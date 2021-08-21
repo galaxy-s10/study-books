@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="ele">
+        <p id="firstp">我是firstp</p>
+        <p id="secondp">我是secondp</p>
+    </div>
+    <script>
+        // 创建一个新的元素
+        var ele1 = document.createElement('p')
+        // 创建一个新的文本节点
+        var ele2 = document.createTextNode('我是新增的p')
+        // 将文本节点添加到元素中
+        ele1.appendChild(ele2)
+
+        var ele = document.getElementById('ele')
+        // 在一个已存在的元素的末尾添加元素
+        // ele.appendChild(ele1)
+
+        var secondp = document.getElementById('secondp')
+        // 在一个已存在的元素的开头添加元素
+        ele.insertBefore(ele1, secondp)
+    </script>
+</body>
+
+</html>

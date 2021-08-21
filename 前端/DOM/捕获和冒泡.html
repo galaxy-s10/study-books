@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div onclick="show1()" style="width: 200px;height: 200px;background-color: red;">
+        <button onclick="show();event.stopPropagation()">show</button>
+        <button onclick="show();event.cancelBubble=true">show</button>
+        <button id="hello">hello</button>
+        <a href="http://www.baidu.com" onclick="link(); return false">link</a>
+        <a href="http://www.baidu.com" id="alink">alink</a>
+    </div>
+    <script>
+
+        window.onload = function () {
+            var hellotbn = document.getElementById('hello')
+            var alink = document.getElementById('alink')
+
+            // 方法1
+            // alink.onclick = function () {
+            //     event.preventDefault()
+            //     console.log('xxxxxxxx');
+            //     console.log(event);
+            // }
+
+            // 方法二
+            // alink.onclick = function () {
+            //     console.log('xxxxxxxx');
+            //     console.log(event);
+            //     return false
+            // }
+
+            // 方法三
+            alink.addEventListener('click', aalink)
+            function aalink() {
+                event.preventDefault()
+                console.log('aalink');
+                //在这里使用return false不管用，只能用event.preventDefault()
+                // return false
+
+            }
+            hellotbn.addEventListener('click', hello)
+            function hello() {
+                // event.stopPropagation()
+                event.cancelBubble = true
+                console.log('hello');
+            }
+        }
+        function show() {
+            console.log('show');
+        }
+        function show1() {
+            console.log('show1');
+        }
+        function link() {
+            console.log('link');
+        }
+    </script>
+</body>
+
+</html>

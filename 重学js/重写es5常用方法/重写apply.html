@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            apply:
+            第一个参数：this
+            第二个参数：
+                数组，实参列表；
+                null，undefined，对象，函数不报错；
+                原始值报错；
+            第三至最后一个参数忽略
+        */
+        var obj = {
+            name: 'hss',
+            age: 22
+        }
+
+        function test() {
+            console.log(this)
+            console.log(arguments)
+            return 999
+        }
+        // test(666, 777, 888) //window
+        // var res = test.apply(obj) //obj
+        // console.log(res)
+
+        Function.prototype.myApply = function (ctx, arg1) {
+            // 不考虑严格模式下的undefined
+            ctx = Object(ctx) || window
+            // originFn是test函数
+            ctx.originFn = this
+            console.log(this);
+            var args = []
+            // var arg1 = arguments[1]
+
+            function myTypeof(v) {
+                return typeof (v) === 'object' ? {
+                    '[object Object]': 'Object',
+                    '[object Array]': 'Array',
+                    '[object Number]': 'Number',
+                    '[object String]': 'String',
+                    '[object Boolean]': 'Boolean',
+                }[({}).toString.call(v)] : typeof (v)
+            }
+            if (typeof (arg1) != 'undefined' && typeof (arg1) != 'object' && typeof (arg1) != 'function') {
+                throw new Error('Uncaught TypeError: CreateListFromArrayLike called on non-object')
+            }
+            if (!arg1 || myTypeof(arg1) != 'Array') {
+                return ctx.originFn()
+            }
+            for (var i = 0; i < arg1.length; i++) {
+                args.push('arg1[' + i + ']')
+            }
+
+            // ctx调用originFn函数，所以origin里面的函数this就是ctx
+            var res = eval('ctx.originFn(' + args + ')')
+            // delete ctx.originFn
+            return res
+        }
+        var res1 = test.myApply(obj, [666, 777, 888])
+        // var res1 = test.myApply(obj)
+        console.log(res1)
+    </script>
+</body>
+
+</html>

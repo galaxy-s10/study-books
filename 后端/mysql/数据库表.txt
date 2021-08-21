@@ -1,0 +1,23 @@
+CREATE TABLE `biao1` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `age` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+
+
+创建数据库表：create table 表名 (字段名1 字段类型1 其他关键词1,字段名2 字段类型2 其他关键词2);
+删除数据库表：drop table 表名
+增加表字段：alter table 表名 add (字段名1 字段类型1 其他关键词1, 字段名2 字段类型2 其他关键词2);
+增加表字段（设定位第一列）：alter table 表名 add (字段名1 字段类型1 其他关键词1,字段名2 字段类型2 其他关键词2) first;
+增加表字段（设定位于c后）：alter table 表名 add (字段名1 字段类型1 其他关键词1,字段名2 字段类型2 其他关键词2) after c;
+删除表字段：alter table 表名 drop 字段名
+修改数据表名：alter tabel 旧表名 rename (to) 新表名
+修改表字段类型：alter table 表名 modify 字段名 字段类型 其他关键词
+修改表字段名称：alter table 表名 change 旧字段名 新字段名 新字段类型 其他关键词
+修改表字段的默认值：alter table 表名 alter 表字段名 set default 值
+删除表字段的默认值：alter table 表名 alter 表字段名 drop default
+查看表结构：desc 表名
+查看创建的表：show create table 表名

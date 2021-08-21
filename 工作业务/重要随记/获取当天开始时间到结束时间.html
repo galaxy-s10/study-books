@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function format(date) {
+            let y = date.getFullYear()
+            let m = date.getMonth() + 1
+            let d = date.getDate()
+            let startTime = `${y}-${m}-${d} 00:00:00`
+            let endTime = `${y}-${m}-${d} 23:59:59`
+            return {
+                startTime,
+                endTime
+            }
+        }
+
+        console.log(format(new Date()));
+    </script>
+</body>
+
+</html>

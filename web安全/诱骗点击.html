@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap {
+            position: relative;
+        }
+
+        .iframe {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            /* opacity: 0.5; */
+            /* opacity: 0; */
+        }
+
+        .img {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background-color: pink;
+        }
+
+        .btn {
+            position: absolute;
+            bottom: 96px;
+            left: 6px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: yellow;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="img">
+            <span class="btn">click</span>
+        </div>
+        <iframe class="iframe" src="https://www.zhengbeining.com/csrf/" frameborder="0"></iframe>
+
+        <script>
+            if(self == top){
+                console.log('ok');
+            }else{
+                console.log('no');
+                top.location = self.location
+            }
+        </script>
+    </div>
+</body>
+
+</html>

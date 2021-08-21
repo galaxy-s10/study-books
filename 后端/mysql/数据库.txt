@@ -1,0 +1,5 @@
+查看所有数据库：show databases
+创建数据库：create database 数据库名
+删除数据库：drop database 数据库名
+切换数据库：use 数据库名
+查看当前打开的数据库：select database()

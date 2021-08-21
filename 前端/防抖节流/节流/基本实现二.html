@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="search">
+    <script>
+        function throttle(fn, interval, option) {
+            var lastTime = 0
+            var timer
+            var option = option || {}
+            var trailing = option.trailing || false
+            var callback = option.callback || null
+            return function () {
+                var _this = this
+                var _arguments = arguments
+                // 获取当前最新的时间戳
+                var newTime = new Date().getTime()
+
+                // 只要触发事件就清除定时器
+                if (timer) {
+                    clearTimeout(timer)
+                }
+
+                var result
+                if (newTime - lastTime > interval) {
+                    result = fn.apply(_this, _arguments)
+                    if (callback) {
+                        callback(result)
+                    }
+
+                    lastTime = newTime
+                } else if (trailing) {
+                    timer = setTimeout(() => {
+                        result = fn.apply(_this, _arguments)
+                        if (callback) {
+                            callback(result)
+                        }
+                    }, interval);
+                }
+            }
+        }
+
+        // 获取输入框
+        var search = document.querySelector('.search');
+
+        // 监听事件
+        var counter = 0;
+        function searchFunc(event) {
+            counter++;
+            console.log("发送" + counter + "次网络请求");
+            console.log(this);
+            return 100
+        };
+
+        search.addEventListener('input', throttle(searchFunc, 1000, {
+            trailing: true,
+            callback: function (res) {
+                console.log(res);   // 100
+            }
+        }))
+
+        // var funWrap = throttle(searchFunc, 1000, {
+        //     trailing: true,
+        //     callback: function (res) {
+        //         console.log(res);
+        //         return res
+        //     }
+        // })
+
+        // search.addEventListener('input', function () {
+        //     funWrap.call(this)
+        // })
+
+
+    </script>
+</body>
+
+</html>

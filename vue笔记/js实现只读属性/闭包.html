@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /**
+         * 原理都是立即执行函数+闭包
+        */
+
+        // 第一种闭包方式：
+        console.log('------------------第一种闭包方式，立即执行函数返回一个对象，这个对象只有get方法--------------------');
+        var obj = (function () {
+            var temp = {
+                name: 'tom',
+                age: 18
+            }
+            function get(v) {
+                return temp[v]
+            }
+            return { get }
+        })()
+
+        console.log(obj.get('name'));   //tom
+        console.log(obj.get('age'));    //18
+        console.log(obj);               //{get:f()}
+        console.log(obj.name);          //undefined
+        console.log(obj.age);           //undefined
+
+        // 第二种闭包方式：
+        console.log('------------------第二种闭包方式，立即执行函数返回一个对象，这个对象本身没有属性和方法，但是它的原型上get方法------------------');
+        var obj1 = (function () {
+            var item = {
+                name: 'tom',
+                age: 18
+            }
+            function Temp() { }
+            Temp.prototype.get = function (v) {
+                return item[v]
+            }
+            return new Temp()
+        })()
+
+        console.log(obj1.get('name'));   //tom
+        console.log(obj1.get('age'));    //18
+        console.log(obj1);               //MyObj {}
+        console.log(obj1.name);          //undefined
+        console.log(obj1.age);           //undefined
+    </script>
+</body>
+
+</html>

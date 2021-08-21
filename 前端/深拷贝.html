@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 当数组里面的值是基本数据类型，比如String，Number，Boolean时，属于深拷贝
+        // 当数组里面的值是引用数据类型，比如Object，Array时，属于浅拷贝
+        var arr1 = ["1", "2", "3", [4, 5]];
+        var arr2 = arr1.concat();
+        arr2[1] = "9";
+        console.log(arr1);  // ["1", "2", "3", Array(2)]
+        console.log(arr2);  // ["1", "2", "3", Array(2)]
+        arr2[3][0] = 999
+        console.log(arr1[3][0]);  // 999
+        console.log(arr2[3][0]);  // 999
+
+
+        function deepClone2(obj) {
+            return JSON.parse(JSON.stringify(obj));
+        }
+        var json1 = {
+            "name": "cheng",
+            "age": 18,
+            "fun": function (a) {
+                console.log(a);
+            }
+        }
+        var json2 = deepClone2(json1);
+        json2.age = 20;
+        console.log(json1); // {name: "cheng", age: 18, fun: ƒ}
+        console.log(json2); // {name: "cheng", age: 20}
+
+        var obj = {
+            a: 1,
+            b: 2
+        }
+        const obj3 = {
+            a: 1,
+            b: { name: '张三', age: 14, hobby: ['唱', '跳', 'rap'] },
+            c: ['周杰伦', '华晨宇', '林俊杰'],
+            d: function () {
+                console.log('ddd');
+            }
+        }
+
+        var obj1 = Object.assign({}, obj3);
+        // 对于Object.assign(), 如果对象的属性值为简单类型（string， number）
+        // 通过Object.assign({},obj3)得到的新对象为深拷贝
+        obj1.a = 3;
+        console.log(obj1)           // {a: 3, b: {…}, c: Array(3), d: ƒ}
+        console.log(obj3)           // {a: 1, b: {…}, c: Array(3), d: ƒ}
+        // 如果属性值为对象或其它引用类型，那对于这个对象而言其实是浅拷贝的。
+        obj1.b.name = '李四'
+        console.log(obj1.b.name);   //李四
+        console.log(obj3.b.name);   //李四
+
+        function deepclone(obj) {
+            const newobj = obj instanceof Array ? [] : {}
+            for (let i in obj) {
+                // 判断自身属性中是否具有指定的属性（避免克隆了原型上的东西）
+                if (obj.hasOwnProperty(i)) {
+                    // 判断是不是原始值
+                    if (obj[i] instanceof Object == true) {
+                        // 不是原始值开始递归
+                        newobj[i] = deepclone(obj[i])
+                    } else {
+                        // 是原始值直接赋值
+                        newobj[i] = obj[i]
+                    }
+                }
+
+            }
+            return newobj
+        }
+
+        // deepClone = (initalObj) => {
+        //     const obj = {};
+        //     if (typeof initalObj !== 'object') {
+        //         return initalObj
+        //     }
+        //     for (const key in initalObj) {
+        //         if (typeof initalObj[key] === 'object') {
+        //             //对数组特殊处理
+        //             if (Array.isArray(initalObj[key])) {
+        //                 //用map方法返回新数组，将数组中的元素递归
+        //                 obj[key] = initalObj[key].map(item => this.deepClone(item))
+        //             } else {
+        //                 //递归返回新的对象
+        //                 obj[key] = this.deepClone(initalObj[key]);
+        //             }
+        //         } else if (typeof initalObj[key] === 'function') {
+        //             //返回新函数
+        //             obj[key] = initalObj[key].bind(obj);
+        //         } else {
+        //             //基本类型直接返回
+        //             obj[key] = initalObj[key];
+        //         }
+        //     }
+        //     return obj;
+        // }
+        // const obj = {
+        //     a: 1,
+        //     b: { name: '张三', age: 14, hobby: ['唱', '跳', 'rap'] },
+        //     c: ['周杰伦', '华晨宇', '林俊杰'],
+        //     e: function () {
+        //         console.log('我是e函数');
+        //         return 'eee'
+        //     },
+        // }
+        // const newobj = deepClone(obj);
+        // console.log(newobj);
+        // obj.a = 222
+        // console.log(obj.a);
+        // console.log(newobj.a);
+
+        // console.log(newObj.a === obj.a)  //true
+        // console.log(newObj.b === obj.b)  //false
+        // console.log(newObj.c === obj.false)  //false
+        // console.log(newObj.c.d === obj.c.d)  //false
+        // console.log(newObj.c.g === obj.c.g)  //false
+        // console.log(newObj.e === obj.e)  //false
+        // console.log(newObj.f === obj.f)  //false
+    </script>
+</body>
+
+</html>

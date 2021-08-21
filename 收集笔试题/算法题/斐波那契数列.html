@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 斐波那契数列：第一和第二项都是1，从第3项开始，每一项都等于前两项之和。
+         * 1,1,2,3,5,8,13,21...
+        */
+        // 求斐波那契数列的第n项是什么
+        // var i = 0
+        // function feibo(num) {
+        //     i++
+        //     if (num == 1 || num == 2) return 1
+        //     return feibo(num - 2) + feibo(num - 1)
+        // }
+        // console.log(feibo(8));
+        // console.log(`遍历了${i}次`);
+
+        // 优化缓存
+        var cache = {}
+        var i = 0
+        function feibo1(num) {
+            i++
+            if (cache[num]) {
+                return cache[num]
+            }
+            if (num == 1 || num == 2) return 1
+            var res = feibo1(num - 2) + feibo1(num - 1)
+            cache[num] = res
+            return res
+        }
+        console.log(feibo1(8));
+        console.log(`遍历了${i}次`);
+
+        // for循环
+        // var j = 0
+        // function feibo2(n) {
+        //     if (n == 1 || n == 2) return 1
+        //     var res1 = 1;   //第一项
+        //     var res2 = 1;   //第二项
+        //     var sum
+        //     for (var i = 2; i < n; i++) {
+        //         j++
+        //         sum = res1 + res2;//第三项的值是前面两个之和
+        //         res1 = res2;    //将下一次的第一项的值改为上次的第二项值
+        //         res2 = sum;     //将下一次的第二项值改为当前的第三项值
+        //     }
+        //     return sum;
+        // }
+        // console.log(feibo2(8))
+        // console.log(`遍历了${j}次`);
+    </script>
+</body>
+
+</html>

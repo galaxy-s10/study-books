@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    window.onload = function () {
+        console.log('onload在页面加载完成执行');
+        console.log(document.getElementById('test'));
+    }
+    console.log(document.getElementById('test'));  //null 
+</script>
+
+<body>
+    <div id="test"></div>
+    <script>
+        // 浏览器窗口的内部宽度(包括滚动条)
+        var w = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
+        // 浏览器窗口的内部高度(包括滚动条)
+        var h = window.innerHeight
+            || document.documentElement.clientHeight
+            || document.body.clientHeight;
+
+        console.log(w, h);
+
+        // 浏览器Y轴滚动距离
+        var offsetY = pageYOffset || document.documentElement.scrollTop
+        console.log(offsetY);
+
+        // 浏览器X轴滚动距离
+        var offsetX = pageXOffset || document.documentElement.scrollLeft
+        console.log(offsetX);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var pro1 = new Promise((res, rej) => {
+            setTimeout(() => {
+                res(100)
+            }, 1000);
+        })
+        var pro2 = new Promise((res, rej) => {
+            setTimeout(() => {
+                res(200)
+            }, 1000);
+        })
+        async function proRes(res) {
+            return 1
+        }
+        Promise.all([pro1]).then(res => {
+            console.log('全部成功');
+            console.log(res);
+        }).catch(err => {
+            console.log('失败');
+            console.log(err);
+        })
+        // var pro1 = new Promise((res, rej) => {
+        //     try {
+        //         var ye = 1
+        //         new ye()
+        //     } catch (err) {
+        //         console.log(err);   //这里捕获到了错误，不会走Promise.all里面的catch，需要手动加
+        //         // rej(err)    //手动加rej
+        //     }
+        // })
+        // Promise.all([pro1]).then(res => {
+        //     console.log('全部成功');
+        //     console.log(res);
+        // }).catch(err => {
+        //     console.log('失败');
+        //     console.log(err);
+        // })
+
+    </script>
+</body>
+
+</html>

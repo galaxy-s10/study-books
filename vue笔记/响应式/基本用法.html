@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj = {}
+        console.log(obj)
+        Object.defineProperty(obj, 'a', {
+            value: 99
+        })
+        Object.defineProperty(obj, 'b', {
+            value: [1, 2, 3]
+        })
+        obj.a = 999
+        console.log(obj.a)  //99，默认不能修改
+        delete obj.a
+        console.log(obj)  //{a: 99, b: Array(3)}，默认不能删除
+
+        obj.b = 123
+        console.log(obj.b)  //[1, 2, 3]，默认不能修改
+        obj.b[0] = 100
+        console.log(obj.b)  //[100, 2, 3]，但可修改引用。
+        obj.b.length = 2
+        console.log(obj.b)  //[100, 2]
+        delete obj.b
+        console.log(obj)    //{a: 99, b: Array(2)}，默认不能删除
+        // obj里面的属性通过Object.defineProperty定义，且默认都不能枚举
+        // 所以下面的for循环啥都不打印
+        for (let key in obj) {
+            console.log(key)
+        }
+
+        // 重新封装Object.defineProperty，默认可删，可写，可枚举
+        function def(obj, key, value, config) {
+            config = config || {}
+            Object.defineProperty(obj, key, {
+                // 该属性对应的值，默认：undefined
+                value,
+                // 该属性是否可枚举，默认：fasle，即默认不可枚举
+                enumerable: config.enumerable == undefined ? true : config.enumerable,
+                // 该属性是否可写，默认：false，即默认不可写
+                writable: config.writable == undefined ? true : config.writable,
+                // 该属性是否可配置，默认：false，即不可配置（不能删除）
+                configurable: config.configurable == undefined ? true : config.configurable,
+            })
+        }
+        var pet = {
+            test: 123
+        }
+        def(pet, 'id', '999', {
+            enumerable: false
+        })
+        def(pet, 'name', 'tom', {
+        })
+        def(pet, 'age', '3', {
+        })
+
+        console.log(pet)    //{test: 123, name: "tom", age: "3", id: "999"}
+        delete pet.test
+        console.log(pet)    //{name: "tom", age: "3", id: "999"}
+        for (let key in pet) {
+            console.log(key)    //name,age
+        }
+        console.log(pet)    //{name: "tom", age: "3", id: "999"}
+
+        pet.name = 'jerry'
+        console.log(pet.name)   //jerry
+
+        // var testObj = { name: 'tom' }
+        // // 判断对象上是否有某个属性
+        // console.log('name' in testObj)  //true
+        // console.log(testObj.hasOwnProperty('name')) //true
+        // console.log(testObj.name !== undefined) //true
+        // console.log(testObj.toString !== undefined) //true
+
+        var aaa = {}
+        def(aaa,'arr',[1,2,3])
+        console.log(aaa)
+    </script>
+</body>
+
+</html>

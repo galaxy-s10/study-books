@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .float .left {
+            float: left;
+            width: 300px;
+            background-color: red;
+        }
+
+        .float .right {
+            float: right;
+            width: 300px;
+            background-color: yellow;
+        }
+
+        .float .center {
+            margin: 0 300px;
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <h1>实现左栏右栏定宽，高度为浏览器页面可视高度；中间自适应宽度，高度随填充内容撑高的布局</h1> -->
+    <div class="float">
+        <div class="left">左边</div>
+        <div class="right">右边</div>
+        <div class="center">
+            <div>三栏布局 左右宽度固定 中间自适应</div>
+            <span>浮动解决方案</span>
+        </div>
+    </div>
+</body>
+
+</html>

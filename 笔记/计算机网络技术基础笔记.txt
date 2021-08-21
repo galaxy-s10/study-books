@@ -1,0 +1,26 @@
+连线：
+路由器---路由器：交叉线
+路由器---主机：交叉线
+二层交换机---三层交换机：直通线
+二层交换机---主机：直通线
+二层交换机---路由器：直通线
+三层交换机---主机：直通线
+
+如果是删除二层交换机的VLAN直接用
+
+                SWITCH   （CONF）#        NO VLAN ID
+
+如果是删除三层交换机的VLAN就稍微复杂些
+
+    1 ：只是划分了VLAN而没有其他操作，那么删除方法同上；
+
+    2 ：划分了VLAN 并且加了interface，那么删除方法同上；
+
+    3 ：划分了VLAN加了interface并且还给VLAN配置了IP，那么用上面的方法就不得行了。
+
+总之，如果你用“NO VLAN ID”无法删除的话，就先用“NO interface vlan id”再用“NO VLAN ID”。
+
+交换机设置trunk模式：switchport mode trunk。
+
+创建vlan10：vlan 10
+连接vlan10：int vlan 10

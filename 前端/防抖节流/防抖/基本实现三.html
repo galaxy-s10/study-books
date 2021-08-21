@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="search">
+
+    <script>
+        // 优化this和arguments
+        function debounce(fn, delay) {
+            var timer
+            return function () {
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                var _this = this
+                var _arguments = arguments
+                timer = setTimeout(() => {
+                    fn.apply(_this, arguments)
+                }, delay);
+            }
+
+        }
+
+        function ajax(e, arg1, arg2) {
+            console.log('ajaxajaxajax');
+            console.log(this);  // <input type="text" class="search">
+            console.log(e);  // InputEvent
+            console.log(arg1, arg2); // 100,200
+        }
+
+        var search = document.querySelector('.search')
+        var debounceWrap = debounce(ajax, 500)
+
+        search.addEventListener('input', function () {
+            debounceWrap.apply(this, [event, 100, 200])
+        })
+
+        //这样实现也行，但有小bug,不能获取event
+        // search.addEventListener('input', debounceWrap.bind(search, 100, 200))
+
+    </script>
+</body>
+
+</html>

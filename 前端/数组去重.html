@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr1 = [
+            { name: '张三' },
+            { name: '张三' },
+            { name: '李四' },
+            { name: '王五' },
+        ]
+        function distinct1(arr, key) {
+            var newobj = {}, newArr = [];
+            for (var i = 0; i < arr.length; i++) {
+                var item = arr[i];
+                if (!newobj[item[key]]) {
+                    newobj[item[key]] = newArr.push(item);
+                }
+            }
+            return newArr;
+        }
+        console.log(distinct1(arr1, 'name'));
+
+
+        var arr2 = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, undefined, null, null, NaN, NaN, 'NaN', 0, 0, 'a', 'a', {}, {}];
+        // es5常用
+        function unique(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = i + 1; j < arr.length; j++) {
+                    if (arr[i] == arr[j]) {         //第一个等同于第二个，splice方法删除第二个
+                        arr.splice(j, 1);
+                        j--;    // splice会修改原数组，删了一个后，下标要减一！
+                    }
+                }
+            }
+            return arr;
+        }
+        console.log(unique(arr2))   // NaN和{}没有去重，两个null直接消失了
+
+        // es6常用
+        var arr3 = [1, 2, 3, 4, 1, 2]
+        console.log(Array.from(new Set(arr3))); // {}没有去重，两个null直接消失了
+
+
+        var arr4 = [2, 3, 4, 5, 5]
+        //  
+        function unique1(arr) {
+            var newarr = [];
+            for (var i = 0; i < arr.length; i++) {
+                if (newarr.indexOf(arr[i]) == -1) {
+                    newarr.push(arr[i])
+                }
+            }
+            return newarr
+        }
+        console.log(unique1(arr2)); // NaN和{}没有去重，两个null直接消失了
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var foo = 'AAA', self = window;
+        var a = {
+            foo: '888',
+            fn: function () {
+                // 这里的this是a
+                var self = this, foo = 'CCC';
+
+                setTimeout(() => {
+                    // 箭头函数里面的this继承外面，即a
+                    console.log('0', this.foo);//888
+                }, 1000);
+
+                // 返回了一个立即执行函数，并且有个形参，形参也是一个立即执行函数
+                return function () {
+                    // 返回了一个立即执行函数
+                    // 立即执行函数其实是window调用了它，即window.函数名()，所以这里的this是window
+                    console.log('1', self.foo);
+                    console.log('2', this.foo);
+                }(
+                    (function () {
+                        // 这里是立即执行函数，同时也是形参，因此可以访问找到外面的作用域
+                        // 这里的this是window
+                        // self先在自己作用域找，没有，再往上层找，上层是a里面的fn函数，self是this，this即a，所以a.foo是888
+                        console.log('3', self.foo);
+                        console.log('4', this.foo);
+                    })()
+                )
+            }
+        }
+        a.fn()
+
+        // 3,888    =>正确：3,888
+        // 4,AAA    =>正确：4,AAA
+        // 1,888    =>正确：1,888
+        // 2,AAA    =>正确：2,AAA
+        // 0,888    =>正确：0,888
+
+        var ppp = '99'
+        function hi() {
+            var ppp = '88'
+            console.log('22');
+        } (function () {
+            // var ppp = 'ppp'
+            console.log(this);
+            console.log(ppp);
+            console.log('11');
+        }())
+        //11
+        //22
+
+        // function hi() {
+        //     console.log('22');
+        // } (console.log('11'))
+        // //11
+        // //22
+        hi()
+
+        var bb = {
+            age: 12,
+            b: function () {
+                console.log(this);  //bb
+
+                setTimeout(() => {
+                    console.log(this);  //bb
+                }, 100);
+                setTimeout(function () {
+                    console.log(this);  //window
+                }, 100);
+                return function () {
+                    console.log(this);  //window
+                    console.log('xxx');
+                }
+            }
+        }
+        console.log(bb.b()());
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bgc{
+            background-image: url(./2.png);
+            /* height: 20px; */
+            width: 3.5rem;
+            color: white;
+            line-height: 150%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            font-size: 12px;
+            text-align: center;
+            display: inline-block;
+        }
+        .fanli{
+            display: flex;
+        }
+        .text{
+            background-image: url(./fanlibg.png);
+            background-repeat: no-repeat;
+            background-position: 0px 0px;
+            background-size: auto 100%;
+            padding: 4px;
+            width: 47px;
+            display: inline-block;
+            height: 30px;
+            box-sizing: border-box;
+        }
+        .price{
+            background-image: url(./fanlibg.png);
+            background-repeat: no-repeat;
+            background-position: -48px 0px;
+            background-size: auto 100%;
+            padding: 4px;
+            /* width: 47px; */
+            display: inline-block;
+            height: 30px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="bgc">10$</div> -->
+    <div class="fanli">
+        <span class="text">返利</span>
+        <span class="price" onclick="aaa()">￥10.23</span>
+        
+    </div>
+    <script>
+        function aaa(){
+            console.log('x');
+            window.open('data.download_url');
+            // window.open('https://voiceapi.tbkyuming.top/video/161155984026825499.mp4');
+        }
+        // setTimeout(() => {
+        //     // window.open('data.download_url');
+        //     // window.open('https://img.cdn.zhengbeining.com/1602698312193bilusi.jpg');
+        //     window.open('https://voiceapi.tbkyuming.top/video/161155984026825499.mp4');
+        //     // window.location.href = 'https://img.cdn.zhengbeining.com/1602698312193bilusi.jpg'
+        //     // window.open('http:www.baidu.com');
+        // }, 1000);
+        
+    </script>
+</body>
+</html>

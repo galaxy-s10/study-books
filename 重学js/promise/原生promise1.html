@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 宏任务：script，setTimeout，setInterval
+         * 微任务：Promise
+         * 优先级：主线程>微任务>宏任务
+        */
+        /**
+         * promsise都做了什么？
+         * promise是同步的，但是promise的回调（then,catch,finally）是异步的
+        */
+
+        var promise = new Promise(function (resolve, reject) {
+            console.log('我是promise里的同步代码');
+            setTimeout(() => {
+                console.log('我是promise里的异步代码');
+                resolve('我是promise里的异步代码执行完成')
+            }, 1000);
+        })
+        console.log('我是promise外的同步代码');
+
+        setTimeout(() => {
+            console.log('定时器1s');
+        }, 1000);
+        promise.then(res => {
+            console.log(res);
+        })
+
+        /**
+         * 打印顺序：
+         * 1.先执行promise里的同步代码，打印：我是promise里的同步代码
+         * 2.遇到定时器，加入宏任务，等该定时器执行了就会将注册的回调函数插入宏任务队列，
+         *   promise里没有同步代码了，返回promise外部
+         * 3.遇到同步代码，打印：我是promise外的同步代码
+         * 4.又遇到定时器，加入宏任务，等该定时器执行了就会将注册的回调函数插入宏任务队列，
+         * 5.遇到promise.then，加入微任务
+         * 6.此时主线程代码执行完毕，先去微任务队列查看，即5，没有任务
+         * 7.查看宏任务队列，4先执行完成，打印：定时器1s
+         * 8.再查看微任务任务队列，还是没有，再执行宏任务队列，即执行5，打印：我是promise里的异步代码
+         * 9.然后执行resolve，加入微任务队列，然后宏任务队列执行完毕，执行微任务队列，打印：我是promise里的异步代码执行完成
+         * 结果：
+         * 我是promise里的同步代码
+         * 我是promise外的同步代码
+         * 我是promise里的异步代码
+         * 我是promise里的异步代码执行完成
+         * 定时器1s
+        */
+    </script>
+</body>
+
+</html>

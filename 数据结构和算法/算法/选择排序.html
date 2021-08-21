@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var arr = [1, 1, 2, 3, 4, 5, 6];
+        // var arr = [6, 5, 4, 3, 2, 1, 1];
+        var arr = [32, 14, 6, 9, 20, 58];
+        // var arr = [3, 3, 1, 1]
+
+        // 循环次数：(arr.length*arr.length-1)/2
+        // arr.length-1+arr.length-2+arr.length-3...
+        // 5+4+3+2+1
+        // 第一轮内层循环arr.length - 1 - 0次，即5次
+        // 第二轮内层循环arr.length - 1 - 1次，即4次
+        // 第三轮内层循环arr.length - 1 - 2次，即3次
+        // 第四轮内层循环arr.length - 1 - 3次，即2次
+        // 第五轮内层循环arr.length - 1 - 5次，即1次
+        // 第六轮内层循环arr.length - 1 - 6次，即0次
+        function selectionSort(arr) {
+            for (var j = 0; j < arr.length; j++) {
+                // 记录最小值的下标（且每次外层for循环重新修改查找范围(越来越小)）
+                // 外层j=0，从j+1至到arr.length找最小值
+                // 外层j=1，从j+2至到arr.length找最小值
+                // ......
+                var min = j
+
+                // 内层循环，每次内层循环都找出最小值的下标
+                // var i = min+1用处是每次都不和自己比较，
+                // 比如第一次外循环j=0,min也等于0,如果var i=min，即arr[0] == arr[0],没必要比较
+                // 比如第二次外循环j=1,min也等于1如果var i=min，即arr[1] == arr[1],没必要比较
+                for (var i = min + 1; i < arr.length; i++) {
+                    console.log(1)
+                    // console.log(min, i)
+                    // 如果找到的值比最小值还小，则把min改成找到的值的下标
+                    if (arr[min] > arr[i]) {
+                        min = i
+                    }
+                }
+                // 将选择的j值和找到的最小值互换位置
+                var temp = arr[j]
+                arr[j] = arr[min]
+                arr[min] = temp
+            }
+            return arr
+        }
+
+        function selectionSort1(arr) {
+            for (var j = 0; j < arr.length; j++) {
+                var max = j
+                for (var i = max + 1; i < arr.length; i++) {
+                    console.log(1)
+                    if (arr[max] < arr[i]) {
+                        max = i
+                    }
+                }
+                var temp = arr[j]
+                arr[j] = arr[max]
+                arr[max] = temp
+            }
+            return arr
+        }
+
+        console.log(selectionSort(arr))
+        // console.log(selectionSort1(arr))
+    </script>
+</body>
+
+</html>

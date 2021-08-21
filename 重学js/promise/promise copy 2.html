@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 根据Promise/A+规范实现Promise
+         * Promise/A+为了简便，以下简称为规范
+         */
+        function _Promise(executor) {
+            // 先保存this
+            var _this = this
+            _this.status = 'pending' //规范要求的状态
+            _this.value = null //规范要求成功返回的值
+            _this.season = null //规范要求失败返回的原因
+
+            _this.cbs = [] //保存订阅
+            _this.onFulfilledCbs = [] //收集成功回调
+            _this.onRejectedCbs = [] //收集失败回调
+
+            // 成功执行的函数
+            function resolve(value) {
+                // 规范规定，只能从pending变成fulfilled或者从pending变成rejected
+                if (_this.status == 'pending') {
+                    _this.status = 'fulfilled'
+                    _this.value = value
+                    for (var i = 0; i < _this.onFulfilledCbs.length; i++) {
+                        _this.onFulfilledCbs[i]()
+                    }
+                }
+            }
+            // 失败执行的函数
+            function reject(season) {
+                // 规范规定，只能从pending变成fulfilled或者从pending变成rejected
+                if (_this.status == 'pending') {
+                    _this.status = 'rejected'
+                    _this.season = season
+                }
+            }
+            // _Promise是构造函数，executor是形参
+            // new构造函数_Promise的时候传了一个函数过来,因此我们可以执行这个函数
+            // 因为new promise时，会立即执行promise的形参（函数）
+            // 所以 _Promise时传进来的executor函数，也要立即执行
+            executor(resolve, reject)
+
+
+            // 原生promise的then方法也是一个函数，函数就可以执行
+            // then方法接收两个参数，一个成功回调函数，一个失败回调函数。
+            // 因此实现的时候也要有两个参数分别作为成功、失败回调
+            _Promise.prototype.then = function (onFulfilled, onRejected) {
+                if (_this.status == 'fulfilled') {
+                    onFulfilled(_this.value)
+                }
+                if (_this.status == 'rejected') {
+                    onRejected(_this.season)
+                }
+                // 如果成功/失败回调在exector里面的异步代码里，则采用发布订阅的方式，等异步代码执行完了再执行回调
+                if (_this.status == 'pending') {
+                    console.log('保存订阅')
+                    // 保存订阅
+                    _this.onFulfilledCbs.push(function () {
+                        onFulfilled(_this.value)
+                    })
+                    _this.onRejectedCbs.push(function () {
+                        onRejected(_this.value)
+                    })
+                }
+            }
+        }
+        // 原生promise的then方法是promise执行完成有结果的时候调用的回调函数，函数就可以执行
+        // then方法接收两个参数，一个成功回调函数，一个失败回调函数。
+        // 因此实现的时候也要有一个then方法，以及要求形参是也是一个函数，
+        // 且形参的函数有两个两个参数，分别作为成功、失败回调
+        // _Promise.prototype.then = function (onFulfilled, onRejected) {
+        //     if (_this.status == 'fulfilled') {
+        //         onFulfilled(_this.value)
+        //     }
+        //     if (_this.status == 'rejected') {
+        //         onRejected(_this.season)
+        //     }
+        // }
+        var p = new _Promise(function (resolve, reject) {
+            // resolve(200)
+            setTimeout(() => {
+                resolve(200)
+            }, 1000);
+            // reject(500)
+        })
+        p.then(res => {
+            console.log(res)
+            console.log(p)
+        }, rej => {
+            console.log(rej)
+        })
+        // console.log(p)
+    </script>
+</body>
+
+</html>

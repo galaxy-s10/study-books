@@ -1,0 +1,427 @@
+
+
+
+数组
+索引数组声明:	$minren = array(
+'杨幂',
+'王珞丹','刘亦菲',
+'黄圣依','范冰冰');
+索引数组声明:	$minren = ['杨幂',
+'王珞丹','刘亦菲',
+'黄圣依','范冰冰'];
+向索引数组中增加元素用: 数组变量名[]、数组变量名[键值]这两种方式来增加元素
+unset删除变量的方式来删除数组里面的值。删除了中间的值，并不会让后面的下标向前自动移动。而是原来的值为多少就为多少
+
+count() 函数返回数组中元素的数目。
+
+
+strtotime()能将将英文文本的日期时间描述解析为 Unix 时间戳。
+//now为现在的当前时间
+echo strtotime("now")."<br />";		约等于echo strtotime(date('Y-m-d H:i:s'));
+//2000年9月10日
+echo strtotime("10 September 2000")."<br />";
+//当前时间加一天
+echo strtotime("+1 day")."<br />";
+//当前时间加一周
+echo strtotime("+1 week")."<br />";
+//当前时间加一周2天4小时2秒
+echo strtotime("+1 week 2 days 4 hours 2 seconds")."<br />";
+//下一个星期四
+echo strtotime("next Thursday")."<br />";
+//上一个星期一
+echo strtotime("last Monday")."<br />";
+
+
+
+mktime (时 ,分 , 秒, 月,日, 年)	mktime()构造一个时间戳的功能。
+
+checkdate(12, 31, 2018)checkdate可以判断一个输出的日期是否有效。如果是有效的时间就返回真，如果不是有效的时间就返回假。
+
+时间函数date('Y-m-d H:i:s');
+time()函数的功能是获取当前时间的 Unix 时间戳。
+
+getdate()获取当前系统时间
+getdate()用来获取当前系统的时间，或者获得一个时间戳的具体含义。
+getdate()函数的返回值是一个根据timestamp得到的包含有时间信息的数组。如果没有参数，则会返回当前的时间。getdate返回的数组，键名包括时间和日期的完整信息。
+
+
+phpinfo是一个函数（功能），这个函数（功能）会显示一个当前电脑（服务器）的详细的PHP信息。
+双引号解析变量，但是单引号不解析变量。
+双引号解析转义字符，单引号不解析转义字符。但，单引号能解析\' 和\
+在双引号里面插入变量，变量后面如果有英文或中文字符，它会把这个字符和变量拼接起来，视为一整个变量。一定要在变          量后面接上特殊字符，例如空格等分开。
+如果在双引号里面插变量的时候，后面不想有空格，可以拿大括号将变量包起来。
+空在英文里面表示是null，它是代表没有。空(null)不是false，不是0，也不是空格。
+主要有以下三空情况会产生空（null）类型：1.通过变量赋值明确指定为变量的值为NULL2.一个变量没有给任何值
+empty() 函数用于检查一个变量是否为空。
+empty() 判断一个变量是否被认为是空的。当一个变量并不存在，或者它的值等同于 FALSE，那么它会被认为不存在。如果变量不存在的话，empty()并不会产生警告。
+isset()可以向括号中间传入一个或者多个变量，变量与变量间用逗号分开。只要有有一个变量为null，则返回false。否则，则返回true。
+unset()这个函数的功能是毁掉变量。unset(变量)括号中间插入想要毁掉的变量名，这个变量就会被毁掉。
+is_* 系列函数有个特点，就是如果是这个类型就返回的是真。不是这个数据类型就返回的是假
+is_null() 函数用于检测变量是否为 NULL。
+is_bool() 函数用于检测变量是否是布尔型。
+is_scala() 函数用于检测变量是否是一个标量。标量变量是指那些包含了 integer、float、string 或 boolean 的变量，而 array、object 和 resource 则不是标量。
+is_numeric() 函数用于检测变量是否为数字或数字字符串。
+is_callable() 函数用于检测函数在当前环境中是否可调用。
+is_callable() 函数验证变量的内容能否作为函数调用。 这可以检查包含有效函数名的变量，或者一个数组，包含了正确编码的对象以及函数名。
+gettype() 函数用于获取变量的类型。
+判断数据类型
+
+我们使用is_* 系列函数。 is_types这一系列的函数，来进行判断某个东西是不是某个类型。如果是这个类型返回真，不是这个类型返回假。
+
+is_int 是否为整型
+is_bool 是否为布尔
+is_float 是否是浮点
+is_string 是否是字符串
+is_array 是否是数组
+is_object 是否是对象
+is_null 是否为空
+is_resource 是否为资源
+is_scalar 是否为标量
+is_numeric 是否为数值类型
+is_callable 是否为函数
+
+变量：整型（int） 浮点（float）、布尔（bool）、字符串（string）
+
+混合类型： 数组（array）、对象（object）
+
+特殊类型：空（null）、 资源（resouce）、回调（callback）
+
+下面的情况是布尔值判断时的自动类型转换：
+
+1，整型的0为假，其他整型值全为真
+
+2, 浮点的0.0，布尔值的假。小数点后只要有一个非零的数值即为真。
+
+3，空字符串为假，只要里面有一个空格都算真。
+
+4，字符串的0，也将其看作是假。其他的都为真
+
+5，空数组也将其视为假，只要里面有一个值，就为真。
+
+6，空也为假
+
+7, 未声明成功的资源也为假
+
+define('xiaoxie',true);	//定义一个常量
+define(xiaoxie,true);		//定义一个常量
+
+$u = $_REQUEST['username'];
+$u = $_GET['username'];
+$u = $_POST['username'];
+
+
+
+	键名				含义
+$_SERVER["REQUEST_METHOD"]	请求当前PHP页面的方法
+$_SERVER["REQUEST_URI"]		请求的URI
+$_SERVER["SERVER_SOFTWARE"]	用的是哪一种服务器
+$_SERVER["REMOTE_ADDR"]		客户的IP地址
+$_SERVER["SERVER_ADDR"]		当前服务器的IP地址
+$_SERVER["SCRIPT_FILENAME"]	主前请求文件的路径
+$_SERVER["HTTP_USER_AGENT"]	当前访问这个网址的电脑和浏览器的情况
+$_SERVER["HTTP_REFERER"]		上级来源（用户从哪个地址进入当前网页的）
+$_SERVER["REQUEST_TIME"]		当前的时间
+
+
+$aaa = &$bbb;		//$aaa变，$bbb也变，$bbb变，$aaa也变。也就是说不管那一方变，另一方都会受到影响
+
+
+$shu = 'biao';
+   
+$biao = '鼠标';
+
+ 
+echo $$shu;	//输出：鼠标
+//$$shu 就是可变变量：在已声明的变量$shu前又加上了一个变量符
+
+
+用代码表示：if($x && $y) 如果$x已经为false了，后面的$y 就没有执行必要了。
+用代码表示：if($x || $y) 如果$x已经为true了，后面的$y 就没有执行必要了。
+逻辑运算符&与&&的区别是：
+& 无论左边结果是什么，右边还是继续运算
+&&当左边为假，右边不再进行运算。
+但是两者的结果是一样的。
+
+本文来自 pt666 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/pt666/article/details/70510828?utm_source=copy 
+
+bool copy ( string $source , string $dest [, resource $context ] )
+
+这个函数的功能为： 拷备一个文件
+返回值为为： bool型值，就是成功返回true，失败返回false
+参数为： 两个字符串的值，一个是copy的源文件，一个为目标文件。第三个参数可选的，不常用，我们不管它。
+
+int array_unshift ( array &$array , mixed $value1 [, mixed $... ] )
+功能： 操作一个数组，向数组中之前插入其他类型的参数。
+返回值： int 类型，可能就是插入成功最后的个数
+参数： 第一个参数为&符，也就是在操作的过程中，改变了第一个参数的值。引用传参。也就是操作这个数组，向这个数组中传入参数。会直接改变这个数组的值。
+第二个参数为mixed，因为数组可以存入多个不同的类型.mixed是指混合的意思。因此，mixed是指可传入任意类型
+第三个数数加了中括号，我们所有遇到中括号的。都是指后面的参数可传，也可以不传。
+第四，最后还看到了三个...(省略号)。代表可以传入任意多个参数。
+
+
+
+$x +＝ $y		等价于	$x ＝ $x + $y
+
+\n 回车
+\t 缩进
+1为true，0为false
+defined()函数判断一个常量是否已经被定义。
+var_dump()函数返回数据类型和值。
+print_r() 函数用于打印变量，以更容易理解的形式展示。
+====================
+mysqli函数
+mysqli_connect() 函数打开一个到 MySQL 服务器的新的连接。
+mysqli_connect_errno() 函数返回上一次连接错误的错误代码。
+mysqli_connect_error() 函数返回上一次连接错误的错误描述。
+mysqli_select_db()更改连接的默认数据库。
+mysqli_set_charset() 函数规定当与数据库服务器进行数据传送时要使用的默认字符集。
+mysqli_fetch_array() 函数从结果集中取得一行作为关联数组，或数字数组，或二者兼有。
+mysqli_fetch_assoc() 函数从结果集中取得一行作为关联数组。
+mysqli_fetch_row() 函数从结果集中取得一行，并作为枚举数组返回。
+mysqli_free_result() 函数释放结果内存。
+mysqli_close() 函数关闭先前打开的数据库连接。
+
+
+如果test.php文件不存在include 会发出警告继续执行demo()和test()函数。
+而requre则直接报错，demo()和test()函数无法继续执行。
+我们通过表格知道了:inlcude 和include_once的区别在于，检测是否重复包含。如果重复包含了include_once不会再包含 对应的文件了，而include 则不管这些。有没引入过文件，都再引入一次。
+
+函数名	描述	实例	输入	输出
+abs()	求绝对值	$abs = abs(-4.2); //4.2	数字	绝对值数字
+ceil()	进一法取整	echo ceil(9.999); // 10	浮点数	进一取整
+floor()	舍去法取整	echo floor(9.999); // 9	浮点数	直接舍去小数部分
+fmod()	浮点数取余	"$x = 5.7;$y = 1.3;$r = fmod($x, $y);// $r equals 0.5, because 4 *  1.3 + 0.5 = 5.7    "	两个浮点数,x>y	浮点余数
+pow()	返回数的n次方	echo pow(-1, 20); // 1	基础数 n次方	乘方值
+round()	浮点数四舍五入	echo round(1.95583, 2);// 1.96	一个数值	保留小数点后多少位,默认为0 舍入后的结果
+sqrt()	求平方根	echo sqrt(9); //3	被开方的数	平方根
+max()	求最大值	"echo max(1, 3, 5, 6, 7);  // 7 echo max(array(2, 4, 5)); // 5"	多个数字或数组	返回其中的最大值
+min()	求最小值	min	多个数字或数组	返回其中的最小值
+mt_rand()	更好的随机数	echo mt_rand(0,9);//n	最小/最大,随机数	随机返回范围内的值
+rand()	随机数	echo rand()	最小/最大,随机数	随机返回范围内的值
+pi()	获取圆周率值	echo pi(); // 3.1415926535898	无	获取圆周率
+
+设置时区的函数为：
+1). date_default_timezone_get()；
+2).date_default_timezone_set('Asia/shanghai');
+
+
+
+
+$num = rand(1,50);//获取1至50的随机数
+$today = date('m-d',time());//获取当天日期
+字符串：
+<?php
+
+$string1 = <<<god
+我有一只小毛驴，我从来也不骑。
+有一天我心血来潮，骑着去赶集。
+我手里拿着小皮鞭，我心里正得意。
+不知怎么哗啦啦啦啦，我摔了一身泥。
+god;
+
+echo $string1;
+?>
+==================
+特殊类型---资源：
+<?php 
+//首先采用“fopen”函数打开文件，得到返回值的就是资源类型。
+$file_handle = fopen("D:/xampp/hellophp/test/test1.txt","r");
+if ($file_handle){
+    //接着采用while循环（后面语言结构语句中的循环结构会详细介绍）一行行地读取文件，然后输出每行的文字
+    while (!feof($file_handle)) { //判断是否到最后一行
+        $line = fgets($file_handle); //读取一行文本
+        echo $line; //输出一行文本
+        echo "<br />"; //换行
+    }
+}
+fclose($file_handle);//关闭文件
+?>
+====================
+<?php 
+ error_reporting(0); //禁止显示PHP警告提示
+ $var;
+ var_dump($var);
+ $var1 = null;
+ var_dump($var1);
+ $var2 = NULL;
+ var_dump( $var2);
+ $var3 = "节日快乐！";
+ unset($var3);
+ var_dump($var3);
+?>
+代码“error_reporting(0)”表示禁止PHP显示警告，当变量未赋值或未定义时候，PHP会显示警告信息；
+“unset”函数的功能是注销定义；
+===================
+<?php
+$p = "PII";
+define("PI",3.14);
+define($p,3.14);
+echo PI;
+echo "<br />";
+echo PII;
+?>
+定义常量的时候使用define函数，第一个参数为参数名，第二个参数为参数值。
+==================
+<?php
+echo __FILE__;
+echo "<br />";
+echo __LINE__;
+echo "<br />";
+echo PHP_VERSION;
+echo "<br />";
+echo PHP_OS;
+echo "<br />";
+?>
+系统常量是PHP已经定义好的常量，我们可以直接拿来使用，常见的系统常量有：
+
+（1）__FILE__ :php程序文件名。它可以帮助我们获取当前文件在服务器的物理位置。
+
+（2）__LINE__ :PHP程序文件行数。它可以告诉我们，当前代码在第几行。
+
+（3）PHP_VERSION:当前解析器的版本号。它可以告诉我们当前PHP解析器的版本号，我们可以提前知道我们的PHP代码是否可被该PHP解析器解析。
+
+（4）PHP_OS：执行当前PHP版本的操作系统名称。它可以告诉我们服务器所用的操作系统名称，我们可以根据该操作系统优化我们的代码。
+
+===========================
+<?php 
+$p="";
+//定义圆周率的两种取值
+define("PI1",3.14);
+define("PI2",3.142);
+//定义值的精度
+$height = "中";
+//根据精度返回常量名，将常量变成了一个可变的常量
+if($height == "中"){
+    $p = "PI1";
+}else if($height == "低"){
+	$p = "PI2";
+}
+$r=1;
+$area = constant($p)*$r*$r;
+echo $area;
+?>
+constant()函数。它和直接使用常量名输出的效果是一样的，但函数可以动态的输出不同的常量，在使用上要灵活、方便。
+====================
+<?php 
+define("PI1",3.14);
+$p = "PI1";
+$is1 = defined($p);
+$is2 = defined("PI2");
+var_dump($is1);
+var_dump($is2);
+?>
+===========================
+<?php 
+    $a = "我在慕课网学习PHP！";
+	$b = $a;
+	$c = &$a;
+	$a = "我天天在慕课网学习PHP！";
+	
+	echo $b."<br />";
+	echo $c."<br />";
+?>
+“&”：引用赋值，意味着两个变量都指向同一个数据。它将使两个变量共享一块内存，如果这个内存存储的数据变了，那么两个变量的值都会发生变化。
+==================
+<?php 
+    $a = 78;//成绩
+	$b = $a >=60 ? "及格" : "不及格";
+	echo $b;
+?>
+(“?:”)三元运算符也是一个比较运算符，对于表达式(expr1)?(expr2):(expr3)，如果expr1的值为true，则此表达式的值为expr2，否则为expr3。
+======================
+<?php 
+    $a = TRUE; //A同意
+	$b = TRUE; //B同意
+	$c = FALSE; //C反对
+	$d = FALSE; //D反对
+	//咱顺便复习下三元运算符
+	echo ($a and $b)?"通过":"不通过";
+	echo "<br />";
+	echo ($a or $c)?"通过":"不通过";
+	echo "<br />";
+	echo ($a xor $c xor $d)?"通过":"不通过";
+	echo "<br />";
+	echo !$c ?"通过":"不通过";
+	echo "<br />";
+	echo $a && $d ?"通过":"不通过";
+	echo "<br />";
+	echo $b || $c || $d ?"通过":"不通过";
+?>
+and	与	都为 true，则返回 true
+or	或	至少有一个为 true，则返回 true
+xor	异或	有且仅有一个为 true，则返回 true
+&&	与	都为 true，则返回 true
+||	或	至少有一个为 true，则返回 true
+!	非	如果不为 true，则返回 true
+===========================
+<?php 
+    $a = "张先生";
+	$tip = $a.",欢迎您在慕课网学习php！";
+	
+    $b = "东边日出西边雨";	
+    $b .= ",道是无情却有情";
+    
+	$c = "东边日出西边雨";	
+    $c = $c.",道是无情却有情";
+    
+	echo  $tip."<br />";
+	echo  $b."<br />";
+	echo  $c."<br />";
+?>
+（1）连接运算符(“.”)：它返回将右参数附加到左参数后面所得的字符串。
+
+（2）连接赋值运算符(“.=”)：它将右边参数附加到左边的参数后。
+================================
+if...else	对比	if...else if
+<?php
+    $totalMoney = 0;//总工资
+    $basicMoney =  2000;//基本工资
+	$sex = "男";
+
+	if($sex == "男"){
+		$totalMoney = $basicMoney  + 0;// 如果是男，没奖金。
+	}else if($sex == "女"){
+		$totalMoney = $basicMoney  + 300;// 女有奖金300元
+	}else if($sex == "老"){
+		$totalMoney = $basicMoney  + 400;// 老有奖金400元
+	}else{
+		$totalMoney = $basicMoney  + 500;// 其他，都奖金500元
+	}
+	echo $totalMoney;
+?>
+
+<?php
+    $totalMoney = 0;//总工资
+    $basicMoney =  2000;//基本工资
+	$sex = "男";
+
+	if($sex == "男"){
+		$totalMoney = $basicMoney  + 0;	// 如果是男，没奖金。
+	}else{					// 其他，都有奖金300元
+		$totalMoney = $basicMoney  + 300;
+	}
+	echo $totalMoney;
+?>
+=================
+<?php
+
+class name{					//定义了一个类
+	public $s1 = 0;			//定义类属性
+	public $s2 = 1;			//定义类属性
+
+	public function s1(){	//定义类方法
+		echo "s1";
+	}
+
+	public function s2(){	//定义类方法
+		echo "s2";
+	}
+}
+
+$name = new name();
+
+echo $name->s1;
+echo $name->s2();
+
+?>
+

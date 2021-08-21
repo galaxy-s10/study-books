@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 2]
+        var arr1 = new Array()
+        arr1[0] = 1
+        arr1[1] = 2
+        var arr2 = new Array(1, 2)
+        // console.log(arr);
+        // console.log(arr1);
+        // console.log(arr2);
+
+        // arr实例在原型链上第一个找到Array.prototype
+        console.log(arr.__proto__ === Array.prototype); //true
+
+        // prototype是函数特有的
+        console.log(arr.prototype); //undefined
+
+        // Array是构造函数
+        console.log(Array); //ƒ Array() { [native code] }
+
+        // Array是构造函数，函数就有prototype，[constructor: ƒ, concat: ƒ, copyWithin: ƒ, fill: ƒ, find: ƒ, …]
+        console.log(Array.prototype);
+
+        // Array是Function构造出来的实例（构造函数），因此Array的原型是Function.prototype
+        console.log(Array.__proto__); //ƒ () { [native code] }
+
+
+        console.log(Array.__proto__ === Function.prototype); //true
+
+        console.log(Array.__proto__.__proto__ === Object.prototype) //true
+    </script>
+</body>
+
+</html>

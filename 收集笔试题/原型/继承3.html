@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>md</title>
+</head>
+
+<body>
+    <script>
+        function Father() {
+            this.money = 100
+        }
+        Father.prototype.lastName = 'zhang'
+        function Son() {
+            this.hobby = 'game'
+        }
+        Son.prototype = father
+        Son.prototype.food = 'fish'
+        var son = new Son()
+        var father = new Father()
+
+        console.log(father.food);   //fish
+        console.log(son.food);      //fish
+
+    </script>
+</body>
+
+</html>

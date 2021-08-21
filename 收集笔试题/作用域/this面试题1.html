@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = 2;
+
+        var obj = {
+            a: 1,
+            showA1: () => {
+                console.log(this);
+                setTimeout(() => {
+                    console.log(this.a)
+                }, 1000)
+            }
+        };
+
+
+        function fn() {
+            var showA2 = () => {
+                console.log(this);
+                setTimeout(() => {
+                    console.log(this.a)
+                }, 1000)
+            }
+            console.log(this.a);
+            obj.showA1()
+            showA2()
+        }
+
+        fn.call(obj)
+
+        /**
+         * 1
+         * window
+         * obj
+         * 2
+         * 1
+        */
+    </script>
+</body>
+
+</html>

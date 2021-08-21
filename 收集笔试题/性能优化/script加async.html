@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <script>
+        console.log(new Date().getTime());
+        // 当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完全加载。
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log('DOMContentLoaded', new Date().getTime());
+        })
+        // 当整个页面及所有依赖资源如样式表和图片都已完成加载时，将触发load事件。
+        window.addEventListener('load', function () {
+            console.log('load', new Date().getTime());
+        })
+    </script>
+    <script src="http://localhost:3000/js1.js" async></script>
+
+    <script src="./js3.js"></script>
+
+    <h1>浏览器解析过程</h1>
+    <ul>
+        <li>浏览器解析到第一个script标签时，</li>
+    </ul>
+
+
+    <h1>浏览器可以并发请求，上面js1和js3会并行的请求</h1>
+    <h1>js1里面有几千行代码，请求的时候花费了2s才请求完，
+        在js1请求的时候，js3也在请求，js3只有一行代码，请求时花费了10ms就请求完了，
+        因为js1带了async属性，所以js1不会阻塞js3的执行，因此先执行了js3里面的代码，
+        等js1请求完成后且执行完成后才会执行js3里面的代码。
+    </h1>
+    <img src="./6.jpg" alt="">
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    /* this的指向取决于谁调用它 */
+    var x = 10
+    var y = 100
+    var foo = {
+        x: 99,
+        y: this.y,   //100
+        baz: {
+            x: 88,
+            y: this.x,   //10
+            z: x,        //10
+            // function()  () =>
+            bar: function () {
+                // var x = 999
+                //如果是普通函数，baz,因为此时是foo.baz.bar()，是baz调用它
+                console.log(this);
+                //如果箭头函数，window，因为此时的父级是window(从baz.y可看出)
+                // console.log(this);
+                let xx = x
+                let thisx = this.x
+                console.log(xx, thisx);     //10,88 
+            }
+        }
+    }
+    foo.baz.bar()
+    // console.log(foo.x);     //99
+    // console.log(go());      //10
+    // console.log(foo.baz.bar()); //88
+
+    var a = 100
+    var o = {
+        a: 10,
+        b: {
+            a: 12,
+            fn: function () {
+                // console.log(this);
+                console.log(this.a); //输出？
+            }
+        }
+    }
+    var p = o.b.fn
+    p() //100
+    o.b.fn();   //12
+
+    // var obj = {
+    //     say: function () {
+    //         var f1 = () => {
+    //             console.log("1111", this);
+    //         }
+    //         f1();
+    //     }
+    // }
+    // var o = obj.say;
+    // o();
+    // obj.say();
+</script>
+
+<body>
+
+</body>
+
+</html>

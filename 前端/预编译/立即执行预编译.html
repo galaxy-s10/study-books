@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+        console.log(hidden);    //undefined
+        console.log(show);    //undefined
+        var hidden = 100;
+        var show = 200;
+        /* 自执行函数不会提升 */
+        (function hidden() {
+            console.log(display);    //Uncaught ReferenceError: display is not defined
+            console.log(show);    //200
+            console.log(hidden);    //function hidden(){}
+            hidden = 200    //这里的hidden是IIFE非匿名函数，不能给它重新赋值！严格模式下会报错
+            show = 300
+            display = 999
+            console.log(hidden);    //function hidden(){}
+            console.log(show);    //300
+            console.log(display);    //999
+        })()
+        console.log(hidden);    //100
+        console.log(display);   //999
+
+        /*
+            GO{
+                a:undefined--->10,
+                b:undefined--->function b(){}
+                c:undefined
+            }
+        */
+
+        // console.log(a); //undefined
+        // console.log(b); //undefined
+        // // console.log(c); //报错c is not defined
+        // var a = 10;
+        // var b = 10;
+
+        // console.log('a:' + a);  //a:10
+        // console.log('b:' + b);  //b:10
+        /*
+            AO{
+                a:undefined,
+                c:undefined,
+                b:function b(){}
+            }
+        */
+        // (function () {
+        //     console.log('a:' + a);  //a:10
+        //     console.log('b:' + b);  //b:function b(){}
+        //     // console.log('c:' + c);  //报错c is not defined
+        //     a = 20
+        //     c = 30
+        //     function b() {
+        //         var bb = 10
+        //     }
+        //     console.log('a:' + a);  //a:20
+        //     console.log('b:' + b);  //b:10
+        //     console.log('c:' + c);  //c:30
+        // })()
+        // console.log(a); //20
+        // console.log(b); //10
+        // console.log(c); //30
+
+        // console.log('a:' + a);  //a:undefined
+        // console.log('b:' + b);  //b:undefined
+        // // console.log('c:' + c);  //报错c is not defined
+        // var a = 10;
+        // var b = 10;
+        // (function aaa() {
+        //     console.log('a:' + a);  //a:10
+        //     console.log('b:' + b);  //b:10
+        //     // console.log('c:' + c);  //报错c is not defined
+        //     console.log('d:' + d);  //d:undefined
+        //     a = 20
+        //     b = 40
+        //     c = 30
+        //     var d = 50
+        //     console.log('a:' + a);  //a:function a(){}
+        //     console.log('b:' + b);  //b:40
+        //     console.log('c:' + c);  //c:30
+        //     console.log('d:' + d);  //c:50
+        // })()
+        // console.log(a); //10
+
+
+        /*
+            GO{
+                foo:
+                bar:function
+            }
+        */
+        // console.log(bar); // undefined
+        // console.log(foo); // error: foo is not defined
+        // if (true) {
+        //     foo = 'foo';
+        //     function bar() {
+        //         return 'bar';
+        //     }
+        // }
+        // console.log(foo);
+
+    </script>
+</body>
+
+</html>

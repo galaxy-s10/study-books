@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="search">
+    <button class="cancel">取消</button>
+    <script>
+        // 优化中途取消
+        function debounce(fn, delay, leading) {
+            var timer
+            var leading = leading || false
+            var debounceFn = function () {
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                var _this = this
+                var _arguments = arguments
+                var isFirst = false
+                if (leading) {
+                    // 第一次立即执行
+                    if (!timer) {
+                        fn.apply(_this, arguments)
+                        isFirst = true
+                    }
+                    // 其余延迟执行
+                    timer = setTimeout(() => {
+                        timer = null
+                        if (!isFirst) {
+                            fn.apply(_this, arguments)
+                        }
+                    }, delay);
+
+                } else {
+                    timer = setTimeout(() => {
+                        fn.apply(_this, arguments)
+                    }, delay);
+                }
+            }
+            debounceFn.cancel = function () {
+                clearTimeout(timer)
+            }
+            return debounceFn
+
+        }
+
+        function ajax(e, arg1, arg2) {
+            console.log('ajaxajaxajax');
+            console.log(this);  // <input type="text" class="search">
+            console.log(e);  // InputEvent
+            console.log(arg1, arg2); // 100,200
+        }
+
+        var search = document.querySelector('.search')
+        var debounceWrap = debounce(ajax, 1000, true)
+
+        search.addEventListener('input', function () {
+            debounceWrap.apply(this, [event, 100, 200])
+        })
+
+        var cancel = document.querySelector('.cancel')
+
+        cancel.addEventListener('click', function () {
+            debounceWrap.cancel()
+        })
+
+        // cancel.addEventListener('click', debounceWrap.cancel)   //这样也可以实现中途取消
+
+    </script>
+</body>
+
+</html>

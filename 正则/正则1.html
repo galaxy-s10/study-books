@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let str = `<百宝音speak voice="siqi" rate="0" pitch="0">今天天气真好<百宝音/speak>`
+        // let str = `今天天气真好，<百宝音soundEvent src="http://nls.alicdn.com/sound-event/horse-neigh.wav" />我们出去玩吧，<百宝音speak voice="xiaogang">好<百宝音break time="2s" />啊<百宝音/speak>，小刚说:<百宝音speak voice="xiaogang">去哪里呢？<百宝音/speak>，<百宝音speak voice="sicheng">当然去<百宝音w>商场<百宝音/w><百宝音/speak>,思诚说，<百宝音speak voice="sicheng">今天<百宝音w>商场特价<百宝音/w><百宝音/speak>,我说<百宝音break time="3s" />好的。`
+        // let str = `今天天气真好，<百宝音soundEvent src="http://nls.alicdn.com/sound-event/horse-neigh.wav" />我们出去玩吧，<百宝音speak voice="xiaogang">好<百宝音break time="2s" />啊<百宝音/speak>，小刚说:<百宝音speak voice="xiaogang">去哪里呢？<百宝音/speak>，<百宝音speak voice="sicheng">当然去<百宝音w>商场<百宝音/w><百宝音/speak>,思诚说，<百宝音speak voice="sicheng">今天<百宝音w>商场特价<百宝音/w><百宝音/speak>,我说<百宝音break time="3s" />好的。`
+        function handleReg(str) {
+            let tag = 'TaG'
+            let reg = /<(百宝音)[^>]+>/g;
+            let reg1 = /<speak voice="([^"]+)"[^>]{0,}>.*?<\/speak>/g
+            let reg2 = /<w>(.*?)<\/w>/g //匹配w标签
+            let reg3 = /<break time="([^>]+)"[^>]+\/>/g   //匹配break标签
+            let reg4 = /<soundEvent src="([^>]+)"[^>]+\/>/g   //匹配soundEvent标签
+            // 去掉所有标签里面的百宝音
+            let delStr = str.replace(reg, function () {
+                // console.log([...arguments]);
+                return arguments[0].replace(arguments[1], "");
+            })
+
+            console.log(delStr);
+            // 保存匹配到的speak语句
+            let speak = []
+            let res1 = delStr.replace(reg1, function () {
+                let temp = {}
+                temp.index = tag + arguments[2]
+                temp.value = arguments[0]
+                speak.push(temp)
+                return temp.index
+                // return arguments[0].replace(arguments[1], "");
+            })
+
+            console.log(res1);
+            console.log(speak);
+            let w = []
+            let res2 = res1.replace(reg2, function () {
+                let temp = {}
+                temp.index = tag + arguments[2]
+                temp.value = arguments[0]
+                w.push(temp)
+                return `<speak>${temp.value}</speak>`
+            })
+
+            let breakTag = []
+            let res3 = res2.replace(reg3, function () {
+                let temp = {}
+                temp.index = tag + arguments[2]
+                temp.value = arguments[0]
+                breakTag.push(temp)
+                return `<speak volume="0">${temp.value}停</speak>`
+            })
+
+            let soundTag = []
+            let res4 = res3.replace(reg4, function () {
+                let temp = {}
+                temp.index = tag + arguments[2]
+                temp.value = arguments[0]
+                soundTag.push(temp)
+                return `<speak>${temp.value}.</speak>`
+            })
+
+            // console.log(breakTag);
+            // console.log(res2);
+            // console.log(res3);
+            let last = res4
+            speak.forEach(item => {
+                console.log(item);
+                console.log(res4.search(item.index));
+                if (res4.search(item.index) != -1) {
+                    let temp = last.replace(item.index, item.value)
+                    last = temp
+                }
+
+            })
+
+            // console.log(last);
+            return last
+        }
+
+
+        console.log(handleReg(str));  
+    </script>
+</body>
+
+</html>

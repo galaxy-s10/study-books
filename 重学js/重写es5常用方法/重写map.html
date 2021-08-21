@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 2, 3]
+        var obj = {
+            name: 'hss',
+            age: 22
+        }
+        var newarr = arr.map(function (item, index, arr) {
+            console.log(this)
+            console.log(item, index, arr)
+            return item > 1
+        }, obj)
+        console.log(newarr)
+        console.log('---------------')
+        Array.prototype.myMap = function (cb) {
+            var _arr = this
+            var _this = arguments[1] || window
+            var _newArr = []
+            var _res
+            for (var i = 0; i < _arr.length; i++) {
+                _res = cb.apply(_this, [_arr[i], i, _arr])
+                // _res && _newArr.push(_res)
+                _newArr.push(_res)
+            }
+            return _newArr
+        }
+
+        var newarr1 = arr.myMap(function (item, index, arr) {
+            // console.log(this)
+            // console.log(item, index, arr)
+            return item > 1
+        }, obj)
+        console.log(newarr1)
+    </script>
+</body>
+
+</html>

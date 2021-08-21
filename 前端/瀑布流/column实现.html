@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css瀑布流</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            column-count: 4;
+            /* 不设置column-gap的话，默认16px */
+            column-gap: 10px;
+        }
+
+        .wrap .item {
+            width: 100%;
+            margin-bottom: 15px;
+            /* 避免元素内部断行并产生新列 */
+            break-inside: avoid;
+        }
+
+        .wrap .item img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="item">
+            <img src="./img/1.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/2.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/3.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/4.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/5.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/6.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/7.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/8.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/9.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/10.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/11.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/12.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/13.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/14.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/15.jpg" alt="">
+        </div>
+        <div class="item">
+            <img src="./img/16.jpg" alt="">
+        </div>
+    </div>
+</body>
+
+</html>

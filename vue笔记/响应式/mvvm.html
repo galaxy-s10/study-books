@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    缺点，new Watch里面的oldValue会导致多次收集watcher
+    <div id="app">
+        {{title}}
+    </div>
+
+    <script src="mvvm.js"></script>
+
+    <script>
+        let mvvm = new Mvvm({
+            el: "#app",
+            data: {
+                title: '个人信息',
+                name: 'cxk',
+                age: 18,
+                // hobby: ['唱', '跳', 'rap'],
+                // car: {
+                //     benz: '奔驰s级',
+                //     bmw: '宝马5系',
+                //     adui: '奥迪A系'
+                // }
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>

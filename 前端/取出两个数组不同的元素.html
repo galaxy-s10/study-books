@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function getArrDifference(arr1, arr2) {
+
+            return arr1.concat(arr2).filter(function (v, i, arr) {
+
+                return arr.indexOf(v) === arr.lastIndexOf(v);
+
+            });
+        }
+        var arr1 = []
+        var arr2 = ['11', '313', '713']
+        console.log(getArrDifference(arr1, arr2))
+    </script>
+</body>
+
+</html>

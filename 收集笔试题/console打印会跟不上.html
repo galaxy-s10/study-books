@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    for循环2000次，再弹窗，但是f12看控制台打印，发现还没打印完2000个时间，就先弹窗了，
+    其实只是浏览器问题，浏览器的打印跟不上cpu运行速度，通俗的讲就是，cpu在极短的时间（比如10ms）就已经运行完这2000次遍历了，
+    而浏览器并不能在10ms内在控制台打印出2000次输出，需要花费30ms才能打印2000次，因此有了这个视觉上的误差（弹窗了，但是控制台还在打印）
+    但是从alert的时间来看，是比for循环完成后那个时间大的，说明是先for循环后才弹窗了，这就可以印证了上面的观点。
+    <script>
+        for (let i = 0; i < 2000; i++) {
+            console.log(window.performance.now())
+            // console.log(new Date().getTime());
+        }
+        // alert(new Date().getTime())
+        alert(window.performance.now())
+    </script>
+</body>
+
+</html>

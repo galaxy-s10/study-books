@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="ppp"></div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#ppp',
+            data: {
+                pet: 'dog'
+            },
+            template: `
+            <ul>
+                <li>{{pet}}</li>
+            </ul>
+            `
+        })
+        console.log(vm);
+        vm.pet = 'cat' // 更改数据
+
+        console.log(vm.$el.textContent);  //dog
+        // Vue.nextTick(function () {
+        //     console.log(vm.$el.textContent);  //cat
+        // })
+
+        // nextTick返回一个promise,因此可以这样：
+        vm.$nextTick().then(res => {
+            console.log(vm.$el.textContent);  //cat
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function formatDate(date) {
+            var arr = date.split("T");
+            var d = arr[0];
+            var darr = d.split('-');
+            var t = arr[1];
+            var tarr = t.split('.000');
+            var marr = tarr[0].split(':');
+            var dd = parseInt(darr[0]) + "/" + parseInt(darr[1]) + "/" + parseInt(darr[2]) + " " + parseInt(marr[0]) + ":" + parseInt(marr[1]) + ":" + parseInt(marr[2]);
+            console.log(dd)
+            return formatDateTime(dd);
+        }
+
+        function formatDateTime(date) {
+            let time = new Date(Date.parse(date));
+            time.setTime(time.setHours(time.getHours() + 8));
+            let Y = time.getFullYear() + '-';
+            let M = addZero(time.getMonth() + 1) + '-';
+            let D = addZero(time.getDate()) + 'T';
+            let h = addZero(time.getHours()) + ':';
+            let m = addZero(time.getMinutes()) + ':';
+            let s = addZero(time.getSeconds());
+            console.log(Y + M + D + h + m + s)
+            return Y + M + D;
+            // return Y + M + D + h + m + s;
+        }
+        function addZero(num) {
+            return num < 10 ? '0' + num : num;
+        }
+        // var dates = new Date()
+        // console.log(dates.toUTCString())
+        // console.log(formatDateTime(dates))
+        // console.log(formatDate(dates))
+
+        //得到本地时间
+        var d = new Date();
+
+        //得到1970年一月一日到现在的秒数
+        var local = d.getTime();
+
+        //本地时间与GMT时间的时间偏移差
+        var offset = d.getTimezoneOffset() * 60000;
+
+
+
+        //获取本地时区，判断如果是负的则相加得到格林尼治时间，正的则相减
+        var localUtc = new Date().getTimezoneOffset() / 60;
+        //得到现在的格林尼治时间
+        var utcTime;
+        if (localUtc > 0) {
+            utcTime = local - offset;
+        } else {
+            utcTime = local + offset;
+        }
+        console.log(localUtc)
+        //得到时区的绝对值
+        var localTime = utcTime + 3600000 * Math.abs(localUtc);
+
+        console.log(localTime);
+
+        var nd = new Date(localTime);
+        YY = nd.getFullYear() + '-';
+        MM = nd.getMonth() + 1 + '-';
+        dd = nd.getDate() + 'T';
+        hh = nd.getHours() + ':';
+        mm = nd.getMinutes() + ':';
+        ss = nd.getSeconds();
+        console.log(YY + MM + dd + hh + mm + ss);
+
+    </script>
+</body>
+
+</html>

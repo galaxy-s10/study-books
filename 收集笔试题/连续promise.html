@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        
+
+        function compose(promises) {
+            console.log(promises);
+            if (!Array.isArray(promises)) throw new TypeError('fns should be an array')
+
+            for (const p of promises) {
+                if (typeof p !== 'function') throw new TypeError('fns should contain only functions')
+            }
+
+            return function () {
+                return dispatch(0)
+
+                function dispatch(i) {
+                    let promise = promises[i]
+                    if (!promise) return Promise.resolve()
+                    try {
+                        return Promise.resolve(promise(dispatch.bind(null, i + 1)))
+                    } catch (err) {
+                        return Promise.reject(err)
+                    }
+                }
+            }
+        }
+
+        var ajax1 = function () {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('ajax1完成，结果是100');
+                    resolve(100)
+                }, 1000);
+            })
+
+        }
+        var ajax2 = function (res) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`ajax1的结果是${res},ajax2完成`);
+                    resolve(res + 100)
+                }, 100);
+            })
+
+        }
+        var ajax3 = function (res) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`ajax2的结果是${res},ajax3完成`);
+                    resolve(res+100)
+                }, 2000);
+            })
+
+        }
+        async function temp() {
+            try {
+                var res1 = await ajax1().then()
+                var res2 = await ajax2(res1).then()
+                var res3 = await ajax3(res2).then()
+                console.log(res1, res2, res3);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        temp()
+        // Promise.all([ajax1(), ajax2(), ajax3()]).then(res => {
+        //     console.log(res);
+        // }).catch(err => {
+        //     console.log(err);
+        // })
+
+
+        function a(ajax1) {
+            ajax1()
+        }
+
+        function b(ajax2) {
+            ajax2()
+        }
+
+        function c(ajax3) {
+            ajax3()
+        }
+
+
+        let promises = [a, b, c]
+        compose(promises)
+        // ajax3().then(res=>{console.log(res);})
+    </script>
+</body>
+
+</html>

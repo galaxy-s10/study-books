@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj = {
+            name: 'vue',
+            // $data: { //这里设置的$data其实没用，会以Object.defineProperty定义的$data为准
+            //     age: 18
+            // }
+        };
+
+        var num = { val: 1 }
+
+        // 给obj对象添加一个$data属性，并且定义它。
+        Object.defineProperty(obj, '$data', {
+            get() {
+                console.log('读取$data属性：' + JSON.stringify(num));
+                return num;
+            },
+
+            set(newValue) {
+                console.log('写入$data属性为：' + newValue);
+                num = newValue
+                return newValue
+                // return console.warn('$data是一个只读属性，不能修改');
+            }
+        })
+        console.log(obj);  // {name: "vue",$data: (...)}
+        console.log(obj.$data); //打印读取$data属性：1
+        // obj.$data = 123 //报警告：$data是一个只读属性，不能修改
+        // num ={val:2}
+        // console.log(obj.$data); //打印读取$data属性：2
+
+        // 如果将obj对象重新赋值，原本定义的属性都会没了
+        // obj = { name: 'react' }
+        // console.log(obj.name);   // {name: "react"},原本定义的$data没了。
+
+
+
+
+        // 报错：数据描述符和存取描述符不能同时存在！
+        // Invalid property descriptor. Cannot both specify accessors and a value or writable attribute
+        // Object.defineProperty(obj, 'test', {
+        //     value: '123',
+        //     get() {
+        //     }
+        // })
+    </script>
+</body>
+
+</html>

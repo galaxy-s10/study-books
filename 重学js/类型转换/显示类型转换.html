@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = []
+        var b = '0'
+
+        console.log(a - b);     //0
+        /**
+         * -是数字剑法运算符，a和b都不是number，都要强制转换为数字
+         * a首先oPrimitive，a的valueOf()的值是[]，不是基本类型，继续toString()
+         * a的toString()的值是"",是基本类型，然后Number("")，即0
+         * b是基本类型，直接Number('0')，即0
+         * 转化后结果就是0-0，即0
+        */
+
+        var c = [1, 2, 3]
+        console.log(c - b); //NaN
+        console.log(b - c); //NaN
+        /**
+         * c.valueOf()是[1,2,3]，继续toString()，结果是"1，2，3"，是基本数据类型，Number("1,2,3")结果是NaN
+         * b转化后是0
+         * NaN-0还是NaN
+        */
+
+        var d = { age: 12 }
+        console.log(d - c);   //NaN
+        console.log(c - d);   //NaN
+
+        var e = [12]
+        console.log(e - b); //12
+
+        var f = {
+            valueOf: function () { return 42; },
+            toString: function () { return 4; }
+        };
+        console.log(f + "");// "42"
+        console.log(String(f));// "4"
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var p = 9
+
+        // function fn(p) {
+        //     console.log(p)
+        // }
+        // fn(p) //9
+
+        // var a = {
+        //     name: 1
+        // }
+
+        // function fn1() {
+        //     console.log(a)
+        //     a = 100
+        //     a.name = {
+        //         name: 2
+        //     }
+        //     console.log(a)
+        //     // a.name = 2
+        //     // console.log(a)
+        // }
+        // fn1()
+        // console.log('-----')
+        // console.log(a)
+
+
+        // let obj2 = new Object()
+        // console.log(obj2)
+        // function obj1(val) {
+        //     val.name = 'aa'
+        //     val1 = new Object()
+        //     console.log(val1)
+        //     val = val1
+        //     // val.name = "bb"
+        // }
+        // let obj2 = new Object()
+        // obj1(obj2)
+        // console.log(obj2.name)
+
+        // var a = 1
+        // b = { name: 'hss' }
+        // function fn2(a, b) {
+        //     a += 10
+        //     b.name = '22'
+        // }
+        // fn2(a, b);
+        // console.log(a, b);
+
+        // console.log('------------');
+        // var a = 123
+        // function fn1(a) {
+        //     console.log(a); //123
+        //     a = 100
+        //     b = 200 // 这里不是var b =200,所以b=200约等于window.b =200;
+        //     console.log(a); //100
+        // }
+        // fn1(a)
+        // console.log(a); //123
+        // console.log(b);//200
+        // console.log('-------------');
+
+
+        // 基本类型
+        // var a = 1
+        // a = 2
+
+        // console.log(a); //2
+
+        // var a = 1
+        // var b = a
+        // b = 2
+        // console.log(a); //1
+        // console.log(b); //2
+
+        // 首先看最普通的函数里面的参数
+        // function fn() {
+        //     var a = 100
+        //     console.log(a); //100
+        // }
+        // fn()
+        // console.log(a); // 报错a is not defined
+
+        // 首先看最普通的函数里面的参数
+        // function fn() {
+        //     a = 100 //这里不是var a = 100，而且，也没有定义局部变量var a，因此这里约等于window.a = 100
+        //     console.log(a); //100
+        // }
+        // fn()
+        // console.log(a); //100
+
+        // function fn(a) {
+        //     console.log(a); //100
+        //     a = 100 //由于这里有形参a，因此，这里的a = 100，约等于 var a = 100
+        //     console.log(a); //100
+        // }
+        // fn(100)
+        // console.log(a); //报错a is not defined
+
+        // function fn(a) {
+        //     var a
+        //     console.log(a); //100
+        //     a = 100
+        //     console.log(a); //100
+        // }
+        // fn(100)
+        // console.log(a); //报错a is not defined
+
+        // 基本类型参数传递
+        // var a = 1
+        // function fn(a) {
+        //     console.log(a); //1
+        //     a = 100 //这里由于有
+        //     console.log(a); //100
+        // }
+        // fn(a)
+        // console.log(a); //1  
+
+        // var a = 1
+        // function fn(a) {
+        //     console.log(a); //这里的a是第一次接收到的形参a，即1
+        //     a = 100 //这里由于已经定义了形参a，因此约等于 var a = 100
+        //     b = a   //这里由于没有定义过形参b，因此这里约等于window.b = a
+        //     console.log(a); //这里的a是var a = 100后的a，即100
+        //     console.log(b); //这里的b是window.b = 100，即100
+        // }
+        // fn(a)
+        // console.log(a); //1
+        // console.log(b); //100
+
+
+        // var a = 1
+        // function fn(aa) {
+        //     console.log(aa); //这里的aa是第一次接收到的形参a，即1
+        //     aa = 100 //这里由于已经定义了形参aa，因此约等于 var aa = 100
+        //     b = aa   //这里由于没有定义过形参b，因此这里约等于window.b = aa
+        //     console.log(aa); //这里的aa是var aa = 100后的a，即100
+        //     console.log(b); //这里的b是window.b = 100，即100
+        // }
+        // fn(a)
+        // console.log(a); //1
+        // console.log(b); //100
+        // console.log(aa);    //报错报错aa is not defined
+
+        // var a = 1
+        // function fn(aa) {
+        //     var aa
+        //     console.log(aa); //这里的aa是第一次接收到的形参a，即1
+        //     aa = 100 //这里由于已经定义了形参aa，因此约等于 var aa = 100
+        //     b = aa   //这里由于没有定义过形参b，因此这里约等于window.b = aa
+        //     console.log(aa); //这里的aa是var aa = 100后的a，即100
+        //     console.log(b); //这里的b是window.b = 100，即100
+        // }
+        // fn(a)
+        // console.log(a); //1
+        // console.log(b); //100
+        // console.log(aa);    //报错报错aa is not defined
+
+        /**
+         * 重点：fn函数里面的aa = 100，根据案例2可粗略转化为：
+         * var a = 1
+         * var aa = a
+         * aa = 100
+         * console.log(a)   //1
+         * console.log(aa)  //100
+         * 因此，fn函数里面的aa = 100，并不会修改fn函数外面的a !
+         * 并且：aa是fn的局部变量，所以aa = 100，会将fn函数里面的aa修改成100！
+        */
+
+        // 引用类型
+        // var a = { age: 1 }
+        // a = { age: 100 }
+        // console.log(a); //{age:100}
+
+        // var a = { age: 1 }
+        // var b = a
+        // b = { age: 100 }
+        // console.log(a); //{age:1}
+        // console.log(b); //{age:100}
+
+        // var a = { age: 1 }
+        // function fn(b) {
+        //     console.log(b); //{age:1}
+        //     b = { age: 100 }    //这里不是var b = {age:100},所以b = {age:100}约等于window.b = {age:100}
+        //     console.log(b); //{age:100}
+        // }
+
+        // fn(a)
+        // console.log(a); //{age:1}
+        // console.log(b); //{age:100}
+
+        // var a = { age: 1 }
+        // function fn(a) {
+        //     console.log(a); //{age:1}
+        //     a = { age: 100 }    //这里由于已经定义了形参a，因此a = {age:100}约等于var a = {age:100}
+        //     console.log(a); //{age:100}
+        // }
+
+        // fn(a)
+        // console.log(a); //{age:1}
+
+        var a = { age: 1 }
+        function fn(aa) {
+            var aa
+            console.log(aa); //{age:1}
+            aa = { age: 100 }    //这里由于已经定义了形参aa，因此aa = {age:100}约等于var aa = {age:100}
+            console.log(aa); //{age:100}
+        }
+
+        fn(a)
+        console.log(a); //{age:1}
+
+        /**
+         * 重点：执行fn(a)，将a当做形参传给fn函数里的aa，
+         * 首先在fn函数内部定义fn的局部变量var aa，然后将fn(a)的a给aa，即：
+         * var a = {age:1}
+         * var aa = a
+         * aa = {age:100}
+         * 根据案例2可知：此时的a:{age:1},aa:{age:100}
+        */
+
+
+        // fn(a)
+        // console.log(a); //{age:1}
+
+
+        /**
+         * fn(a){}函数里面的a仅仅只是一个形参名
+         * 执行fn(a)的时候，把a传进去给了fn函数，
+         * fn函数里面的a = {age:100},约等于window.a = {age:100}
+         * 是重点来了，根据引用数据类型参数传递的第二个例子可以得出：
+         * var a = {age:1}  //我是第一个a
+         * window.a = {age:100} //我是第二个a
+         * 第二个a的重新赋值，并不会改变第一个a的引用（指针），即这两a不是同一个东西
+         * 因此，fn函数里面给a赋值，只是给fn这个函数的作用域里面的a赋值
+        */
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="h3">{{uname}}</div>
+    </div>
+
+    <script>
+        new Vue({
+            el:'#app',
+            // template:'<h1>template</h1>',
+            data(){
+                return {
+                    uname:'张三'
+                }
+            },
+            // render:h=>h("#app"),
+            beforeMount(){
+                console.log(document.getElementById("h3").innerHTML)
+            },
+            mounted(){
+                console.log(document.getElementById("h3").innerHTML)
+            },
+            
+
+        })
+    </script>
+</body>
+</html>

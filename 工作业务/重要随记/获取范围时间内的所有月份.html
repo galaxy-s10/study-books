@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 获取范围时间内的月份
+        function getMonthBetween(start, end) {
+
+            function formatMonth(localTime) {
+                var val = new Date(localTime);
+                YY = val.getFullYear() + '-';
+                MM = val.getMonth() + 1;
+                // return YY + MM
+                return YY + (MM < 10 ? "0" + MM : MM)
+            }
+            //传入的格式YYYY-MM
+            var result = []
+            var s = start.split('-')
+            var e = end.split('-')
+            var min = new Date()
+            var max = new Date()
+            min.setFullYear(s[0], s[1] * 1 - 1, 1) //开始日期
+
+            max.setFullYear(e[0], e[1] * 1 - 1, 1) //结束日期
+            var curr = min
+            while (curr <= max) {
+                var month = curr.getMonth()
+                //this.$common.formatDate()是调用项目中自己的函数，对月份格式化
+                result.push(formatMonth(curr))
+                curr.setMonth(month + 1)
+            }
+            return result
+        }
+        console.log(getMonthBetween('2019-01', '2020-02'));
+    </script>
+</body>
+
+</html>

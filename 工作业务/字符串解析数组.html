@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = "['https://homesitetask.zbjimg.com/homesite/task/2021/04/07/1.jpg/origine/b273280a-16e5-4e2a-878c-5e8b968c3606', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/2.jpg/origine/d9719fe4-82c4-4ba7-8b4b-af6bba3ea3dc', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/3.jpg/origine/26ee6d37-d707-4af4-897d-6a5c2ad131d0', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/4.jpg/origine/6f6cbdb4-b3de-4b2e-bc09-9a066a403a4a', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/5.jpg/origine/cfb3fd61-9a9b-4886-aa05-f894e1de27fd', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/6.jpg/origine/80f3f74a-670c-46dd-a721-0df38448d59c', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/7.jpg/origine/4c6194a3-cc66-4832-bcd9-5d5841c2eeb6', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/8.jpg/origine/caeff941-36c4-43ee-95d7-c0465b5749ad', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/9.jpg/origine/32c18de2-de1e-4dc4-af42-05ecbde80c3b', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/10.jpg/origine/d6499828-e5d0-49b2-bd50-c5e512812d9d', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/11.jpg/origine/4a96b8b5-78c3-4421-904a-3d2a0b11a32f', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/12.jpg/origine/56e60a2a-f4ed-4e9f-a42a-f3b298e1a4be', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/13.jpg/origine/4936a10a-dc3c-4d56-a510-860865dfe044', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/14.jpg/origine/498d7882-71e3-4be0-95d6-81939d7272ab', 'https://homesitetask.zbjimg.com/homesite/task/2021/04/07/15.jpg/origine/4d82d0b2-aa42-4209-b24f-ac2135c0be63']"
+        var b = a.slice(1, a.length - 1)
+        var c = b.split(', ')
+        var d = c.map(item => { return item.slice(1, item.length - 1) })
+        console.log(d);
+
+        var aa = "['应用平台：综合 手机版 触屏版 PC版 微信版 ', '架构：B/S ', '功能模块：订单管理系统 招募分销系统 配送管理系统 支付功能 评价系统 积分系统 营销系统 金融系统 会员管理系统 其他 ', '应用领域：跨境电商 农村电商 零售商超 生鲜电商 O2O电商 连锁店电商 百货电商 厂商 分销电商 电视购物 其他 ', '数据库：MySQL SAP PostgreSQL Oracle 其它 ', '交付方式：源码交付 SAAS 人工服务 ', '开发语言：Flash php Ruby JavaScript java 其它 ']"
+        var bb = aa.slice(1, aa.length - 1)
+        // var bb = aa.split()
+        console.log(bb);
+        console.log(bb.split(', '));
+        var cc = bb.split(', ')
+        var dd = cc.map(item => { return item.slice(1, item.length - 1) })
+        console.log(dd);
+    </script>
+</body>
+
+</html>

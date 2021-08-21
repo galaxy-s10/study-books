@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Person(name) {
+            this.name = name
+        }
+        let p = new Person('tom')
+        Person.prototype.say = function () {
+            console.log('say');
+        }
+        Person.prototype.age = 15
+        console.log(p.__proto__);   //Person.prototype
+        console.log(Person.prototype);  // p.__protp__
+        console.log(Person.constructor.prototype);  //Function.prototype
+        console.log('---');
+        console.log(Person.constructor === Function);   //true
+        console.log(Person.__proto__ === Person.constructor.prototype); //true
+        console.log(Function.prototype === Function.prototype); //true
+        console.log(p.__proto__ === Person.prototype);  //true
+    </script>
+</body>
+
+</html>

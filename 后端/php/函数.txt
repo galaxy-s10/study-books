@@ -1,0 +1,18 @@
+is_int() 函数用于检测变量是否是整数。如果指定的变量是整数 TRUE，否则返回 FALSE。
+empty() 函数用于检查一个变量是否为空。当 var 存在，并且是一个非空非零的值时返回 FALSE 否则返回 TRUE。 
+gettype() 函数用于获取变量的类型。
+intval() 函数用于获取变量的整数值。成功时返回 var 的 integer 值，失败时返回 0。 空的 array 返回 0，非空的 array 返回 1。
+strval() 函数用于获取变量的字符串值。返回字符串。 
+is_array() 函数用于检测变量是否是一个数组。如果检测的变量是数组，则返回 TRUE，否则返回 FALSE。
+is_bool() 函数用于检测变量是否是布尔型。
+is_float() 	检测变量是否是浮点型
+is_int() 函数用于检测变量是否是整数。
+is_null() 函数用于检测变量是否为 NULL。如果指定变量为 NULL，则返回 TRUE，否则返回 FALSE。
+is_numeric() 函数用于检测变量是否为数字或数字字符串。如果指定的变量是数字和数字字符串则返回 TRUE，否则返回 FALSE。
+is_object() 函数用于检测变量是否是一个对象。如果指定变量为对象，则返回 TRUE，否则返回 FALSE。
+is_resource() 函数用于检测变量是否为资源类型。如果指定变量是 resource 类型，is_resource() 返回 TRUE，否则返回 FALSE。
+is_resource() 函数用于检测变量是否是一个标量。如果指定变量是标量返回 TRUE，否则返回 FALSE。
+is_string() 函数用于检测变量是否是字符串。如果指定变量为字符串，则返回 TRUE，否则返回 FALSE。
+isset() 函数用于检测变量是否已设置并且非 NULL。如果指定变量存在且不为 NULL，则返回 TRUE，否则返回 FALSE。
+print_r() 函数用于打印变量，以更容易理解的形式展示。
+settype() 函数用于设置变量的类型。设置成功时返回 TRUE， 失败时返回 FALSE。 

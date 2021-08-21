@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj = {
+            name: 'hss',
+            age: 22
+        }
+
+        function test() {
+            console.log(this)
+            console.log(arguments)
+            return 999
+        }
+        // test(666, 777, 888) //window
+        // var res = test.call(obj, 666, 777, 888) //obj
+        // console.log(res)
+
+        Function.prototype.myCall = function (ctx) {
+            // 不考虑严格模式下的undefined
+            ctx = Object(ctx) || window
+            // 谁调用方法，this就指向谁，比如这里的myCall是test调用的，this就是test
+            // 给ctx添加一个属性originFn，让他指向this，也就是test
+            // 如果执行originFn()，也就是执行test()，而它是ctx调用的，所以this就是ctx
+            ctx.originFn = this
+            var args = []
+            for (var i = 1; i < arguments.length; i++) {
+                args.push('arguments[' + i + ']')
+            }
+            var res = eval('ctx.originFn(' + args + ')')
+            delete ctx.originFn
+            return res
+        }
+        let res1 = test.myCall(obj, 666, 777, 888)
+        console.log(res1)
+    </script>
+</body>
+
+</html>

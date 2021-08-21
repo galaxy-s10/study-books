@@ -1,0 +1,11 @@
+查询所有数据：select * from 表名
+查询数据：select 字段名1,字段名2,字段名n from 表名
+查询数据：select * from 表名 where 条件
+查询数据：select 字段名1,字段名2,字段名n from 表名 where 条件
+查询重复的值数据：select distinct 表字段 from 表名
+连接数据：select concat(字段名1,字段名n) from 表名
+查询数据并重命名：select 字段名1 as 新名字,字段名n as 新名字 from 表名
+查询数据并并用分隔符隔开：select concat_ws("===",字段名1,字段名n) from 表名
+模糊查询开头为aa的数据：select 字段名1,字段名n from 表名 where 字段名 like "aa%"
+模糊查询结尾为aa的数据：select 字段名1,字段名n from 表名 where 字段名 like "%aa"
+模糊查询有aa的数据：select 字段名1,字段名n from 表名 where 字段名 like "%aa%"

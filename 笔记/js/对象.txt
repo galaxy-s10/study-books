@@ -1,0 +1,54 @@
+JavaScript 对象
+JavaScript 中的所有事物都是对象：字符串、数值、数组、函数...此外，JavaScript 允许自定义对象。所有事物都是对象
+===========================创建直接的实例========================
+<script>
+var person=new Object();
+person.firstname="John";
+person.lastname="Doe";
+person.age=50;
+person.eyecolor="blue"; 
+document.write(person.firstname + " is " + person.age + " years old.");
+</script>
+
+<script>
+person={firstname:"John",lastname:"Doe",age:50,eyecolor:"blue"}
+document.write(person.firstname + " is " + person.age + " years old.");
+</script>
+==========================使用对象构造器==================
+<script>
+function person(firstname,lastname,age,eyecolor){
+	this.firstname=firstname;
+	this.lastname=lastname;
+	this.age=age;
+    	this.eyecolor=eyecolor;
+}
+myFather=new person("John","Doe",50,"blue");
+document.write(myFather.firstname + " is " + myFather.age + " years old.");
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

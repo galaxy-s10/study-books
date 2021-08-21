@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        debugger
+
+        new Promise((resolve, reject) => {
+            console.log("promise1", 1)
+            resolve()
+        }).then(() => {
+            console.log("then11", 2)
+            new Promise((resolve, reject) => {
+                console.log("promise2", 3)
+                resolve();
+            }).then(() => {
+                console.log("then21", 4)
+                new Promise((resolve, reject) => {
+                    console.log("promise3", 5)
+                    resolve();
+                }).then(() => {
+                    console.log("then31", 7)
+                }).then(() => {
+                    console.log("then32", 9)
+                })
+            }).then(() => {
+                console.log("then22", 8)
+            })
+        }).then(() => {
+            console.log("then12", 6)
+        })
+
+        // new Promise((resolve, reject) => {
+        //     console.log("promise1", 1)
+        //     resolve()
+        // }).then(() => {
+        //     console.log("then11", 2)
+        //     new Promise((resolve, reject) => {
+        //         console.log("promise2", 3)
+        //         resolve();
+        //     }).then(() => {
+        //         console.log("then21", 4)
+        //         new Promise((resolve, reject) => {
+        //             console.log("promise3", 5)
+        //             resolve();
+        //         }).then(() => {
+        //             console.log("then31", 7)
+        //         }).then(() => {
+        //             console.log("then32", 9)
+        //         })
+        //     }).then(() => {
+        //         console.log("then22", 8)
+        //     })
+        // }).then(() => {
+        //     console.log("then12", 6)
+        // })
+
+        // console.log(111);
+        // setTimeout(function () {
+        //     console.log(222)
+        //     for (var i = 0; i < 5; i++) {
+        //         console.log(888)
+        //     }
+        //     setTimeout(function () {
+        //         console.log(333)
+        //     }, 0)
+        // }, 0)
+
+        // for (var i = 0; i < 5000; i++) {
+        //     console.log(999)
+        // }
+        // setTimeout(() => {
+        //     console.log(444);
+        // }, 10);
+        // console.log(555)
+
+    </script>
+</body>
+
+</html>

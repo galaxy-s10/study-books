@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/template" id="ast">
+        <div>
+            <h1>你好</h1>
+            <ul>
+                <li>你好啊A</li>
+                <li>好的B</li>
+                <li>收到了C</li>
+            </ul>
+        </div>
+    </script>
+    <script src="./parse.js"></script>
+    <script>
+        var str = document.getElementById('ast').innerHTML
+        console.log(str)
+        parse(str)
+    </script>
+</body>
+
+</html>

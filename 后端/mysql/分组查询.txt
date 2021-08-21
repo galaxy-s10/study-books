@@ -1,0 +1,3 @@
+单独使用group by 分组：select * from 表名 group by 列名
+group by和聚合函数一起使用：select count(*) from 表名 group by 列名
+group by和having关键字一起使用：select sum(列名) from 表名 group by 列名

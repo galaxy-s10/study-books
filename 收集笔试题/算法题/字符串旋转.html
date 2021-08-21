@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 字符串旋转:
+         * 给定两字符串A和B，如果能将A从中间某个位置分割为左右两部分字符串（都不为空串），
+         * 并将左边的字符串移动到右边字符串后面组成新的字符串可以变为字符串B时返回true。
+         * 例如：如果A=‘youzan’，B=‘zanyou’，A按‘you’‘zan’切割换位后得到‘zanyou’和B相同返回true。
+        */
+
+        /**
+         * 旋转字符串
+         * @param A string字符串 
+         * @param B string字符串 
+         * @return bool布尔型
+         */
+        function solve(A, B) {
+            // write code here
+            for (let i = 0; i < A.length; i++) {
+                let s1 = A.substring(0, i);
+                let s2 = A.substring(i);
+                // let s2 = A.substring(i, A.length);
+                if (s2 + s1 === B) return true;
+            }
+            return false
+
+        }
+        // function solve(A, B) {
+        //     var arrA = A.split('')
+        //     var i = arrA.length / 2
+        //     var start = arrA.splice(0, i)
+        //     var str = arrA.join('') + start.join('')
+        //     if (str == B) {
+        //         return true
+        //     } else {
+        //         return false
+        //     }
+        // }
+        console.log(solve('youzan', 'zanyou'));
+    </script>
+</body>
+
+</html>

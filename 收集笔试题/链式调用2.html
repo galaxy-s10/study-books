@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function main() {
+            console.log('main')
+        }
+        Function.prototype.before = function (fn) {
+            //补全代码
+            var that = this
+            /**
+             * 这里必须返回一个函数，因为after是定义在函数的原型上的，
+             * 只有返回函数，才会在函数上面的原型找，找不到就会找对应函数原型上的方法，
+             * 最后才会找到after!!!
+             * 如果返回的不是一个函数，比如返回一个数字1，字符串"1"，或者一个对象{},
+             * 都会报错（main.before(...).after is not a function），
+             * 因为它们身上都没有after这个方法，且它的的原型上也没有
+            */
+            return function (after) {
+                after()
+                fn()
+                that.apply()
+                // this.main()
+            }
+        }
+        Function.prototype.after = function (fn) {
+            //补全代码
+            /**
+             * this:谁调用就指向谁。
+             * 这里的this是Function.prototype.before执行返回的函数(function(after){})，
+             * 因此执行这个this
+            */
+            this(fn)
+        }
+        /**
+         * 总结核心部分：
+         * 首先main调用before，main没有before，因为main是一个函数，所以在函数原型上找before，
+         * 在函数的原型上找到了before，然后main.prototype.before()，执行里面的代码，最后返回了一个函数，
+         * 继续执行main.prototype.before().after，main.prototype.before()返回了一个函数，但是它本身并没有
+         * after这个函数，因此再它的原型上找，找到了after函数，执行里面的代码，遇到this(fn)，
+         * 因为after是main.prototype.before()调用的，而main.prototype.before()又是一个函数(function (after){...})，
+         * 因此，这个this是一个函数，函数就可以执行
+         * 因此得到最终结果！
+        */
+        main.before(function () {
+            console.log('回调before')
+        }).after(function () {
+            console.log('回调after')
+        })
+
+        // 打印顺序：after before  main
+
+    </script>
+</body>
+
+</html>

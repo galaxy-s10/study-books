@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Queue() {
+            this.item = []
+        }
+
+        // 入列
+        Queue.prototype.enqueue = function (ele) {
+            this.item.push(ele)
+        }
+
+        // 出列
+        Queue.prototype.dequeue = function () {
+            return this.item.shift()
+        }
+
+        // 查看队列头
+        Queue.prototype.front = function () {
+            return this.item[0]
+        }
+
+        // 检查队列是否为空
+        Queue.prototype.isEmpty = function () {
+            return this.item.length == 0
+        }
+
+        // 检查队列大小
+        Queue.prototype.size = function () {
+            return this.item.length
+        }
+
+        var queue = new Queue()
+        queue.enqueue(1)
+        queue.enqueue(3)
+        queue.enqueue(2)
+        queue.enqueue(43)
+        queue.enqueue(43)
+        queue.enqueue(43)
+        queue.enqueue(43)
+        console.log(queue.size())
+        console.log(queue)
+        queue.dequeue()
+        console.log(queue)
+        console.log(queue.front())
+        console.log(queue.isEmpty())
+
+        // 击鼓传花，给定一个数比如3，一个花，一群人坐在一圈里，一个人拿花喊1，
+        // 然后把花传给第二个人喊2，第二个人再把花传给第三个人，第三个人喊3并淘汰，
+        // 继续把花传给下一个人，继续数，继续淘汰，最后一个人是赢家
+        // 要求，给定一个数和一群人，返回赢家
+        function game(num, list) {
+            var queue = new Queue()
+            for (var i = 0; i < list.length; i++) {
+                queue.enqueue(list[i])
+            }
+            var y = 1
+            while (queue.size() > 1) { //如果当前队列人数大于1
+                // 手里有花的且喊的不是num的人往队列最后移
+                for (var j = 0; j < num - 1; j++) {
+                    queue.enqueue(queue.dequeue())
+                }
+                var taotai = queue.dequeue() //花到手且喊num的人里就淘汰
+                console.log('第' + y + '轮淘汰了:', taotai)
+                y++
+            }
+            return queue.dequeue()
+        }
+        //赢家是： a
+        console.log('赢家是：', game(3, ['a', 'b', 'c', 'd', 'e', 'f']))
+
+        // 优先级队列
+        function FirstQueue() {
+            this.item = []
+        }
+        FirstQueue.prototype.enqueue = function (ele, level) {
+            function QueueItem(ele, level) {
+                this.ele = ele
+                this.level = level
+            }
+            var quequItem = new QueueItem(ele, level)
+            var isMin = true
+            for (var i = 0; i < this.item.length; i++) {
+                if (this.item[i].level < quequItem.level) {
+                    this.item.splice(i, 0, quequItem)
+                    isMin = false
+                    break
+                }
+            }
+            if (isMin) {
+                this.item.push(quequItem)
+            }
+        }
+        var firstQueue = new FirstQueue()
+        console.log(firstQueue)
+        console.log(firstQueue.enqueue('存10', 1))
+        console.log(firstQueue.enqueue('存300', 3))
+        console.log(firstQueue.enqueue('存100000', 10))
+        console.log(firstQueue.enqueue('存200', 2))
+        console.log(firstQueue)
+    </script>
+</body>
+
+</html>

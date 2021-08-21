@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 山峰元素是指其值大于或等于左右相邻值的元素。
+         * 给定一个输入数组nums，任意两个相邻元素值不相等，
+         * 数组可能包含多个山峰。找到索引最大的那个山峰元素并返回其索引
+         * 即找最后一个山峰的索引值。
+         * 倒序遍历，找到第一个，前一个数比后一个数小的值
+        */
+        var arr = [2, 4, 1, 2, 7, 8, 4, 8, 5, 1]
+        function solve(a) {
+            for (var i = a.length - 1; i >= 0; i--) {
+                if (a[i] > a[i - 1]) {
+                    return i
+                }
+            }
+        }
+        console.log(solve(arr))
+
+    </script>
+</body>
+
+</html>

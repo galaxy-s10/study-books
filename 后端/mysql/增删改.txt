@@ -1,0 +1,14 @@
+插入数据：insert into 表名 (字段名1,......字段名n) values (值1,......值n);
+如果数据是字符型，必须使用单引号或者双引号，如："值"。
+例如要插入name为eee，age为19，email为666的数据：insert into 表名 (name,age,email) values ("eee",19,"666");
+这种插入数据方法不一定要插入全部字段名，也可插部分字段名，值和插入的字段名对应即可。
+不添加字段名插入数据：insert into 表名 values (值1,.....值n);	但添加的值必须与默认的字段名一样对应，缺一不可！
+
+
+删除所有记录：delete from 表名;
+删除所有记录：truncate (table) 表名;		全部清零
+删除id为4的记录：delete from 表名 where id=4;
+
+把全部name改为老王：update 表名 set name="老王";
+把id为1的name改为老王：update 表名 name="老王" where id=1;
+把id为1的name和age分别改为：老王，20：update 表名 name="老王",age=20 where id=1;

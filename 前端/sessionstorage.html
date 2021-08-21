@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // localStorage.name= '张三'
+        sessionStorage.name= JSON.stringify({name:'李四'}) 
+
+        console.log(localStorage.name)
+        console.log(JSON.parse(sessionStorage.name))
+
+    </script>
+</body>
+
+</html>

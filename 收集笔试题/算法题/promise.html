@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function compose(promises) {
+            if (!Array.isArray(promises)) throw new TypeError('fns should be an array')
+
+            for (const p of promises) {
+                if (typeof p !== 'function') throw new TypeError('fns should contain only functions')
+            }
+
+            return function () {
+                return dispatch(0)
+
+                function dispatch(i) {
+                    let promise = promises[i]
+                    if (!promise) return Promise.resolve()
+                    try {
+                        return Promise.resolve(promise(dispatch.bind(null, i + 1)))
+                    } catch (err) {
+                        return Promise.reject(err)
+                    }
+
+                }
+
+            }
+        }
+
+        async function a1(go) {
+
+            const result = await new Promise(resolve => {
+                setTimeout(() => {
+                    resolve('resolved a1')
+
+                }, 1000);
+            })
+            console.log(result)
+            go()
+        }
+
+        async function a2(go) {
+
+            const result = await new Promise(resolve => {
+                setTimeout(() => {
+                    resolve('resolved a2')
+
+                }, 1000);
+            })
+
+            console.log(result)
+            go()
+        }
+
+        async function a3(go) {
+            const result = await new Promise(resolve => {
+                setTimeout(() => {
+                    resolve('resolved a3')
+
+                }, 1000);
+            })
+            console.log(result)
+            go()
+
+        }
+
+        let promises = [a1, a2, a3]
+        console.log(promises);
+        // for (let i = 0; i < promises.length; i++) {
+        //     promises[i]()
+        // }
+        compose(promises)()
+    </script>
+</body>
+
+</html>

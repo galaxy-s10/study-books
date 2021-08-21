@@ -1,0 +1,85 @@
+
+=======================弹性布局---父元素======================
+display:flex
+flex-direction	决定主轴方向
+		row(默认值)，主轴在水平方向，起点在左端
+		row-reverse，主轴在水平方向，起点在右端
+		column，主轴在垂直方向，起点在左端
+		column-reverse，主轴在垂直方向，起点在右端
+justify-content	决定元素在主轴方向上的对齐方式。
+		flex-start(默认值)，项目位于容器的开头。
+		flex-end，项目位于容器的结尾。
+		center，项目位于容器的中心。	
+		space-between，两端对齐，两端没有缝隙，类似于float:left和float:right
+		space-around，每个项目两侧的间隔相等
+align-items	决定元素在侧轴方向上的对齐方式。
+		flex-start(默认值)，项目位于容器的开头。
+		flex-end，项目位于容器的结尾。
+		center，项目位于容器的中心。	
+align-content	决定元素在多行侧轴方向上的对齐方式。
+		flex-start(默认值)，项目位于容器的开头。
+		flex-end，项目位于容器的结尾。
+		center，项目位于容器的中心。	
+flex-wrap:		指定弹性盒子的子元素换行方式
+		nowrap（默认值），不换行
+		wrap，换行
+		wrap-reverse，换行，反转
+
+=========================弹性布局---子元素============================
+f'lex:1
+
+=============================媒体查询media=================
+@media (min-width: 768px){ //>=768的设备 }
+@media (min-width: 992px){ //>=992的设备 }
+@media (min-width: 1200){ //>=1200的设备 }
+或者
+@media (max-width: 1200){ //>=1200的设备 }
+@media (max-width: 992px){ //>=992的设备 }
+@media (max-width: 768px){ //>=768的设备 }
+由于css后面的样式会覆盖前面的样式，因此，当使用min-width时，应该从小到大的往下写，而当使用max-width时，应该从大到小的往下写
+========定位===========
+position:absolute	绝对定位，脱离文本流（不占位置）相对于最近的已经定位的父元素（祖）进行定位。
+position:relative	相对定位，不脱离文本流（占位置）
+position:fixed	固定定位，只跟浏览器有关系
+父相子绝
+如果父级元素没有定位，会以浏览器为准对齐
+
+===================盒子模型================
+默认：box-sizing:content-box
+
+box-sizing:content-box：元素的width和height决定元素的内容，padding和border的改变不能改变width和height的值。
+
+box-sizing:border-box：就是用元素内容和padding和border一起决定width和height
+width和height改变，paddign和border不改变时，元素内容的宽高会发生相应的改变，改变的值就是width和height改变的值。
+paddign和border改变，width和height不改变时，元素内容的宽高会发生相应的改变，改变的值就是width和height改变的值。
+
+
+===================清除浮动======================
+clear属性指定段落的左侧或右侧不允许浮动的元素。
+clear:both;在左右两侧均不允许浮动元素。
+clear:left;在左侧不允许浮动元素。
+clear:right;在右侧不允许浮动元素。
+
+1. clear属性的空标签，原理：添加一个空标签，利用CSS提高的clear:both清除浮动，让父元素可以自动获取到高度
+clear:both;
+2. :after伪元素，原理：通过CSS伪元素在容器的内部元素之后添加一个看不见的空格“/20”或点“.” ，并且设置clear属性清除浮动。
+content: "";
+display: block;
+clear: both;
+	
+====================BFC==================
+BFC 全称为 块格式化上下文 (Block Formatting Context) 。
+
+BFC特性：
+BFC 是一个独立的容器，容器内子元素不会影响容器外的元素。反之亦如此。
+盒子从顶端开始垂直地一个接一个地排列，盒子之间垂直的间距是由 margin 决定的。
+在同一个 BFC 中，两个相邻的块级盒子的垂直外边距会发生重叠。
+BFC元素不会和浮动元素相互重叠。
+BFC 能够识别并包含浮动元素，当计算其区域的高度时，浮动元素也可以参与计算了。
+
+BFC 创建 
+float的值不为none
+overflow值不为visible
+position值不为static/relative
+display的值为table-cell,table-caption,or inline-block中的任何一个
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var col1 = [1, 2, 4]
+        var col2 = [1, 2, 3, 5]
+        function baseData(key) {
+            var obj = {
+                1: '列1',
+                2: '列2',
+                3: '列3',
+                4: '列4',
+                5: '列5',
+            }
+            return obj[key]
+        }
+        var b = col1.map(v => {
+            return baseData(v)
+        })
+        var c = col2.map(v => {
+            return baseData(v)
+        })
+        console.log(b);
+        console.log(c);
+
+        // 去重
+        var arr1 = [1, 2, 3, 5, 2, 5, 4]
+        /**
+         * 排序后，遍历原数组插入新数组，如果原数组的值在新数组里没有，就插入
+         * 如果原数组的值在
+        */
+        function unique(arr) {
+            arr.sort()  //sort会修改原数组
+            var newarr = arr.slice()
+            var temp = [newarr[0]]  //这个数组最好有要有一个初始值，以防for循环里面的if判断的temp.length-1为-1
+            // 如果当前值和
+            for (var i = 0; i < newarr.length; i++) {
+                if (newarr[i] != temp[temp.length - 1]) {
+                    temp.push(newarr[i])
+                }
+            }
+            return temp
+        }
+        console.log(unique(arr1));
+        var obja = { name: 1 }
+        var objb = obja
+        obja.a = objb
+        console.log(obja);
+        JSON.stringify(obja)
+    </script>
+</body>
+
+</html>

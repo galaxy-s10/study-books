@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="search">
+
+    <script>
+        // 优化了全局变量污染
+        function debounce() {
+            var timer
+            return function () {
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(() => {
+                    ajax()
+                }, 1000);
+            }
+
+        }
+
+        function ajax() {
+            console.log('ajaxajaxajax');
+        }
+
+        var search = document.querySelector('.search')
+        search.addEventListener('input', debounce())
+
+    </script>
+</body>
+
+</html>

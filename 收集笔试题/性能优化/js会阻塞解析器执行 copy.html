@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        h1 {
+            color: red !important
+        }
+    </style>
+    <script async src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+
+<body>
+    <script>
+        window.addEventListener('load', function () {
+            console.log(document.querySelectorAll('h1')[0].innerText)// h1
+            console.log('load');
+        })
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log(document.querySelectorAll('h1')[0].innerText)// h1
+            console.log('DOMContentLoaded');
+        })
+        console.log(document.querySelectorAll('h1'))// 空
+    </script>
+    <h1>hello world</h1>
+    <img src="./6.jpg" alt="">
+
+</body>
+
+</html>

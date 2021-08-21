@@ -1,0 +1,261 @@
+============= 局部作用域==========
+// 此处不能调用 carName 变量
+function myFunction() {
+    var carName = "Volvo";
+    // 函数内可调用 carName 变量
+}
+
+==========全局变量==========
+var carName = " Volvo";
+ 
+// 此处可调用 carName 变量
+function myFunction() {
+    // 函数内可调用 carName 变量
+document.getElementById("demo").innerHTML =
+		"我可以显示 " + carName;
+}
+
+============作用域===========
+            for (var i = 0; i <1; i++) {
+                console.log(i)
+                abtn[i].onclick = function () {
+                    alert(i)
+                }
+            }//最终结果是控制台输出0，而弹出弹出1。0小于1，输出0，弹出0，然后i++，i等于1，1不小于1，终止循环，但是此时的i变成了1，因此弹出1
+========================
+var 没有作用域
+
+let 声明的变量只在 let 命令所在的代码块内有效。
+
+const 声明一个只读的常量，一旦声明，常量的值就不能改变。
+============Promise================
+
+===================includes()============
+includes() 方法用来判断一个数组是否包含一个指定的值，如果是返回 true，否则false。
+arr.includes()
+includes() 方法用于判断字符串是否包含指定的子字符串。如果找到匹配的字符串则返回 true，否则返回 false。
+string.includes()
+==================indexOf() =============
+indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
+
+如果没有找到匹配的字符串则返回 -1。
+==============================forEach()===================================================
+array.forEach(function(currentValue, index, arr), thisValue)
+currentValue 	必需。当前元素
+index 	可选。当前元素的索引值。
+arr 	可选。当前元素所属的数组对象。
+forEach() 方法用于调用数组的每个元素，并将元素传递给回调函数。
+
+For/In 循环
+JavaScript for/in 语句循环遍历对象的属性：
+var person={fname:"John",lname:"Doe",age:25}; 
+ 
+for (x in person)  // x 为属性名
+{
+    txt=txt + person[x];
+}
+
+============================================================
+
+isNaN() 函数用于检查其参数是否是非数字值。	语法	isNaN(x)
+
+JavaScript 可以通过不同的方式来输出数据：
+使用 window.alert() 弹出警告框。
+使用 document.write() 方法将内容写到 HTML 文档中。
+使用 innerHTML 写入到 HTML 元素。
+使用 console.log() 写入到浏览器的控制台。
+
+您可以在文本字符串中使用反斜杠对代码行进行换行。	查看源代码看效果
+document.write("你好 \
+世界!");
+
+JavaScript 数组
+var cars=new Array("Saab","Volvo","BMW");
+var cars=["Saab","Volvo","BMW"]; 
+
+JavaScript 对象
+JavaScript 对象是变量的容器。
+JavaScript 对象是属性变量的容器。
+JavaScript 对象是属性和方法的容器。
+
+var person=
+{
+firstname : "John",
+lastname  : "Doe",
+id        	:  5566
+};
+对象属性有两种寻址方式：
+name=person.lastname;
+name=person["lastname"]; 
+
+==============================================================
+数组方法：
+
+合并两个数组 - concat()
+<script>
+var hege = ["Cecilie", "Lone"];
+var stale = ["Emil", "Tobias", "Linus"];
+var children = hege.concat(stale);
+document.write(children);
+</script>
+
+Cecilie,Lone,Emil,Tobias,Linus 
+
+----------------------------------------
+合并三个数组 - concat()
+<script>
+var parents = ["Jani", "Tove"];
+var brothers = ["Stale", "Kai Jim", "Borge"];
+var children = ["Cecilie", "Lone"];
+var family = parents.concat(brothers, children);
+document.write(family);
+</script>
+
+----------------------------------------
+join()		将数组的所有元素组成一个字符串。
+<script type="text/javascript">
+var arr = new Array(3);
+arr[0] = "George"
+arr[1] = "John"
+arr[2] = "Thomas"
+document.write(arr.join());
+document.write("<br />");
+document.write(arr.join("."));
+</script>
+
+George,John,Thomas
+George.John.Thomas 
+
+-----------------------------------------
+sort()		从字面上对数组进行排序。
+<script type="text/javascript">
+var arr = new Array(6)
+arr[0] = "George"
+arr[1] = "John"
+arr[2] = "Thomas"
+arr[3] = "James"
+arr[4] = "Adrew"
+arr[5] = "Martin"
+document.write(arr + "<br />")
+document.write(arr.sort())
+</script>
+
+George,John,Thomas,James,Adrew,Martin
+Adrew,George,James,John,Martin,Thomas 
+
+-----------------------------------------
+sort()		从数值上对数组进行排序。
+<script type="text/javascript">
+
+function sortNumber(a, b)
+{
+return a - b
+}
+var arr = new Array(6)
+arr[0] = "10"
+arr[1] = "5"
+arr[2] = "40"
+arr[3] = "25"
+arr[4] = "1000"
+arr[5] = "1"
+document.write(arr + "<br />")
+document.write(arr.sort(sortNumber))
+
+</script>
+
+---------------------------------------------------------
+pop() 方法用于删除数组的最后一个元素并返回删除的元素。
+
+<p id="demo"></p>
+<p id="demo2"></p>
+<p id="demo3"></p>
+<button onclick="myFunction()">点我</button>
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+function myFunction()
+{
+	var x=document.getElementById("demo");
+	var y=document.getElementById("demo2");
+	var z=document.getElementById("demo3");
+	
+	x.innerHTML="原数组："+fruits;
+	var shuzu = fruits.pop();
+	y.innerHTML="pop() 方法用于删除数组的最后一个元素并返回删除的元素:"+shuzu;
+	z.innerHTML="新数组："+fruits;
+}
+</script>
+
+原数组：Banana,Orange,Apple,Mango
+
+pop() 方法用于删除数组的最后一个元素并返回删除的元素:Mango
+
+新数组：Banana,Orange,Apple
+-----------------------------------------------------------
+push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+function myFunction(){
+	fruits.push("Kiwi")
+	var x=document.getElementById("demo");
+	x.innerHTML=fruits;
+}
+</script>
+
+Banana,Orange,Apple,Mango,Kiwi
+
+--------------------------------------------------
+shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。
+
+
+<p id="demo"></p>
+<p id="demo2"></p>
+<p id="demo3"></p>
+<button onclick="myFunction()">点我</button>
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+function myFunction()
+{
+	var x=document.getElementById("demo");
+	var y=document.getElementById("demo2");
+	var z=document.getElementById("demo3");
+
+	x.innerHTML="原数组："+fruits;
+	var shuzu = fruits.shift();
+	y.innerHTML="shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值:"+shuzu;
+	z.innerHTML="新数组："+fruits;
+}
+</script>
+
+原数组：Banana,Orange,Apple,Mango
+
+shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值:Banana
+
+新数组：Orange,Apple,Mango
+----------------------------------------------------------
+unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。
+<script>
+function myFunction(){
+	var fruits = ["Banana", "Orange", "Apple", "Mango"];
+	fruits.unshift("Lemon","Pineapple");
+	var x=document.getElementById("demo");
+	x.innerHTML=fruits;
+}
+</script>
+-------------------------------------------------------------------
+在JavaScript中，this通常指向的是我们正在执行的函数本身，或者是指向该函数所属的对象（运行时）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

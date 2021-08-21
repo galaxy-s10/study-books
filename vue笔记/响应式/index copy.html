@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <ul>
+            <li>{{pet}}</li>
+            <li>{{car}}</li>
+            <li>我的手机是：{{phone.name}}，分辨率：{{phone.display}}</li>
+        </ul>
+    </div>
+
+
+
+
+    <script src="./compiler.js"></script>
+    
+    <script src="./vnode.js"></script>
+    <!-- <script src="./Dep.js"></script> -->
+    <script src="./diff.js"></script>
+    <!-- <script src="./initrender.js"></script> -->
+    <script src="./index.js"></script>
+    
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    pet: 123,
+                    car: ['audi', 'bmw'],
+                    phone: { name: 'samsung', display: '2k' },
+                    hobby: [
+                        { name: 'game' },
+                        { name: 'coding' },
+                        { name: 'music' },
+                    ]
+                }
+            },
+        })
+        console.log(vm);
+    </script>
+
+</body>
+
+</html>

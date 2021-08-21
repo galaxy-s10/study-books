@@ -1,0 +1,21 @@
+======================JavaScript Array filter() 方法==================
+定义和用法
+filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
+注意： filter() 不会对空数组进行检测。
+注意： filter() 不会改变原始数组。
+
+返回数组 ages 中所有元素都大于 18 的元素:
+var ages = [32, 33, 16, 40];
+
+function checkAdult(age) {
+    return age >= 18;
+}
+
+function myFunction() {
+    document.getElementById("demo").innerHTML = ages.filter(checkAdult);
+}
+输出结果为:
+32,33,40
+=========================================
+
+

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>骨架屏</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        @keyframes loading {
+            to {
+                background-position-x: -50%
+            }
+        }
+
+        .masonry-wrap {
+            box-sizing: border-box;
+            background-color: #fff;
+            border-radius: 0.3rem;
+
+        }
+
+        .masonry-item {
+            box-sizing: border-box;
+            background-color: #fff;
+            box-shadow: 0px 4px 6px rgb(0, 0, 0, .12);
+            border-radius: 0.3rem;
+            transition: all .5s ease;
+        }
+
+        .masonry-item:nth-child(2n) {
+            top: 0%;
+            left: 100%;
+        }
+
+        .masonry-item:nth-child(2n-1) {
+            top: 100%;
+            left: 0%;
+        }
+
+        .loading-block {
+            width: 100%;
+            height: 1rem;
+            border-radius: 0.3rem;
+            background: linear-gradient(100deg,
+                    rgba(255, 255, 255, 0) 40%,
+                    rgba(255, 255, 255, .5) 50%,
+                    rgba(255, 255, 255, 0) 60%) #ededed;
+            background-size: 200%;
+            background-position-x: 150%;
+            animation: 1s loading ease-in-out infinite;
+        }
+
+        .test {
+            background-color: red;
+            width: 100%;
+            height: 500px;
+            position: relative;
+        }
+
+        .aaa {
+            background-color: yellow;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 0;
+            transition: all 1s;
+        }
+
+        .error {
+            width: 600px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            font-size: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error">
+        此处无图胜有图
+    </div>
+    <!-- <div class="test">
+        <div class="aaa"></div>
+    </div> -->
+    <!-- 骨架屏的样式 loading -->
+    <div class="masonry-wrap" style="height: 1800px">
+        <div class="masonry-item">
+            <div class="loading-block" style="height:200px;background-color: #ededed;"></div>
+            <div style="padding: 0 10px 10px;">
+                <h3 class="loading-block" style="width: 80%;"></h3>
+                <div>
+                    <p class="loading-block"></p>
+                    <div style="display: flex;justify-content: space-between;align-items: center;">
+                        <div class="loading-block"
+                            style="background-color: #ededed;width: 20px; height: 20px; border-radius: 50%"></div>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="masonry-item">
+            <div class="loading-block" style="height:220px;background-color: #ededed;"></div>
+            <div style="padding: 0 10px 10px;">
+                <h3 class="loading-block" style="width: 80%;"></h3>
+                <div>
+                    <p class="loading-block"></p>
+                    <div style="display: flex;justify-content: space-between;align-items: center;">
+                        <div class="loading-block"
+                            style="background-color: #ededed;width: 20px; height: 20px; border-radius: 50%"></div>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="masonry-item">
+            <div class="loading-block" style="height:260px;background-color: #ededed;"></div>
+            <div style="padding: 0 10px 10px;">
+                <h3 class="loading-block" style="width: 80%;"></h3>
+                <div>
+                    <p class="loading-block"></p>
+                    <div style="display: flex;justify-content: space-between;align-items: center;">
+                        <div class="loading-block"
+                            style="background-color: #ededed;width: 20px; height: 20px; border-radius: 50%"></div>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="masonry-item">
+            <div class="loading-block" style="height:210px;background-color: #ededed;"></div>
+            <div style="padding: 0 10px 10px;">
+                <h3 class="loading-block" style="width: 80%;"></h3>
+                <div>
+                    <p class="loading-block"></p>
+                    <div style="display: flex;justify-content: space-between;align-items: center;">
+                        <div class="loading-block"
+                            style="background-color: #ededed;width: 20px; height: 20px; border-radius: 50%"></div>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="masonry-item">
+            <div class="loading-block" style="height:280px;background-color: #ededed;"></div>
+            <div style="padding: 0 10px 10px;">
+                <h3 class="loading-block" style="width: 80%;"></h3>
+                <div>
+                    <p class="loading-block"></p>
+                    <div style="display: flex;justify-content: space-between;align-items: center;">
+                        <div class="loading-block"
+                            style="background-color: #ededed;width: 20px; height: 20px; border-radius: 50%"></div>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="masonry-item">
+            <div class="loading-block" style="height:220px;background-color: #ededed;"></div>
+            <div style="padding: 0 10px 10px;">
+                <h3 class="loading-block" style="width: 80%;"></h3>
+                <div>
+                    <p class="loading-block"></p>
+                    <div style="display: flex;justify-content: space-between;align-items: center;">
+                        <div class="loading-block"
+                            style="background-color: #ededed;width: 20px; height: 20px; border-radius: 50%"></div>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="masonry-item">
+            <div class="loading-block" style="height:200px;background-color: #ededed;"></div>
+            <div style="padding: 0 10px 10px;">
+                <h3 class="loading-block" style="width: 80%;"></h3>
+                <div>
+                    <p class="loading-block"></p>
+                    <div style="display: flex;justify-content: space-between;align-items: center;">
+                        <div class="loading-block"
+                            style="background-color: #ededed;width: 20px; height: 20px; border-radius: 50%"></div>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="masonry-item">
+            <div class="loading-block" style="height:160px;background-color: #ededed;"></div>
+            <div style="padding: 0 10px 10px;">
+                <h3 class="loading-block" style="width: 80%;"></h3>
+                <div>
+                    <p class="loading-block"></p>
+                    <div style="display: flex;justify-content: space-between;align-items: center;">
+                        <div class="loading-block"
+                            style="background-color: #ededed;width: 20px; height: 20px; border-radius: 50%"></div>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="masonry-item">
+            <div class="loading-block" style="height:200px;background-color: #ededed;"></div>
+            <div style="padding: 0 10px 10px;">
+                <h3 class="loading-block" style="width: 80%;"></h3>
+                <div>
+                    <p class="loading-block"></p>
+                    <div style="display: flex;justify-content: space-between;align-items: center;">
+                        <div class="loading-block"
+                            style="background-color: #ededed;width: 20px; height: 20px; border-radius: 50%"></div>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                        <span class="loading-block" style="width:20%;">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        setTimeout(() => {
+            waterfall()
+        }, 100);
+        // waterfall()
+        // setTimeout(() => {
+        //     window.scrollTo(0, 0)
+        // }, 300);
+
+
+        function waterfall() {
+
+            // 获取数组最小值的下标
+            function getMinIndex(arr) {
+                return [].indexOf.call(arr, Math.min.apply(null, arr))
+            }
+            // 列数
+            const column = 2;
+            // 间隙
+            const gap = 20;
+
+            const wrap = document.getElementsByClassName("masonry-wrap")
+            const item1 = wrap[0].getElementsByClassName("masonry-item")
+
+            const item = wrap[0].getElementsByClassName("masonry-item")
+            const width1 = window.getComputedStyle(wrap[0], null)['width'];
+            const width2 = width1.slice(0, width1.length - 2) - ((column - 1) * gap)
+            // 计算减去间隙后，每个item的平均宽度
+            const width = width2 / column
+            // 保存当前列的offsetHeight的高度
+            const offsetList = []
+            wrap[0].style.position = "relative"
+            let test = 0
+            for (let i = 0; i < item.length; i++) {
+                test += item[i].offsetHeight + gap
+                // item[i].getElementsByTagName("img")[0].style.width = "100%"
+                // item[i].getElementsByTagName("img")[0].style.height = "100%"
+                // item[i].getElementsByTagName("img")[0].style.height = list[i].height + 'px'
+                // item[i].getElementsByTagName("img")[0].style.display = "block"
+                item[i].style.position = 'absolute'
+                item[i].style.width = width + "px";
+
+                if (i < column) {
+                    // 将第一行的offsetHeight都保存在数组里
+                    // offsetList.push(i == 0 ? (item[i].offsetHeight + gap) : (item[i].offsetHeight))
+                    offsetList.push(item[i].offsetHeight)
+                    item[i].style.top = "0";
+                    if ((i + 1) % column == 1) {
+                        item[i].style.left = 0
+                    } else {
+                        let w = i * width
+                        // let g =  gap
+                        let g = i * gap
+                        item[i].style.left = `calc(${w}px + ${g}px)`
+                    }
+                } else {
+                    // 当前数组的最低offsetHeight索引
+                    const minIndex = getMinIndex(offsetList);
+                    let w = minIndex * width;
+                    let g = minIndex * gap;
+                    // let g = minIndex * gap;
+                    item[i].style.top = offsetList[minIndex] + gap + "px"
+                    item[i].style.left = w + g + "px"
+                    offsetList[minIndex] += item[i].offsetHeight + gap
+                }
+            }
+
+
+            let wrapItem = wrap[0].getElementsByClassName('masonry-item')
+
+            function format(v) {
+                return v.slice(0, v.length - 2)
+            }
+            let wrapHeight = parseInt(format(wrapItem[wrapItem.length - 1].style.top)) + parseInt(wrapItem[wrapItem
+                    .length - 1]
+                .offsetHeight)
+            wrap[0].style.height = wrapHeight + 10 + 'px'
+
+        }
+    </script>
+</body>
+
+</html>

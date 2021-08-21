@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 将[1,2,[3,4],5,[6,7,[8]]]转换为树型（只要是树型就好。）
+         * [
+            {
+                "value": 1
+            },
+            {
+                "value": 2
+            },
+            {
+                "child": [
+                    {
+                        "value": 3
+                    },
+                    {
+                        "value": 4
+                    }
+                ]
+            },
+            {
+                "value": 5
+            },
+            {
+                "child": [
+                    {
+                        "value": 6
+                    },
+                    {
+                        "value": 7
+                    },
+                    {
+                        "child": [
+                            {
+                                "value": 8
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+        */
+        var arr = [1, 2, [3, 4], 5, [6, 7, [8]], [9]]
+        // 递归实现,遍历数组里的每一项，是数组就递归，不是就返回该项值
+        function toTree(arr) {
+            var res = []
+            arr.forEach(item => {
+                if (typeof item == 'number') {
+                    res.push({ value: item })
+                } else if (Array.isArray(arr)) {
+                    res.push({ child: toTree(item) })
+                    // res.push(toTree(item))
+                }
+            });
+            return res
+        }
+        console.log(toTree(arr));
+
+        // map实现，判断传进来的值，是数组就返回一个children，递归，不是就返回该值
+        function toTree1(item) {
+            if (typeof item == 'number') {
+                return { value: item }
+            } else if (Array.isArray(item)) {
+                return {
+                    child: item.map(arr => {
+                        return toTree1(arr)
+                    })
+                }
+                // return item.map(arr => {
+                //     return toTree1(arr)
+                // })
+            }
+        }
+        console.log(toTree1(arr));
+        console.log(JSON.stringify(toTree1(arr)));
+
+
+        // 将树型结构里面的value值都保存在数组里，并保持原本的树型结构
+        var tree1 = [
+            {
+                "value": 1
+            },
+            {
+                "value": 2
+            },
+            {
+                "child": [
+                    {
+                        "value": 3
+                    },
+                    {
+                        "value": 4
+                    }
+                ]
+            },
+            {
+                "value": 5
+            },
+            {
+                "child": [
+                    {
+                        "value": 6
+                    },
+                    {
+                        "value": 7
+                    },
+                    {
+                        "child": [
+                            {
+                                "value": 8
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "child": [
+                    {
+                        "value": 9
+                    }
+                ]
+            }
+        ]
+        
+        function flatTree(arr) {
+            var resarr = []
+            arr.forEach(item => {
+                if (item.value) {
+                    resarr.push(item.value)
+                } else if (item.child) {
+                    var temp = flatTree(item.child)
+                    resarr.push(temp)
+                }
+            });
+            return resarr
+        }
+        console.log(flatTree(tree1));
+        console.log(JSON.stringify(flatTree(tree1)));
+    </script>
+</body>
+
+</html>

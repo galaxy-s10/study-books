@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <img src="https://img.cdn.zhengbeining.com/1594408065308Billd.jpg" width="100" alt="">
+    </div>
+    <script>
+        //拿到数据后开始画背景大图 想法很简单就是把图片画到canvas中然后在画布上再画头像文字让后转成img
+        function drawCanvasBgImg() {
+            var vm = this;
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+            var clientWidth = 300; //获取屏幕宽度用于canvas宽度自适应移动端屏幕
+            var dpr = 2;
+            // var clientWidth = this.getWindowInfo().width;  //获取屏幕宽度用于canvas宽度自适应移动端屏幕
+            // var dpr = this.getWindowInfo().dpr;
+            ctx.globalCompositeOperation = "source-atop"; //** 坑锯齿感觉没什么用不知道是不是用错地方了 **
+            canvas.width = dpr * clientWidth; //由于手机屏幕时retina屏，都会多倍渲染，用dpr来动态设置画布宽高，避免图片模糊
+            canvas.height = dpr * clientWidth * 609 / 375; //去掉微信头部的状态栏应该是603 没搞懂603还是不能让图片满屏直接多加到了609
+            var img = new Image();
+            img.crossOrigin = ''; //死坑的图片跨域 （img.crossOrigin = "Anonymous"这种写法还是不能显示base64格式图片）
+            img.src = "http://xxx" + this.randomNum + ".jpg";
+            img.onload = function () {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                vm.drawCanvasUserImg(canvas, ctx, dpr);
+            }
+        }
+        // 在背景图片的画布上截取一个圆然后填充入用户头像
+        function drawCanvasUserImg(canvas, ctx, dpr) {
+            var vm = this;
+            var circleR = 50 * dpr; //半径
+            var circleX = canvas.width / 2; //圆心X坐标
+            var circleY = 50 * dpr; //圆心Y坐标
+            var imgX = circleX - circleR; //图片X开始坐标
+            var imgY = circleY - circleR; //图片Y开始坐标
+            var imgWidth = 2 * circleR; //图片按圆形大小
+            var img = new Image();
+            img.crossOrigin = '';
+            img.src = this.userImg;
+            img.onload = function () {
+                ctx.save(); // 保存当前ctx的状态
+                ctx.arc(circleX, circleY, circleR, 0, 2 * Math.PI); //画出圆
+                ctx.clip(); //裁剪上面的圆形
+                ctx.drawImage(img, imgX, imgY, imgWidth, imgWidth); // 在刚刚裁剪的园上画图
+                ctx.restore(); // 还原状态
+                vm.canvasFillText(canvas, ctx, dpr, circleR);
+            }
+        }
+        // 填写用户称呢或者用户留言
+        function canvasFillText(canvas, ctx, dpr, circleR) {
+            var fontSizeThis = dpr * 20 + 'px' + ' Arial';
+            var userNameY = 0; //用户名Y轴坐标
+            var userMessageX = dpr * 40; //用户留言X轴坐标
+            var userMessageY = 0; //用户留言Y轴坐标
+            var lastSubStrIndex = 0; //字符串下标
+            var lineWidth = 0; //一行宽度
+            var allTextWidth = 0; //所有字符宽度
+            ctx.font = fontSizeThis;
+            // 需要用户名是写入用户名
+            if (this.userName) {
+                userNameY = circleR * 2.5;
+                ctx.fillStyle = "#0094ff";
+                ctx.textAlign = 'center';
+                ctx.fillText(this.userName, canvas.width / 2, userNameY);
+            }
+            if (this.userMessage) {
+                userMessageY = userNameY + dpr * 35;
+                ctx.fillStyle = "#000";
+                // 获取字符宽度
+                for (var i = 0; i < this.userMessage.length; i++) {
+                    allTextWidth += ctx.measureText(this.userMessage[i]).width;
+                }
+                // 字符串长度大于画布区域要换行
+                if (allTextWidth > canvas.width - 2 * userMessageX) {
+                    for (var i = 0; i < this.userMessage.length; i++) {
+                        lineWidth += ctx.measureText(this.userMessage[i]).width;
+                        if (lineWidth > canvas.width - 2 * userMessageX) {
+                            ctx.textAlign = 'left';
+                            ctx.fillText(this.userMessage.substring(lastSubStrIndex, i), userMessageX, userMessageY);
+                            userMessageY += dpr * 25; //设置行高
+                            lineWidth = 0;
+                            lastSubStrIndex = i;
+                        }
+                        if (i == this.userMessage.length - 1) {
+                            ctx.fillText(this.userMessage.substring(lastSubStrIndex, i + 1), userMessageX,
+                            userMessageY);
+                        }
+                    }
+                } else {
+                    // 小于者居中显示
+                    ctx.textAlign = 'center';
+                    ctx.fillText(this.userMessage, canvas.width / 2, userMessageY);
+                }
+            }
+            this.convertCanvasToImage(canvas);
+        }
+
+        // 画活动页分享背景大图
+        drawCanvasBgImg()
+        // 在背景图片的画布上截取一个圆然后填充入用户头像
+        drawCanvasUserImg(canvas, ctx, dpr)
+        // 填写用户称呢或者用户留言
+        canvasFillText(canvas, ctx, dpr, circleR)
+        // 合成base64位分享图
+        function convertCanvasToImage(canvas) {
+            this.imgSrc = canvas.toDataURL("image/jpeg"); //png有毒在安卓机下识别二维码无法跳转
+            this.$Spin.hide();
+        }
+        // js主要结构
+        new Vue({
+            el: 'imgBox',
+            data: {
+                urlParam: {}, //获取url中的传值对象
+                randomNum: 1, //随机数用于确定那个祈福页
+                userName: '', //用户称呢
+                imgSrc: '', //合成最终图片
+                userImg: '', //用户头像图片
+                userMessage: '', //用户留言
+            },
+            methods: {
+                // 分享到盆友圈
+                wxShareFriends: function () {},
+                // 初始化请求头
+                wxHttp: function () {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                },
+                // 获取随机数[1,10]
+                randomNumbers() {
+                    this.randomNum = Math.ceil(Math.random() * 10)
+                },
+                // 获取微信用户头像和称呢和用户输入祝福语
+                getUserInfo() {
+                    var vm = this;
+                    $.post('API请求地址', function (data) {
+                        if (data.code == 1) {
+                            vm.userImg = data.data.headimg;
+                            vm.userName = data.data.nickname;
+                            if (vm.randomNum % 2 == 0) {
+                                vm.userMessage = '红尘相遇，年华已老。岁月花开多少不在，古往今来相遇是一件既微妙。而又神圣的事情，红尘的情网中'
+                            } else {
+                                vm.userMessage = '红尘相遇，年华已老'
+                            }
+                        }
+                        vm.$nextTick(function () {
+                            vm.drawCanvasBgImg();
+                        })
+                    })
+                },
+                // 获取页面dpr和宽度
+                getWindowInfo() {
+                    var windowInfo = {};
+                    windowInfo.dpr = window.devicePixelRatio;
+                    if (window.innerWidth) {
+                        windowInfo.width = window.innerWidth;
+                    } else {
+                        windowInfo.width = document.body.clientWidth;
+                    }
+                    return windowInfo;
+                },
+                // 画活动页分享背景大图
+                drawCanvasBgImg() {},
+                // 在背景图片的画布上截取一个圆然后填充入用户头像
+                drawCanvasUserImg(canvas, ctx, dpr) {},
+                // 填写用户称呢或者用户留言
+                canvasFillText(canvas, ctx, dpr, circleR) {},
+                // 合成base64位分享图
+                convertCanvasToImage(canvas) {
+                    this.imgSrc = canvas.toDataURL("image/jpeg"); //png有毒在安卓机下识别二维码无法跳转
+                    this.$Spin.hide();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

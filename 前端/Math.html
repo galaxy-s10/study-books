@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // 随机获取0-1之间的随机数
+    console.log(Math.random());
+    // 随机获取0-10之间的随机数[0-10)
+    console.log(Math.random() * 10);
+    // 随机获取0-9之间的随机整数[0-9]
+    console.log(Math.floor(Math.random() * 10));
+    // 随机获取0-8之间的随机整数[0-8]
+    console.log(Math.floor(Math.random() * 9));
+    // 随机获取1-9之间的随机整数[1-9]
+    console.log(Math.floor(Math.random() * 9) + 1);
+    // 随机获取1-10之间的随机整数[1-10]
+    console.log(Math.floor(Math.random() * 10) + 1);
+    // 随机获取1-20之间的随机整数[1-20]
+    console.log(Math.floor(Math.random() * 20) + 1);
+
+    //随机获取1-9之间的随机整数[1-9]
+    console.log(Math.ceil(Math.random() * 9));
+    //随机获取1-20之间的随机整数[1-20]
+    console.log(Math.ceil(Math.random() * 20));
+
+    // for (let i = 0; i < 100; i++) {
+    //     console.log(Math.random() * 10);
+    // }
+    // 获取[n-m]之间的随机整数
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function getRandomInt1(min, max) {
+        return Math.round(Math.random() * (max - min)) + min
+    }
+    // for (let i = 0; i < 100; i++) {
+    //     console.log(getRandomInt1(23, 26));
+    // }
+
+
+    // console.log(Math.round(1.4));   //1
+    // console.log(Math.round(1.5));   //2
+    // console.log(Math.round(1.6));   //2
+    // console.log(Math.round(-1.4));  //-1
+    // console.log(Math.round(-1.5));  //-1
+    // console.log(Math.round(-1.6));  //-2
+    // console.log(Math.floor(0.4));  //0
+    // console.log(Math.floor(0.5));  //0
+    // console.log(Math.floor(0.6));  //0
+    // console.log(Math.floor(-0.4));  //-1
+    // console.log(Math.floor(-0.5));  //-1
+    // console.log(Math.floor(-0.6));  //-1
+    // console.log(Math.floor(1.4));   //1
+    // console.log(Math.floor(1.5));   //1
+    // console.log(Math.floor(1.6));   //1
+    // console.log(Math.floor(-1.4));  //-2
+    // console.log(Math.floor(-1.5));  //-2
+    // console.log(Math.floor(-1.6));  //-2
+</script>
+
+<body>
+
+</body>
+
+</html>

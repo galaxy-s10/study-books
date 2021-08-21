@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        /**
+         * 这里采用闭包来解决
+         * 核心：
+         * 1，函数有自己的作用域，立即执行函数
+         * 2，闭包
+        */
+        var ul = document.getElementsByTagName('ul')[0]
+        var li = ul.children
+
+        // for (var i = 0; i < li.length; i++) {
+        //     li[i].onclick = function (i) {
+        //         console.log(arguments[0]);  //event对象
+        //         console.log(arguments[0] === i);    //true
+        //     }
+        // }
+
+        for (var i = 0; i < li.length; i++) {
+            li[i].onclick = (
+                function (i) {
+                    return function (e) {
+                        console.log(e); //event对象
+                        console.log(i); //01234
+                    }
+                })(i)
+        }
+
+        // for (var i = 0; i < li.length; i++) {
+        //     li[i].addEventListener('click', function () {
+        //         console.log(i); //每次点击都是5
+        //     })
+        // }
+        // // js里面函数才有作用域，for循环不算函数，因此for循环里面的i是全局变量
+        // // console.log(i); //5
+
+    </script>
+</body>
+
+</html>

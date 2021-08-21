@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="nav">
+        <button>按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+        <button>按钮4</button>
+    </div>
+
+    <script>
+        var btn = document.querySelector(".nav").querySelectorAll("button")
+        // 获取点击按钮的索引
+        for (var i = 0; i < btn.length; i++) {
+            btn[i].index = i
+            btn[i].onclick = function () {
+                console.log(this.index)
+            }
+        }
+
+        // 闭包实现
+        for (var i = 0; i < btn.length; i++) {
+            (function (i) {
+                console.log(i)
+                btn[i].onclick = function () {
+                    console.log(i)
+                }
+            })(i)
+        }
+    </script>
+</body>
+
+</html>

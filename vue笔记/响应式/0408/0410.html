@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{name}}
+    </div>
+    <script src="./myvue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                name: 'tom',
+                age: 18,
+                hobby: ['code', 'game'],
+                obj: { client: 'vue', server: 'node' }
+            }
+        })
+        console.log(app);
+        console.log(app.obj.client)
+        app.obj.client=123
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onClick="goHome()">home</button>
+    <button onClick="goAbout()">about</button>
+    <button onClick="goLogin()">login</button>
+    <button onClick="goNotFount()">404</button>
+
+    <div class="view"></div>
+
+
+    <script>
+
+        var view = document.getElementsByClassName('view')[0]
+        // 监听url的变化
+        window.addEventListener("hashchange", (e) => {
+            console.log('hash地址栏改变了');
+            console.log(location.hash);
+            hashchange()
+        });
+
+        // 刚进来第一次监听不到url变化，因此需要先执行一次
+        hashchange()
+
+        function hashchange() {
+            // 更新视图
+            var hash = location.hash
+            switch (hash) {
+                case "#home":
+                    view.innerHTML = 'home'
+                    break;
+                case "#about":
+                    view.innerHTML = 'about'
+                    break;
+                case "#login":
+                    view.innerHTML = 'login'
+                    break;
+                default:
+                    view.innerHTML = '404' + hash
+            }
+        }
+
+        function goHome() {
+            console.log('goHome');
+            window.location.href = "#home"
+        }
+        function goAbout() {
+            console.log('goAbout');
+            window.location.href = "#about"
+        }
+        function goLogin() {
+            console.log('goLogin');
+            window.location.href = "#login"
+        }
+        function goNotFount() {
+            console.log('goNotFount');
+            window.location.href = "#" + Math.floor((Math.random() * 99) + 1)
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="wrap">
+        <p class="ppp">我是p1</p>
+        <p class="ppp">我是p2</p>
+        <span>我是span</span>
+    </div>
+    <script>
+        var ele = document.getElementById('wrap')
+        console.log(ele);   //<div id="wrap">...</div>
+        var ele1 = document.getElementsByTagName('p')
+        console.log(ele1);  //HTMLCollection(2) [p, p]
+        console.log(ele1[0]);  //<p class="ppp">我是p1</p>
+        var ele2 = document.getElementsByClassName('ppp')
+        console.log(ele2);  //HTMLCollection(2) [p.ppp, p.ppp]
+        console.log(ele2[0]);  //HTMLCollection(2) [p.ppp, p.ppp]
+        var ele3 = document.querySelector('#wrap')
+        console.log(ele3);  //<div id="wrap">...</div>
+        var ele4 = document.querySelector('p')
+        console.log(ele4);  //<p class="ppp">我是p1</p>
+        var ele5 = document.querySelectorAll('p')
+        console.log(ele5);      //NodeList(2) [p, p]
+        console.log(ele5[0]);  //<p class="ppp">我是p1</p>
+    </script>
+</body>
+
+</html>

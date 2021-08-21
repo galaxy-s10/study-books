@@ -1,0 +1,3 @@
+默认：select * from 表名 order by 列名	
+升序：select * from 表名 order by 列名 asc
+降序：select * from 表名 order by 列名 desc

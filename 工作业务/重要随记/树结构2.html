@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./tree2.js"></script>
+</head>
+
+<body>
+    <script>
+        console.log(tree2.data.data);
+        let data = tree2.data.data;
+
+        let temp = []
+        function digui(data) {
+            data.forEach((item, index) => {
+                item.add = 100;
+                if (item.checked == false) {
+                    // let temp1 = {}
+                    // temp1.id = index
+                    temp.push(item)
+                }
+                if (item.children) {
+                    digui(item.children)
+                }
+            });
+        }
+
+        function digui1(data, val) {
+            data.forEach((item, index) => {
+                // console.log(item.auth_id, val);
+                // console.log(item.auth_id == val);
+                if (item.auth_id == val || item.checked == false) {
+                    // let temp1 = {}
+                    // temp1.id = index
+                    // temp.push(item)
+                    console.log('object');
+                    item.checked = false
+                }
+                
+                if (item.children, val) {
+                    digui1(item.children, val)
+                }
+            });
+        }
+
+
+        digui(data)
+        console.log(temp);
+        console.log(data);
+        temp.forEach(item => {
+            console.log(item.auth_pid);
+            digui1(data, item.auth_pid)
+        });
+
+        let temp2 = []
+        function digui2(data,val) {
+            data.forEach((item, index) => {
+                item.add = 100;
+                if (item.auth_id == val) {
+                    // let temp1 = {}
+                    // temp1.id = index
+                    item.checked = false
+                    temp.push(item)
+                }
+                if (item.children) {
+                    digui2(item.children,val)
+                }
+            });
+        }
+        
+        temp.forEach(item=>{
+            console.log(item.auth_pid);
+            digui2(data,item.auth_pid)
+        })
+
+        console.log(temp);
+        console.log(data);
+
+    </script>
+</body>
+
+</html>

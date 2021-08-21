@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function foo() {
+            console.log('foo')
+            var res = await bar()
+            console.log('res', res);
+            console.log('foo_end')
+        }
+        async function bar() {
+            console.log('bar');
+
+            var res = await new Promise((reslove, reject) => {
+                reject(99)
+                // reslove(99)
+                console.log('barbar');
+            })
+            console.log('await');
+            console.log(res);
+            // res.then(res => {
+            //     console.log('then');
+            //     console.log(res);
+            // }).catch(err => {
+            //     console.log('catch');
+            //     console.log(err);
+            // })
+            // var res = await new Promise((reslove, reject) => {
+            //     reject(99)
+            //     console.log('barbar');
+            // })
+            // console.log('bar_end');
+            // return res
+        }
+        // foo()
+        bar().then(res => {
+            console.log('bar() res');
+            console.log(res);
+        }).catch(err=>{
+            console.log("bar() err");
+            console.log(err);
+        })
+        // new Promise(function (resolve) {
+        //     console.log('p1')
+        //     resolve();
+        // }).then(function () {
+        //     console.log('p2')
+        // })
+
+        /*
+        执行foo()
+        打印foo
+        执行await bar，中断saync foo代码，执行bar外面的代码
+        进入bar,打印bar,然后async bar返回Promise {<fulfilled>: undefined}
+        继续向下执行，打印p1，然后将new promise放到微任务队列
+        bar外面的代码执行完，回到await bar(),bar()返回的是promise对象，
+        await负责执行这个promise的then操作，因此await bar()是个微任务，将它
+        放到微任务队列，继续往下执行同步代码打印foo_end，然后主线任务全部完成，
+        执行微任务队列，首先打印p2,然后await bar()，什么没干，然后完成。
+        最终打印结果：
+        foo
+        bar
+        p1
+        foo_end
+        p2
+        */
+    </script>
+</body>
+
+</html>

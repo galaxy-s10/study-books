@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class B {
+            then() {
+                console.log('finish');
+            }
+        }
+        async function A() {
+            const result = await new B()
+            // console.log(await new B());
+            console.log('over');
+        }
+
+        A()
+        // 打印finish,然后就完了，不会打印over
+    </script>
+</body>
+
+</html>

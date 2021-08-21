@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var arr = [1, 2, 3, 4, 5, 6];
+        // var arr = [6, 5, 4, 3, 2, 1];
+        var arr = [32, 14, 6, 9, 20, 58];
+        // var arr = [32,32];
+
+        /**
+         * 核心：取一个值（a）出来，依次和前面已排序好的值作比较，
+         * 如果前面排序好的值比a大，则将该值往后移，
+         * 直到找到值等于或小于a的位置，将a插入该位置，
+         * 继续重复上述步骤
+         */
+
+
+
+        /**
+         * 原始顺序：                                   32,14,6,9,20,58
+         * 选出下标为1的值和前面已经排序的1个作对比，排序后[14,32],6,9,20,58；比较了1次后换位置
+         * 选出下标为2的值和前面已经排序的2个作对比，排序后[6,14,32],9,20,58；比较了2次后换位置
+         * 选出下标为3的值和前面已经排序的3个作对比，排序后[6,9,14,32],20,58；比较了3次后换位置
+         * 选出下标为4的值和前面已经排序的4个作对比，排序后[6,9,14,20,32],58；比较了2次后换位置
+         * 选出下标为5的值和前面已经排序的5个作对比，排序后[6,9,14,20,32,58]；比较了0次后换位置
+         */
+
+        // 假设当i=2，即j=2，
+        // 判断while循环，arr[i-1]值是14，arr[j]是6，arr[i-1]大于arr[j]，
+        // 即前面的元素对比的元素大，进入while循环
+        // 将对比的元素即arr[i-1]，往后移，即arr[i-1] =arr[j]，即arr[i-1]是arr[1]是6，
+        // 后移后，说明目前拿出的值还是最小值，还要继续和之前的元素对比，
+        // 先j--，这样下个while就可以继续和之前的元素对比
+        // 继续while循环，此时j=1，i还是2，arr[i-1]即arr[1]是6，
+        // arr[j]即arr[1]是14
+        // arr[i-1]为14，大于arr[i]
+        function insertSort(arr) {
+            for (var i = 1; i < arr.length; i++) {
+                // console.log(1)
+                // console.log(i)
+                var j = i           //保存当前取出来的元素下标
+                var temp = arr[i]   //保存取出来的元素
+                while (arr[j - 1] > temp && j > 0) {
+                    console.log(1)
+                    // 取出来的元素和前面的元素比较，如果前面的元素大于取出来的元素
+                    // 则前面的元素往后移，即把该元素(arr[j-1])移到arr[j]
+                    // 即arr[j]的值变成了arr[j-1]，即arr[j] = arr[j-1]
+                    arr[j] = arr[j - 1]
+
+                    // 下面代码是错误的!
+                    // arr[j-1] = arr[j]，是直接把取出来的值放到上一个位置了
+                    // arr[j-1] = arr[j]
+                    j--
+                }
+                // 将取出来的值放到while循环后的j位置。
+                arr[j] = temp
+            }
+            return arr
+        }
+
+        function insertSort1(arr) {
+            for (var i = 1; i < arr.length; i++) {
+                var j = i 
+                var temp = arr[i]
+                while (arr[j - 1] < temp && j > 0) {
+                    console.log(1)
+                    // 取出来的元素和前面的元素比较，如果前面的元素小于取出来的元素
+                    // 则前面的元素往后移，即把该元素(arr[j-1])移到arr[j]
+                    // 即arr[j]的值变成了arr[j-1]，即arr[j] = arr[j-1]
+                    arr[j] = arr[j - 1]
+
+                    j--
+                }
+                // 将取出来的值放到while循环后的j位置。
+                arr[j] = temp
+            }
+            return arr
+        }
+
+        // console.log(insertSort(arr))
+        console.log(insertSort1(arr))
+    </script>
+</body>
+
+</html>

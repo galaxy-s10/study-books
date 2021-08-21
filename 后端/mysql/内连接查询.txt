@@ -1,0 +1,52 @@
+select * from xinxi;
++----+------+-----+
+| id | name | age |
++----+------+-----+
+|  1 | 小明 |  18 |
+|  2 | 小李 |  18 |
+|  3 | 小红 |  19 |
+|  4 | 小黄 |  19 |
+|  5 | 小高 |  20 |
+|  6 | 小成 |  17 |
++----+------+-----+
+6 rows in set (0.00 sec)
+
+select * from chengji;
++----+------+--------+
+| id | mark | stu_id |
++----+------+--------+
+|  1 |   66 |      2 |
+|  2 |   77 |      4 |
+|  3 |   88 |      5 |
+|  4 |   89 |      6 |
++----+------+--------+
+4 rows in set (0.00 sec)
+
+内连接查询：select name,mark from xinxi,chengji where xinxi.id=chengji.stu_id;
+			or
+	select a.name,b.mark from xinxi as a,chengji as b where a.id=b.stu_id;
+			or
+	select name,mark from xinxi inner join chengji where xinxi.id=chengji.stu_id;
+			or
+	select name,mark from xinxi inner join chengji on xinxi.id=chengji.stu_id;
+
+左连接查询：select name,mark from xinxi left join chengji on xinxi.id=chengji.stu_id;
++------+------+
+| name | mark |
++------+------+
+| 小李 |   66 |
+| 小黄 |   77 |
+| 小高 |   88 |
+| 小成 |   89 |
+| 小明 | NULL |
+| 小红 | NULL |
++------+------+
+右连接查询：select name,mark from xinxi right join chengji on xinxi.id=chengji.stu_id;
++------+------+
+| name | mark |
++------+------+
+| 小李 |   66 |
+| 小黄 |   77 |
+| 小高 |   88 |
+| 小成 |   89 |
++------+------+

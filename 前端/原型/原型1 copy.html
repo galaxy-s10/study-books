@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // 圣杯模式封装
+        Father.prototype.lastName = 'zhang'
+        function Father() {
+            this.money = '100'
+        }
+        function Son() {
+            this.hobby = 'game'
+        }
+        // function inherit(Target, Origin) {
+        //     function F() { };
+        //     F.prototype = Origin.prototype;
+        //     Target.prototype = new F();
+        //     Target.prototype.constuctor = Target;
+        //     Target.prototype.uber = Origin.prototype;   // 超类
+        // }
+        var inherit = (function () {
+            function F() { }
+            return function (Target, Origin) {
+                F.prototype = Origin.prototype;
+                Target.prototype = new F();
+                Target.prototype.constuctor = Target;
+                Target.prototype.uber = Origin.prototype;   // 超类
+            }
+        }())
+        inherit(Son, Father)
+        var son = new Son()
+        var father = new Father()
+        Son.prototype.grade = 6
+        console.log(son);               // Son {hobby: "game"}
+        console.log(father);            // Father {money: "100"}
+        console.log(Son.prototype);     // Father {uber: {…}, grade: 6, constuctor: ƒ}
+        console.log(Father.prototype);  // {lastName: "zhang", constructor: ƒ}
+        console.log(son.lastName);      // zhang
+
+        // 构造器
+        // function Father() {
+        //     this.money = '100'
+        // }
+        // function Son() {
+        //     this.hobby = 'game'
+        // }
+        // var son = new Son()
+        // Son.prototype.constructor = Father
+        // console.log(son);
+
+
+
+        // 测试1
+        // Father.prototype.money = 100
+        // function Father() {
+        //     this.money = 200
+        // }
+        // function Son() {
+        //     this.hobby = 'game'
+        // }
+        // Son.prototype = Father.prototype
+        // var son = new Son()
+
+
+        // 圣杯模式
+        // Father.prototype.lastName = "zhang"
+        // function Father() {
+        //     this.money = '100'
+        // }
+        // function Son() {
+        //     this.hobby = 'game'
+        // }
+        // function F() {
+        // }
+        // F.prototype = Father.prototype
+        // Son.prototype = new F()
+        // Son.prototype.constructor = Son
+        // Son.prototype.food = 'fish'
+        // var son = new Son()
+        // var father = new Father()
+        // console.log(Son.prototype)      // Father {food: "fish", constructor: ƒ}
+        // console.log(Father.prototype)   // {lastName: "zhang", constructor: ƒ}
+        // console.log(son);               // Son {hobby: "game"}
+        // console.log(father);            // Father {money: "100"}
+
+        // 共享原型
+        Father.prototype.lastName = 'zhang'
+        function Father() {
+            this.money = '100'
+        }
+        function Son() {
+            this.hobby = 'game'
+        }
+        Son.prototype = Father.prototype
+        Son.prototype.food = 'fish'
+        var son = new Son()
+        var father = new Father()
+        console.log(Son.prototype)      // {lastName: "zhang", food: "fish", constructor: ƒ}
+        console.log(Father.prototype)   // {lastName: "zhang", food: "fish", constructor: ƒ}
+        console.log(son);               // Son {hobby: "game"}
+        console.log(father);            // Father {money: "100"}
+        console.log(son.money);         // undefined
+
+        // // 普通继承1
+        // Father.prototype.lastName = 'zhang'
+        // function Father() {
+        //     this.money = '100'
+        // }
+        // function Son() {
+        //     this.hobby = 'game'
+        // }
+        // var father = new Father()
+        // Son.prototype = father
+        // Son.prototype.food = 'fish'
+        // var son = new Son()
+        // console.log(Son.prototype)      //Father {money: "100", food: "fish"}   
+        // console.log(Father.prototype)   //{lastName: "zhang", constructor: ƒ}
+        // console.log(son);               //Son {hobby: "game"}
+        // console.log(father);            //Father {money: "100", food: "fish"}
+
+        // Person.prototype.name = '张三'
+        // function Person() {
+        //     // new完后首先会隐式绑定this，里面的__proto__指向本身
+        //     // var this = {
+        //     //     __proto__: Person.prototype
+        //     // }
+        // }
+        // var obj = { name: '李四' }
+        // var person = new Person()
+        // console.log(person.__proto__);   //{name: "张三", constructor: ƒ}
+        // console.log(person.name);   //张三
+        // person.__proto__ = obj
+        // console.log(person.__proto__);   //{name: "李四"}
+        // console.log(person.name);    //李四
+
+        // 普通继承2
+        // Father.prototype.lastName = 'zhang'
+        // function Father() {
+        //     this.money = '100'
+        // }
+        // function Son() {
+        //     this.hobby = 'game'
+        // }
+        // Son.prototype = new Father()
+        // // Son.prototype.food = 'fish'
+        // var son = new Son()
+        // // var father = new Father()
+        // Son.prototype.food = 'fish'
+        // console.log(son.lastName)
+
+        // 原型链实现继承
+        // Grandfather.prototype.lastName = 'zhang'
+        // function Grandfather() {
+        //     this.money = 100
+        // }
+        // var grandfather = new Grandfather()
+        // Father.prototype = grandfather
+        // function Father() {
+        //     this.work = 'code'
+        // }
+        // var father = new Father()
+        // Son.prototype = father
+        // function Son() {
+        //     this.hobby = 'game'
+        // }
+        // var son = new Son()
+        // console.log(son);
+
+        // 借用构造函数
+        // Father.prototype.money = 100
+        // function Father() {
+        //     this.work = 'code'
+        // }
+        // function Son() {
+        //     Father.call(this)
+        //     this.hobby = 'game'
+        // }
+        // var son = new Son()
+        // var father = new Father()
+        // console.log(son);           // Son {work: "code", hobby: "game"}
+        // console.log(father);        // Father {work: "code"}
+        // console.log(son.money);     // undefined
+
+        // 组合继承(借用构造函数+原型链)
+        // Father.prototype.money = 100
+        // function Father() {
+        //     this.work = 'code'
+        // }
+        // function Son() {
+        //     Father.call(this)
+        //     this.hobby = 'game'
+        // }
+        // // var father = new Father()
+        // // Son.prototype = father
+        // Son.prototype = new Father()
+        // var son = new Son()
+        // var father1 = new Father()
+        // var father = new Father()
+        // Son.prototype.food = 'fish'
+        // console.log(son);           // Son {work: "code", hobby: "game"}
+        // console.log(father);        // Father {work: "code", food: "fish"}
+        // // console.log(father1);       // Father {work: "code"}
+        // console.log(son.money);     // undefined
+
+    </script>
+</body>
+
+</html>

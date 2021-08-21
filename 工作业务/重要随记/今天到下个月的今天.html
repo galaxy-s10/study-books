@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+        function getNextMonth() {
+            var dateList = [];
+            let startDate = new Date();
+            let endDate = new Date();
+            endDate.setDate(startDate.getDate() + 30);
+            while ((endDate.getTime() - startDate.getTime()) >= 0) {
+                let year = startDate.getFullYear();
+                let month = (startDate.getMonth() + 1).toString().length === 1 ? "0" + (startDate.getMonth() + 1).toString() : (
+                    startDate.getMonth() + 1);
+                let day = startDate.getDate().toString().length === 1 ? "0" + startDate.getDate() : startDate.getDate();
+                let week = startDate.getDay();
+                let w;
+                switch (week) {
+                    case 0:
+                        w = '周日';
+                        break;
+                    case 1:
+                        w = '周一';
+                        break;
+                    case 2:
+                        w = '周二';
+                        break;
+                    case 3:
+                        w = '周三';
+                        break;
+                    case 4:
+                        w = '周四';
+                        break;
+                    case 5:
+                        w = '周五';
+                        break;
+                    case 6:
+                        w = '周六';
+                        break;
+                }
+                // dateList.push(month + "-" + day);
+                dateList.push(year + "年" + month + "月" + day + '日' + "(" + w + ")");
+                startDate.setDate(startDate.getDate() + 1);
+            }
+            return dateList
+        }
+
+        console.log(getNextMonth())
+
+        function getHours() {
+            let t = []
+            for (let i = 0; i < 24; i++) {
+                t.push(i < 10 ? "0" + i : i + "")
+            }
+            return t
+        }
+
+        function getMinutes() {
+            let t = []
+            for (let i = 0; i < 60; i++) {
+                t.push(i < 10 ? "0" + i : i + "")
+            }
+            return t
+        }
+
+
+
+        console.log(getHours());
+        console.log(getMinutes());
+
+        let str = '2021年01月08日(周五)'
+        let str1 = str.replace('年', '-')
+        let str2 = str1.replace('月', '-')
+        let str3 = str2.replace('日', '')
+        let str4 = str3.replace('日', '')
+        let str9 = str.replace(/\W/g, "-").slice(0, str.length - 5)
+        console.log(str9);
+    </script>
+</body>
+
+</html>

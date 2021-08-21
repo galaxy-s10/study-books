@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/template" id="myTemplate">
+        <div>
+            今天是：{{date}}，天气：{{weather}}
+        </div>
+        <ul>
+            {{#firend}}
+                <li class='123'>
+                我的朋友{{firend_name}}，今年{{age}}岁了，喜欢
+                {{#hobby}}
+                    <span>{{.}}</span>
+                {{/hobby}}
+                </li>
+            {{/firend}}
+            {{#pets}}
+                <li class='123'>
+                我的宠物{{name}}，今年{{age}}岁了
+                </li>
+            {{/pets}}
+        </ul>
+    </script>
+
+    <script src="./mustache.js"></script>
+    <script>
+        var str = document.getElementById('myTemplate').innerHTML
+        var data = {
+            date: '2021年4月4日',
+            firend: [
+                { firend_name: "tom", age: 18, hobby: ["看书", "画画", "跳舞"] },
+                { firend_name: "why", age: 19, hobby: ["唱歌", "弹琴"] },
+                { firend_name: "lili", age: 21, hobby: ["编程", "游戏"] },
+            ],
+            pets: [
+                { name: 'dog', age: 3 },
+                { name: 'cat', age: 2 },
+            ],
+            weather: '晴'
+        };
+        var domStr = Mustache.render(str, data);
+        var ele = document.getElementById("app");
+        ele.innerHTML = domStr;
+    </script>
+</body>
+
+</html>

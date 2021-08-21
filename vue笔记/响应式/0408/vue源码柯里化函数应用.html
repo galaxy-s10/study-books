@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app" class="wrap">
+        <li class="ppp">{{pet}}</li>
+        <li class="ppp">{{car}}</li>
+        <li class="ppp">我的手机是：{{phone.phone_name}}，分辨率：{{phone.phone_display}}</li>
+    </div>
+</body>
+<script>
+    // 柯里化函数
+    function makeMap(
+        str,
+        expectsLowerCase
+    ) {
+        var map = Object.create(null);
+        var list = str.split(',');
+        for (var i = 0; i < list.length; i++) {
+            console.log('1');
+            map[list[i]] = true;
+        }
+        console.log(map);
+        return expectsLowerCase
+            ? function (val) { return { a: map[val.toLowerCase()] }; }
+            : function (val) { return map[val]; }
+    }
+    // 调用makeMap柯里化函数，返回一个isHTMLTag函数，这个isHTMLTag函数具有缓存
+    // 定义这个isHTMLTag函数后，后面调用该函数都具有缓存功能。
+    var isHTMLTag = makeMap(
+        'html,body,base,head,link,meta,style,title,' +
+        'address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,nav,section,' +
+        'div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,' +
+        'a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,rtc,ruby,' +
+        's,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,' +
+        'embed,object,param,source,canvas,script,noscript,del,ins,' +
+        'caption,col,colgroup,table,thead,tbody,td,th,tr,' +
+        'button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,' +
+        'output,progress,select,textarea,' +
+        'details,dialog,menu,menuitem,summary,' +
+        'content,element,shadow,template,blockquote,iframe,tfoot'
+    );
+    console.log(isHTMLTag('div'));
+    console.log(isHTMLTag('div1'));
+</script>
+
+</html>

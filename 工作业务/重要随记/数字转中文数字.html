@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        let funcChangeNumToCHN = (s_) => {
+            if (!s_) {
+                return '零'
+            }
+            var _arrayCHNNum = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+            var _arrayCHNBit = ['', '十', '百', '千'];
+
+            let _numArray = s_.toString().split('');
+            if (_numArray.length === 2 && _numArray[0] === '1') {
+                _numArray[0] = 'y';
+            }
+            for (let i = _numArray.length - 1; i >= 0; i--) {
+                if (_numArray[i] === '0') {
+                    _numArray[i] = 'x';
+                } else {
+                    break;
+                }
+            }
+            let _s = '';
+            let _bLast0 = false;
+            for (let i = 0; i < _numArray.length; i++) {
+                if (_numArray[i] === 'x') {
+                    continue;
+                }
+                if (_numArray[i] === '0' && _bLast0) {
+                    _bLast0 = true;
+                    continue;
+                }
+                if (_numArray[i] !== 'y') {//delete 1 in ten
+                    _s += _arrayCHNNum[parseInt(_numArray[i])];
+                }
+                if (_numArray[i] === '0') {
+                    _bLast0 = true;
+                    continue;
+                }
+                _bLast0 = false;
+
+                _s += _arrayCHNBit[_numArray.length - i - 1];
+            }
+            return _s;
+        }
+
+        console.log(funcChangeNumToCHN(10000));
+    </script>
+</body>
+
+</html>

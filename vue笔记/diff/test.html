@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box">
+        <h3>我是一个标题</h3>
+        <ul>
+            <li>牛奶</li>
+            <li>咖啡</li>
+            <li>可乐</li>
+        </ul>
+    </div>
+    <div id="parentElement">
+        <span id="childElement">Oldnode</span>
+    </div>
+    <div id="parentVnode">
+        <span id="childVnode">Newnode</span>
+    </div>
+    <div id="">
+        <span id="">第三</span>
+    </div>
+
+    <script>
+        // 创建要插入的节点
+        var newNode = document.createElement("span");
+        var text1 = document.createTextNode('我是新增的span元素')
+        newNode.appendChild(text1)
+
+        // 获得父节点的引用
+        var parentDiv = document.getElementById("childElement").parentNode;
+        // var parentDiv = document.getElementById("parentElement");
+
+        //要在哪个节点上面插入
+        var sp2 = document.getElementById("childElement");
+        // console.log(sp2);
+        console.log(parentDiv);
+        parentDiv.insertBefore(newNode, sp2);
+
+        // 获取旧节点
+        var oldnode = document.getElementById("parentElement");
+
+        // 获取新节点
+        var newvnode = document.getElementById("parentVnode");
+
+        // 在旧的节点上加上新的
+        oldnode.parentNode.insertBefore(newvnode, oldnode);
+
+        // 删除旧的节点
+        oldnode.parentNode.removeChild(oldnode);
+
+        //实验一结束
+
+        // //实验二：referenceNode 为 undefined
+        // var sp2 = undefined; // Not exist a node of id "childElement"
+        // parentDiv.insertBefore(newNode, sp2); //隐式转换到节点类型
+        // //实验二结束
+
+        // //实验三：referenceNode 为字符类型的 "undefined"
+        // var sp2 = "undefined"; //不存在id为"childElement"的referenceNode
+        // parentDiv.insertBefore(newNode, sp2); // Generate "Type Error: Invalid Argument"
+     //实验三结束
+    </script>
+    <script src="./diff.js"></script>
+    <script>
+        console.log(h('p', {}, '呵呵'));
+        const myVNode1 = h('div', {}, h('p', {}, '呵呵'))
+        const myVNode2 = h('ul', {}, [
+            h('li', {}, '牛奶'),
+            h('li', {}, '咖啡'),
+            h('li', {}, [h('div', {}, [h('p', {}, '可口可乐'), h('p', {}, '百事可乐')])]),
+            h('li', {}, h('p', {}, '雪碧'))
+        ])
+        console.log(myVNode1, myVNode2)
+        console.log(patch);
+    </script>
+</body>
+
+</html>

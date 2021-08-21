@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 根据Promise/A+规范实现Promise
+         * Promise/A+为了简便，以下简称为规范
+         */
+        function _Promise(executor) {
+
+            var _this = this // 先保存this
+            _this.status = 'pending' //规范要求的状态
+            _this.value = undefined //规范要求成功返回的值
+            _this.season = undefined //规范要求失败返回的原因
+            _this.exception = undefined //规范要求异常抛出的值
+
+            _this.onFulfilledCbs = [] //收集成功回调
+            _this.onRejectedCbs = [] //收集失败回调
+
+            // 成功执行的函数
+            function resolve(value) {
+                // 规范规定，只能从pending变成fulfilled或者从pending变成rejected
+                // 比如：如果当前status从pending变成fulfilled，
+                // 则不能再次对status进行修改成pending或者rejected。
+                if (_this.status == 'pending') {
+                    _this.status = 'fulfilled'
+                    _this.value = value
+                    // 发布
+                    _this.onFulfilledCbs.forEach(fn => fn())
+                }
+            }
+            // 失败执行的函数
+            function reject(season) {
+                // 规范规定，只能从pending变成fulfilled或者从pending变成rejected
+                // 比如：如果当前status从pending变成fulfilled，
+                // 则不能再次对status进行修改成pending或者rejected。
+                if (_this.status == 'pending') {
+                    _this.status = 'rejected'
+                    // 有then回调且then回调里有reject回调就不要抛出错误，将错误通过reject返回
+                    _this.season = season
+                    _this.exception = undefined
+                    // 发布
+                    _this.onRejectedCbs.forEach(fn => fn())
+                }
+            }
+
+            // 因为new Promise(fn)时，会立即执行fn
+            // 所以实现_Promise时，也要立即执行传进来的executor函数
+            // 捕获异常，如果Promise有reject或catch，就将异常通过reject返回，
+            // 如果Promise没有捕获异常，就抛出错误
+            // 实现的_Promise也要和原生Promise一致
+            try {
+                executor(resolve, reject)
+            } catch (e) {
+                // 如果捕获到异常，把异常存在exception里（后面抛不抛出异常再通过其他条件判断）
+                _this.exception = e
+                // 只要有异常，都要将Promise的状态改为rejected（这样的reason就是报错信息了）
+                reject(e)
+                // 利用定时器，将抛出错误的操作延迟一个循环，等判断用户有没有执行then的reject再判断抛不抛出错误
+                // 步骤：
+                // 1，捕获到错误，存到exception；
+                // 2，遇到定时器宏任务，把定时器的回调放进宏任务队列，等待函数执行栈全部执行完再执行
+                // 3，然后就会继续往下执行，执行完executor里面的代码后，继续执行函数执行栈的其余代码，
+                // 4，执行完所有函数执行栈的代码后，如果都没有遇到_Promise.then的reject，
+                // 5，那么此时的exception就还是报错信息（因为只要遇到了reject，就会将exception清空）
+                // 6，就会执行这个定时器任务回调，
+                // 7，exception有值就抛出错误
+                setTimeout(() => {
+                    if (_this.exception) {
+                        setTimeout(() => {
+                            throw new Error(e)
+                        }, 0);
+                    }
+                }, 0);
+            }
+
+            /**
+             * Promise执行完成有结果的时候，会调用的then方法，该方法接收两个参数，
+             * 第一个是成功时候的回调函数，第二个是失败时候的回调函数，
+             * 所以实现_Promise时，也要实现这个then方法
+             */
+
+            _Promise.prototype.then = function (onFulfilled, onRejected) {
+                console.log('then')
+                if (_this.status == 'fulfilled') {
+                    setTimeout(() => {
+                        onFulfilled(_this.value)
+                    }, 0);
+
+                }
+                if (_this.status == 'rejected') {
+                    setTimeout(() => {
+                        onRejected(_this.season)
+                    }, 0);
+                }
+                if (_this.status == 'pending') {
+                    // 采用发布订阅方式，将等待的结果分别保存到成功和失败数组里
+                    // 订阅
+                    _this.onFulfilledCbs.push(function () {
+                        onFulfilled(_this.value)
+                    })
+                    // 订阅
+                    _this.onRejectedCbs.push(function () {
+                        onRejected(_this.season)
+                    })
+                }
+            }
+        }
+
+        var p = new _Promise(function (resolve, reject) {
+            console.log('_Promise里的同步代码')
+            // resolve(200)
+            // reject(500)
+            setTimeout(() => {
+                throw new Error('xxx')
+            }, 1000);
+            // setTimeout(() => {
+            //     resolve(200)
+            //     // reject(500)
+            // }, 1000);
+        })
+        p.then((res) => {
+            console.log(res)
+            console.log(p)
+        })
+        console.log(111);
+        // console.log(p);
+        // 打印顺序：
+        // _Promise里的同步代码
+        // 111
+        // 500
+        // _Promise {status: "rejected", value: null, season: 500, exception: null}
+    </script>
+</body>
+
+</html>

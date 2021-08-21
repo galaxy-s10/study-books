@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 利用构造函数创建对象
+        function Star(uname, age) {
+            // 实例成员
+            this.uname = uname
+            this.age = age
+            // this.sing = function () {
+            //     console.log('我会唱歌')
+            // }
+        }
+        var ldh = new Star('刘德华', 18)
+        var zxy = new Star('张学友', 19)
+        // console.dir(Star)
+        var that = this
+        Star.prototype.sing = function () {
+            that = this
+            console.log('我会唱歌')
+        }
+        // console.dir(Star)
+        // console.log(ldh.__proto__ === Star.prototype)
+        console.log(ldh)
+        ldh.sing()
+        console.log(ldh.__proto__)
+        console.log(Star.prototype)
+        console.log(ldh.__proto__.constructor)
+        console.log(ldh.__proto__ === Star.prototype)
+        console.log(Star.prototype.constructor)
+        console.log(ldh.toString)
+        console.log(that === ldh)
+
+    </script>
+</body>
+
+</html>

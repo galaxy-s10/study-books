@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var data = {
+            id: 1,
+            user: {
+                u_id: 100,
+                u_name: 'hss',
+            }
+        }
+        console.log(data.user.token); //undefined
+        console.log(data.user.token == undefined); //true
+        console.log(data.user.token == null);  //true
+        console.log(data.user.token === undefined); //true
+        console.log(data.user.token === null);  //false
+        console.log(undefined == null);    //true
+        console.log(undefined === null);    //false
+        console.log(typeof (data.user.token)); //undefined
+    </script>
+</body>
+
+</html>

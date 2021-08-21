@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const PENDING = "PENDING";
+        const FULFILLED = "FULFILLED";
+        const REJECT = "REJECT";
+
+        function resolvePromise(promise2, x, resolve, reject) {
+            if (promise2 === x) {
+                return reject(
+                    new TypeError("Chaining Circle detected for promise #<MyPromise>")
+                );
+            }
+
+            //如果是对象
+            //使用called判断执行一次
+            let called = false;
+            if ((typeof x === "object" && x !== null) || typeof x === "function") {
+                //if x is an object or function,
+                // Let then be x.then. [3.5]
+                try {
+                    //就是返回的Promise对象了
+                    //If retrieving the property x.then results in a thrown exception e, reject promise with e as the reason.
+
+                    let then = x.then;
+                    //If then is a function, call it with x as this, first argument resolvePromise, and second argument rejectPromise, where:
+                    if (typeof then === "function") {
+                        then.call(
+                            x,
+                            (y) => {
+                                if (called) return;
+                                called = true;
+                                resolve(y);
+                            },
+                            (r) => {
+                                if (called) return;
+                                called = true;
+                                reject(r);
+                            }
+                        );
+
+                        //如果是对象 但是不是promise  也不影响
+                    } else {
+                        resolve(x);
+                    }
+                } catch (err) {
+                    if (called) return;
+                    called = true;
+                    reject(err);
+                }
+            } else {
+                //如果不是对象
+                resolve(x);
+            }
+        }
+
+        class MyPromise {
+            //执行new操作的时候 会执行constructor
+            //executor就是传进来的那个函数
+            constructor(executor) {
+                //状态
+                this.status = PENDING;
+                //值  默认undefined
+                this.value = undefined;
+                //原因 默认undefined
+                this.reason = undefined;
+
+                //收集函数
+                this.onFulfilledCallBacks = [];
+                this.onRejectCallBacks = [];
+
+                //这个参数value则是 调用resolve()传进来的值
+                const resolve = (value) => {
+                    if (this.status === PENDING) {
+                        this.status = FULFILLED;
+                        this.value = value;
+                    }
+                    //发布onFulfilled
+                    this.onFulfilledCallBacks.forEach((fn) => fn());
+                };
+                //这个参数reason则是 Promise里面 reject()传进来的值
+                const reject = (reason) => {
+                    if (this.status === PENDING) {
+                        this.status = REJECT;
+                        this.reason = reason;
+                    }
+                    //发布 onReject
+                    this.onRejectCallBacks.forEach((fn) => fn());
+                };
+
+                //因为Promise内部是立即执行的,所以立即调用executor函数
+                try {
+                    executor(resolve, reject);
+                } catch (err) {
+                    reject(err);
+                }
+            }
+
+            then(onFulfilled, onReject) {
+                onFulfilled =
+                    typeof onFulfilled === "function" ? onFulfilled : (value) => value;
+                onReject =
+                    typeof onReject === "function" ?
+                        onReject :
+                        (reason) => {
+                            throw reason;
+                        };
+                const promise2 = new MyPromise((resolve, reject) => {
+                    if (this.status === FULFILLED) {
+                        setTimeout(() => {
+                            //收集then里面的返回值,进行处理
+                            try {
+                                const x = onFulfilled(this.value);
+                                resolvePromise(promise2, x, resolve, reject);
+                            } catch (err) {
+                                reject(err);
+                            }
+                        }, 0);
+                    }
+
+                    if (this.status === REJECT) {
+                        setTimeout(() => {
+                            try {
+                                const x = onReject(this.reason);
+                                resolvePromise(promise2, x, resolve, reject);
+                            } catch (err) {
+                                reject(err);
+                            }
+                        }, 0);
+                    }
+
+                    //当异步的时候,进入then 状态值还是PENDING 所以这时候订阅这些成功或者失败的方法
+                    if (this.status === PENDING) {
+                        this.onFulfilledCallBacks.push(() => {
+                            const x = onFulfilled(this.value);
+                            resolvePromise(promise2, x, resolve, reject);
+                        });
+                        this.onRejectCallBacks.push(() => {
+                            const x = onReject(this.reason);
+                            resolvePromise(promise2, x, resolve, reject);
+                        });
+                    }
+                });
+                return promise2;
+            }
+
+            catch(errCallBack) {
+                return this.then(null, errCallBack);
+            }
+
+            static resolve(value) {
+                return new MyPromise((resolve, reject) => {
+                    resolve(value);
+                });
+            }
+            static reject(reason) {
+                return new MyPromise((resolve, reject) => {
+                    reject(reason);
+                });
+            }
+        }
+
+
+        var p = new MyPromise((res, rej) => {
+            // throw new Error('xx')
+            res(100)
+        })
+
+        p.then(res => {
+            console.log(res)
+            console.log(p);
+        })
+        console.log('xx')
+    </script>
+</body>
+
+</html>

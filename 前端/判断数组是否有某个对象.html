@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [{
+            name: "回锅肉",
+            value: "0"
+        }, {
+            name: "炒肉",
+            value: "1"
+        }]
+        var result = arr.some(function (item) {
+            if (item.name == "小炒肉") {
+                return true;
+            }
+        })
+        console.log(result);//result 为true时表示数组内已存在 false表示不存在
+
+        var arr1 = ["2cbfe301-5ed2-4c35-a61e-49945be21433", "7c340cb3-0030-4fd1-9fff-f9554130cd41"]
+
+        function exist(arr, val) {
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] == val) {
+                    return true
+                }
+            }
+            return false
+        }
+        console.log(exist(arr1, 'f54b0998-47f5-417b-bfd2-d2d63a6db4a8'))
+
+    </script>
+</body>
+
+</html>

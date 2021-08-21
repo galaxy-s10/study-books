@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function ajaxfn() {
+        // 创建一个XMLHttpRequest异步对象
+        var xmlhttp = new XMLHttpRequest();
+        // 设置请求方式和请求地址
+        xmlhttp.open("GET", "http://localhost:3003/article", true);
+        // send发送请求
+        xmlhttp.send();
+        // 监听状态变化
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                // xmlhttp.readyState == 4表示请求已完成
+                // xmlhttp.status == 200表示成功
+                // xmlhttp.status == 404未找到页面
+                console.log('object');
+                console.log(xmlhttp.responseText);
+                console.log(xmlhttp.getAllResponseHeaders());
+                console.log(xmlhttp.getResponseHeader('content-type'));
+            }
+        }
+    }
+    // ajaxfn()
+
+    var promise = new Promise((resolve,reject)=>{
+        setTimeout(() => {
+            resolve(1)
+        }, 1000);
+    })
+    promise.then(res=>{
+        console.log(res);
+    })
+    console.log('11');
+</script>
+
+<body>
+
+</body>
+
+</html>

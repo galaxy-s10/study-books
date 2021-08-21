@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 对时间字符串进行排序,思路，遍历每个时间，使用getTime()转化成时间戳，
+         * 将这个时间戳插入对应的时间字符串所在的位置，然后再通过sort进行排序
+        */
+        let data = [
+            {
+                "today": "2021-02-01",
+                "allVisiteTotal": 0,
+                "allVisitorTotal": 0
+            },
+            {
+                "today": "2021-02-04",
+                "allVisiteTotal": 34,
+                "allVisitorTotal": 14
+            },
+            {
+                "today": "2021-02-02",
+                "allVisiteTotal": 15,
+                "allVisitorTotal": 10
+            },
+            {
+                "today": "2021-02-05",
+                "allVisiteTotal": 36,
+                "allVisitorTotal": 25
+            },
+            {
+                "today": "2021-02-03",
+                "allVisiteTotal": 18,
+                "allVisitorTotal": 13
+            },
+            {
+                "today": "2021-02-06",
+                "allVisiteTotal": 69,
+                "allVisitorTotal": 48
+            }
+        ]
+
+        data.forEach(item => {
+            item.timeFlag = new Date(item.today).getTime()
+            console.log(item);
+        });
+        console.log(data);
+        data.sort(function (a, b) {
+            return a.timeFlag - b.timeFlag
+            // return a.timeFlag - b.timeFlag
+        })
+        console.log(data);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        localStorage.setItem('name', '张三')
+        localStorage.age = 18
+        localStorage['sex'] = '男'
+        localStorage.obj = JSON.stringify({ name: '小明' })
+        console.log(localStorage.name)  //张三
+        console.log(localStorage.getItem('age'));   //18
+        console.log(localStorage['sex'])        //男
+        console.log(JSON.parse(localStorage.obj))   //{name: "小明"}
+        localStorage.removeItem('age')
+        console.log(localStorage.age);  //undefined
+        console.log(localStorage.key(0));   //obj
+        console.log(localStorage.key(1));   //name
+        console.log(localStorage.key(2));   //sex
+        // window.localStorage.clear()
+        // console.log(localStorage);   //Storage {length: 0}
+    </script>
+</body>
+
+</html>

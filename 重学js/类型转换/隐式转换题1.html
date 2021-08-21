@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log({} + [] == [])  //false
+        console.log(+[] == [])      //true
+        // 但是在浏览器控制台直接输入{} + [] == []，会显示true
+        // 在浏览器控制台直接输入：{} + [] == []，会把{}当做啥都没写，因此就是约等于在控制台输入： + [] == []，即true
+        console.log({}.toString())  //[object Object]
+        // 在浏览器控制台直接输入：{}.toString()，回车直接报错
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const promise1 = new Promise((resolve, reject) => {
+        console.log("凡科建站");
+        setTimeout(() => {
+          resolve("凡科商城");
+          console.log("凡科互动");
+        });
+      });
+      const promise2 = Promise.resolve()
+        .then(() => {
+          console.log("凡科微传单");
+        })
+        .then(() => {
+          console.log("凡科轻站小程序");
+        });
+      async function main() {
+        console.log("凡科快图");
+        console.log(await Promise.all([promise1, promise2]));
+        console.log("凡科悦客");
+        return "凡科公众号助手";
+      }
+      console.log(typeof main());
+
+      /**
+       * 凡科建站
+       * 凡科快图
+       * promis.all？
+       * 凡科悦客
+       * object
+       * 凡科微传单
+       * 凡科轻站小程序
+       * 凡科商城
+       * 凡科互动
+       */
+
+      //   var promise3 = new Promise((res, rej) => {});
+      //   console.log(typeof promise3, 334334); // object
+    </script>
+  </body>
+</html>

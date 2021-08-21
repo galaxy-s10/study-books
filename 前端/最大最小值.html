@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function min(nums) {
+            // 假设第一个值是最小的
+            var minValue = nums[0]
+            // 遍历数组每一个值，
+            for (var i = 0; i < nums.length; i++) {
+                // 如果遍历到的值比最小值小，则
+                if (nums[i] < minValue) {
+                    minValue = nums[i]
+                }
+            }
+            return res
+        }
+        function max(nums) {
+            var maxValue = nums[0]
+            for (var i = 0; i < nums.length; i++) {
+                if (maxValue < nums[i]) {
+                    maxValue = nums[i]
+                }
+            }
+            return maxValue
+        }
+        function getMax(nums) {
+            return Math.max.apply(null, nums)
+        }
+        function getMin(nums) {
+            return Math.min.apply(null, nums)
+        }
+        var nums = [1, 12, 3, 4, 5, 0]
+        console.log('最大值：', max(nums))
+        console.log('最小值：', min(nums))
+        console.log('最大值：', getMax(nums))
+        console.log('最小值：', getMin(nums))
+        console.log('最大值：', Math.max(...nums))
+        console.log('最小值：', Math.min(...nums))
+
+    </script>
+</body>
+
+</html>

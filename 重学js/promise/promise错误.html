@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // // executor函数里面的代码有错误，但是没有被then的reject捕获，会修改Promise的状态为reject，并抛出错误
+        // var p = new Promise((resolve, reject) => {
+        //     throw new Error('xxx')
+        // })
+        // console.log(p);
+
+        // // 打印顺序：
+        // // Promise {<rejected>: Error: xxx at file:///E:/hss/my-study-notes/%E9%87%8D%E5%AD%A6js/promise/promise%E9%94%99%E8%AF…}
+        // // 报错：Uncaught (in promise) Error: xxx
+
+
+        // // executor函数里面的代码有错误，但是有被then的reject捕获，不会抛出错误，会修改Promise的状态为reject，然后返回错误原因
+        // var p = new Promise((resolve, reject) => {
+        //     throw new Error('xxx')
+        // })
+        // p.then(res => {
+        //     console.log('成功');
+        //     console.log(res);
+        // }, err => {
+        //     console.log('失败');
+        //     console.log(err);
+        // })
+        // console.log(p);
+
+        // // 打印顺序：
+        // // Promise {<rejected>: Error: xxx at file:///E:/hss/my-study-notes/%E9%87%8D%E5%AD%A6js/promise/promise%E9%94%99%E8%AF…}
+        // // 失败
+        // // Error: xxx
+
+
+        // executor函数里面的代码有错误，但是有被Promise.catch捕获，会修改Promise的状态为rejected，然后通过reject回调返回错误原因
+        var p = new Promise((resolve, reject) => {
+            // setTimeout(() => {
+            throw new Error('xxx')
+            // }, 1000);
+
+        })
+        p.then(res => {
+            console.log('成功');
+            console.log(res);
+        }, rej => {
+            console.log('失败');
+            console.log(rej);
+        })
+        console.log(p);
+
+        // 打印顺序：
+        // Promise {<rejected>: Error: xxx at file:///E:/hss/my-study-notes/%E9%87%8D%E5%AD%A6js/promise/promise%E9%94%99%E8%AF…}
+        // 失败
+        // Error: xxx
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // https://blog.csdn.net/weixin_39683368/article/details/110747033
+        // 我们知道js的赋值运算顺序永远都是从右往左的，不过由于“.”是优先级最高的运算符，所以这行代码先“计算”了a.x。
+        // 由于( . 运算符最先计算)一开始js已经先计算了a.x，
+        // 便已经解析了这个a.x是对象A的x，所以在同一条公式的情况下再回来给a.x赋值，也不会说重新解析这个a.x为对象B的x。
+        var a = { n: 1 }
+        var b = a
+        a.x = a = { n: 2 }
+        console.log(a.x);   //undefined
+        console.log(b.x);   //{n:2}
+    </script>
+</body>
+
+</html>

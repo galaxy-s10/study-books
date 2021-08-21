@@ -1,0 +1,47 @@
+创建数据库：create database 数据库名
+删除数据库：drop database 数据库名
+选择数据库：use 数据库名
+查看所有数据库：show databases
+查看当前打开的数据库：select database()
+=============================================
+创建数据库表：create table 表名 (字段名1 字段类型1 其他关键词1,字段名2 字段类型2 其他关键词2);
+删除数据库表：drop table 表名
+查看表结构：desc 表名
+查看创建的表：show create table 表名
+增加表字段：alter table 表名 add (字段名1 字段类型1 其他关键词1, 字段名2 字段类型2 其他关键词2);
+删除表字段：alter table 表名 drop 字段名
+修改数据表名：alter tabel 旧表名 rename (to) 新表名
+修改表字段类型：alter table 表名 modify 字段名 字段类型 其他关键词
+修改表字段名称：alter table 表名 change 旧字段名 新字段名 新字段类型 其他关键词
+修改表字段的默认值：alter table 表名 alter 表字段名 set default 值
+删除表字段的默认值：alter table 表名 alter 表字段名 drop default
+============================================
+插入数据：insert into 表名 (字段名1,......字段名n) values (值1,......值n);
+不添加字段名插入数据：insert into 表名 values (值1,.....值n);	但添加的值必须与默认的字段名一样对应，缺一不可！
+更新数据：update	表名	set	更新的数据	条件
+删除数据：delete from 表名 条件
+删除数据：truncate (table) 表名		全部清零
+查询所有数据：select * from 表名
+查询数据：select	字段名1,字段名2,字段名n	from	表名	条件
+模糊查询：select	字段名1,字段名2,字段名n	from	表名	where	字段名	like	"开头有什么字%"
+模糊查询：select	字段名1,字段名2,字段名n	from	表名	where	字段名	like	"%结尾有什么字"
+模糊查询：select	字段名1,字段名2,字段名n	from	表名	where	字段名	like	"%有什么字%"
+过滤重复数据：select distinct 表字段 from 表名
+连接数据：select concat(字段名1,字段名n) from 表名
+连接数据并用分隔符隔开：select concat_ws("===",字段名1,字段名n) from 表名
+连接数据并重命名且用分隔符隔开：select concat_ws("===",字段名1,字段名n) as 新名字 from 表名
+查询数据并重命名字段名：select 字段名1 as 新名字,字段名n as 新名字 from 表名
+联合查询：select 字段名1,字段名2 from 表名 union all select 字段名1,字段名2 from 表名
+内连接查询：select 表名.字段名,表名.字段名 from 表名1,表名2 where 条件
+内连接查询：select 表名.字段名,表名.字段名 from 表名1 inner join 表名2 where 条件
+内连接查询：select 表名.字段名,表名.字段名 from 表名1 inner join 表名2 on 条件
+左连接查询：select 表名.字段名,表名.字段名 from 表名1 left join 表名2 on 条件
+左连接查询：select 表名.字段名,表名.字段名 from 表名1 right join 表名2 on 条件
+
+
+
+查看当前数据库字符集：show variables like 'character%'
+修改数据库字符集：alter database 数据库名 character set utf8			//修改完数据库字符集，需要重启mysql数据库。
+修改表字符集：alter table 表名 default character set utf8 collate utf8_general_ci
+使用limit限制查询结果的数量：select * from 表名 limit [offset,] 数量		//offset为可选参数，默认为0，表示从第一条开始查。一次类推
+

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let data = [{
+                "afficail_tag_id": 52,
+                "account_id": 249,
+                "province_name": "北京市",
+                "province_code": 110000,
+                "province_id": 1,
+                "city_name": "市辖区",
+                "city_code": 110100,
+                "city_id": 183,
+                "area_name": "西城区",
+                "area_code": 110102,
+                "area_id": 185
+            },
+            {
+                "afficail_tag_id": 53,
+                "account_id": 249,
+                "province_name": "北京市",
+                "province_code": 110000,
+                "province_id": 1,
+                "city_name": "市辖区",
+                "city_code": 110100,
+                "city_id": 183,
+                "area_name": "朝阳区",
+                "area_code": 110105,
+                "area_id": 186
+            },
+            {
+                "afficail_tag_id": 54,
+                "account_id": 249,
+                "province_name": "天津市",
+                "province_code": 120000,
+                "province_id": 2,
+                "city_name": "",
+                "city_code": 0,
+                "city_id": 0,
+                "area_name": "",
+                "area_code": 0,
+                "area_id": 0
+            },
+            {
+                "afficail_tag_id": 55,
+                "account_id": 249,
+                "province_name": "内蒙古自治区",
+                "province_code": 150000,
+                "province_id": 5,
+                "city_name": "包头市",
+                "city_code": 150200,
+                "city_id": 528,
+                "area_name": "",
+                "area_code": 0,
+                "area_id": 0
+            },
+            {
+                "afficail_tag_id": 56,
+                "account_id": 249,
+                "province_name": "辽宁省",
+                "province_code": 210000,
+                "province_id": 6,
+                "city_name": "鞍山市",
+                "city_code": 210300,
+                "city_id": 644,
+                "area_name": "铁东区",
+                "area_code": 210302,
+                "area_id": 679
+            },
+            {
+                "afficail_tag_id": 57,
+                "account_id": 249,
+                "province_name": "辽宁省",
+                "province_code": 210000,
+                "province_id": 6,
+                "city_name": "鞍山市",
+                "city_code": 210300,
+                "city_id": 644,
+                "area_name": "立山区",
+                "area_code": 210304,
+                "area_id": 681
+            },
+            {
+                "afficail_tag_id": 58,
+                "account_id": 249,
+                "province_name": "辽宁省",
+                "province_code": 210000,
+                "province_id": 6,
+                "city_name": "抚顺市",
+                "city_code": 210400,
+                "city_id": 645,
+                "area_name": "",
+                "area_code": 0,
+                "area_id": 0
+            },
+            {
+                "afficail_tag_id": 59,
+                "account_id": 249,
+                "province_name": "辽宁省",
+                "province_code": 210000,
+                "province_id": 6,
+                "city_name": "本溪市",
+                "city_code": 210500,
+                "city_id": 646,
+                "area_name": "明山区",
+                "area_code": 210504,
+                "area_id": 695
+            },
+            {
+                "afficail_tag_id": 60,
+                "account_id": 249,
+                "province_name": "辽宁省",
+                "province_code": 210000,
+                "province_id": 6,
+                "city_name": "本溪市",
+                "city_code": 210500,
+                "city_id": 646,
+                "area_name": "本溪满族自治县",
+                "area_code": 210521,
+                "area_id": 697
+            }
+        ]
+
+        let newData = []
+
+        data.forEach((_tag, _tagIndex) => {
+            // 遍历拿到所有省份
+            console.log('遍历拿到所有省份');
+            console.log(_tag);
+            if (_tag.province_id != 0) {
+                let hasPro = false;
+                newData.forEach((_province, _proIndex) => {
+                    console.log('pppppp')
+                    console.log(_province)
+                    if (_province.id == _tag.province_id) {
+                        hasPro = true;
+                    }
+                });
+                if (!hasPro) {
+                    let temp = {};
+                    temp.p_id = 0;
+                    temp.id = _tag.province_id;
+                    temp.name = _tag.province_name;
+                    newData.push(temp);
+                } else {
+                    // 存在同名省份,不添加
+                    console.log('存在同名省份,不添加')
+                }
+            }
+
+
+            // 遍历拿到所有市区
+            let hasPro = false;
+            let proIndex;
+            let hasCity = false;
+            let cityIndex;
+            newData.forEach((_province, _provinceIndex) => {
+                // 如果newData里面的省id等于旧数据的省id,就把旧数据的市插入新数据的省
+                if (_province.id == _tag.province_id) {
+                    // let hasPro = false;
+                    // let proIndex;
+                    if (_tag.city_id != 0) {
+                        // 外层的newData代表所有省份,如果遍历initList时有市区,记录起来
+                        hasPro = true;
+                        proIndex = _provinceIndex
+                    }
+                    if (!hasPro) {
+                        console.log("这个省份没有市区");
+                    } else {
+                        // 有市区,判断有没有children
+                        if (newData[proIndex].children) {
+                            //  省份有市,判断要插入的市在children有没有,没有的就插入
+                            // let hasCity = false;
+                            
+                            newData[proIndex].children.forEach((_city, _cityIndex) => {
+                                // console.log("—----_city");
+                                // console.log(_city);
+                                // 如果在最新数据的省children里面的市已经存在了现在的市,就不插入
+                                if (_city.id == _tag.city_id) {
+                                    hasCity = true;
+                                    cityIndex = _cityIndex
+                                }
+
+                            });
+                            if (!hasCity) {
+                                let temp1 = {};
+                                temp1.p_id = _tag.province_id;
+                                temp1.id = _tag.city_id;
+                                temp1.name = _tag.city_name;
+                                newData[proIndex].children.push(temp1);
+                            }
+                            // else{
+                            //     // 新数据具体的一个市
+                            //     console.log('668')
+                                //  console.log(cityIndex)
+                                //  console.log(newData[proIndex].children[cityIndex])
+                                //  // if(newData[proIndex].children[cityIndex])
+                                //  // newData[proIndex].children[cityIndex].forEach()
+                            // }
+                            
+                        } else {
+                            // 省份没有市,先添加children
+                            newData[proIndex].children = [];
+                            let temp1 = {};
+                            temp1.p_id = _tag.province_id;
+                            temp1.id = _tag.city_id;
+                            temp1.name = _tag.city_name;
+                            newData[proIndex].children.push(temp1);
+                        }
+                    }
+                    console.log('省份和市区');
+                    console.log(newData)
+                    console.log(proIndex,cityIndex)
+                }
+            });
+      
+        })
+
+        console.log('--------------')
+        console.log(newData);
+
+        data.forEach((_tag, _tagIndex) => {
+            console.log(_tag);
+            if (_tag.area_id != 0) {
+               console.log('有地方啊909')
+               let proIndex
+                newData.forEach((_province, _proIndex) => {
+                    console.log(_province)
+                    if (_province.id == _tag.province_id) {
+                        proIndex = _proIndex;
+                    }
+                });
+                let cityIndex
+                newData[proIndex].children.forEach((_city,_cityIndex)=>{
+                    if (_city.id == _tag.city_id) {
+                        cityIndex = _cityIndex;
+                    }
+                })
+                // console.log(newData[proIndex].children[cityIndex])
+                if(newData[proIndex].children[cityIndex].children){
+                         // newData[proIndex].children[cityIndex].children = []
+                     let temp = {};
+                     temp.p_id = newData[proIndex].children[cityIndex].id;
+                     temp.id = _tag.area_id;
+                     temp.name = _tag.area_name;
+                     newData[proIndex].children[cityIndex].children.push(temp);
+                }else{
+                    newData[proIndex].children[cityIndex].children = []
+                     let temp = {};
+                     temp.p_id = newData[proIndex].children[cityIndex].id;
+                     temp.id = _tag.area_id;
+                     temp.name = _tag.area_name;
+                     newData[proIndex].children[cityIndex].children.push(temp);
+                }
+
+            }
+        })
+
+        console.log('?????????????????')
+        console.log(newData);
+
+    </script>
+</body>
+
+</html>

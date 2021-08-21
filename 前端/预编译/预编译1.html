@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        console.log(show);
+        var show = 10
+        var hidden = 100
+        console.log(show);
+        function show() {
+            console.log(show);
+            hidden = 200
+            console.log('show');
+        }
+        // show()
+        console.log(show);
+        console.log(hidden);
+
+        // console.log(hidden);    //undefined
+        // console.log(show);    //undefined
+        // var hidden = 100;
+        // var show = 200
+        //     /* 自执行函数不会提升 */
+        //     (function hidden() {
+        //         console.log(hidden);    //undefined
+        //         console.log(show);    //200
+        //         hidden = 200
+        //         show = 300
+        //         var hidden
+        //         console.log(hidden);    //200
+        //         console.log(show);    //300
+        //     })()
+        // console.log(hidden);    //100
+
+        // function show() {
+        //     console.log(show);  //undefined
+        //     var show = 100
+        // }
+        // show()
+        // function show() {
+        //     console.log(show);  //function show(){}
+        // }
+        // show()
+
+
+
+        // console.log(show);  //function show(){}
+        // var show = 10
+        // console.log(show);  //10
+        // function show() {
+        //     console.log(show);
+        //     console.log('show');
+        // }
+        // show()  //Uncaught TypeError: show is not a function
+        // console.log(show);  //10
+
+        // console.log(hidden);    //undefined
+        // var hidden = 20;
+        // /* 自执行函数不会提升 */
+        // (function hidden() {
+        //     console.log(hidden);    //function hidden(){}
+        //     console.log('hidden');  //hidden
+        //     hidden = 100    //这里的hidden是IIFE非匿名函数，不能给它重新赋值！严格模式下会报错
+        //     console.log(hidden);    //function hidden(){}
+        // })()
+        // console.log(hidden);    //20
+
+        /*
+            GO{
+                a:undefined
+                b:undefined
+            }
+        */
+        // console.log(a)   //undefined
+        // var a = 10;
+        // var b = 10;
+        // /* 
+        //     AO{
+
+        //     }
+        // */
+
+        // (function a() {
+        //     console.log('a:' + a);  //a:function a(){}
+        //     console.log('b:' + b);  //b:10
+
+        //     a = 20
+        //     c = 30
+        //     console.log('a:' + a);  //a:function a(){}
+        //     console.log('b:' + b);  //b:10
+        //     console.log('c:' + c);  //c:30
+        // })()
+        // console.log(a); //10
+        // console.log(b); //10
+        // console.log(c); //30
+
+        // show = 100
+        // function bye() {
+        //     console.log(show);  //undefined
+        //     show = 200
+        //     console.log(show);  //200
+        //     var show = 300
+        //     console.log(show);  //300
+        // }
+
+        // bye()
+        // var show
+    </script>
+</body>
+
+</html>

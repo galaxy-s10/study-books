@@ -1,0 +1,18 @@
+在JavaScript中，数组是一种特殊的对象类型。 因此 typeof [1,2,3,4] 返回 object。  
+数组：
+var myCars=["Saab","Volvo","BMW"];
+对象：
+person={firstname:"John",lastname:"Doe",age:50,eyecolor:"blue"};
+===============
+数组：
+var mycars = new Array();
+mycars[0] = "Saab";
+mycars[1] = "Volvo";
+mycars[2] = "BMW";
+对象：
+person=new Object();
+person.firstname="John";
+person.lastname="Doe";
+person.age=50;
+person.eyecolor="blue"; 
+======================

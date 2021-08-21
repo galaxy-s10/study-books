@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log({} + 1);    //[object Object]1
+        console.log({} - 1);    //NaN
+        console.log({} - '1');    //NaN
+        // let a = {
+        //     age: 1
+        //     // valueOf: function () { console.log('valueOf'); return {}; },
+        //     // toString: function () { console.log('valueOf'); return {}; }
+        // };
+        // console.log(a);
+        // console.log(a.valueOf());
+        // console.log(a.toString());
+        // console.log(a + "");
+        // console.log("" + a);
+        // console.log(String(a));
+        console.log(x);
+        console.log((function () { }).toString());  //"function () { }"
+        console.log((function () { var a = 1 }).toString());  //"function () { var a = 1 }"
+        console.log({}.toString()); //"[object Object]"
+        console.log({ age: 1 }.toString()); //"[object Object]"
+        console.log([].toString()); //""
+        console.log([].toString() === ""); //true
+        console.log([1, 2, 3].toString());//"1,2,3"
+
+
+        console.log('------------------------');
+        console.log(+('-1'));   //-1
+        console.log(-('-1'));   //1
+        console.log(+('0'));    //0
+        console.log(-('0'));    //-0
+
+        console.log('-------------------');
+        console.log(Boolean(undefined));
+        console.log(Boolean(null));
+        console.log(Boolean(0));
+        console.log(Boolean(+0));
+        console.log(Boolean(-0));
+        console.log(Boolean(NaN));
+        console.log(Boolean(''));
+        console.log(Boolean());
+        console.log('------------------');
+
+        // 除了上述类型转换为假值，其余都可以理解为真值，所有对象都真值
+        console.log(Boolean(new Boolean(false)));
+        console.log(Boolean(-10));
+        console.log(Boolean(+10));
+        console.log(Boolean(new String('')));
+        console.log(Boolean(new String(0)));
+        console.log(Boolean(new String('-10')));
+        console.log(Boolean(new Number(0)));
+        console.log(Boolean(new Number(-0)));
+        console.log(Boolean(new Number(+0)));
+        console.log(Boolean(new Array([])));
+        console.log(Boolean(new Object()));
+        console.log(Boolean(function () { }));
+
+        console.log('---------------');
+
+
+    </script>
+</body>
+
+</html>

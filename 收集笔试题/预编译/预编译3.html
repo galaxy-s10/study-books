@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = 0
+        if (typeof a) {
+            console.log(1);
+        } else {
+            console.log(2);
+        }
+        // typeof 操作符返回一个字符串，字符串隐式转换都是true！
+        // 因此结果是打印1
+
+        if ('0') {
+            console.log('ok');
+        } //打印ok
+    </script>
+</body>
+
+</html>

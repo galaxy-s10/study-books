@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let str = '哈喽大家好园爆炸后一片废<百宝音break time="500ms" />墟所惊呼的我做了什么<百宝音break time="1s" />专辑中的单曲的我做了什么专辑中的单曲的我做了什么"'
+
+        let reg = /<(百宝音)[^>]+>/g
+        let str1 = str.replace(reg, function () {
+            console.log(arguments);
+            return arguments[0].replace(arguments[1], "")
+        })
+        console.log(str);
+        console.log(str1);
+    </script>
+</body>
+
+</html>

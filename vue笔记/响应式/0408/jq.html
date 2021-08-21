@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="hotart">
+        <div>234</div>
+        <div>
+            <div>
+                <div class="aside-l">
+                    <img src="https://img.cdn.zhengbeining.com/1617544782384mustachejs.png" alt="">
+                </div>
+                <div class="aside-r">
+                    <img src="https://img.cdn.zhengbeining.com/1617544782384mustachejs.png" alt="">
+                </div>
+            </div>
+            <div>
+                <div class="aside-l">
+                    <img src="https://img.cdn.zhengbeining.com/1617544782384mustachejs.png" alt="">
+                </div>
+                <div class="aside-r">
+                    <img src="https://img.cdn.zhengbeining.com/1617544782384mustachejs.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+        var domstr = $('.hotart > div')[1]
+        console.log('domstr');
+        console.log($(domstr));
+        var a = $(domstr).children('div')
+        console.log(a);
+        a.map((i, v) => {
+            console.log(v);
+            console.log($(v).find('div').each((c, d) => {
+                console.log(d);
+                console.log($(d).find('img').attr('src'))
+            }))
+        })
+        // console.log(domstr.find('div'))
+        // $(domstr).find('div').each((i,v)=>{
+        //     console.log(v);
+        //     console.log($(v).find('img').attr('src'));
+        // })
+    </script>
+</body>
+
+</html>

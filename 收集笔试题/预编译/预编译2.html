@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        aa() //打印aaa2，具体看预编译1.html里面的解释
+        var aa = function () {
+            console.log('aaa1');
+        }
+        function aa() {
+            console.log('aaa2');
+        }
+
+    </script>
+</body>
+
+</html>

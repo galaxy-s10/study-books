@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onClick="goHome()">home</button>
+    <button onClick="goAbout()">about</button>
+    <button onClick="goLogin()">login</button>
+    <button onClick="goNotFount()">404</button>
+
+    <div class="view"></div>
+
+
+    <script>
+
+        var view = document.getElementsByClassName('view')[0]
+        // 监听url的变化
+        window.addEventListener("popstate", (e) => {
+            console.log('点击了前进/后退，history地址栏改变了');
+            // console.log(history);
+            hashchange()
+        });
+
+        function hashchange() {
+            // 更新视图
+            var history = location
+            switch (history.pathname) {
+                case "/home":
+                    view.innerHTML = 'home'
+                    break;
+                case "/about":
+                    view.innerHTML = 'about'
+                    break;
+                case "/login":
+                    view.innerHTML = 'login'
+                    break;
+                default:
+                    view.innerHTML = '404' + history
+            }
+        }
+
+        function goHome() {
+            console.log('goHome');
+            history.pushState({}, "", '/home');
+            hashchange()
+        }
+        function goAbout() {
+            console.log('goAbout');
+            history.pushState({}, "", '/about');
+            hashchange()
+        }
+        function goLogin() {
+            console.log('goLogin');
+            history.pushState({}, "", '/login');
+            hashchange()
+        }
+        function goNotFount() {
+            console.log('goNotFount');
+            history.pushState({}, "", '/404' + Math.floor((Math.random() * 99) + 1));
+            hashchange()
+        }
+    </script>
+</body>
+
+</html>

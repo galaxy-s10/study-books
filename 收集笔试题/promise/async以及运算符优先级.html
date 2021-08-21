@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 运算符优先级：由高到低：
+         * . [] ()
+         * ++ -- - ~ ! delete new typeof void await
+         * * / %
+         * + - +
+         * << >> >>>
+         * < <= > >= instanceof
+         * == != === !==
+        */
+        function test1() {
+            return Promise.resolve({
+                a: 1
+            })
+        }
+
+        // async function test2() {
+        //     let temp1 = await test1().a //有()，先执行()，即先执行test1()，然后还有.，再执行.，即test().a，然后执行await,最后再赋值给temp1
+        //     console.log(temp1);
+        //     let temp2 = await test1()
+        //     console.log(temp2.a);
+        // }
+
+        // 上面的test2可以理解为下面的test2
+        function test2() {
+            var xxx = test1().a //test()返回的是一个promise,promise.a就是undefined
+            new Promise(resolve => {
+                // console.log(xxx); //undefined
+                resolve(xxx)
+            }).then(res => {
+                console.log(res);    //这里的res就是对于原本的temp1
+                new Promise(resolve1 => {
+                    var y = test1()
+                    resolve1(y)
+                }).then(res1 => {   //这里的res1就是对于原本的temp2
+                    console.log(res1.a);
+                })
+            })
+        }
+
+        test2()
+    </script>
+</body>
+
+</html>

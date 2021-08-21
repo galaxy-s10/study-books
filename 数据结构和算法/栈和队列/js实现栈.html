@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Stack() {
+            this.items = []
+
+        }
+        // 往栈插入一个元素（压栈）
+        Stack.prototype.push = function (element) {
+            this.items.push(element)
+        }
+        // 删除并返回栈顶元素（出栈）
+        Stack.prototype.pop = function (element) {
+            return this.items.pop()
+        }
+        // 返回栈顶元素
+        Stack.prototype.peek = function (element) {
+            return this.items[this.items.length - 1]
+        }
+        // 判断栈是否为空
+        Stack.prototype.isEmpty = function (element) {
+            return this.items.length == 0
+        }
+        // 判断栈大小 
+        Stack.prototype.size = function (element) {
+            return this.items.length
+        }
+        // 清空栈
+        Stack.prototype.clear = function (element) {
+            this.items = []
+        }
+        // 打印栈
+        Stack.prototype.print = function (element) {
+            console.log(this.items.toString());
+        }
+
+
+        var s = new Stack()
+        s.push(1)
+        s.push(2)
+        s.push(3)
+        s.push(4)
+        console.log(s);
+        console.log(s.pop())
+        console.log(s.pop())
+        console.log(s.peek())
+        console.log(s.peek())
+        console.log(s.isEmpty())
+        console.log(s.size())
+        s.print()
+        // s.clear()
+        console.log(s);
+
+
+        // 进制转换(栈实现)
+        function transform(num) {
+            var stack = new Stack()
+            var str = ""
+            while (num > 0) {
+                var yushu = num % 2 //余数
+                stack.push(yushu)	//入栈
+                num = Math.floor(num / 2) //每次取余的结果
+            }
+            while (!stack.isEmpty()) {
+                str += stack.pop() + ""	//出栈
+            }
+            return str
+        }
+        console.log(transform(10))	//1010
+    </script>
+</body>
+
+</html>

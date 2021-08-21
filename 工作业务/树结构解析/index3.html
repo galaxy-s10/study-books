@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./tree.js"></script>
+</head>
+
+<body>
+    <script>
+        console.log(tree);
+
+        function tiledTagList(tree) {
+            const list = [];
+
+            const expanded = dates => {
+                dates.forEach(item => {
+                    const obj = {};
+                    if (item.children && item.children.length) {
+                        expanded(item.children);
+                    } else {
+                        obj.id = item.id;
+                        obj.name = item.label;
+
+                        list.push(obj);
+                    }
+                });
+            };
+            expanded(tree);
+
+            return list;
+        }
+
+        function treeToArray(tree) {
+            let arr = [];
+            const expanded = datas => {
+                if (datas && datas.length > 0) {
+                    datas.forEach(e => {
+                        arr.push(e);
+                        expanded(e.children);
+                    })
+                }
+            };
+            expanded(tree);
+            return arr;
+        }
+
+
+        var tree1 = [
+            {
+                id: '1',
+                label: '价值属性',
+                children: [
+                    {
+                        id: '1-1',
+                        label: '用户分层',
+                        children: []
+                    }
+                ]
+            },
+            {
+                id: '2',
+                label: '购课属性',
+                children: [
+                    {
+                        id: '2-1',
+                        label: '课程',
+                        children: [
+                            {
+                                id: '2-1-1',
+                                label: '课程ID',
+                                children: []
+                            },
+                            {
+                                id: '2-1-2',
+                                label: '课程数量',
+                                children: []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: '3',
+                label: '基础属性',
+                children: [
+                    {
+                        id: '3-1',
+                        label: '年级',
+                        children: []
+                    },
+                    {
+                        id: '3-2',
+                        label: '身份',
+                        children: []
+                    },
+                    {
+                        id: '3-3',
+                        label: '省份',
+                        children: [
+                            {
+                                id: '3-3-1',
+                                label: '河北省',
+                                children: []
+                            },
+                            {
+                                id: '3-3-2',
+                                label: '河南省',
+                                children: []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: '4',
+                label: '666',
+            }
+        ];
+
+        /* 
+            tree:树结构数据;
+            name:外层(父)name
+        */
+        function flatTree(tree, name = '') {
+            return tree.reduce((res, item) => {
+                console.log('外层res', res);
+                if (item.children && item.children.length) {
+                    console.log('树结构数据的children', res);
+                    console.log('外层(父)name', name);
+                    console.log('连接前item.name', item.name);
+                    res = res.concat(flatTree(item.children, name + '-' + item.name))
+                    console.log('里层有children返回值：', res);
+                } else {
+                    console.log('name', name)
+                    console.log('nameslice', name.slice(1))
+                    res.push({ p_id: item.p_id, id: item.id, name: item.name, parents: name.slice(1) })
+                    console.log('里层无children返回值：', res);
+                }
+                console.log('reduce返回值：', res);
+                return res
+            }, []);
+        }
+
+
+        function flatTree1(tree, name = "") {
+            return tree.reduce((res, item) => {
+                let val;
+                if (item.children && item.children.length) {
+                    val = res.concat(flatTree1(item.children, name + "-" + item.name));
+                } else {
+                    console.log(res);
+                    res.push({ id: item.id, name: item.name, parent: name.slice(1) });
+                    val = res
+                }
+                return val;
+            }, []);
+        }
+        // console.log(tree1);
+        // console.log(tiledTagList(tree1))
+        // console.log(treeToArray(tree))
+        console.log(flatTree1(tree))
+        console.log(tree);
+
+
+        let res = []
+        const fn = (source) => {
+            source.forEach(el => {
+                res.push(el)
+                el.children && el.children.length > 0 ? fn(el.children) : ""
+            })
+        }
+
+        // fn(tree)
+        // console.log(res);
+
+        function flat(arr) {
+            return [].concat(...arr.map(item => [].concat(item, ...flat(item.children))));
+        }
+
+        // console.log(flat(tree));
+
+        function trans(data) {
+            let transData = []
+            function go(data) {
+                for (let item of data) {
+                    let {
+                        p_id, name, id, children
+                    } = item;
+                    let newItem = {
+                        p_id, name, id
+                    }
+                    transData.push(newItem)
+                    if (children) {
+                        go(children)
+                    }
+                }
+            }
+            go(data)
+            return transData;
+        }
+        let newData = trans(tree)
+        // console.log(newData)
+    </script>
+</body>
+
+</html>

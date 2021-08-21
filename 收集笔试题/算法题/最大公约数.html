@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 求出两个数的最大公约数，如果有一个自然数a能被自然数b整除，则称a为b的倍数，b为a的约数。
+         * 几个自然数公有的约数，叫做这几个自然数的公约数。公约数中最大的一个公约数，称为这几个自然数的最大公约数。
+         * 如：6,6能被2,3整除，则2和3都是6的倍数，6是2和3的约数；
+         * 如：18,18能被2,9,3,6整除，则，2,9,3,6都是18的倍数，18是2,9,3,6的约数
+         * 6和18最大的公约数就是3
+        */
+        // 辗转相除法
+        // 用大数对小数求余，若余数为0，则除数为最大公约数。
+        // 若余数不为0，将此余数作为除数，小数作为被除数，重新求余，直到余数为0为止。此时的最大公约数为余数
+        function gcd(a, b) {
+            var y
+            if (a > b) {
+                y = a % b
+                while (y != 0) {
+                    a = b
+                    b = y
+                    y = a % b
+                }
+                return b
+            } else {
+                // if (a == b) return a //这里加不加都行
+                y = b % a
+                while (y != 0) {
+                    b = a
+                    a = y
+                    y = b % a
+                }
+                return a
+            }
+        }
+        // 精简版
+        function gcd(a, b) {
+            // 假设a是大数，b是小数，大数除小数
+            let res = a % b;
+            while (res != 0) {
+                // 如果余数不等于0，此时余数肯定比除数（b）要小。
+                a = b;//将小数当大数
+                b = res;//将余数当做小数
+                res = a % b;//继续取余
+            }
+            return b;
+        }
+        console.log(gcd(6, 6));
+    </script>
+</body>
+
+</html>

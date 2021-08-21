@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="search">
+
+    <script>
+        var timer
+        function debounce() {
+            if (timer) {
+                console.log('清除timer');
+                clearTimeout(timer)
+            }
+            timer = setTimeout(() => {
+                ajax()
+            }, 1000);
+        }
+
+        function ajax() {
+            console.log('ajaxajaxajax');
+        }
+
+        var search = document.querySelector('.search')
+        search.addEventListener('input', debounce)
+
+    </script>
+</body>
+
+</html>

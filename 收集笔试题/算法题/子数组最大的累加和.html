@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 输入：[1, -2, 3, 5, -2, 6, -1]
+        // 输出：12
+        function maxsumofSubarray(arr) {
+            var res = arr[0];
+            for (var n = 1; n < arr.length; n++) {
+                if (res + arr[n] < 0) {
+                    res = arr[n + 1]
+                    n += 1
+                } else {
+                    if (n == arr.length - 1 && arr[arr.length - 1] < 0) return res
+                    res += arr[n]
+                }
+            }
+            return res
+        }
+        function foo(arr) {
+            let result = 0
+            for (let i = 0; i < arr.length; i++) {
+                let max = 0, memo = 0
+                if (arr[i] < 0) continue
+                for (let j = i; j < arr.length; j++) {
+                    memo = memo + arr[j]
+                    max = memo > max ? memo : max
+                }
+                max > result ? (result = max) : null
+            }
+            console.log('x');
+            return result
+        }
+        // function maxsumofSubarray(arr) {
+        //     var res = arr[0];
+        //     for (var n = 1; n < arr.length; n++) {
+        //         if (res + arr[n] < 0) {
+        //             res = arr[n + 1]
+        //             n += 1
+        //         } else {
+        //             if (n == arr.length - 1 && arr[arr.length - 1] < 0) return res
+        //             res += arr[n]
+        //         }
+        //     }
+        //     return res
+        // }
+        console.log(foo([1, -2, 3, 5, -2, 6, -1]));
+
+    </script>
+</body>
+
+</html>

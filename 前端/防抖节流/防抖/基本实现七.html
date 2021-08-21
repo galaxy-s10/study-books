@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="search">
+    <button class="cancel">取消</button>
+
+    <script>
+        // 优化返回值
+        function debounce(fn, delay, option) {
+            var timer
+            var option = option || {}
+            var leading = option.leading || false
+            var callback = option.callback || null
+            var result
+            var debounceFn = function () {
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                var _this = this
+                var _arguments = arguments
+                if (leading) {
+                    // 通过一个变量来记录是否立即执行
+                    var isFirst = false
+
+                    // 如果timer是fasle，则立即执行（第一次执行防抖的时候，是undefined，所以第一次一定会执行）
+                    if (!timer) {
+                        result = fn.apply(_this, arguments)
+                        if (callback) {
+                            callback(result)
+                        }
+                        isFirst = true
+                    }
+                    // 其余延迟执行
+                    timer = setTimeout(() => {
+
+                        // 立即执行完第一次防抖后，timer就不是fasle了，
+                        // 将timer设为null，这样下一次触发防抖时，立即执行就还会生效
+                        timer = null
+
+                        // 判断在立即执行后，有没有继续触发防抖，有的话才执行，
+                        // 如果只是执行了一次立即执行就结束了，则不执行
+                        if (!isFirst) {
+                            result = fn.apply(_this, arguments)
+                            if (callback) {
+                                callback(result)
+                            }
+                        }
+                    }, delay);
+
+                } else {
+                    timer = setTimeout(() => {
+                        result = fn.apply(_this, arguments)
+                        if (callback) {
+                            callback(result)
+                        }
+                    }, delay);
+                }
+
+            }
+
+            debounceFn.cancel = function () {
+                clearTimeout(timer)
+                // 清空定时器后，timer还是一个值，会导致下次立即执行失效
+                // 因此清空定时器后，还要将timer设为null
+                // 上面步骤不能乱，要先清空，再重新赋值null
+                timer = null
+            }
+            return debounceFn
+        }
+
+        function ajax(e, arg1, arg2) {
+            console.log('ajaxajaxajax');
+            // Arguments(3) [InputEvent, 100, 200, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+            console.log(arguments);
+            console.log(this);  // <input type="text" class="search">
+            return '我是ajax的返回值'
+        }
+
+        var search = document.querySelector('.search')
+        var debounceWrap = debounce(ajax, 1000, {
+            leading: true,
+            callback: function (res) {
+                console.log(res);   // 我是ajax的返回值
+            }
+        })
+
+
+        // 注意：由于函数拥有自己的作用域，如果将防抖和中途取消分别进行定义，
+        // 则他们指向的不是同一个作用域，会导致中途取消功能取消失效
+        // 如果要使用中途取消功能，则必须要在外部定义一个变量保存防抖函数
+        // 在执行防抖和中途取消时，都得通过外部的全局变量进行操作！
+        search.addEventListener('input', function () {
+            debounceWrap.apply(this, [event, 100, 200])
+        })
+
+        var cancel = document.querySelector('.cancel')
+
+        cancel.addEventListener('click', function () {
+            debounceWrap.cancel()
+        })
+    </script>
+</body>
+
+</html>

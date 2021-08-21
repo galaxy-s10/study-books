@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <li>{{pet}}</li>
+        <li>{{pet}}</li>
+        <li>{{car}}</li>
+        <li>我的手机是：{{phone.phone_name}}，分辨率：{{phone.phone_display}}，价格{{phone.phone_money}}</li> -->
+        {{obj}}
+        {{arr}}
+        <!-- {{arr[0]}} -->
+        <!-- {{list}} -->
+        <!-- {{show}} -->
+        <button @click="change">btn</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var a = {}
+        Object.defineProperty(a, 'name', {
+            get() { },
+            set() { },
+        })
+        console.log(a);
+        var renderFn = Vue.compile('<div><span>render{{ msg }}</span></div>')
+        // console.log(renderFn);
+        // 将template挂载到#foo元素上,即使用template将#foo替换掉。
+        // 如果在实例化时存在el选项，实例将立即进入编译过程，否则，需要显式调用 app.$mount() 手动开启编译。
+        // 如果 render 函数和 template property 都不存在，挂载 DOM 元素的 HTML 会被提取出来用作模板，此时，必须使用 Runtime + Compiler 构建的 Vue 库。
+        // 优先级render > template > el
+        const app = new Vue({
+            el: '#app',
+            data: {
+                // pet: 123,
+                // car: ['audi', 'bmw'],
+                // phone: { phone_name: 'samsung', phone_display: '2k', phone_money: '5999' },
+                // hobby: [
+                //     { hobby_name: 'game' },
+                //     { hobby_name: 'coding' },
+                //     { hobby_name: 'music' },
+                // ],
+                obj: { name: 123 },
+                arr: ['aa'],
+                // list: { a: 1, b: 2 }
+            },
+            methods: {
+                change() {
+                    console.log('change')
+                    this.arr[0] = new Date().getTime()
+                    // console.log(this.arr)
+                    this.obj.name = 888
+                }
+            }
+            // computed: {
+            //     addPlus: {
+            //         get() {
+            //             return this.pet + 10
+            //         },
+            //         set(v) {
+            //             console.log(v);
+            //         },
+            //     }
+            // }
+            // template: `
+            // <div id="bar">
+            //     bar{{msg}}
+            //     <slot></slot>
+            // </div>`,
+            // render: renderFn.render
+        })
+        // .$mount('#foo')
+        console.log(app);
+        console.log(app._watchers[0] === app._watcher);
+
+    </script>
+</body>
+
+</html>

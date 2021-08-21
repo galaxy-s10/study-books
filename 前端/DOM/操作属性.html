@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="ipt" type="text" placeholder="我是input">
+    <script>
+        var ipt = document.getElementById('ipt')
+        console.log(ipt.getAttribute('type'))   //text
+        ipt.setAttribute('type', 'password')
+        console.log(ipt.getAttribute('type'));   //password
+        ipt.removeAttribute('type')
+        console.log(ipt);   //<input id="ipt" placeholder="我是input">
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <script src="http://localhost:3000/js1.js"></script>
+
+    <script src="./js3.js"></script>
+
+    <script>
+        alert(1)
+    </script>
+
+    <h1>浏览器可以并发请求，上面js1和js3会并行的请求</h1>
+    <h1>js1里面有几千行代码，请求的时候花费了2s才请求完，
+        在js1请求的时候，js3也在请求，js3只有一行代码，请求时花费了10ms就请求完了，
+        js1的script标签没有加async属性，默认串行的，因此并不会先执行js3里面的代码，而是会等待js1请求完成且执行完成后才会执行js3里面的代码。
+    </h1>
+    <img src="./6.jpg" alt="">
+
+</body>
+
+</html>

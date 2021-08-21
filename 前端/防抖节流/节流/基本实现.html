@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="search">
+    <script>
+        function throttle(fn, interval) {
+            // var lastTime = 0
+            var lastTime = new Date().getTime()
+            return function () {
+                var _this = this
+                var _arguments = arguments
+                var newTime = new Date().getTime()
+
+                // if (newTime - lastTime > interval) {
+                if (newTime - lastTime > interval) {
+                    fn.apply(_this, _arguments)
+                    lastTime = newTime
+                } 
+            }
+        }
+
+        // 获取输入框
+        var search = document.querySelector('.search');
+
+        // 监听事件
+        var counter = 0;
+        function searchFunc(event) {
+            counter++;
+            console.log("发送" + counter + "次网络请求");
+            console.log(this);
+        };
+
+        search.addEventListener('input', throttle(searchFunc, 1000))
+
+
+    </script>
+</body>
+
+</html>

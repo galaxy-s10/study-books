@@ -1,0 +1,19 @@
+连接mysql数据库
+// 创建连接实例 (MySQLi - 面向对象)
+$conn = new mysqli($servername, $username, $password);
+
+// 检测连接实例 (MySQLi - 面向对象)
+if ($conn->connect_error) {
+    die("连接失败: " . $conn->connect_error);
+} 
+echo "连接成功";
+
+// 创建连接实例 (MySQLi - 面向过程)
+$conn = mysqli_connect($servername, $username, $password);
+
+// 检测连接实例 (MySQLi - 面向过程)
+if (!$conn) {
+    die("连接失败: " ."Connection failed: " . mysqli_connect_error());
+}
+echo "连接成功";
+=================================

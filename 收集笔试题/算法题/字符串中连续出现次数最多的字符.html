@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /**
+         * 寻找字符串中连续出现次数最多的字符
+         * 思路：两个指针，一个i不动，另一个j扫描，
+         * 当j扫描到和前面的字符（即i指向的字符）不一样就
+         * 让i移到j的位置，然后j继续往后面扫描
+        */
+        var str = "aaabbbbccdbbeeeeefefg"
+        console.log('字符串长度', str.length);
+        function findMax(str) {
+            var i = 0;//假设是第一项
+            var j = 1;//假设是第二项
+            var maxStr;
+            var maxStrNum = 1;
+            // 扫描
+            while (j < str.length - 1) {
+                // 如果第一项和第二项不一样
+                if (str[i] != str[j]) {
+                    // 如果当前连续的次数（即i到j之间的距离）大于最大次数
+                    if (j - i > maxStrNum) {
+                        maxStrNum = j - i
+                        maxStr = str[i]
+                    }
+                    i = j
+                }
+                j++
+            }
+            return { maxStr, maxStrNum }
+        }
+        console.log(findMax(str));
+
+        /**
+         * 依次遍历，保存当前遍历到的字符出现的最多次数
+        */
+        function findMax1(str) {
+            var i = 0;
+            var j = 1;
+            var num = 1
+            // 保存字符串中每个字符的最多连续次数
+            var res = {}
+            for (var k = 0; k < str.length; k++) {
+                // 如果第一项和第二项一样
+                if (str[i] == str[j]) {
+                    num++
+                } else {
+                    // 如果第一项和第二项不一样
+                    if (res[str[i]]) {
+                        res[str[i]] = res[str[i]] > num ? res[str[i]] : num
+                    } else {
+                        res[str[i]] = num
+                    }
+                    // 重置操作
+                    num = 1
+                    i = j
+                }
+                j++
+            }
+            var maxStr;
+            var maxStrNum = 0;
+            for (var k in res) {
+                if (res[k] > maxStrNum) {
+                    maxStrNum = res[k]
+                    maxStr = k
+                }
+            }
+            return { maxStr, maxStrNum }
+        }
+        // console.log(findMax1(str));
+
+        function findMax2(str) {
+            var i = 0;
+            var j = 1;
+            var num = 1
+            // 保存字符串中每个字符的最多连续次数
+            var res = {}
+            for (var k = 0; k < str.length; k++) {
+                // 如果第一项和第二项一样
+                if (str[i] == str[j]) {
+                    num++
+                } else {
+                    // 如果第一项和第二项不一样
+                    if (res[str[i]]) {
+                        res[str[i]] = res[str[i]] > num ? res[str[i]] : num
+                    } else {
+                        res[str[i]] = num
+                    }
+                    // 重置操作
+                    num = 1
+                    i = j
+                }
+                j++
+            }
+            var maxStr;
+            var maxStrNum = 0;
+            for (var k in res) {
+                if (res[k] > maxStrNum) {
+                    maxStrNum = res[k]
+                    maxStr = k
+                }
+            }
+            return { maxStr, maxStrNum }
+        }
+
+        // console.log(findMax2(str));
+    </script>
+</body>
+
+</html>

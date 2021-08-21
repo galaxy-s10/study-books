@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+
+        $.ajax({
+            url: "https://gc.goco123.com/backend/LandingPageComponentElement/detail?key=xmt_left_qrcode", success: function (result) {
+                var res = JSON.parse(result)
+                resolve(res)
+            }
+        });
+        /**
+         * 从0,1,2,...,n这n+1个数中选择n个数，找出这n个数中缺失的那个数，要求O(n)尽可能小。
+         * 输入：[0,1,2,3,4,5,7]
+         * 输出：6
+         * 输入：[0,1,2]
+         * 输出：3
+        */
+        function solve(a) {
+            // write code here
+            var i
+            for (i = 0; i < a.length; i++) {
+                if (a[i] != i) {
+                    return i
+                }
+            }
+            return i
+        }
+        function solve1(a) {
+            //找到下标和自身数值对不上的，但如果返回确实数字，要 减1，
+            // [0,1,3,4,5] 用find 会返回第一个符合要求的element，所以会返回3 ，所以要减 1
+            // 如果find 找不到，会返回undefined，这时候就是缺最后一个数字
+            if (a[0] !== 0) { return 0 }
+            let result = a.find((el, i) => el != i) - 1
+            if (result) {
+                return result
+            } else {
+                return a.length
+            }
+        }
+        console.log(solve([0, 1, 2, 3, 4, 5]));
+
+    </script>
+</body>
+
+</html>

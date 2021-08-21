@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = {
+            valueOf: function () {
+                console.log('valueOf');
+                return "1";
+            },
+            toString: function () {
+                console.log('toString');
+                return "1";
+            }
+        };
+        var b = [1];
+        b.valueOf = function () {
+            console.log('valueOf');
+            return "1";
+        }
+        b.toString = function () {
+            console.log('toString');
+            return "1";
+        }
+        var c = [1];
+        c.valueOf = function () {
+            console.log('valueOf');
+            return 111
+        };
+        c.toString = function () {
+            console.log('toString');
+            return [1]
+        };
+
+        console.log(String(a));     //先执行toString，返回字符串1，是基本数据类型 ，返回该值，然后String("1")，即"1"
+        console.log(String(b));     //先执行toString，返回字符串1，是基本数据类型 ，返回该值，然后String("1")，即"1"
+        // 先执行toString，返回数组[1]，非基本数据类型 ，
+        // 再执行valueOf，返回111，是基本数据类型，返回该值，然后String(111)，即"111"
+        console.log(String(c)); //"111"
+        console.log(String(undefined));     //"undefined"
+        console.log(String(null));          //"null"
+        console.log(String(true));          //"true"
+        console.log(String(false));         //"false"
+        console.log(String());              //""
+        console.log(String(''));            //""
+        console.log(String('-'));           //"-"
+        console.log(String('12'));          //"12"
+        console.log(String('12s'));         //"12s"
+        console.log(String([]));            //先toString是"",即String(""),即""
+        console.log(String({}));            //先toString是"[object Object]",即String("[object Object]"),即[object Object]
+        console.log(String([0]));           //先toString是"0",即String("0"),即"0"
+        console.log(String(["1"]));	        //先toString是"1",即String("1"),即"1"
+        console.log(String(["1", "2"]));	//先toString是"1,2",即String("1,2"),即NaN
+        console.log(String([1]));	        //先toString是"1",即String("1"),即1
+        console.log(String([1, 2]));	    //先toString是"1,2",即String("1,2"),即NaN
+        console.log(String(["abc"]));	    //先toString是"abc",即String("abc"),即NaN
+        console.log(+('-1'));               //+("-1") === + String("-1"),即+ -1，即-1
+        console.log(-('-1'));               //-("-1") === - String("-1"),即- -1，即1
+        console.log(+('0'));                //+("0") === + String("0"),即+ 0，即0
+        console.log(-('0'));                //-("0") === - String("0"),即- 0，即-0
+    </script>
+</body>
+
+</html>

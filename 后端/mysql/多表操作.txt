@@ -1,0 +1,6 @@
+			主键
+为表添加主键约束：alter table 表名 add primary key(主键字段)
+删除主键约束：alter table 表名 drop primary key
+			外键(必须是InnoDB型)
+为表添加外键约束：alter table 表名 add constraint 外键名 foreign key(外键字段名) references 外键表名(主键字段名)
+删除外键约束：alter table 表名 drop foreign key 外键名

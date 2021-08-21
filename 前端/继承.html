@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 利用构造函数创建对象
+        function Father(uname, age) {
+            // this指向父构造函数的对象实例
+            this.uname = uname
+            this.age = age
+        }
+        // Son.prototype = new Father()
+        Father.prototype.money = function () {
+            console.log('1000')
+        }
+        // console.log(Father.prototype)
+        function Son(uname, age, score) {
+            // this指向子构造函数的对象实例
+            Father.call(this, uname, age)
+            this.score = score
+        }
+        console.dir(Father)
+        var son = new Son('儿子', 19, 100)
+        console.log(son)
+        Son.prototype = new Father()
+        console.dir(Father)
+        console.log(Son)
+        console.log(son.__proto__.constructor)
+        console.log(Son.prototype)
+
+
+        // sdf
+
+    </script>
+</body>
+
+</html>

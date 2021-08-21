@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var arr1 = [
+            { "id": "1001", "name": "值1" },
+            { "id": "1001", "name": "值1" },
+            { "id": "1002", "name": "值2" },
+            { "id": "1002", "name": "值2" },
+            { "id": "1002", "name": "值2" },
+            { "id": "1003", "name": "值3" }
+        ];
+
+        function groupby(arr, groups) {
+            var map = {},
+                dest = [];
+            for (var i = 0; i < arr.length; i++) {
+                var ai = arr[i];
+                if (!map[ai.id]) {
+                    dest.push({
+                        id: ai.id,
+                        groups: [ai]
+                    });
+                    map[ai.id] = ai;
+                } else {
+                    for (var j = 0; j < dest.length; j++) {
+                        var dj = dest[j];
+                        if (dj.id == ai.id) {
+                            dj.groups.push(ai);
+                            break;
+                        }
+                    }
+                }
+            }
+            return dest
+        }
+        console.log(arr1)
+        console.log(groupby(arr1, 'id'));
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./tree.js"></script>
+</head>
+
+<body>
+    <script>
+        console.log(tree);
+        //field 定义children字段名称
+        function treeToArray(treeData, field) {
+            var result = [];
+            if (!field) field = "children";
+            for (var key in treeData) {
+                var obj = treeData[key];
+                var clone = JSON.parse(JSON.stringify(obj));
+                delete clone[field];
+                result.push(clone);
+                //
+                if (obj[field]) {
+                    var tmp = treeToArray(obj[field], field);
+                    result = result.concat(tmp);
+                }
+            }
+            return result;
+        }
+
+
+        // console.log(JSON.stringify(treeToArray(tree, "children"), null, 2))
+        let temp1 = []
+        let temp2 = []
+        let temp3 = []
+        let data1 = treeToArray(tree, "children")
+        console.log(data1);
+
+        data1.forEach(item => {
+            if (item.p_id == 0) {
+                temp1.push(item)
+            }
+        });
+
+        temp1.forEach(item => {
+            data1.forEach(item1 => {
+                if (item1.p_id == item.id) {
+                    temp2.push([item, item1])
+                }
+            });
+        });
+
+        temp2.forEach(item => {
+            data1.forEach(item1 => {
+                if (item1.p_id == item[1].id) {
+                    let a = Object.assign([], item)
+                    a.push(item1)
+                    // item.push(a)
+                    // let area = [item, item1]
+                    temp3.push(a)
+                }
+            });
+        });
+
+        console.log(temp1);
+        console.log(temp2);
+        console.log(temp3);
+        // console.log(JSON.stringify(treeToArray(treeData, "sub"), null, 2))
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    你好<span>&nbsp</span><span>&nbsp</span><span>&nbsp</span><span>&nbsp</span><span>&nbsp</span><span>&nbsp</span>啊
+    <script>
+        // 将2[1[a]3[b]2[3[c]3[d]]]转换为：abbbcccdddcccdddabbbcccdddcccddd
+        var str = '2[1[a]3[b]2[3[c]3[d]]]'
+        // var str = '2[3[ab]4[c]]'    //abababccccabababcccc
+
+        function formatStr(str) {
+            // 保存数字
+            var numStack = []
+            // 保存字母
+            var zimuStack = []
+            var index = 0
+            var lastStr = str
+            while (index < str.length - 1) {
+                if (/^(\d+)\[/.test(lastStr)) {
+                    console.log('匹配到数字', lastStr.match(/^(\d+)\[/)[1])
+                    numStack.push(lastStr.match(/^(\d+)\[/)[1])
+                    zimuStack.push('')
+                    index += lastStr.match(/^(\d+)\[/)[0].toString().length
+                } else if (/^([a-zA-Z]+)/.test(lastStr)) {
+                    var zimu = lastStr.match(/^([a-zA-Z]+)/)[1]
+                    console.log('匹配到字母', zimu)
+                    zimuStack[zimuStack.length - 1] = zimu
+                    index += zimu.length
+                } else if (/^]/) {
+                    console.log('匹配到]', index)
+                    var num = numStack.pop()
+                    console.log('num', num)
+                    var zimu = zimuStack.pop()
+                    var temp = zimu
+                    for (var i = 1; i < num; i++) {
+                        zimu += temp
+                    }
+                    var temp = zimu
+                    zimuStack[zimuStack.length - 1] = zimuStack[zimuStack.length - 1] + zimu
+                    index++
+                }
+                lastStr = str.substring(index)
+                console.log(lastStr)
+            }
+            console.log(numStack)
+            console.log(zimuStack)
+            console.log(zimuStack[0].repeat(numStack[0]))
+        }
+        formatStr(str)
+    </script>
+</body>
+
+</html>

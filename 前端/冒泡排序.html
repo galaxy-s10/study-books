@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [32, 14, 6, 9, 20, 58];
+
+        function bubbleSort(arr) {
+            let temp;
+            for (let i = 0; i < arr.length - 1; i++) {
+                for (let j = 0; j < arr.length - 1 - i; j++) {
+                    // 如果前面的值比后面的值大，则换位置
+                    if (arr[j] > arr[j + 1]) {
+                        temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+        }
+
+        console.log(bubbleSort(arr))
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var b = {
+            val: [1, 2, 3],
+            toJSON: function () { return "[" + this.val.slice(1).join() + "]"; }
+        }
+        // 可能不是我们想要的结果！
+        console.log(JSON.stringify(b)); // "[2,3]"
+        console.log("1" + "2" + "3");   //"123"
+        console.log("" + [1, 2, 3]);    //"1,2,3"
+        console.log("[" + ([1, 2, 3]).slice(1).join() + "]");
+    </script>
+</body>
+
+</html>

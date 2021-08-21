@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 2, 3]
+        // 当长度等于数组长度时，也会执行for循环里面代码，
+        // arr[arr.length]等于在数组最后一项插入数据，
+        // 插入数据后继续i++，i还是等于arr.length，继续执行for循环里面的代码
+        // 然后继续给数组最后一项插入数据...因此会造成死循环
+
+        // for (var i = 0; i <= arr.length; i++) {
+        //     arr[i] = 1
+        // }
+
+
+        // 此时的item是arr对应下标的值类型，修改值类型不会修改arr对应下标的引用 
+        arr.forEach(item => {
+            item = 1
+        })
+        console.log(arr)
+
+        var arr1 = [{
+            name: 'tom'
+        }, {
+            name: 'lili'
+        }]
+        arr1.forEach(function (item, index) {
+            var item
+            item = 1
+        })
+        console.log(arr1)
+
+        // arr1.forEach((item, index) => {
+        //     console.log(item)
+        //     item[index] = 1
+        //     // item = 1
+        // })
+        // console.log(arr1)
+
+        // var obj = {
+        //     age: 21,
+        // }
+        // var temp = obj
+        // obj = 'str'
+        // console.log(obj)    //str
+        // console.log(temp)   //{age:21}
+
+        var obj = {
+            name: 'a'
+        }
+        var obj1 = obj
+        obj = {
+            name: 'b'
+        }
+
+        console.log(obj) //{name:'b'}
+        console.log(obj1) //{name:'a'}
+
+        function Person() { }
+        Person.prototype.name = 'tom'
+        Person.prototype.age = 18
+        var person = new Person()
+
+        Person.prototype = {
+            name: 'mike'
+        }
+        Person.prototype.age = 21
+        console.log(person.name) //tom
+        console.log(person.age) //tom
+
+        var person1 = new Person()
+        console.log(person1.name) //mike
+    </script>
+</body>
+
+</html>

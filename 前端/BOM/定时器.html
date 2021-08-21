@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>zzzz
+</head>
+<script>
+    var timer = setTimeout(() => {
+        console.log('一秒后执行');
+    }, 1000);
+    clearTimeout(timer)
+    var i = 0
+    var timer1 = setInterval(() => {
+        i++;
+        console.log('每一秒执行一次');
+        if (i > 5) {
+            clearInterval(timer1)
+            console.log('停止了timer1');
+        }
+    }, 1000);
+</script>
+
+<body>
+
+</body>
+
+</html>

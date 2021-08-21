@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        Person.prototype.lastName = 'zhang'
+        function Person() {
+        }
+
+        function Father() {
+        }
+
+        function inherit(target, origin) {
+            function F() { }
+            F.prototype = origin.prototype
+            target.prototype = new F()
+        }
+
+        inherit(Father, Person)
+        // Father.prototype = Person.prototype
+        var person = new Person()
+        var father = new Father()
+        Father.prototype.work = 'code'
+        console.log(person.lastName);   //zhang
+        console.log(father.lastName);   //zhang
+
+        // function Person(name, age) {
+        //     this.name = name
+        //     this.age = age
+        // }
+        // var person = new Person()
+        // function Father(name, age, work) {
+        //     Person.call(this, name, age)
+        //     this.work = work
+        // }
+        // var father = new Father('张三', 18, 'code')
+        // console.log(father);    //Father {name: "张三", age: 18, work: "code"}
+
+        // var obj = Object.create(null)
+        // // document.write(obj) //报错，找不到它的toString()方法
+        // obj.toString = function () {
+        //     return 'aaa'
+        // }
+        // document.write(obj) //aaa
+
+        // Object.prototype.tostring = function () {
+        //     return 'aaa'
+        // }
+        // // Person.prototype.tostring = function () {
+        // //     return 'bbb'
+        // // }
+        // function Person() {
+
+        // }
+
+        // var person = new Person()
+
+
+        // Person.prototype.lastName = 'zhang'
+        // function Person() {
+
+        // }
+        // var person = new Person()
+        // Father.prototype = person
+        // function Father() {
+        //     this.name = '张三'
+        //     this.work = 'code'
+        // }
+        // var father = new Father()
+        // Son.prototype = father
+        // function Son() {
+        //     this.hobby = 'games'
+        // }
+        // var son = new Son()
+
+
+
+        // var obj = { name: 123 }
+        // var obj1 = obj
+        // obj1 = { name: 234 }
+        // console.log(obj);   //{name: 123}
+        // console.log(obj1);  //{name: 234}
+
+
+
+        // function Person() {
+        //     // var this = {
+        //     //     __proto__: Person.prototype
+        //     // }
+        // }
+        // var person = new Person()
+        // Person.prototype.name = '张三'
+        // Person.prototype = {
+        //     name: '王五'
+        // }
+        // console.log(person.name);   //张三
+
+
+        // Person.prototype.name = '张三'
+        // function Person() {
+        //     // new完后首先会隐式绑定this，里面的__proto__指向本身
+        //     // var this = {
+        //     //     __proto__: Person.prototype
+        //     // }
+        // }
+        // var obj = { name: '李四' }
+        // var person = new Person()
+        // console.log(person.__proto__);   //{name: "张三", constructor: ƒ}
+        // console.log(person.name);   //张三
+        // person.__proto__ = obj
+        // console.log(person.__proto__);   //{name: "李四"}
+        // console.log(person.name);    //李四
+
+
+        // Car.prototype.name = "BMW"
+        // Car.prototype.lang = 4500
+        // Car.prototype.height = 1400
+        // function Car() {
+
+        // }
+        // var car = new Car()
+        // console.log(car.name);  //"BMW"
+        // console.log(car.lang);  //4500
+        // console.log(car.height);    //1400
+
+        // function Car() { }
+        // function Person() { }
+
+        // // 修改car的构造器
+        // Car.prototype = {
+        //     constructor: Person
+        // }
+        // var car = new Car()
+        // console.log(car.constructor);   //ƒ Person() { }
+
+
+        // function Person() { }
+        // // 增
+        // Person.prototype.name = '张三'
+        // Person.prototype.age = 18
+        // Person.prototype.sex = 'male'
+        // var person = new Person()
+        // // 查
+        // console.log(Person.prototype);  //{name: "张三", age: 18, sex: "male", constructor: ƒ}
+        // // 改
+        // Person.prototype.age = 20
+        // console.log(Person.prototype.age);//20
+        // // 删
+        // delete Person.prototype.sex
+        // console.log(Person.prototype);  //{name: "张三", age: 20, constructor: ƒ}
+
+
+    </script>
+</body>
+
+</html>

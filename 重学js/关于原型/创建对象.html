@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 对象初始化几种形式
+        // 可以通过new Object()， Object.create()方法，或者使用字面量标记（初始化标记）初始化对象。
+        // 字面量形式
+        let obj = {
+            name: 'hss',
+            age: 21
+        };
+        // Object 构造函数创建一个对象包装器。
+        let obj1 = new Object({
+            name: 'hss',
+            age: 21
+        })
+
+        // Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
+        let obj2 = Object.create({
+            name: 'hss',
+            age: 21
+        })
+
+        // 通过构造函数新建对象
+        function Person() { }
+        let obj3 = new Person()
+
+        // console.log('obj', obj);
+        // console.log('obj1', obj1);
+        // console.log('obj2', obj2);
+        // console.log('obj3', obj3)
+
+        // let obj3 = new Object([1, 2])
+
+        // Object是构造函数，只要是函数就有prototype
+        console.log(Object); //ƒ Object() { [native code] }
+
+        // Object.prototype是一个对象，用于表示Object的原型对象。
+        // 几乎所有的JavaScript对象都是Object的实例(函数自己是自己的实例)，其原型链上最后一个就是指向Object.prototype。
+        // 即Object是原型链的顶端，所有对象都可通过原型链继承Object的方法
+        // {constructor: ƒ, __defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, …}
+        console.log(Object.prototype);
+
+        // Object实例是Object构造函数构造出来的
+        // Object构造函数也是函数，函数的原型是Function.prototype
+        // 因此Object.__proto__是Function.Prototype
+        console.log(Object.__proto__); //ƒ () { [native code] }
+        console.log(Object.__proto__ === Function.prototype); //true
+
+        console.log(Object.__proto__.__proto__ === Object.prototype); //true
+        console.log(Object.__proto__.__proto__.__proto__); //null
+
+        console.log('-----------');
+        // 每个对象都有__proto__，每个函数都有prototype
+        // console.log('obj3', obj3);
+        console.log(obj3.__proto__);// Person.prototype
+        console.log(obj3.__proto__ === Array.prototype); //false
+        console.log(obj3.__proto__ === Object.prototype); //false
+
+        console.log(new Object(1) instanceof Number);               //true
+        console.log(new Object("1") instanceof String);               //true
+        console.log(new Object(false) instanceof Boolean);               //true
+        console.log(new Object({ name: 1 }) instanceof Object);   //true
+        console.log(new Object([1]) instanceof Array);              //true
+        console.log(new Object([1]) instanceof Object);          //true
+        console.log([1, 2] instanceof Array);                      //true
+        console.log([1, 2] instanceof Object);                      //true
+        console.log(obj3);  
+        console.log(obj3.prototype);                            //undefined，只有函数有prototype,obj3是对象
+        console.log(obj3.prototype === Person.prototype);       // true
+    </script>
+</body>
+
+</html>

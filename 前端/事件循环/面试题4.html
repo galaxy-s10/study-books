@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+        let p1 = new Promise(resolve => {
+            let p3 = Promise.resolve()
+            // resolve(p3)
+            // 等价于
+            Promise.resolve().then(() => {
+                Promise.resolve(p3).then(() => {
+                    resolve();
+                })
+            })
+        })
+        p1.then(() => {
+            console.log(2)
+        })
+        let p2 = Promise.resolve().then(res => {
+            console.log(3)
+        })
+        p2.then(() => {
+            console.log(4)
+        }).then(() => {
+            console.log(5)
+        })
+        //2,3,4,5
+
+        // Promise.resolve().then(function () {
+        //     console.log(2);
+        // });
+
+
+        // async function foo() {
+        //     console.log('foo')
+        //     // var res = await bar()
+        //     var res = await 1
+        //     console.log('foo_end')
+        // }
+        // async function bar() { 
+        //     console.log('bar');
+        // }
+        // foo()
+
+        // new Promise(function (resolve) {
+        //     console.log('p1')
+        //     resolve();
+        // }).then(function () {
+        //     console.log('p2')
+        // })
+
+        // var val = new Promise(resolve => {
+        //     console.log('xxx');
+        //     // setTimeout(() => {
+        //     // resolve(999)
+        //     // }, 1000);
+
+        //     console.log('yyy');
+        // })
+
+        // console.log(val)
+        // console.log('foo_end')
+
+
+
+    </script>
+</body>
+
+</html>

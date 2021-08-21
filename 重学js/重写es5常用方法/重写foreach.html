@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 2, 3]
+        var obj = {
+            name: 'hss',
+            age: 22
+        }
+        arr.forEach(function (item, index, arr) {
+            console.log(this)
+            console.log(item, index, arr)
+        }, obj)
+
+        console.log('-----------')
+        Array.prototype.myForEach = function (cb) {
+            var _arr = this
+            var _this = arguments[1] || window
+            console.log(arguments)
+            for (var i = 0; i < _arr.length; i++) {
+                cb.apply(_this, [_arr[i], i, _arr])
+            }
+        }
+
+        arr.myForEach(function (item, index, arr) {
+            console.log(this)
+            console.log(item, index, arr)
+        }, obj)
+    </script>
+</body>
+
+</html>

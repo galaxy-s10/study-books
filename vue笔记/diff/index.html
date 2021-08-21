@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="diff()">diff</button>
+    <div id="box">
+        <h3>我是一个标题</h3>
+        <ul>
+            <li>牛奶</li>
+            <li>咖啡</li>
+            <li>可乐</li>
+        </ul>
+    </div>
+
+    <ul>
+        <li>牛奶</li>
+        <li>咖啡</li>
+    </ul>
+
+    <script src="./diff.js"></script>
+    <script>
+        // var vnode1 = h('div', {}, h('p', {}, '呵呵'))
+        var vnode1 = h('div', {}, '我是div')
+        // var vnode2 = h('h1', {}, '我是vnode2-h1')
+        var vnode2 = h('ul', {}, [
+            h('li', {}, 'vnode2-xxx'),
+            h('li', {}, 'vnode2-yyy'),
+        ])
+        var vnode3 = h('h1', {}, '我是vnode3-h1')
+        var vnode4 = h('h1', {}, [
+            h('ol', {}, 'vnode4-xxx'),
+            h('ol', {}, 'vnode4-yyy'),
+        ])
+
+        console.log(vnode1);
+        console.log(vnode2);
+        var vnode11 = {
+            sel: "div",
+            data: {},
+            children: undefined,
+            text: "我是div",
+            elm: undefined
+        }
+        var vnode22 = {
+            sel: "ul",
+            data: {},
+            children: [
+                {
+                    sel: "li",
+                    data: {},
+                    children: undefined,
+                    text: "vnode2-xxx",
+                    elm: undefined
+                },
+                {
+                    sel: "li",
+                    data: {},
+                    children: undefined,
+                    text: "vnode2-yyy",
+                    elm: undefined
+                }
+            ],
+            text: undefined,
+            elm: undefined
+        }
+        console.log(createElement(vnode1)); //真实dom：<div>我是div</div>
+        console.log(createElement(vnode2));//真实dom：<ul><li>vnode2-xxx</li><li>vnode2-yyy</li></ul>
+        console.log(object);
+        console.log(object);
+        var vnode5 = h('ul', {}, [
+            h('li', {}, '牛奶'),
+            h('li', {}, '咖啡'),
+            h('li', {}, [
+                h('div', {}, [
+                    h('p', {}, '可口可乐'),
+                    h('p', {}, '百事可乐')
+                ])
+            ]),
+            h('li', {}, h('p', {}, '雪碧'))
+        ])
+        var box = document.getElementById('box')
+        var vnode22 = vnode2
+        // patch(box, vnode1)
+        patch(box, vnode2)
+        // patch(box, vnode3)
+
+        function diff() {
+            patch(vnode2, vnode4)
+        }
+        var vnode6 = h('ul', {}, [
+            h('li', {}, '牛奶'),
+            h('li', {}, '咖啡'),
+        ])
+        // console.log(vnode6);
+        // console.log(JSON.stringify(vnode6));
+    </script>
+</body>
+
+</html>

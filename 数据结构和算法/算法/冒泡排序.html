@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var arr = [1, 2, 3, 4, 5, 6];
+        // var arr = [6, 5, 4, 3, 2, 1];
+        // var arr = [32, 14, 6, 9, 20, 58];
+        var arr = [32, 32]
+
+        // 外层for循环控制互换多少轮
+        // 里层for循环控制每一轮互换多少次
+        // 没有任何优化，需要固定循环arr.length*arr.length次数
+        function bubbleSort(arr) {
+            // 外层for循环互换6轮
+            for (var i = 0; i < arr.length; i++) {
+                // 内层for循环每轮互换6次
+                for (var j = 0; j < arr.length; j++) {
+                    console.log(1)
+                    // 如果第一个比第二个大，则交换位置，最终就是：小->大
+                    // if (arr[j] >arr[j + 1]) {
+                    // 如果第一个比第二个小，则互换位置，最终就是：大->小
+                    if (arr[j] < arr[j + 1]) {
+                        var temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            return arr
+        }
+
+
+        // 优化越界问题
+        // 因为里层for循环会下标+1，当里层j=arr.length+1时，值为undefined
+        // 优化后，需要固定循环arr.length*(arr.length-1)次数
+        function bubbleSort1(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = 0; j < arr.length - 1; j++) {
+                    console.log(1)
+                    if (arr[j] < arr[j + 1]) {
+                        var temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            return arr
+        }
+
+
+
+        /**
+         * 每次外层循环后，里层循环不应该固定循环arr.length-1次，
+         * 因为每次外层循环后，里层循环都会得出一个最终的最值，
+         * 后面的里层循环，这个最值不用重复的继续循环
+         * 所以应该每次都相对应的减少里层的循环次数
+         * 第一轮内循环互换了5次，第二轮4次，第三轮3次，第四轮2次，第五轮1次，第六轮0次
+         * 优化后，需要固定循环(arr.length*(arr.length-1))/2次数
+         */
+        function bubbleSort2(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                // console.log(i)
+                // 互换过的下次就不互换，即每次内层循环次数随着外层越来越小
+                // 第一轮内层循环互换arr.length - 1 - 0次，即5次
+                // 第二轮内层循环互换arr.length - 1 - 1次，即4次
+                // 第三轮内层循环互换arr.length - 1 - 2次，即3次
+                // 第四轮内层循环互换arr.length - 1 - 3次，即2次
+                // 第五轮内层循环互换arr.length - 1 - 5次，即1次
+                // 第六轮内层循环互换arr.length - 1 - 6次，即0次
+                for (var j = 0; j < arr.length - 1 - i; j++) {
+                    console.log(1)
+                    // console.log(i, j)
+                    if (arr[j] < arr[j + 1]) {
+                        var temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            return arr
+        }
+
+        /**
+         * 0 0
+         * 0 1
+         * 0 2
+         * 0 3
+         * 0 4
+         * 1 0
+         * 1 1
+         * 1 2
+         * 1 3
+         * 2 0
+         * 2 1
+         * 2 2
+         * 3 0
+         * 3 1
+         * 4 0
+         */
+
+
+        /**
+         * 前面是从第一个到最后一个往后冒泡
+         * 也可以从最后一个到第一个往前冒泡
+         * 需要固定循环(arr.length)*(arr.length)次数
+         */
+        function bubbleSort3(arr) {
+            for (var i = arr.length - 1; i >= 0; i--) {
+                for (var j = 0; j < arr.length; j++) {
+                    console.log(1)
+                    // console.log(i,j)
+                    if (arr[j] < arr[j + 1]) {
+                        var temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            return arr
+        }
+
+
+        // 优化里层越界
+        // 需要固定循环(arr.length)*(arr.length-1)次数
+        function bubbleSort4(arr) {
+            for (var i = arr.length - 1; i >= 0; i--) {
+                for (var j = 0; j < arr.length - 1; j++) {
+                    console.log(1)
+                    // console.log(i,j)
+                    if (arr[j] < arr[j + 1]) {
+                        var temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            return arr
+        }
+
+        // 优化里层循环
+        // 需要固定循环((arr.length)*(arr.length))/2次数
+        function bubbleSort5(arr) {
+            for (var i = arr.length - 1; i >= 0; i--) {
+                // 互换过的下次就不互换，即每次内层循环次数随着外层越来越小
+                // 第一轮内层循环互换arr.length - 1 - 0次，即5次
+                // 第二轮内层循环互换arr.length - 1 - 1次，即4次
+                // 第三轮内层循环互换arr.length - 1 - 2次，即3次
+                // 第四轮内层循环互换arr.length - 1 - 3次，即2次
+                // 第五轮内层循环互换arr.length - 1 - 5次，即1次
+                // 第六轮内层循环互换arr.length - 1 - 6次，即0次
+                for (var j = 0; j < i; j++) {
+                    console.log(1)
+                    // console.log(i, j)
+                    if (arr[j] < arr[j + 1]) {
+                        var temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            return arr
+        }
+
+        /**
+         * 5 0
+         * 5 1
+         * 5 2
+         * 5 3
+         * 5 4
+         * 4 0
+         * 4 1
+         * 4 2
+         * 4 3
+         * 3 0
+         * 3 1
+         * 3 2
+         * 2 0
+         * 2 1
+         * 1 0
+         */
+
+
+
+
+        // console.log(bubbleSort(arr)) //  打印36个1，即遍历了36次
+        // console.log(bubbleSort1(arr)) //  打印30个1，即遍历了30次
+        // console.log(bubbleSort2(arr)) //  打印15个1，即遍历了15次
+        // console.log(bubbleSort3(arr)) //  打印36个1，即遍历了42次
+        // console.log(bubbleSort4(arr)) //  打印30个1，即遍历了35次
+        console.log(bubbleSort5(arr)) //  打印15个1，即遍历了15次
+    </script>
+</body>
+
+</html>

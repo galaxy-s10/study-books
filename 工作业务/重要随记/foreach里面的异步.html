@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [1, 2, 3, 4, 5]
+        function set1() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('111');
+                    resolve(1)
+                }, 1000);
+            })
+
+        }
+        let bb = []
+        arr.forEach(async item => {
+            let a = await set1()
+            bb.push(a)
+        })
+        console.log(bb);
+    </script>
+</body>
+
+</html>

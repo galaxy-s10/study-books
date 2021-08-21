@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /* 
+            需求：查询当月的记录，即当月第一天到当月最后一天
+         */
+
+        // 获取当月的最后一天，比如获得这个月的第一天，然后加一个月，再减一天，即是当前月份最后一天
+
+
+        // let val = new Date("2020-02-01")    //2020年2月1日   闰年
+        // let val = new Date("2019-02-01")    //2020年2月1日      平年
+        let val = new Date("2019-12-05 10:15:32")    //2019年12月5日10点15分32秒      平年
+        // let val = new Date("2019-12-05")    //2019年12月5日      平年
+        // 从 Date 对象以四位数字返回年份。
+        let year = new Date(val).getFullYear()
+        // 从 Date 对象返回月份 (0 ~ 11)。
+        let month = new Date(val).getMonth() + 1
+
+        // 从 Date 对象返回一个月中的某一天 (1 ~ 31)。
+        // let day = new Date(val).getDate()
+
+        // console.log(val);
+        // console.log(val.getFullYear(), val.getMonth() + 1, val.getDate(), val.getHours(), val.getMinutes(), val.getSeconds());
+        // console.log(year, month);
+
+        let new_year = year;
+        let next_month = month + 1; //下一个月
+        if (next_month > 12) {//如果下一个月大于12月，则年份转到下一年
+            next_month -= 12; //月份减
+            new_year++; //年份增
+        }
+
+        var newTime = new Date(new_year, next_month - 1, 1); //下一个月的第一天
+        var res = new Date(newTime.getTime() - 1000)    //下个月的第一天减去一秒等于当前月最后一天最后一秒
+
+        // var res = (new Date(newTime.getTime() - 1000 * 60 * 60 * 24)).getDate();    //减一天等于上个月最后一天，即当前月最后一天
+
+        console.log(newTime);
+        console.log(res);
+    </script>
+
+    <script>
+        // let year = new Date(val).getFullYear()
+        // let month = new Date(val).getMonth() + 1
+        // let new_year = year;
+        // let next_month = month + 1; //下一个月
+        // if (next_month > 12) {//如果下一个月大于12月，则年份转到下一年
+        //     next_month -= 12; //月份减
+        //     new_year++; //年份增
+        // }
+        // var newTime = new Date(new_year, next_month - 1, 1); //下一个月的第一天
+        // var res = new Date(newTime.getTime() - 1000)    //下个月的第一天减去一秒等于当前月最后一天最后一秒
+    </script>
+</body>
+
+</html>

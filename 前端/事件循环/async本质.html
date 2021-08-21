@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // async function async1() {
+        //     console.log('async1 start')
+        //     await async2()
+        //     console.log('async1 end')
+        // }
+        // async function async2() {
+        //     console.log('async2')
+        // }
+        // async1()
+        // console.log('script end')
+
+
+        // 上述代码约等于：
+        async function async1() {
+            console.log('async1 start')
+            new Promise(function (resolve) {
+                console.log('async2')
+                resolve()
+            }).then(res => {
+                console.log('async1 end')
+            })
+
+        }
+        async function async2() {
+            console.log('async2')
+        }
+        async1()
+        console.log('script end')
+
+         // 结果：async1 start ---> async2 ---> script end ---> async1 end
+    </script>
+</body>
+
+</html>

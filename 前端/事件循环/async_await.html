@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        // chorme版本84.0.4147.89
+
+        window.onload = function () {
+            scrollTo(0, document.body.scrollHeight);
+        }
+
+
+
+        // async function foo() {
+        //     console.log('foo')
+        //     await bar()
+        //     console.log('foo_end')
+        // }
+        // async function bar() {
+        //     console.log('bar')
+        // }
+        // foo();
+
+        // new Promise(function (resolve) {
+        //     console.log('p1')
+        //     resolve();
+        // }).then(function () {
+        //     console.log('p2')
+        // })
+
+        async function foo() {
+            console.log('foo')
+            var res = await bar()
+            // console.log(res);
+            // console.log(bar());
+            console.log('foo_end')
+        }
+        async function bar() {
+            console.log('bar');
+            // var res = await new Promise(resolve => {
+            //     setTimeout(() => {
+            //         console.log('1111');
+            //         resolve(111)
+            //     }, 0)
+            // })
+            // return res
+            // return 111
+        }
+        console.log(bar());
+        // bar().then(v => console.log(v))
+        // console.log(bar().then(v => console.log(v)));
+        // foo();
+
+        new Promise(function (resolve) {
+            // setTimeout(() => {
+                console.log('p1')
+            // }, 1000);
+            resolve();
+        }).then(function () {
+            console.log('p2')
+        })
+
+        // async function foo() {
+        //     console.log('foo');
+        //     var res = await bar()
+        //     console.log(res);
+        //     console.log('foo_end');
+        // }
+        // async function bar() {
+            // var res = await new Promise(resolve => {
+            //     setTimeout(() => {
+            //         resolve(1)
+            //     }, 1000)
+            // })
+            // return res
+            // return 1
+        // }
+        // foo()
+        // new Promise(function (resolve) {
+        //     console.log('p1')
+        //     resolve();
+        // }).then(function () {
+        //     console.log('p2')
+        // })
+        // console.log('end');
+
+
+        // chorme版本84.0.4147.89
+        // async function foo() {
+        //     console.log('foo')
+        //     var res = await bar()
+        //     console.log('foo_end')
+        // }
+        // async function bar() {
+        //     console.log('bar')
+
+        // }
+        // foo();
+
+
+
+                    // var res = await new Promise(resolve => {
+            // console.log('bar p');
+            //     setTimeout(() => {
+            //         resolve(1)
+            //         // return 1
+            //         console.log(111);
+            //     }, 1000);
+            // })
+            // console.log('bar',res);
+            // var res = await new Promise(resolve => {
+            //     setTimeout(() => {
+            //         resolve(1)
+            //     }, 1000);
+            // })
+            // return res
+            // return 100
+
+
+        // async function foo() {
+        //     console.log('foo')
+        //     await bar()
+        //     console.log('foo_end')
+        // }
+
+        // async function f() {
+        //     var res = await Promise.resolve('hello world');
+        //     console.log(res);   //hello world
+        //     var res1 = await Promise.reject('出错了');
+        //     console.log(res1);  // 不会执行
+        //     var res2 = await Promise.resolve('es6'); // 不会执行
+        //     console.log(res2);  // 不会执行
+        // }
+        // // console.log(foo()); //Promise {<pending>}
+        // f().then(v => console.log(v)).catch(e => console.log(e))    //出错了
+
+        // async function foo() {
+        //     throw new Error('出错了')
+        // }
+        // console.log(foo())  //Promise {<rejected>: Error: 出错了}
+        // foo().then(v => console.log(v), e => console.log(e))    //Error: 出错了
+        // foo().then(v => console.log(v)).catch(e => console.log(e))
+
+
+        // foo();
+
+        // new Promise(function (resolve) {
+        //     console.log('p1')
+        //     resolve();
+        // }).then(function () {
+        //     console.log('p2')
+        // })
+
+        // async function async1() {
+        //     console.log('async1 start')
+        //     await async2()
+        //     console.log('async1 end')
+        // }
+        // async function async2() {
+        //     console.log('async2')
+        // }
+        // async1();
+        // new Promise(function (resolve) {
+        //     console.log('p1')
+        //     resolve();
+        // }).then(function () {
+        //     console.log('p2')
+        // })
+        // console.log('script end')
+
+        // debugger
+
+
+        // async function foo() {
+        //     console.log('foo');
+        //     await bar()
+        //     bar()
+        //     await baz()
+        //     await bar()
+        //     console.log('foo_end');
+        // }
+        // function bar() {
+        //     console.log('bar');
+        // }
+        // async function baz() {
+        //     console.log('baz');
+        // }
+        // foo()
+        // baz()
+        // console.log('end');
+
+        // async function foo() {
+        //     console.log('foo');
+        //     await bar()
+        //     console.log('foo_end');
+        // }
+        // function bar() {
+        //     return new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             resolve()
+        //             console.log('bar');
+        //         }, 1000);
+        //     })
+        // }
+        // foo()
+        // console.log('end');
+    </script>
+</body>
+
+</html>

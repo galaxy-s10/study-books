@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        let fn1 = function () {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('aaaaa');
+                    console.log(all);
+                    resolve('a')
+                }, 1000);
+            })
+        }
+        let fn2 = function () {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('bbbbb');
+                    console.log(all);
+                    resolve('b')
+                }, 1000);
+            })
+        }
+        let fn3 = function () {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('ccccc');
+                    console.log(all);
+                    resolve('c')
+                }, 1000);
+            })
+        }
+
+        function run(pro, cb) {
+            // 每次执行完run都会执行回调函数cb,也就是pick,最后一次promise执行完后也会执行pick,
+            // 如果对一个空数组进行shift(),会返回undefined，需要排除最后一次的undefined
+            if (pro) {
+                pro().then((val) => {
+                    console.log(val);
+                    cb()
+                })
+            }
+        }
+        function pick() {
+            run(all.shift(), pick)
+        }
+        let all = [fn1, fn2, fn3]
+        pick()
+        console.log('1111');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 二叉搜索树（Binary Search Tree）
+        function BinarySearchTree() {
+
+            // 节点对象类
+            function Node(key) {
+                this.key = key
+                this.left = null
+                this.right = null
+            }
+            // 属性
+            this.root = null
+
+            // 方法1：插入
+            BinarySearchTree.prototype.insert = function (key) {
+                // 先根据key创建节点
+                var newNode = new Node(key)
+                if (this.root == null) {
+                    this.root = newNode
+                } else {
+                    insertNode(this.root, newNode)
+                }
+
+                function insertNode(node, newNode) {
+                    if (node.key > newNode.key) {
+                        // 两个节点对比，如果新节点比对比的节点小，则向左查找
+                        if (node.left == null) {
+                            // 如果左边没有节点，直接把新节点给左边的节点
+                            node.left = newNode
+                        } else {
+                            // 如果左边有节点，再次比较左节点和新节点的大小
+                            insertNode(node.left, newNode)
+                        }
+                    } else {
+                        // 如果新节点比对比的节点大，则向右查找
+                        if (node.right == null) {
+                            // 如果左边没有节点，直接把新节点给左边的节点
+                            node.right = newNode
+                        } else {
+                            // 如果左边有节点，再次比较左节点和新节点的大小
+                            insertNode(node.right, newNode)
+                        }
+                    }
+                }
+            }
+
+        }
+
+        // 最小值
+        BinarySearchTree.prototype.min = function () {
+            var node = this.root
+            var res
+            while (node != null) {
+                res = node
+                node = node.left
+            }
+            return res
+        }
+        // 最大值
+        BinarySearchTree.prototype.max = function () {
+            var node = this.root
+            var res
+            while (node != null) {
+                res = node
+                node = node.right
+            }
+            return res
+        }
+        // 指定值，给一个key，查找对应的节点，如果找到，返回对应节点，找不到返回false
+        BinarySearchTree.prototype.search = function (key) {
+            var node = this.root
+            var res = false
+            while (node != null) {
+                // 如果传进来的key比对比的节点key值大，则向右查找
+                if (node.key < key) {
+                    node = node.right
+                } else if (node.key > key) {
+                    node = node.left
+                } else {
+                    return node
+                }
+            }
+            return res
+        }
+
+        var bst = new BinarySearchTree()
+        bst.insert(11)
+        bst.insert(7)
+        bst.insert(15)
+        bst.insert(5)
+        bst.insert(3)
+        bst.insert(9)
+        // ...
+
+        console.log(bst.min())
+        console.log(bst.max())
+        console.log(bst.search(31))
+    </script>
+</body>
+
+</html>

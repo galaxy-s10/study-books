@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = 'www.aaaabbbbccc.com'
+
+
+        //查询字符串中出现的次数最多的字符以及次数
+        function select(str) {
+            var obj = {} //保存每个字符以及出现的次数
+            var res = [] //出现最多的字符
+            var max = 0 //出现的次数
+            for (var i = 0; i < str.length; i++) {
+                var strs = str[i]
+                if (obj[strs] !== undefined) {
+                    obj[strs]++
+                } else {
+                    obj[strs] = 1
+                }
+            }
+            for (var k in obj) {
+                if (max < obj[k])
+                    max = obj[k]
+            }
+            for (var v in obj) {
+                if (obj[v] === max) {
+                    res.push(v)
+                }
+            }
+            return '出现次数最多的字符为' + res.join('和') + '，出现次数为' + max + '次。'
+        }
+        console.log(str);
+        // var str = ['aa', 'bb', 'cc', 'aa', 'bb', 'aa']
+        console.log(select(str))
+
+        //查询字符串中出现的每个字符的次数
+        function select1(str) {
+            const v = {}
+            for (let i = 0; i < str.length; i++) {
+                // if (v[str[i]]) {
+                //     v[str[i]]++
+                // } else {
+                //     v[str[i]] = 1
+                // }
+                v[str[i]] ? v[str[i]]++ : v[str[i]] = 1
+            }
+            return v
+        }
+        console.log(select1(str));
+    </script>
+</body>
+
+</html>

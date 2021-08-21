@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // object instanceof constructor
+        // 某个实例对象 instanceof 某个构造函数
+        // instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。
+        function Test() { }
+        var test = new Test()
+        console.log(test.constructor === Test); //true
+        console.log(test.constructor.__proto__.__proto__ === test.__proto__.__proto__);//true
+        console.log(Test.__proto__.__proto__ === test.__proto__.__proto__);//true
+        function myInstanceof(left, right) {
+            var leftVal = left.__proto__
+            var flag = false
+            while (leftVal) {
+                if (leftVal === right.prototype) {
+                    flag = true
+                    break
+                    // return true
+                }
+                leftVal = leftVal.__proto__
+            }
+            return flag
+        }
+        console.log(myInstanceof(test, Function));
+        console.log(myInstanceof(test, Object));
+        console.log(myInstanceof(test, Test));
+        var str = '123'
+        console.log(myInstanceof(str, String));
+        console.log(String.prototype.prototype);
+
+        console.log('---------------');
+        function Person() { };
+        function Student() { };
+        var p = new Person();
+        Student.prototype = p;
+        //继承原型
+        var s = new Student();
+        console.log(s instanceof Student);//true 
+        console.log(s instanceof Person);//true
+        console.log(p instanceof Student);  //false
+        console.log(p instanceof Person);   //true
+
+        console.log('----------------------');
+        function Person() { }
+
+        console.log(Object instanceof Object);  //true
+        console.log('111');
+        /**
+         * Object isntanceof Object为什么是true?
+         * 因为Object是一个构造函数，构造函数也是函数，因此构造函数是Function的实例
+         * Object.__proto__ ===Function.prototype
+         *
+         * */
+    </script>
+</body>
+
+</html>

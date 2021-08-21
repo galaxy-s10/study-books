@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // !!这里的结果会有些不一样，因为这里的排序在原型里面的this.array进行的!!!!!!!!
+        // 创建一个ArrayList
+
+        function ArrayList() {
+            this.array = []
+
+            // 插入
+            ArrayList.prototype.insert = function (item) {
+                this.array.push(item)
+            }
+
+            // toString()
+            ArrayList.prototype.toString = function () {
+                return this.array.join()
+            }
+
+            // 冒泡排序
+        }
+
+        var list = new ArrayList()
+        list.insert(32)
+        list.insert(14)
+        list.insert(6)
+        list.insert(9)
+        list.insert(20)
+        list.insert(58)
+        console.log(list)
+
+        // 外层for循环控制互换多少轮
+        // 里层for循环控制每一轮互换多少次
+        // 没有任何优化，需要循环this.array.length*this.array.length次数
+        ArrayList.prototype.bubbleSort = function () {
+            for (var i = 0; i < this.array.length; i++) {
+                for (var j = 0; j < this.array.length; j++) {
+                    // 如果第一个比第二个大，则交换位置，最终就是：小->大
+                    // if (this.array[j] > this.array[j + 1]) {
+                    // 如果第一个比第二个小，则互换位置，最终就是：大->小
+                    if (this.array[j] < this.array[j + 1]) {
+                        console.log(1)
+                        var temp = this.array[j]
+                        this.array[j] = this.array[j + 1]
+                        this.array[j + 1] = temp
+                    }
+                }
+            }
+            return this.array
+        }
+
+
+        // // 优化冒泡排序
+        // ArrayList.prototype.bubbleSort = function () {
+        //     for (var i = 0; i < this.array.length; i++) {
+        //         for (var j = 0; j < this.array.length - 1; j++) {
+        //             console.log('1')
+        //             if (this.array[j] < this.array[j + 1]) {
+        //                 var temp = this.array[j]
+        //                 this.array[j] = this.array[j + 1]
+        //                 this.array[j + 1] = temp
+        //             }
+        //         }
+        //     }
+        //     return this.array
+        // }
+
+        console.log(list.bubbleSort())
+
+        // function bubbleSort(arr) {
+        //     let temp;
+        //     for (let i = 0; i < arr.length - 1; i++) {
+        //         for (let j = 0; j < arr.length - 1 - i; j++) {
+        //             // 如果前面的值比后面的值大，则换位置
+        //             if (arr[j] > arr[j + 1]) {
+        //                 temp = arr[j]
+        //                 arr[j] = arr[j + 1]
+        //                 arr[j + 1] = temp
+        //             }
+        //         }
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

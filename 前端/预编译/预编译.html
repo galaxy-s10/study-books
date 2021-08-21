@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            GO{
+                aa:undefined,--->10
+                car:function(){}
+                cc:234
+            }
+        */
+
+        function car() {
+            console.log(bb);    //undefined
+            if (aa) {
+                var bb = 100
+            }
+            console.log(bb);    //undefined
+            cc = 234;
+            console.log(cc);    //234
+        }
+        var aa
+        /* 预编译不看条件语句，直接看里面的语句
+            AO{
+                bb:undefined,
+            }
+        */
+        car()
+        aa = 10;
+        console.log(cc);    //234
+
+
+        show = 100
+        function bye() {
+            console.log(show);  //undefined
+            show = 200
+            console.log(show);  //200
+            var show = 300
+            console.log(show);  //300
+        }
+
+        bye()
+        var show
+
+        /* 
+            GO{
+                say:undefined--->function say(){}
+            }
+        */
+
+        function say(say) {
+            console.log(say);   //function say() { var num = 10 }
+            var say = 234
+            console.log(say);   //234
+            function say() { var num = 10 }
+        }
+
+        /* 
+            AO{
+                say:undefined;--->1--->function say() { }--->234
+
+            }        
+        */
+
+        say(1)
+        console.log(say);   //function say(say){...}
+        var say = 123
+        console.log(say);   //123
+
+        function test(a, b) {
+            console.log(a); //1
+            c = 0;
+            var c;
+            a = 3;
+            b = 2;
+            console.log(b); //2
+            function b() { }
+            function d() { }
+            console.log(b); //2
+        }
+
+        /*  ***预编译阶段***
+            AO{
+                c:undefined;
+                a:undefined;    --->1
+                b:undefined;    --->function b() { }
+                d:function d() { }
+
+            }
+        */
+
+        test(1)
+        /*  ***执行阶段***
+            AO{
+                c:undefined;                            ===》0
+                a:undefined;    --->1                   ===》3
+                b:undefined;    --->function b() { }    ===》2
+                d:function d() { }
+            }
+         
+        */
+
+
+        function fn(a) {
+            console.log(a); //function a() { };
+
+            var a = 123;
+
+            console.log(a); //123
+
+            function a() { }
+
+            console.log(a); //123
+
+            var b = function () { }
+
+            console.log(b)  //function () { }
+
+            function d() { };
+        }
+
+        /*  ***预编译阶段***
+        1，创建AO对象
+            AO{}
+        2，找形参和变量声明，将变量和形参名作为AO属性名，值为undefined
+            AO{
+                a:undefined;
+                b:undefined;
+            }
+        3，将实参值和形参统一
+            AO{
+                a:1;
+                b:undefined;
+            }
+        4，在函数体里面找函数声明，值赋予函数体
+            AO{
+                a:function a() { };
+                b:undefined;
+                d:function d() { };
+            }
+        */
+        fn(1)
+        /* ***执行阶段***
+            AO{
+                a:function a() { };     --->123
+                b:undefined;            --->function () { }
+                d:function d() { };
+            }
+        */
+
+
+
+
+        // a = 123
+        // console.log(a); // 123
+        // var a = b = 123
+        // console.log(a, b);  // 123 123
+
+        // function test() {
+            // var a = b = 123
+        // }
+        // test()
+        // console.log(b)  // 123
+        // console.log(a);  //报错Uncaught ReferenceError: a is not defined
+        // console.log(window.a);  // undefined
+    </script>
+</body>
+
+</html>

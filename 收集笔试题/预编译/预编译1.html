@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = function () {
+            console.log(1);
+        }
+        function a() {
+            console.log(2);
+        }
+
+        a() //打印1
+
+        /**
+         * 考点：预编译的时候，赋值不会提升。
+         * 首先预编译阶段，第一个var a=function(){}，var a是声明，var a = function是赋值，
+         * 声明会提升，赋值不会提升，因此此时var a = undefined，
+         * 然后到了第二个function a(){}，函数声明优先级最高，直接把第一个a = undefined变成了function a(){}
+         * 然后预编译完成，到了执行阶段，
+         * 首先var a = function(){}，给a赋值，原本的a是function(){console.log(2)}，现在重新赋值，此
+         * 时的a = function(){console.log(1)},
+         * 然后到了第二个function a(){}，由于预编译的时候已经声明过了，就不会再执行了，
+         * 最终执行a(),，结果就是打印1
+         *
+        */
+    </script>
+</body>
+
+</html>

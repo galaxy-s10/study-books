@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj5 = {
+            a: 123
+        }
+        function fn4(obj5) {
+            const next = obj5.a;
+            function fn5(actions) {
+                console.log(456)
+                console.log(next)  //123
+                console.log("789")
+                console.log(next)   //123
+                console.log(obj5.a) //fn5
+            }
+            obj5.a = fn5;
+        }
+        fn4(obj5)
+        obj5.a(100)
+        console.log(obj5.a) //fn5
+
+        /**
+         * 执行fn4(obj5)，进入fn4
+         * obj5.a赋值给next
+         * 定义fn5
+         * 将fn5赋值给obj5.a，这里是通过下标修改obj5的a属性
+         * 然后执行完fn4后，此时
+         * obj5={
+         *   a(actions){
+         *       console.log(456)
+         *       next(actions)
+         *       console.log
+         *   }
+         * }
+         * 执行obj5.a
+         * 所以打印：
+         * 456，
+         * next(actions),actions是形参100，next是闭包，指向最初的还没被修改的原本的obj5.a，即a(b){console.log(123,+" "+b)},即打印：
+         * 123， 100
+         * 然后next(actions)完了，继续执行，打印
+         * 789
+        */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="search">
+
+    <script>
+        // 两种常见需求需要有所修改
+        // 1,输入框时，需要头部立即执行，然后其余的延迟执行
+        // 2,ajax时，需要头部立即执行，然后防抖时间里不能执行，得过了防抖时间才可以继续点击立即执行（比如发请求发表文章，头部立即执行就已经发表了，后面就不需要继续发表了）
+        // 优化头部立即执行
+        function debounce(fn, delay, leading) {
+            var timer
+            var leading = leading || false
+            return function () {
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                var _this = this
+                var _arguments = arguments
+                var isFirst = false
+                if (leading) {
+                    // 第一次立即执行
+                    if (!timer) {
+                        fn.apply(_this, arguments)
+                        isFirst = true
+                    }
+                    // 其余延迟执行
+                    timer = setTimeout(() => {
+                        timer = null
+                        if (!isFirst) {
+                            fn.apply(_this, arguments)
+                        }
+                    }, delay);
+
+                } else {
+                    timer = setTimeout(() => {
+                        fn.apply(_this, arguments)
+                    }, delay);
+                }
+
+            }
+
+        }
+
+        function ajax(e, arg1, arg2) {
+            console.log('ajaxajaxajax');
+            console.log(this);  // <input type="text" class="search">
+            console.log(e);  // InputEvent
+            console.log(arg1, arg2); // 100,200
+        }
+
+        var search = document.querySelector('.search')
+        var debounceWrap = debounce(ajax, 1000, true)
+
+        search.addEventListener('input', function () {
+            debounceWrap.apply(this, [event, 100, 200])
+        })
+
+    </script>
+</body>
+
+</html>

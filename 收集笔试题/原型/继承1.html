@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>md</title>
+</head>
+
+<body>
+    <script>
+        function Father() {
+            this.money = 100
+        }
+        Father.prototype.lastName = 'zhang'
+        function Son() {
+            this.hobby = 'game'
+        }
+        var father = new Father()
+        Son.prototype = father
+        var son = new Son()
+        Son.prototype.food = 'fish'
+        console.log(father.food);
+        console.log(son.food);
+
+
+        console.log(father);        //monty:100,lastName:zhang,food:fish
+        console.log(son);           //monty:100,lastName:zhang,,hobby:game,food:fish
+    </script>
+</body>
+
+</html>

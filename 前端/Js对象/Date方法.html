@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    var date1 = new Date('2020-5-29 14:35:10')
+    var date2 = date1.getTime()
+    console.log(date2); //1590734110000
+    date1.setTime(date2)
+    console.log(date1); //Fri May 29 2020 14:35:10 GMT+0800 (中国标准时间)
+
+    var date3 = 1 * 24 * 60 * 60 * 1000
+    date1.setTime(date2 + date3)
+    console.log(date1); //Sat May 30 2020 14:35:10 GMT+0800 (中国标准时间)
+
+    console.log(date1.toUTCString());   //Sat, 30 May 2020 06:35:10 GMT
+
+    var date4 = new Date()
+    console.log(date4);         //Fri May 29 2020 19:40:23 GMT+0800 (中国标准时间)
+    console.log(date4.toUTCString());   // Fri, 29 May 2020 11:40:23 GMT
+
+    var date5 = new Date()
+    console.log(date5.valueOf());
+    console.log(date5.getTime());
+    var date6 = +new Date()
+    console.log(date6);
+    console.log(Date.now());    //H5新增
+</script>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 2, 3]
+        // var arr = []
+        var initData = [1, 6, 7]
+        var obj = {
+            name: 'hss',
+            age: 22
+        }
+        // var newarr = arr.reduce(function (pre, item, index, arr) {
+        //     console.log(this)
+        //     console.log(pre, item, index, arr)
+        //     // obj.age += 1
+        //     if (item > 2) {
+        //         pre.push(item)
+        //     }
+        //     return pre
+        // }, initData, obj)
+        // console.log(newarr)
+        // console.log(initData)
+        // console.log('---------------------')
+        Array.prototype.myReduce = function (cb, initValue) {
+            var _arr = this
+            var _this = arguments[2] || window
+            for (var i = 0; i < _arr.length; i++) {
+                initValue = cb.apply(_this, [initValue, _arr[i], i, _arr])
+            }
+            return initValue
+        }
+        var newarr1 = arr.myReduce(function (pre, item, index, arr) {
+            console.log(this)
+            console.log(pre, item, index, arr)
+            // obj.age += 1
+            if (item > 2) {
+                pre.push(item)
+            }
+            return pre
+        }, initData, obj)
+        console.log(newarr1)
+        console.log(initData)
+    </script>
+</body>
+
+</html>

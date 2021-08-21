@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <img id="img1" src="./5.jpg" style="width: 300px;" alt="">
+    <img id="img2" src="https://img.cdn.zhengbeining.com/1597246545480mvvm.png" onload="img2ok()" style="width: 300px;"
+        alt="">
+    <script>
+        console.log('第一个js', window.performance.now());
+        function img2ok() {
+            console.log('img2ok',window.performance.now());
+        }
+        function img3ok() {
+            console.log('img3ok',window.performance.now());
+            console.log(document.getElementById('img3'));
+        }
+        function img4ok() {
+            console.log('img4ok',window.performance.now());
+            console.log(document.getElementById('img4'));
+        }
+        // alert(window.performance.now())
+        for (var i = 0; i < 2000; i++) {
+            if (i == 1999) {
+                console.log('遍历完成', window.performance.now());
+            }
+            console.log(window.performance.now());
+        }
+        console.log(document.getElementById('img1'));
+        console.log(document.getElementById('img2'));
+        console.log(document.getElementById('img3'));
+        console.log(document.getElementById('img4'));
+    </script>
+
+    <h1>浏览器解析过程</h1>
+    <ul>
+        <ol>浏览器解析到img1和img2,开始请求img1和img2</ol>
+        <ol>遇到script标签，停止解析html，打印img1,img2,img3节点，此时由于是img2是网络请求，这里
+            获取到的img2可能还没有加载出来，但是还是可以获取img2这个节点；其次由于还没有解析到img3，因此
+            获取到的img3是null</ol>
+        <ol></ol>
+    </ul>
+
+    <h1>浏览器可以并发请求，上面js1和js3会并行的请求</h1>
+    <h1>js1里面有几千行代码，请求的时候花费了2s才请求完，
+        在js1请求的时候，js3也在请求，js3只有一行代码，请求时花费了10ms就请求完了，
+        js1的script标签没有加async属性，默认串行的，因此并不会先执行js3里面的代码，而是会等待js1请求完成且执行完成后才会执行js3里面的代码。
+    </h1>
+    <img id="img3" src="./6.jpg" onload="img3ok()" alt="">
+    <img id="img4" src="https://img.cdn.zhengbeining.com/1596802741490flow.png" style="width: 300px;" onload="img4ok()"
+        alt="">
+
+</body>
+
+</html>

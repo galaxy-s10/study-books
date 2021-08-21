@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css瀑布流</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            /* padding: 10px; */
+            /* margin: 10px; */
+        }
+
+        .aaa {
+            /* height: 30px; */
+            width: 200px;
+            height: 100%;
+            border: 4px solid pink;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/1.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/2.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/3.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/4.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/5.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/6.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/7.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/8.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/9.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/10.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/11.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/12.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/13.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/14.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/15.jpg" alt="">
+        </div>
+        <div class="item">
+            <img class="aaa" src='./img/loading.gif' data-src="./img/16.jpg" alt="">
+        </div>
+    </div>
+</body>
+
+<script src="./data.js"></script>
+<script>
+    function offSet(curEle) {
+        var totalLeft = null;
+        var totalTop = null;
+        var par = curEle.offsetParent;
+        //首先把自己本身的相加
+        totalLeft += curEle.offsetLeft;
+        totalTop += curEle.offsetTop;
+        //现在开始一级一级往上查找，只要没有遇到body，我们就把父级参照物的边框和偏移相加
+        while (par) {
+            if (navigator.userAgent.indexOf("MSIE 8.0") === -1) {
+                //不是IE8我们才进行累加父级参照物的边框
+                totalTop += par.clientTop;
+                totalLeft += par.clientLeft;
+            }
+            //把父级参照物的偏移相加
+            totalTop += par.offsetTop;
+            totalLeft += par.offsetLeft;
+            par = par.offsetParent;
+        }
+        return {
+            left: totalLeft,
+            imgScrollTop: totalTop
+        };
+        //返回一个数组，方便我们使用哦。
+    }
+
+    function lazy() {
+        // 获取页面滚动条卷去的高度
+        let bodyScrollHeight = parseInt(document.body.scrollTop || document.documentElement.scrollTop)
+        // 获取页面高度
+        let windowHeight = window.innerHeight
+        // 获取所有img标签
+        var imgs = document.querySelectorAll('.aaa')
+        // 延迟加载图片
+        setTimeout(() => {
+            for (let i = 0; i < imgs.length; i++) {
+                // 获取每个img标签距离body的高度
+                let {
+                    imgScrollTop
+                } = offSet(imgs[i])
+                /* 
+                    （1）如果img标签距离body的高度 小于 页面高度+被卷去的高度，则代表当前img标签在可视区域，加载图片
+                    （2）由于如果从最底部加载的话，最开头的图片一定符合（1），因此要判断img标签距离body的高度有没有大于滚动的高度，
+                        大于滚动高度了才加载图片
+                 */
+                if (imgScrollTop >= bodyScrollHeight && imgScrollTop < windowHeight + bodyScrollHeight) {
+                    // 遍历img的所有属性
+                    for (let j = 0; j < imgs[i].attributes.length; j++) {
+                        // 如果有data-src属性，将它的值赋给src
+                        if (imgs[i].attributes[j].name == 'data-src') {
+                            imgs[i].src = imgs[i].attributes[j].value
+                            // 赋值后data-src就没用了，移除掉它
+                            imgs[i].removeAttribute('data-src')
+                        }
+                    }
+                }
+            }
+        }, 300);
+    }
+
+    lazy()
+    // setTimeout(() => {
+    // pubuliu()
+    // }, 1000);
+    pubuliu()
+    window.addEventListener('scroll', function () {
+        const offsetTop = window.pageYOffset || document.documentElement.scrollTop;
+        console.log(offsetTop);
+        console.log(window.innerHeight);
+        if (document.documentElement.offsetHeight - (window.innerHeight + offsetTop) < 100) {
+            console.log('距离底部：', document.documentElement.offsetHeight - (window.innerHeight + offsetTop));
+        }
+        // if (window.innerHeight + offsetTop == document.documentElement.offsetHeight) {
+        //     console.log('到底了');
+        // }
+        lazy()
+    })
+
+    function waterfall() {
+
+        // 获取数组最小值的下标
+        function getMinIndex(arr) {
+            return [].indexOf.call(arr, Math.min.apply(null, arr))
+        }
+        // 列数
+        const column = 2;
+        // 间隙
+        const gap = 10;
+
+        const wrap = document.getElementsByClassName("wrap")
+        const item1 = wrap[0].getElementsByClassName("item")
+
+        const item = wrap[0].getElementsByClassName("item")
+        const width1 = window.getComputedStyle(wrap[0], null)['width'];
+        const width2 = width1.slice(0, width1.length - 2) - ((column - 1) * gap)
+        // 计算减去间隙后，每个item的平均宽度
+        const width = width2 / column
+        // 保存当前列的offsetHeight的高度
+        const offsetList = []
+        wrap[0].style.position = "relative"
+        let test = 0
+        for (let i = 0; i < item.length; i++) {
+            test += item[i].offsetHeight + gap
+            item[i].getElementsByTagName("img")[0].style.width = "100%"
+            // item[i].getElementsByTagName("img")[0].style.height = "100%"
+            item[i].getElementsByTagName("img")[0].style.height = list[i].height + 'px'
+            item[i].getElementsByTagName("img")[0].style.display = "block"
+            item[i].style.position = 'absolute'
+            item[i].style.width = width + "px";
+
+            if (i < column) {
+                // 将第一行的offsetHeight都保存在数组里
+                // offsetList.push(i == 0 ? (item[i].offsetHeight + gap) : (item[i].offsetHeight))
+                offsetList.push(item[i].offsetHeight)
+                item[i].style.top = "0";
+                if ((i + 1) % column == 1) {
+                    item[i].style.left = 0
+                } else {
+                    let w = i * width
+                    // let g =  gap
+                    let g = i * gap
+                    item[i].style.left = `calc(${w}px + ${g}px)`
+                }
+            } else {
+                // 当前数组的最低offsetHeight索引
+                const minIndex = getMinIndex(offsetList);
+                let w = minIndex * width;
+                let g = minIndex * gap;
+                // let g = minIndex * gap;
+                item[i].style.top = offsetList[minIndex] + gap + "px"
+                item[i].style.left = w + g + "px"
+                offsetList[minIndex] += item[i].offsetHeight + gap
+            }
+        }
+
+
+        let wrapItem = wrap[0].getElementsByClassName('item')
+
+        function format(v) {
+            return v.slice(0, v.length - 2)
+        }
+        let wrapHeight = parseInt(format(wrapItem[wrapItem.length - 1].style.top)) + parseInt(wrapItem[wrapItem
+                .length - 1]
+            .offsetHeight)
+        wrap[0].style.height = wrapHeight + 10 + 'px'
+
+    }
+
+
+</script>
+
+</html>

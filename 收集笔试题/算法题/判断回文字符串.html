@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      /**
+       * 回文字符串,一个正读和反读都一样的字符串
+       * 回文：12321,12121,1111,noon,level
+       * 不是回文：1232,12345,
+       */
+      var str = "123321";
+      /**
+       * 拿第一个和最后一个比
+       * 拿第二个和倒数第二个比
+       * 拿第三个和倒数第三个比
+       * 。。。
+       */
+      function judge(str) {
+        var len = Math.ceil(str.length / 2);
+        for (let i = 0; i < len; i++) {
+          if (str[i] !== str[str.length - 1 - i]) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      /**
+       * 使用双指针，一个指向前，一个指向后，两个指针同时往中间走，如果两个指针指向的字符不一样就返回false
+       */
+      function judge1(str) {
+        var left = 0;
+        var right = str.length - 1;
+        while (left < right) {
+          if (str[left] !== str[right]) {
+            return false;
+          }
+          return true;
+        }
+      }
+
+      console.log(judge(str));
+      console.log(judge1(str));
+    </script>
+  </body>
+</html>

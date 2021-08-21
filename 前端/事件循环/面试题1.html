@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(111);
+        setTimeout(function () {
+            console.log(222)
+            for (var i = 0; i < 2; i++) {
+                console.log(888)
+            }
+            setTimeout(function () {
+                console.log(333)
+            }, 0)
+        }, 0)
+
+        for (var i = 0; i < 2; i++) {
+            console.log(999)
+        }
+        setTimeout(() => {
+            console.log(444);
+        }, 1000);
+        console.log(555)
+        // 111
+        // 5000次999
+        // 555
+        // 222
+        // 5000次888
+        // 444
+        // 333
+// chrome 84环境下结果：bar,p1,foo,p2
+
+//结果：bar,p1,p2,foo
+
+//结果：p1,bar,p2,foo
+
+//chrome 84环境下结果：bar,p1,foo,p2
+
+//chrome 84环境下结果：bar,p1,foo,p2
+
+//chrome 84环境下结果：bar,p1,foo,p2
+//结果：p1,bar,p2,foo
+
+//结果：p1,bar,p2,foo
+
+        // Promise.resolve()
+        //     .then(function () {
+        //         console.log('p2')
+        //     })
+
+
+        /*
+        foo
+        bar
+        p1
+        undefined
+        foo_end
+        p2
+         */
+
+        /*
+        执行foo()
+        打印foo
+        执行await bar，中断saync foo代码，执行bar外面的代码
+        进入bar,打印bar,然后async bar返回Promise {<fulfilled>: undefined}
+        继续向下执行，打印p1，然后将new promise放到微任务队列
+        bar外面的代码执行完，回到await bar(),bar()返回的是promise对象，
+        await负责执行这个promise的then操作，因此await bar()是个微任务，将它
+        放到微任务队列，继续往下执行同步代码打印foo_end，然后主线任务全部完成，
+        执行微任务队列，首先打印p2,然后await bar()，什么没干，然后完成。
+        最终打印结果：
+        foo
+        bar
+        p1
+        undefined
+        foo_end
+        p2
+        */
+    </script>
+</body>
+
+</html>

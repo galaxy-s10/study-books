@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>观察者模式</title>
+</head>
+
+<body>
+    <h1>观察者模式</h1>
+    <script>
+        goods = {}
+        // 发布/订阅者
+        class People {
+            constructor(name) {
+                this.name = name
+
+            }
+            subscribe(good, cb) {
+                console.log(`${this.name}订阅了${good}`);
+                if (!goods[good]) {
+                    goods[good] = []
+                }
+                console.log(`淘宝收到了有人订阅${good}的通知`);
+                goods[good].push(cb)
+            }
+            publish(good, cb) {
+                console.log(`${this.name}发布了${good}`);
+                if (!goods[good]) {
+                    console.log(`这个商品不存在（没人订阅过），不发布`);
+                    return
+                }
+                console.log(`淘宝收到了有人发布${good}的通知，给所有订阅了${good}的顾客发送通知`);
+                for (let i = 0; i < goods[good].length; i++) {
+                    goods[good][i]()
+                }
+            }
+        }
+        let tom = new People('tom')
+        let lili = new People('lili')
+        let boss = new People('boss')
+        tom.subscribe('apple', function () {
+            console.log(`我是tom，我订了一台苹果12 mini,有货麻烦通知我！`);
+        })
+        tom.subscribe('xiaomi', function () {
+            console.log(`我是tom，我订了一台小米11,有货麻烦通知我！`);
+        })
+
+        lili.subscribe('apple', function () {
+            console.log(`我是lili，我订了一台苹果12 pro max,有货麻烦通知我！`);
+        })
+
+        boss.publish('apple', function () {
+            console.log(`我是boss，最新到货苹果12系列手机，欲购从速！`);
+        })
+        boss.publish('huawei', function () {
+            console.log(`我是boss，最新到货华为系列手机，欲购从速！`);
+        })
+
+    </script>
+</body>
+
+</html>

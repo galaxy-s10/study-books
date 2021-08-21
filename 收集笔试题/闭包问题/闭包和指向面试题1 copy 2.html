@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj5 = {
+            a(b) {
+                console.log(123, " " + b)
+            }
+        }
+        function fn4(obj5) {
+            // debugger
+            var next = obj5.a;
+            function fn5(actions) {
+                // debugger
+                console.log(456)
+                next(actions)
+                console.log(next)   //a(b){}
+                console.log(obj5.a) //fn5(){}
+                console.log("789")
+            }
+            obj5.a = fn5;
+        }
+        // debugger
+        fn4(obj5)
+        obj5.a(100)
+        console.log(obj5.a) //fn5(){}
+
+        // 执行fn4的时候，进入fn4，定义了next和fn5两个变量（函数），next是obj5.a，而fn5是在fn4的环境下出生的，里面的next是fn4环境下的obj5.a
+        // obj5.a是a(b){},因此fn5里面的next就会指向obj5.a，
+        // 然后修改了obj5.a，将fn4里面的fn5赋值给了obj5.a，即原本的obj5.a不指向a(b){}了，而是指向了fn4里面的fn5
+
+        /**
+         * 执行fn4(obj5)，进入fn4
+         * obj5.a赋值给next
+         * 定义fn5
+         * 将fn5赋值给obj5.a，这里是通过下标修改obj5的a属性
+         * 然后执行完fn4后，此时
+         * obj5={
+         *   a(actions){
+         *       console.log(456)
+         *       next(actions)
+         *       console.log
+         *   }
+         * }
+         * 执行obj5.a
+         * 所以打印：
+         * 456，
+         * next(actions),actions是形参100，next是闭包，指向最初的还没被修改的原本的obj5.a，即a(b){console.log(123,+" "+b)},即打印：
+         * 123， 100
+         * 然后next(actions)完了，继续执行，打印
+         * 789
+        */
+    </script>
+</body>
+
+</html>

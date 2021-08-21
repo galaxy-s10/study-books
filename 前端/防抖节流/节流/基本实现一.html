@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="search">
+    <script>
+        function throttle(fn, interval, trailing) {
+            var lastTime = 0
+            var timer
+            var trailing = trailing || false
+            return function () {
+                var _this = this
+                var _arguments = arguments
+                // 获取当前最新的时间戳
+                var newTime = new Date().getTime()
+
+                // 只要触发事件就清除定时器
+                if(timer){
+                    clearTimeout(timer)
+                }
+
+                if (newTime - lastTime > interval) {
+                    fn.apply(_this, _arguments)
+                    lastTime = newTime
+                } else if (trailing) {
+                    timer = setTimeout(() => {
+                        fn.apply(_this, _arguments)
+                    }, interval);
+                }
+            }
+        }
+
+        // 获取输入框
+        var search = document.querySelector('.search');
+
+        // 监听事件
+        var counter = 0;
+        function searchFunc(event) {
+            counter++;
+            console.log("发送" + counter + "次网络请求");
+            console.log(this);
+        };
+
+        search.addEventListener('input', throttle(searchFunc, 1000, true))
+
+
+    </script>
+</body>
+
+</html>

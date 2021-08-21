@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="btn">按钮</button>
+    <script>
+        var btn = document.querySelector('.btn')
+        btn.onclick = function () {
+            console.log('点击');
+        }
+        for (var i = 0; i < 5000; i++) {
+            console.log('event loop');
+        }
+
+    </script>
+</body>
+
+</html>

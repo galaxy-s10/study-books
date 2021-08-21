@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <a href="/home">首页</a>
+        <a href="/about">关于</a>
+    </div>
+    <div class="router-view"></div>
+
+
+    <script>
+        const routerView = document.getElementsByClassName("router-view")[0];
+
+        //2.监听a标签的点击,因为使用history的话,监听不了url变化，并且会刷新页面
+        const aNodes = document.getElementsByTagName("a");
+
+        for (let el of aNodes) {
+            el.addEventListener("click", (e) => {
+                //阻止默认行为
+                e.preventDefault();
+                //对href进行判断 并使用pushState改变url 这样不会刷新页面
+                const href = el.getAttribute("href");
+                console.log(href);
+                history.pushState({}, "", href);
+                urlChange();
+            });
+        }
+
+        //监听前进滚动
+        window.addEventListener("popstate", () => {
+            console.log('xx');
+            urlChange();
+        });
+        function urlChange() {
+            console.log('xxx');
+            switch (location.pathname) {
+                case "/home":
+                    routerView.innerHTML = "首页";
+                    break;
+                case "/about":
+                    routerView.innerHTML = "关于";
+                    break;
+            }
+        }
+    </script>
+</body>
+
+</html>

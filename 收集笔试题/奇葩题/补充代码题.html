@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // https://blog.csdn.net/flyingeagle168/article/details/108817139
+        /**
+        下面代码什么时候会打印ok？
+         var a=?;
+         if(a==1&&a==2&&a==3){
+             console.log('ok');
+         }
+        */
+
+        var a = {
+            num: 1,
+            toString() {
+                console.log('toString');
+                return a.num++
+            },
+            // valueOf() {
+            //     console.log('valueOf');
+            //     return a.num++
+            // }
+        };
+        if (a == 1 && a == 2 && a == 3) {
+            console.log('ok');
+        }
+    </script>
+</body>
+
+</html>

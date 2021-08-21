@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // every() 方法测试一个数组内的所有元素是否都能通过某个指定函数的测试。
+        // 它返回一个布尔值。
+        // 即全部返回true，结果就是true；只要有一项是返回false，就是false
+        // 注意：若收到一个空数组，此方法在一切情况下都会返回 true。
+        var arr = [1, 2, 3]
+        // var arr = []
+        var obj = {
+            name: 'hss',
+            age: 22
+        }
+        var res = arr.every(function (item, index, arr) {
+            console.log(this)
+            console.log(item, index, arr)
+            return item > 0
+        }, obj)
+        console.log(res)
+        console.log('------------')
+        Array.prototype.myEvery = function (cb) {
+            var _arr = this
+            var _this = arguments[1] || window
+            // var _res = true
+            for (var i = 0; i < _arr.length; i++) {
+                if (!cb.apply(_this, [_arr[i], i, _arr])) {
+                    // _res = false
+                    // break
+                    return false
+                }
+            }
+            // return _res
+            return true
+        }
+        var res1 = arr.myEvery(function (item, index, arr) {
+            console.log(this)
+            console.log(item, index, arr)
+            return item > 0
+        }, obj)
+        console.log(res1)
+    </script>
+</body>
+
+</html>

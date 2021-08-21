@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 2, 3]
+        var newarr = arr.filter(item => true)
+        console.log(arr) // [1, 2, 3]
+        console.log(newarr) // [1, 2, 3]
+        console.log(arr === newarr) // false
+        newarr[0] = 100
+        console.log(arr) // [1, 2, 3]
+        console.log(newarr) // [100, 2, 3]
+
+        var objarr = [{ name: 'tom' }]
+        var newobjarr = objarr.filter(item => true)
+        console.log(objarr)                         // [{ name: 'tom' }]
+        console.log(newobjarr)                      // [{ name: 'tom' }]
+        console.log(objarr === newobjarr)           // false
+        newobjarr[0].name = 'tony'
+        console.log(objarr)                         // [{ name: 'tony' }]
+        console.log(newobjarr)                      // [{ name: 'tony' }]
+
+    </script>
+</body>
+
+</html>

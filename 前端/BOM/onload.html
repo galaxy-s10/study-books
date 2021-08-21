@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    window.onload = function () {
+        console.log('onload在页面加载完成执行');
+        console.log(document.getElementById('test'));
+        function show() {
+            console.log('位置错误，不会执行');
+            // show()写这里不生效，由于html文档是从上往下执行的，
+            // onload是文档加载完成才执行的，
+            // 执行到onclick时，show()方法还没有定义，因此会报undefined
+        }
+    }
+    console.log(document.getElementById('test'));  //null
+    function show() {
+        console.log('位置正确');
+        var res = window.confirm('确定or取消？')
+        console.log(res);
+        document.getElementById('res').innerText = "<h1>" + res + "</h1>"
+        document.getElementById('res1').innerHTML = "<h1>" + res + "</h1>"
+        // show()写这里不生效，由于html文档是从上往下执行的，
+        // onload是文档加载完成才执行的，
+        // 执行到onclick时，show()方法还没有定义，因此会报undefined
+    }
+</script>
+
+<body>
+    <div id="test"></div>
+    <button onclick="show()">弹出确认</button>
+    <div id="res"></div>
+    <div id="res1"></div>
+
+</body>
+
+</html>

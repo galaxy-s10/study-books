@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = []
+        a.valueOf = function () {
+            console.log('valueOf');
+        }
+        a.toString = function () {
+            console.log('toString');
+        }
+        console.log(Boolean(a));    //valueOf和toString都不执行，直接打印true
+        var val1 = new Boolean(false)
+        var val2 = new String('1')
+        console.log(Boolean(false));        //fasle
+        console.log(val1);                  //Boolean {false}
+        console.log(new Boolean(false));    //Boolean {false}
+        console.log(new Boolean(1));        //Boolean {false}
+        console.log(Boolean(val1));         //true
+        console.log(Boolean(val2));         //true
+        console.log('---------------');
+        var a = [42];
+        var b = ["43"];
+        a.valueOf = function () {
+            console.log('a的valueOf');
+            return Array.prototype.valueOf.call(this)
+        }
+        a.toString = function () {
+            console.log('a的toString');
+            console.log(Array.prototype.toString.call(this));
+            return Array.prototype.toString.call(this)
+        }
+        b.valueOf = function () {
+            console.log('b的valueOf');
+            return Array.prototype.valueOf.call(this)
+        }
+        b.toString = function () {
+            console.log('b的toString');
+            console.log(Array.prototype.toString.call(this));
+            return Array.prototype.toString.call(this)
+        }
+        console.log(a < b)// false
+        /**
+         * 首先a进行toPrimitive操作，先执行valueOf,打印a的valueOf，返回[42]，不是基本类型，
+         * 继续toString，打印a的toString，打印"42",返回"42",继续ToNumber，返回42
+         * 首先b进行toPrimitive操作，先执行valueOf,打印b的valueOf，返回["42"]，不是基本类型，
+         * 继续toString，打印b的toString，打印"43",返回"43"继续ToNumber，返回43
+         * 结果：42<43，true
+        */
+
+    </script>
+</body>
+
+</html>

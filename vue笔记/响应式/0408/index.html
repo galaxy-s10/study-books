@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>
+        vue在初始化时的有关响应式步骤：
+    <ul>
+        <li>首先，在模板编译的时候，遇到data里面的数据就会绑定一个watcher实例，
+            而在实例化watcher的时候，会触发watcher的get方法，将自身指向Dep.target，
+            通俗的讲就是，在模板编译的时候，遇到data里面每个的数据，都分别用一个人来观察（看住）它，看
+            它什么时候变化
+        </li>
+        <li>
+            模板编译后，
+        </li>
+    </ul>
+    </p>
+
+    <div id="app">
+        <li>{{pet}}</li>
+        <li>{{pet}}</li>
+        <li>{{car}}</li>
+        <li>我的手机是：{{phone.phone_name}}，分辨率：{{phone.phone_display}}，价格{{phone.phone_money}}</li>
+    </div>
+
+    <script src="./index.js"></script>
+    <!-- <script src="./index1.js"></script> -->
+
+
+    <script>
+
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    pet: 123,
+                    car: ['audi', 'bmw'],
+                    phone: { phone_name: 'samsung', phone_display: '2k', phone_money: '5999', 'phone_abc': 'abc' },
+                    hobby: [
+                        { hobby_name: 'game' },
+                        { hobby_name: 'coding' },
+                        { hobby_name: 'music' },
+                    ]
+                }
+            },
+        })
+        console.log(vm);
+    </script>
+
+</body>
+
+</html>

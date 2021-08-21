@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //封装设置cookie函数
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            // getTime()返回距 1970 年 1 月 1 日之间的毫秒数
+            // setTime()以毫秒设置 Date 对象
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + "; " + expires;
+        }s
+        //封装获取cookie函数
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) { return c.substring(name.length); }
+            }
+            return "";
+        }
+        console.log(document.cookie);
+        setCookie('user', 'admin', 1)
+        setCookie('pwd', 123456, 1)
+        console.log(getCookie('user')); //admin
+        console.log(getCookie('pwd'));  //123456
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

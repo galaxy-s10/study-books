@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var son = '儿子'
+        function fun() {
+            var son = '女儿'
+            console.log(this.son) // 儿子
+            console.log(son) //女儿
+        }
+        fun()
+
+        var a = '222'
+        var obj = {
+            a: '111',
+            fn: function () {
+                console.log(this.a) //111
+            }
+        }
+        obj.fn()
+
+        var Father = function () {
+            this.unmae = '张三'
+        }
+        var baba = new Father()
+        baba.unmae = '李四'
+        console.log(baba.unmae) //李四
+        var mama = new Father()
+        console.log(mama.unmae) //张三
+
+        // 箭头函数
+        var obj1 = {
+            a1: '111',
+            fn1: function () {
+                setTimeout(function () {
+                    console.log(this.a1) //undefined
+                });
+                var that = this
+                setTimeout(function () {
+                    console.log(that.a1) //111
+                });
+                setTimeout(() => {
+                    console.log(this.a1) // 111
+                });
+            }
+        }
+        obj1.fn1()
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+查看所有数据库：show databases
+切换数据库：use 数据库名
+创建数据库：create database 数据库名
+删除数据库：drop database 数据库名
+创建数据库表：create table 表名（列名 列类型 其他关键词,
+			            列名 列类型 其他关键词,
+			            ......
+);
+增加表字段：alter table 表名 add （列名 列类型 其他关键词
+			       ......
+			       列名 列类型 其他关键词
+);
+新建表字段时修改顺序：alter table 表名 add （列名 列类型 其他关键词
+				       ......
+				       列名 列类型 其他关键词
+);
+修改列名：alter table 表名 change 原列名 新列名 列类型
+修改列类型：alter table 表名 modify 列名 列类型 其他关键词
+	    alter table 表名 change 原列名 新列名 列类型
+删除表的某一列：alter table 表名 drop 列名
+查看创建表的sql语句：show create table 表名
+查看当前数据库的表：show tables
+查看表结构：desc 表名
+删除表：drop table 表名
+
+
+
+
+CREATE TABLE table_name (column_name column_type);
+
+
+show variables like "%char%";
+set names gbk
+中文编码问题，配置文件my.ini中找到[mysqld]，添加这句代码character-set-server = utf8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Fn() {
+        var num = 10;
+        this.x = 100;
+        this.getx = function () {
+          console.log(this.x);
+          console.log(x);
+        };
+      }
+      var f1 = new Fn; //f1:{x:100,getx(){console.log(x)}}
+      console.log(f1);
+      console.log(f1.num);          //undefined
+      console.log(f1.x);
+      console.log(f1.getx());       //如果注释了第二个，这里还是报错，x is not defined
+      console.log(f1);
+    //   console.log(Fn);
+    
+    </script>
+  </body>
+</html>

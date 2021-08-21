@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = {
+            valueOf: function () {
+                console.log('valueOf');
+                return "1";
+            },
+            toString: function () {
+                console.log('toString');
+                return "1";
+            }
+        };
+        var b = [1];
+        b.valueOf = function () {
+            console.log('valueOf');
+            return "1";
+        }
+        b.toString = function () {
+            console.log('toString');
+            return "1";
+        }
+        var c = [1];
+        c.valueOf = function () {
+            console.log('valueOf');
+            return [1]
+        };
+        c.toString = function () {
+            console.log('toString');
+            return this.join("");
+        };
+
+        console.log(Number(a));     //先执行valueOf，返回字符串1，是基本数据类型 ，返回该值，然后Number("1")，即1
+        console.log(Number(b));     //先执行valueOf，返回字符串1，是基本数据类型 ，返回该值，然后Number("1")，即1
+        // 先执行valueOf，返回数组[1]，非基本数据类型 ，
+        // 再执行toString，返回"1"，是基本数据类型，返回该值，然后Number("1")，即1
+        console.log(Number(c)); //1
+        console.log(Number(undefined));  //NaN
+        console.log(Number(null));          //0
+        console.log(Number(true));          //1
+        console.log(Number(false));         //0
+        console.log(Number());              //Number() === Number(null) ,即0
+        console.log(Number(''));            //0
+        console.log(Number('-'));           //NaN
+        console.log(Number('12'));          //12
+        console.log(Number('12s'));         //NaN
+        console.log(Number([]));            //先valueOf本身[],再toString是"",即Number(""),即0
+        console.log(Number({}));            //先valueOf本身{},再toString是"[object Object]",即Number("[object Object]"),即NaN
+        console.log(Number([0]));           //先valueOf本身[0],再toString是"0",即Number("0"),即0
+        console.log(Number(["1"]));	        //先valueOf本身["1"],再toString是"1",即Number("1"),即1
+        console.log(Number(["1", "2"]));	//先valueOf本身["1","2"],再toString是"1,2",即Number("1,2"),即NaN
+        console.log(Number([1]));	        //先valueOf本身[1],再toString是"1",即Number("1"),即1
+        console.log(Number([1, 2]));	    //先valueOf本身[1,2],再toString是"1,2",即Number("1,2"),即NaN
+        console.log(Number(["abc"]));	    //先valueOf本身["abc"],再toString是"abc",即Number("abc"),即NaN
+        console.log(+('-1'));               //+("-1") === + Number("-1"),即+ -1，即-1
+        console.log(-('-1'));               //-("-1") === - Number("-1"),即- -1，即1
+        console.log(+('0'));                //+("0") === + Number("0"),即+ 0，即0
+        console.log(-('0'));                //-("0") === - Number("0"),即- 0，即-0
+        // console.log('x');
+        // console.log({} + 1);    //[object Object]1 
+        // console.log({} - 1);    //NaN
+        // console.log({} - '1');  //NaN
+        // console.log([] + 1);    //"1"
+        // console.log([] - 1);    //-1
+        // console.log([] - '1');  //-1
+        // console.log([1] + 1);   //"11"
+        // console.log([1] - 1);   //0 
+        // console.log([1] - '1'); //0
+        // console.log(+{});   //NaN
+        // console.log(+[]);   //0
+        // console.log(+'1');  //1
+        // console.log('-----------------');
+        // var a = {} + []
+        // console.log(a); //[object Object]
+        // console.log({} + []);//[object Object]
+
+        // var arr = [1, 2]
+        // var arr1 = [1, 2]
+        // arr.valueOf = function () {
+        //     console.log('valueOf');
+        //     return 1
+        // }
+        // arr.toString = function () {
+        //     console.log('toString');
+        //     return 2
+        // }
+        // // console.log(arr.valueOf());
+        // console.log(arr - [1]);          //valueOf--->0
+        // console.log(arr1 - [1]);         //NaN
+        // console.log('------------------');
+        // console.log(1 + "2" + "2");     //"122"
+        // console.log(1 + +"2" + "2");    //"32"
+        // console.log("A" - "B" - "2");   //NaN
+        // console.log("A" - "B" + "2");   //"NaN2"
+        // console.log("A" - "B" + 2);     //NaN
+    </script>
+</body>
+
+</html>

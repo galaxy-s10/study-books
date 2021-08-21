@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="ele">
+        <p id="firstp">我是firstp</p>
+        <p id="secondp">我是secondp</p>
+    </div>
+    <script>
+        // 新建元素
+        var newele = document.createElement('h1')
+        // 新建文本节点
+        var newtext = document.createTextNode('我是替换的h1')
+        // 将文本节点添加到元素上
+        newele.appendChild(newtext)
+
+        var ele = document.getElementById('ele')
+        var secondp = document.getElementById('secondp')
+
+        // 将新的元素和旧的元素进行替换
+        ele.replaceChild(newele, secondp)
+    </script>
+</body>
+
+</html>

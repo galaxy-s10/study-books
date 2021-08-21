@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 2, 3, 4, 5]
+        // slice() 方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝
+        // slice(start?: number, end?: number)
+        // slice内部主要实现，这里并没有考虑负数。
+        Array.prototype.mySlice = function () {
+            var _arr = this
+            var _newArr = []
+            var start = arguments[0] || 0
+            var end = arguments[1] || _arr.length
+            for (var i = start; i < end; i++) {
+                _newArr.push(_arr[i])
+            }
+            return _newArr
+        }
+        var arr2 = arr.mySlice(1, 2)
+        var arr3 = arr.slice(1, 2)
+        console.log(arr2);
+        console.log(arr3);
+
+    </script>
+</body>
+
+</html>

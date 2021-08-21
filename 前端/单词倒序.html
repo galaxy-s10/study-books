@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function desc(str) {
+            var arr = str.split(" ")
+            var res = []
+            for (var i = 0; i < arr.length; i++) {
+                res.unshift(arr[i])
+            }
+            return res.join(" ")
+        }
+
+        var str = 'hello word i come here'
+        console.log(desc(str))
+    </script>
+</body>
+
+</html>

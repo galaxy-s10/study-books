@@ -1,0 +1,51 @@
+MariaDB [shujuku]> select * from xinxi;
++----+------+-----+
+| id | name | age |
++----+------+-----+
+|  1 | 小明 |  18 |
+|  2 | 小李 |  18 |
+|  3 | 小红 |  19 |
+|  4 | 小黄 |  19 |
+|  5 | 小高 |  20 |
+|  6 | 小成 |  17 |
++----+------+-----+
+6 rows in set (0.00 sec)
+
+MariaDB [shujuku]> select * from chengji;
++----+------+--------+
+| id | mark | stu_id |
++----+------+--------+
+|  1 |   66 |      2 |
+|  2 |   77 |      4 |
+|  3 |   88 |      5 |
+|  4 |   89 |      6 |
++----+------+--------+
+4 rows in set (0.00 sec)
+
+联合查询：select * from xinxi where id =1 union all select * from chengji where id=1;
++----+-----+-----+
+| id | name | age |
++----+------+-----+
+|  1 | 小明 |  18 |
+|  1 | 66   |   2 |
++----+------+-----+
+2 rows in set (0.00 sec)
+联合查询：select * from chengji where id =1 union all select * from xinxi where id=1;
++----+------+--------+
+| id | mark | stu_id |
++----+------+--------+
+|  1 | 66   |      2 |
+|  1 | 小明 |     18 |
++----+------+--------+
+2 rows in set (0.00 sec)
+
+联合查询：select * from xinxi where id =1 union all select * from xinxi where id=2;
++----+------+-----+
+| id | name | age |
++----+------+-----+
+|  1 | 小明 |  18 |
+|  2 | 小李 |  18 |
++----+------+-----+
+2 rows in set (0.00 sec)
+
+

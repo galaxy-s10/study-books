@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function ArrayList() {
+            // 链头
+            this.head = null
+            // 链长度
+            this.length = 0
+        }
+        ArrayList.prototype.append = function (ele) {
+            function Node(ele) {
+                this.ele = ele
+                this.next = null
+            }
+            var node = new Node(ele)
+            // 如果链表没有数据，把node给head
+            if (this.head == null) {
+                console.log(node)
+                this.head = node
+            } else {
+                // 如果head有值，则从头开始往next找
+                var current = this.head
+                while (current.next) {
+                    current.next = current
+                }
+                // 当执行完while后，这里就是current.next=null，也就是最后一项了
+                current.next = node
+            }
+            this.length++
+        }
+
+        var arrayList = new ArrayList()
+        arrayList.append(1)
+        arrayList.append(2)
+        arrayList.append(3)
+        // arrayList.append(4)
+        console.log(arrayList)
+    </script>
+</body>
+
+</html>

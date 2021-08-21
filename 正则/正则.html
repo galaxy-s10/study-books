@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        let str =
+            '<speak  bgm="背2" name="小sfsdfsdfsdf玉"><speak name="小玉">通常情况<speak bgm="背2"下，应当处理 input 事件，并更新组件input</speak></speak>'
+        let reg = /<speak.+?name="(.+?)?">/i;
+        // let reg = /<speak.+?name="(.+?)?">/i;
+        // let str1 = str.match(reg)
+        console.log('str1');
+        // console.log(str1);
+        // let str2 = str.replace(reg, "$2,$1")
+        let str2 = str.replace(reg, function (match, p1, offset, string) {
+            console.log(arguments);
+            console.log(p1);
+            let temp = arguments[0].replace()
+            return '<speak  bgm="背2" name="xxx">'
+        })
+        console.log(str2);
+        console.log(str);
+    </script>
+</body>
+
+</html>

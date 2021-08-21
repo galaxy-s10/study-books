@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            height: 300px;
+            width: 300px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        /* 
+            外a定义
+            外a.[[scope]] -- >0 : GO{外a():function(){}}
+         */
+
+        /* 外a()执行
+            外a.[[scope]] -- >0 : AO{内a():function(){a = 4;}}
+                              1 : GO{外a():function(){}}
+         */
+
+        /* 内a()定义
+           内a.[[scope]] -- >0 : AO{内a():function(){a = 4;}}
+                            1 : GO{外a():function(){}}
+         */
+
+        /* 内a()执行,a=4,并不是var a=4,如果是var a = 4,就是在a函数内部声明一个局部变量a,
+            但这里是a=4,等于是给a赋值，预编译阶段不会在a函数内部声明，会一层一层往下找
+           内a.[[scope]] -- >0 : AO{}
+                            1 : AO{内a():function(){a = 4;}}
+                            2 : GO{外a():function(){}}
+         */
+
+        function a() {
+            function a() {
+                a = 4;
+            }
+            a();
+            console.log(a);
+        }
+        var a;
+        a();
+        console.log(a);
+
+    </script>
+
+</body>
+
+</html>

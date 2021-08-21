@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    var cat = { name: "tom" }
+    cat.hobby = cat
+
+    function deepclone(obj, hash) {
+        var newobj = Array.isArray(obj) ? [] : {}
+        hash = hash ? hash : new WeakMap()
+        if (hash.has(obj)) {
+            return hash.get(obj)
+        } else {
+            hash.set(obj, newobj)
+        }
+        for (var i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                if (obj[i] instanceof Object) {
+                    newobj[i] = deepclone(obj[i], hash)
+                } else {
+                    newobj[i] = obj[i]
+                }
+            }
+        }
+        return newobj
+    }
+
+
+    function deepclone88(obj, queueList) {
+        // 找数组里面有没有这个值
+        function find(arr, obj) {
+            var res = null
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].key == obj.key) {
+                    res = arr[i]
+                }
+            }
+            return res
+        }
+        queueList = queueList ? queueList : []
+        // 如果在数组找到这个值，就返回这个值，跳出递归
+        if (find(queueList, obj)) {
+            return find(queueList, obj)
+        } else {
+            // 找不到就插入值，继续递归
+            queueList.push(obj)
+        }
+        var newobj = obj instanceof Array ? [] : {}
+        for (var i in obj) {
+            // 判断自身属性中是否具有指定的属性（避免克隆了原型上的东西）
+            if (obj.hasOwnProperty(i)) {
+                // 判断是不是原始值
+                if (obj[i] instanceof Object == true) {
+                    // 不是原始值开始递归
+                    newobj[i] = deepclone88(obj[i], queueList)
+                } else {
+                    // 是原始值直接赋值
+                    newobj[i] = obj[i]
+                }
+            }
+
+        }
+        return newobj
+    }
+
+    console.log(deepclone(cat))
+
+    function deepclone99(obj) {
+        const newobj = obj instanceof Array ? [] : {}
+        for (var i in obj) {
+            // 判断自身属性中是否具有指定的属性（避免克隆了原型上的东西）
+            if (obj.hasOwnProperty(i)) {
+                // 判断是不是原始值
+                if (obj[i] instanceof Object == true) {
+                    // 不是原始值开始递归
+                    newobj[i] = deepclone(obj[i])
+                } else {
+                    // 是原始值直接赋值
+                    newobj[i] = obj[i]
+                }
+            }
+
+        }
+        return newobj
+    }
+
+    const arr = ['11', '22', '33', 'aaa', 'bbb', 'cccc']
+    const obj = {
+        a: 1,
+        b: { name: '张三', age: 14, hobby: ['唱', '跳', 'rap'] },
+        c: ['周杰伦', '华晨宇', '林俊杰'],
+        e: function () {
+            console.log('我是e函数');
+            return 'eee'
+        }
+    }
+    // 木易杨
+    function cloneDeep3(source, uniqueList) {
+
+        function find(arr, item) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].source === item) {
+                    return arr[i];
+                }
+            }
+            return null;
+        }
+        if (!uniqueList) uniqueList = []; // 新增代码，初始化数组
+
+        var target = Array.isArray(source) ? [] : {};
+
+        // 数据已经存在，返回保存的数据
+        var uniqueData = find(uniqueList, source);
+        if (uniqueData) {
+            return uniqueData.target;
+        };
+
+        // 数据不存在，保存源数据，以及对应的引用
+        uniqueList.push({
+            source: source,
+            target: target
+        });
+        // =============
+
+        for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+                if (isObject(source[key])) {
+                    target[key] = cloneDeep3(source[key], uniqueList); // 新增代码，传入数组
+                } else {
+                    target[key] = source[key];
+                }
+            }
+        }
+        return target;
+    }
+
+
+    console.log(object);
+
+    const newobj = deepclone(obj)
+    console.log(newobj);    //{a: 1, b: {…}, c: Array(3), e: {…}}
+    obj.a = 999
+    console.log(newobj);    //{a: 1, b: {…}, c: Array(3), e: {…}}
+    console.log(obj);       //{a: 999, b: {…}, c: Array(3), e: {…}}
+    const newarr = deepclone(arr)
+
+    console.log(newarr);            //["11", "22", "33", "aaa", "bbb", "cccc"]
+    console.log(typeof newarr);     //object
+    console.log(newarr[0]);         //11
+</script>
+
+<body>
+
+</body>
+
+</html>

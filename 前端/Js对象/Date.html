@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    var date1 = new Date();
+    var date2 = new Date(1590749870077);
+    var date3 = new Date('2020-5-29 18:54:10');
+    var date4 = new Date(2020, 4, 29, 18, 54, 10, 800);
+    console.log(date1);
+    console.log(date2); //Fri May 29 2020 18:57:50 GMT+0800 (中国标准时间)
+    console.log(date3); //Fri May 29 2020 18:54:10 GMT+0800 (中国标准时间)
+    console.log(date4); //Fri May 29 2020 18:54:10 GMT+0800 (中国标准时间)
+    var date5 = date4.getFullYear()
+    var date6 = date4.getMonth()
+    var date7 = date4.getDate()
+    var date8 = date4.getHours()
+    var date9 = date4.getMinutes()
+    var date10 = date4.getSeconds()
+    var date11 = date4.getMilliseconds()
+    // 2020 5 29 18 54 10 800
+    console.log(date5, date6 + 1, date7, date8, date9, date10, date11);
+</script>
+
+<body>
+
+</body>
+
+</html>

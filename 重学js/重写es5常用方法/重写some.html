@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // some() 方法测试数组中是不是至少有1个元素通过了被提供的函数测试。
+        // 它返回的是一个Boolean类型的值。
+        // 即只要有一个是true就返回true，全部是fasle才返回false
+        // 注意：如果用一个空数组进行测试，在任何情况下它返回的都是false。
+        var arr = [1, 2, 3]
+        // var arr = []
+        var obj = {
+            name: 'hss',
+            age: 22
+        }
+        var res = arr.some(function (item, index, arr) {
+            console.log(this)
+            console.log(item, index, arr)
+            return item == 1
+        }, obj)
+        console.log(res)
+        console.log('----------------------')
+
+        Array.prototype.mySome = function (cb) {
+            var _arr = this
+            var _this = arguments[1] || window
+            // var _res = false
+            for (var i = 0; i < _arr.length; i++) {
+                if (cb(_this, [_arr[i], i, _arr])) {
+                    // _res = true
+                    // break
+                    return true
+                }
+            }
+            // return _res
+            return false
+        }
+        var res1 = arr.some(function (item, index, arr) {
+            console.log(this)
+            console.log(item, index, arr)
+            return item == 1
+        }, obj)
+        console.log(res1)
+    </script>
+</body>
+
+</html>

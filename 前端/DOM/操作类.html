@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="hi hii" id="first"></div>
+    <div class="hello"></div>
+
+    <script>
+        var mybtn = document.getElementsByTagName('button')
+
+        var myclass = document.getElementsByTagName('div')
+        console.log(myclass[0].className);  //hi hii
+
+        myclass[0].classList.add('hiii')
+        console.log(myclass[0].className);  //hi hii hiii
+        myclass[0].classList.add('ho', 'hoo')
+        console.log(myclass[0].className);  //hi hii hiii ho hoo
+        myclass[0].classList.remove('hi')
+        console.log(myclass[0].className);  //hii hiii ho hoo
+        myclass[0].classList.remove('hii', 'ho')
+        console.log(myclass[0].className);  //hiii hoo
+        myclass[0].className = 'aaa'
+        console.log(myclass[0].className);  //aaa
+
+    </script>
+</body>
+
+</html>

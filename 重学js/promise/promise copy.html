@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function _Promise(executor) {
+
+            var _this = this // 先保存this
+            _this.status = 'pending' //规范要求的状态
+            _this.value = undefined //规范要求成功返回的值
+            _this.season = undefined //规范要求失败返回的原因
+            _this.exception = undefined //规范要求异常抛出的值
+
+            // 成功执行的函数
+            function resolve(value) {
+                // 规范规定，只能从pending变成fulfilled或者从pending变成rejected
+                // 比如：如果当前status从pending变成fulfilled，
+                // 则不能再次对status进行修改成pending或者reject。
+                if (_this.status == 'pending') {
+                    _this.status = 'fulfilled'
+                    _this.value = value
+                }
+            }
+            // 失败执行的函数
+            function reject(season) {
+                // 规范规定，只能从pending变成fulfilled或者从pending变成rejected
+                // 比如：如果当前status从pending变成fulfilled，
+                // 则不能再次对status进行修改成pending或者reject。
+                if (_this.status == 'pending') {
+                    _this.status = 'rejected'
+                    _this.season = season
+                }
+            }
+
+            // 因为new Promise(fn)时，会立即执行fn
+            // 所以实现_Promise时，也要立即执行传进来的executor函数
+            // 如果捕获到异常，利用定时器，先执行失败回调reject，再抛出错误
+            try {
+                executor(resolve, reject)
+            } catch (e) {
+                _this.exception = e
+                reject()
+                setTimeout(() => {
+                    throw new Error(e)
+                }, 0);
+            }
+
+        }
+
+        var p = new _Promise(function (resolve, reject) {
+            console.log('_Promise里的同步代码')
+            throw new Error('xxx')
+            // resolve(200)
+            // reject(500)
+        })
+        console.log(p)
+        // var p = new _Promise(function (a, b) {
+        //     a(100)
+        //     // b()
+        // })
+
+        // console.log(p);
+    </script>
+</body>
+
+</html>

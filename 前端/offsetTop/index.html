@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .header {
+            margin: 10px;
+            padding: 10px;
+            border: 10px solid skyblue;
+            width: 100%;
+            height: 50px;
+            background-color: red;
+        }
+
+        .content {
+            width: 300px;
+            height: 300px;
+            background-color: blue;
+            overflow: hidden;
+        }
+
+        .part-1 {
+            margin: 10px;
+            position: relative;
+            width: 150px;
+            height: 150px;
+            background-color: yellow;
+            overflow: hidden;
+        }
+
+        .part-2 {
+            margin: 10px;
+            padding: 10px;
+            border: 3px solid purple;
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">header</div>
+    <div class="content">
+        <div class="part-1">
+            <div class="part-2">part-2</div>
+        </div>
+    </div>
+    x.offsetTop是，x距离自己到(最近的已定位的父元素顶部(包括padding、margin、border))的距离
+    part-1的(最近的已定位的父元素顶部)是header(content没有定位，所以不是content)，因此part-1.offsetTop为120
+    part-2的(最近的已定位的父元素顶部)是part-1，因此part-2.offsetTop为10
+    <script>
+        var part1 = document.querySelector('.part-1').offsetTop
+        var part2 = document.querySelector('.part-2').offsetTop
+        console.log('part1', part1);
+        console.log('part2', part2);
+        console.log('part2', document.querySelector('.part-1'));
+        console.log('part2', document.querySelector('.part-2'));
+    </script>
+</body>
+
+</html>
