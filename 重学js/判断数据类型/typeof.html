@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 缺点：
+       * 1，不能区分数组和对象，都会返回object
+       * 2，除了new Function()会返回function，其他所有new xxx都会返回object
+       * 在 ECMAScript 2015 之前，typeof 总能保证对任何所给的操作数返回一个字符串。即便是没有声明的标识符，typeof 也能返回 'undefined'。使用 typeof 永远不会抛出错误。
+       * 但在加入了块级作用域的 let 和 const 之后，在其被声明之前对块中的 let 和 const 变量使用 typeof 会抛出一个 ReferenceError。块作用域变量在块的头部处于“暂存死区”，
+       * 直至其被初始化，在这期间，访问变量将会引发错误。（即let和const不会提升）
+       */
+      var str = "abc";
+      var num = 1;
+      var bool = true;
+      var arr = [1, 2, 3];
+      var obj = { name: "haoxl", age: 18 };
+      var fun = function () {
+        console.log("I am a function");
+      };
+      var und = undefined;
+      var nul = null;
+      var str1 = new String(123);
+      var num1 = new Number(123);
+      var bool1 = new Boolean(true);
+      var arr1 = new Array([]);
+      var obj1 = new Object({});
+      var fun1 = new Function("a", "b");
+
+      console.log(typeof str); //string
+      console.log(typeof num); //number
+      console.log(typeof bool); //boolean
+      console.log(typeof arr); //object
+      console.log(typeof obj); //object
+      console.log(typeof fun); //function
+      console.log(typeof und); //undefined
+      console.log(typeof nul); //object
+      console.log(typeof str1); //object 除 Function 外的所有构造函数的类型都是 'object'
+      console.log(typeof num1); //object 除 Function 外的所有构造函数的类型都是 'object'
+      console.log(typeof bool1); //object 除 Function 外的所有构造函数的类型都是 'object'
+      console.log(typeof arr1); //object 除 Function 外的所有构造函数的类型都是 'object'
+      console.log(typeof obj1); //object 除 Function 外的所有构造函数的类型都是 'object'
+      console.log(typeof fun1); //function  https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof
+    </script>
+  </body>
+</html>

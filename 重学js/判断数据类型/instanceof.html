@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof
+      var str = "abc";
+      var num = 1;
+      var bool = true;
+      var arr = [1, 2, 3];
+      var obj = { name: "haoxl", age: 18 };
+      var fun = function () {
+        console.log("I am a function");
+      };
+      var und = undefined;
+      var nul = null;
+      var str1 = new String(123);
+      var num1 = new Number(123);
+      var bool1 = new Boolean(true);
+      var arr1 = new Array([]);
+      var obj1 = new Object({});
+      var fun1 = new Function("a", "b");
+
+      console.log(str instanceof String, str instanceof Object); // false,false
+      console.log(num instanceof Number, num instanceof Object); // false,false
+      console.log(bool instanceof Boolean, bool instanceof Object); // false,false
+      console.log(arr instanceof Array, arr instanceof Object); // true,true
+      console.log(obj instanceof Function, obj instanceof Object); // false,true
+      console.log(fun instanceof Function, fun instanceof Object); // true,true
+      console.log(und instanceof Object); // false
+      console.log(nul instanceof Object); // false
+      console.log(str1 instanceof String, str1 instanceof Object); // true,true
+      console.log(num1 instanceof Number, num1 instanceof Object); // true,true
+      console.log(fun1 instanceof Function, fun1 instanceof Object); // true,true
+      console.log(obj1 instanceof Object); // true
+    </script>
+  </body>
+</html>
