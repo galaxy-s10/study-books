@@ -1,0 +1,24 @@
+{
+  // "files": ["demo/hello.ts"],
+  "compilerOptions": {
+    // "target": "es6", // 编译输出目标es版本，默认：es3
+    // "module": "es6", // 设置后就不会报这个错：Uncaught ReferenceError: exports is not defined
+    // "jsx": "preserve",
+    // "esModuleInterop": true, // 可以esm和cjs混用
+    // "noImplicitAny": false, // 在表达式和声明上有隐含的 any类型时报错。
+    // "experimentalDecorators": true, // 启用实验性的ES装饰器。
+    // "lib": ["dom", "ES2015"], //	编译过程中需要引入的库文件的列表。
+    // "skipLibCheck": true, // https://github.com/webpack/webpack/issues/12185
+    "allowJs": true, //默认是只检查ts/tsx，开启后会检测js
+    // "checkJs": true, //检查js，默认false，开启后，会检查js文件，比如js和ts都let a=1，且这两文件都被ts认为不是模块，就会报对应的警告
+    // "moduleResolution": "node", // 如何处理模块
+    // "declaration": true, // 生成相应的 .d.ts文件。
+    // "rootDir": "../",
+    "outDir": "./tsbuild" //如果是"./"，就代表输出到tsconfig.json目录
+    // "newLine": "lf", //当生成文件时指定行结束符： "crlf"（windows）或 "lf"（unix）。默认是platform specific
+    // "noEmitOnError": true //报错时不输出文件，默认是false。
+  },
+  "include": ["demo/**/*"]
+  // "include": ["demo/**/*.ts", "demo/**/*.js"]
+  // "exclude": []
+}

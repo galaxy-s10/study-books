@@ -1,5 +1,5 @@
 /**
- * 需求：
+ * warn: 在ts里面引入js文件的数据，会导致类型检测失效！
  */
 export interface tab {
   id: number;
