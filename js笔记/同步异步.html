@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let ajax1 = new Promise((res, rej) => {
+        console.log("发起ajax1请求");
+        setTimeout(() => {
+          res("ajax1请求在2秒后响应");
+        }, 2000);
+      });
+      let ajax2 = new Promise((res, rej) => {
+        console.log("发起ajax2请求");
+        setTimeout(() => {
+          res("ajax2请求在1秒后响应");
+        }, 1000);
+      });
+      //不管哪个请求先响应，如果想按照哪个ajax先发就先执行哪个，就这样写
+      //   ajax1.then((res) => {
+      //     console.log(res);
+      //     ajax2.then((res2) => {
+      //       console.log(res2);
+      //     });
+      //   });
+
+      //不管哪个请求先发，如果想按照哪个ajax先响应就先执行哪个，就这样写
+      ajax1.then((res) => {
+        console.log(res);
+      });
+      ajax2.then((res) => {
+        console.log(res);
+      });
+      //2,1
+    </script>
+  </body>
+</html>
