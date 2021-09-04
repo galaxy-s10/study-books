@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const list = [
+        {
+          id: 1,
+          name: 123,
+        },
+        {
+          id: 2,
+          name: 456,
+        },
+        {
+          id: 1,
+          name: 789,
+        },
+      ];
+      //期望得到
+      //    [{
+      //           id:1,
+      //           name:123,
+      //           item:{
+      //               id:1,
+      //               name:789
+      //           }
+      //       },{
+      //           id:2,
+      //           name:456
+      //       }]
+
+      function test(arr) {
+        const newarr = JSON.parse(JSON.stringify(arr));
+        // console.log(newarr);
+        let res = [];
+        for (let i = 0; i < newarr.length; i++) {
+          console.log(i, newarr[i]);
+          let flag = true;
+          for (let j = 0; j < res.length; j++) {
+            if (res[j].id === newarr[i].id) {
+              console.log("youle");
+              flag = false;
+              console.log(res[i], i, j);
+              if (res[j].item) {
+                res[j].item.push(newarr[i]);
+              } else {
+                res[j].item = [newarr[i]];
+              }
+            } else {
+              console.log("meile");
+            }
+          }
+          flag && res.push(newarr[i]);
+          console.log(JSON.stringify(res));
+        }
+        console.log(res);
+      }
+
+      test(list);
+    </script>
+  </body>
+</html>
