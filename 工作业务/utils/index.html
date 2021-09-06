@@ -1,50 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <script src="./utils.js"></script>
     <script>
-        var arr1 = [1, 2, 3]
-        var arr2 = [3, 4, 5]
-        console.log(unique(arr1, arr2))
-        var groupData = [
-            { name: 'Apple X', type: 'Apple' },
-            { name: 'S20', type: 'Samsung' },
-            { name: 'S10', type: 'Samsung' },
-            { name: 'Apple 12', type: 'Apple' },
-            { name: 'Oneplus 7', type: 'Oneplus' },
-            { name: 'Apple 11', type: 'Apple' },
-            { name: 'S21', type: 'Samsung' },
-            { name: 'Oneplus 8', type: 'Oneplus' },
-        ]
-        var res1 = groupByName(groupData, 'type')
-        console.log(res1)
-        // console.log(groupData);
-        // console.log(res1['Apple'])
+      console.log(computedExpirationTime(1631500994022));
+      var arr1 = [1, 2, 3];
+      var arr2 = [3, 4, 5];
+      console.log(unique(arr1, arr2));
+      var groupData = [
+        { name: "Apple X", type: "Apple" },
+        { name: "S20", type: "Samsung" },
+        { name: "S10", type: "Samsung" },
+        { name: "Apple 12", type: "Apple" },
+        { name: "Oneplus 7", type: "Oneplus" },
+        { name: "Apple 11", type: "Apple" },
+        { name: "S21", type: "Samsung" },
+        { name: "Oneplus 8", type: "Oneplus" },
+      ];
+      var res1 = groupByName(groupData, "type");
+      console.log(res1);
+      // console.log(groupData);
+      // console.log(res1['Apple'])
 
-        // var aaa = [{ name: 'apple x', type: 'apple' }, { name: 'apple 11', type: 'apple' }, { name: 'oneplus 7', type: 'oneplus' }]
-        // console.log(groupByName(groupData, 'type'));
-        // console.log(JSON.stringify(aaa));
-        // console.log(JSON.stringify(groupByName(aaa, 'type')));
+      // var aaa = [{ name: 'apple x', type: 'apple' }, { name: 'apple 11', type: 'apple' }, { name: 'oneplus 7', type: 'oneplus' }]
+      // console.log(groupByName(groupData, 'type'));
+      // console.log(JSON.stringify(aaa));
+      // console.log(JSON.stringify(groupByName(aaa, 'type')));
 
-        // console.log(formatTime('2020-10-01 12:24:03'));
-        console.log(formatTime('2020-10-01'));
-        // console.log(formatTime1(1616562620756));
-        // console.log(formatTime1(1616562620756));
-        // console.log(formatTime1(1616562620756, 'yy-mm-dd'));
-        // console.log(formatTime(1616562620756));
-        console.log(formatTime1(new Date()));
-        console.log(formatTime2(new Date()));
+      // console.log(formatTime('2020-10-01 12:24:03'));
+      console.log(formatTime("2020-10-01"));
+      // console.log(formatTime1(1616562620756));
+      // console.log(formatTime1(1616562620756));
+      // console.log(formatTime1(1616562620756, 'yy-mm-dd'));
+      // console.log(formatTime(1616562620756));
+      console.log(formatTime1(new Date()));
+      console.log(formatTime2(new Date()));
     </script>
-
-</body>
-
+  </body>
 </html>
