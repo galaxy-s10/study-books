@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let aa = ["SkinBody1", "SkinFace1", "SkinLeg1"];
+      let skin1 = "SkinLeg";
+      let skin2 = "SkinBody";
+      let skin3 = "SkinFace";
+      let res1;
+      let res2;
+      let res3;
+      aa.forEach((v) => {
+        console.log(v);
+        let reg1 = /SkinLeg(.+)/g;
+        let reg2 = /SkinBody(.+)/g;
+        let reg3 = /SkinFace(.+)/g;
+        res1 = v.match(reg1);
+        res2 = v.match(reg2);
+        res3 = v.match(reg3);
+        // let regres1 = v.match(reg1);
+        // let regres2 = v.match(reg2);
+        // let regres3 = v.match(reg3);
+        console.log(regres1, 232323);
+        console.log(regres2, 232323);
+        console.log(regres3, 232323);
+      });
+      inst.changeSlot("SkinLeg", res1);
+      inst.changeSlot("SkinBody", res2);
+      inst.changeSlot("SkinFace", res3);
+    </script>
+  </body>
+</html>

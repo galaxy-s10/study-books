@@ -1,4 +1,4 @@
-# Delete `␍` eslint
+# Delete `cr` eslint
 
 ## 网上搜到的答案
 
