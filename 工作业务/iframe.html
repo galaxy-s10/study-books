@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>123</div>
+    <!-- <iframe id="hss" src="https://www.hsslive.cn" frameborder="0"></iframe> -->
+    <!-- <iframe id="child" src="http://127.0.0.1:5501/index.html"></iframe> -->
+    <script>
+      window.onload = function () {
+        let iframe = document.createElement("iframe");
+        iframe.style.width = "100px";
+        iframe.style.height = "100px";
+        iframe.setAttribute("id", "cocos-canvas");
+        iframe.setAttribute("src", "http://127.0.0.1:5501/index.html");
+        // iframe.src = "https://www.hsslive.cn";
+        console.log(iframe);
+        document.body.appendChild(iframe);
+        // console.log(window.frames["child"], "获取child的iframe成功");
+        let cocosCanvasIframe = window.frames["cocos-canvas"];
+        console.log(cocosCanvasIframe, "获取cocos-canvas的iframe成功");
+        // iframe.postMessage("message111", "http://127.0.0.1:5501/index.html");
+        console.log(window.frames.postMessage("1111", "http://127.0.0.1:5501"));
+        // console.log(cocosCanvasIframe.postMessage("1111"));
+        // window.open("http://127.0.0.1:5501/index.html");
+        window.addEventListener("message", function (event) {
+          console.log("iframe监听到事件", event);
+        });
+      };
+    </script>
+  </body>
+</html>

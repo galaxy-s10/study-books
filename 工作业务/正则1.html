@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const decodeAction = (txt) => {
+        const regs = /\$ACTION\((.*)\)/gi;
+        const reg =
+          /\$ACTION\((?<key>[\w|\d|\W]+),(?<action>[\w|\d|\W]+)\)\((?<txt>[\w|\d|\W]+)\)/i;
+        const regsx = txt?.match(regs);
+        regsx?.forEach((el) => {
+          const regex = reg.exec(el);
+          if (regex && regex.groups) {
+            const groups = regex.groups;
+            txt = txt.replace(
+              el,
+              `<a href='javascript:actionClick("${groups["key"]}","${groups["action"]}")'>${groups["txt"]}</a>`
+            );
+          }
+          if (regex && !regex.groups && regex.length == 4) {
+            txt = txt.replace(
+              el,
+              `<a href='javascript:actionClick("${regex[1]}","${regex[2]}")'>${regex[3]}</a>`
+            );
+          }
+        });
+        return txt;
+      };
+      const str =
+        "hi，你好${hss;customer-service-QA1Feedback2-EN,app://pkg/com.nebula.mamu/com.nebula.livevoice.ui.activity.ActivityWebViewNormal?extra_external_url=http%3A%2F%2Ffeedback.funnymamu.com%2Ffeedback%3FfromType%3D2%26tab%3D1&extra_webview_title=Feedback}，我叫${lili;www.google.com}啊";
+      console.log(decodeAction(str));
+
+      function decodeAction1(_str) {
+        let str = _str;
+        let reg = /\${([^}]*)}/g;
+        let resarr = str.match(reg);
+        // let resarr = str.replace(reg, function (a, b, c, d, e) {
+        //   console.log(a, b, c, d, e);
+        //   return "12";
+        // });
+        console.log(resarr, "gsfgsf");
+        let strres = "";
+        resarr.forEach((el) => {
+          console.log(el, 33333);
+          //   console.log("execres", execres);
+          str = str.replace(reg, function (a, b, c, d, e) {
+            let name = b.split(";")[0];
+            let arr = b.split(";")[1].split(",");
+            let key = arr[0];
+            let action = arr[1];
+
+            return `<a href='javascript:actionClick("${key}","${action})"'>${name}</a>`;
+          });
+        });
+        return str;
+      }
+
+      console.log(decodeAction1(str));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 深拷贝问题
+        针对深拷贝，需要使用其他办法，因为 Object.assign()拷贝的是（可枚举）属性值。}
+        假如源值是一个对象的引用，它仅仅会复制其引用值。
+        https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+      */
+      let user = { info: { token: "0x100", age: 18 }, status: 1 };
+      let age = 20;
+      //修改user.info里面的age
+      let obj = Object.assign({}, { ...user });
+      // let obj = Object.assign({ ...user }, { ...user.info, age });
+      console.log(obj);
+
+      //给user.info新增name
+      let name = "zsh";
+      let obj1 = Object.assign({ ...user }, { info: { ...user.info, name } });
+      console.log(obj1);
+    </script>
+  </body>
+</html>
