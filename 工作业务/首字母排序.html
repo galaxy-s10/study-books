@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 数组首字母排序
+       */
+      function orderByFirstLetterArr(arr) {
+        let _arr = JSON.parse(JSON.stringify(arr));
+        return _arr.sort((a, b) => {
+          return a[0].charCodeAt() - b[0].charCodeAt();
+        });
+      }
+      let arrList = ["eat", "ettt", "tea", "tan", "ate", "nat", "bat"];
+      console.log(orderByFirstLetterArr(arrList));
+
+      let objList = { a: "sgd", sdf: "terw", b: "etewet1" };
+      function orderByFirstLetterObj(obj) {
+        let _obj = JSON.parse(JSON.stringify(obj));
+        return _obj.sort((a, b) => {
+          return a[0].charCodeAt() - b[0].charCodeAt();
+        });
+      }
+      console.log(orderByFirstLetterObj(objList));
+    </script>
+  </body>
+</html>
