@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // 数组扁平化，去重，升序
+    // 方法1，使用es6中的flat()方法扁平化数组，然后new Set去重，最后sort排序
+    let arr = [1, 3, 2, [4, 5, 7, [6, 7, 8, [9, 1, 3]]]]
+    arr = arr.flat(Infinity)
+    arr = [...new Set(arr)]
+    // arr = Array.from(arr)
+    // arr = [...arr]
+    arr.sort((a, b) => {
+        return a - b
+    })
+    console.log(arr);
+
+    // 方法2，使用toString()方法将数组转化为字符串，再使用splice()方法,最后map()方法，扁平化数组，然后new Set去重，最后sort排序
+    let arr1 = [1, 3, 2, [4, 5, 7, [6, 7, 8, [9, 1, 3]]]]
+    arr1 = arr1.toString().split(',').map(item => {
+        return Number(item)
+    })
+    arr1 = [...new Set(arr1)]
+    // arr1 = Array.from(arr1)
+    // arr1 = [...arr1]
+    arr1.sort((a, b) => {
+        return a - b
+    })
+    console.log(arr1);
+
+    // 方法3，利用JSON.stringify，然后正则替换[]
+    let arr2 = [1, 3, 2, [4, 5, 7, [6, 7, 8, [9, 1, 3]]]]
+    arr2 = JSON.stringify(arr2).replace(/(\[|\])/g, '').split(',').map(item => {
+        return Number(item)
+    })
+    arr2 = [...new Set(arr2)]
+    arr2.sort((a, b) => {
+        return a - b
+    })
+    console.log(arr2);
+</script>
+
+<body>
+
+</body>
+
+</html>

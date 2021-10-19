@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div2 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid red;
+            text-align: center;
+        }
+
+        #div2 p {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            /* 这里的margin只是清除p标签默认的外边距 */
+            margin: 0;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div2">
+        <p></p>
+    </div>
+
+    <div style="width: 300px;background-color: red;margin:0 auto">
+        <span>dsff</span>
+    </div>
+    <div style="width:400px;height:50px;position: relative;background-color: red;">
+        <!-- 子元素高度已知 -->
+        <div style="background-color: blue;position:absolute;left: 50%;width:100px;height:30px;margin-left: -50px;">
+            fdsfdsfsf
+        </div>
+    </div>
+    <div style="width:400px;height:50px;position: relative;background-color: red;">
+        <!-- 子元素高度未知 -->
+        <div style="background-color: blue;position:absolute;left: 50%;transform: translateX(-50%);">
+            fdsfdsfsf
+        </div>
+    </div>
+
+    <div style="width:400px;height:50px;background-color: blue;display: flex;justify-content: center">
+        <div>fds</div>
+    </div>
+    <div style="width: 300px;margin: 0 auto;">
+        <div>sdf</div>
+    </div>
+    <div style="background-color: blue;height: 40px;line-height: 40px;">
+        <div>fsd</div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div style="width:400px;height:300px;position: relative;background-color: red;">
+        <!-- 子元素高度已知 -->
+        <div style="background-color: blue;position:absolute;top: 50%;width:100px;height:100px;margin-top: -50px;">
+            fdsfdsfsf
+        </div>
+    </div>
+    <div style="width:400px;height:300px;position: relative;background-color: red;">
+        <!-- 子元素高度未知 -->
+        <div style="background-color: blue;position:absolute;top: 50%;transform: translateY(-50%);">
+            fdsfdsfsf
+        </div>
+    </div>
+
+
+    <div style="width:400px;height:200px;background-color: blue;display: flex;align-items:center">
+        <div>fds</div>
+    </div>
+</body>
+
+</html>

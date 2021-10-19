@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            background: red;
+            width: 100px;
+            height: 100px
+        }
+        div:first-child{
+            background-color: yellow;
+            /* 绝对定位，脱离文本流（不占位置）*/
+            position: absolute;
+            top: 30px;
+            left: 30px;
+
+        }
+        div:nth-child(2){
+            background-color: green;
+            /* 相对定位,不脱离文本流（占位置） */
+            position: relative;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+</body>
+
+</html>

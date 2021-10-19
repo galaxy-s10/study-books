@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <router-link to="/login/1/aaa">登录</router-link>
+        <router-view></router-view>
+    </div>
+
+    <template id="login">
+        <div>
+            <h1>登录---{{$route.params.id}}------{{$route.params.name}}</h1>
+        </div>
+    </template>
+    
+
+    <script>
+
+        var login = {
+            template:"#login"
+        }
+
+        var routerobj = new VueRouter({
+            routes:[
+                {path:'/login/:id/:name',component:login}
+            ]
+        })
+
+        var vm = new Vue({
+            el:"#app",
+            data:{},
+            methods:{},
+            router:routerobj
+        })
+
+
+
+    </script>
+    
+</body>
+</html>

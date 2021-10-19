@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="content"
+        style="height:150px;line-height:150px;text-align:center; color: #fff;background-color:#ccc;font-size:80px;">
+    </div>
+    <script>
+        let num = 1;
+        let content = document.getElementById('content');
+
+        function count() {
+            content.innerHTML = num++;
+            console.log('s')
+        };
+        content.onmousemove = debounce(count, 500);
+        // content.onmousemove = debounce1(count, 500, false);
+        function debounce(func, wait) {
+            let timeout;
+            return function () {
+                let context = this;
+                let args = arguments;
+
+                if (timeout) clearTimeout(timeout);
+
+                let callNow = !timeout;
+                timeout = setTimeout(() => {
+                    timeout = null;
+                }, wait)
+
+                if (callNow) func.apply(context, args)
+            }
+        }
+    </script>
+</body>
+
+</html>

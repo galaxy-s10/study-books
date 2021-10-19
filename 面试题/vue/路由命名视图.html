@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-view></router-view>
+        <router-view name="left"></router-view>
+        <router-view name="right"></router-view>
+    </div>
+
+    <template id="header">
+        <div>
+            <h1>我是header</h1>
+        </div>
+    </template>
+    <template id="left">
+        <div>
+            <h1>我是left</h1>
+        </div>
+    </template>
+    <template id="right">
+        <div>
+            <h1>我是rigth</h1>
+        </div>
+    </template>
+
+
+    <script>
+        var header = {
+            template:"#header"
+        }
+        var left = {
+            template:"#left"
+        }
+        var right = {
+            template:"#right"
+        }
+
+        var routerobj = new VueRouter({
+            routes:[
+                {path:"/",components: {
+                    default:header,
+                    left,
+                    right
+                }}
+            ]
+        })
+
+        var vm = new Vue({
+            el:"#app",
+            data:{},
+            methods:{},
+            router:routerobj
+        })
+    </script>
+</body>
+</html>

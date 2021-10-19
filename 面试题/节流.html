@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="search">
+    <script>
+        function throttle(fn, interval) {
+            var lastTime = 0
+            return function () {
+                var _this = this
+                var _arguments = arguments
+                var newTime = new Date().getTime()
+
+                if (newTime - lastTime > interval) {
+                    var res = fn.apply(_this, _arguments)
+                    lastTime = newTime
+                }
+                return res
+            }
+        }
+
+        // 获取输入框
+        var search = document.querySelector('.search');
+
+        // 监听事件
+        function searchFunc() {
+            // Arguments(3) [InputEvent, 100, 200, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+            console.log(arguments);
+            console.log(this);  // <input type="text" class="search">
+        };
+
+        var throttleWrap = throttle(searchFunc, 1000)
+
+        search.addEventListener('input', function () {
+            throttleWrap.apply(this, [event, 100, 200])
+        })
+
+        // search.addEventListener('input', throttle.apply(searchFunc, [1000]))
+
+
+    </script>
+</body>
+
+</html>

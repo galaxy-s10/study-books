@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .center {
+        width: 400px;
+        height: 400px;
+        background-color: pink;
+        position: relative;
+        /* display: flex;
+        justify-content: center;
+        align-items: center; */
+    }
+
+    .item {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        /* margin-left: -100px;
+        margin-top: -100px; */
+        transform: translateX(-50%) translateY(-50%);
+        width: 200px;
+        height: 200px;
+        background-color: gray
+    }
+    .center1{
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+        position: relative;
+    }
+    .item1{
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: skyblue;
+        width: 100px;
+        height: 100px;
+
+    }
+</style>
+
+<body>
+
+    <div class="center">
+        <div class="item"></div>
+    </div>
+    <div class="center1">
+        <div class="item1"></div>
+    </div>
+</body>
+
+</html>

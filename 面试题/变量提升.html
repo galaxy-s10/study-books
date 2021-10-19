@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    console.log(a);
+    var a = 1;
+    var getNum = function () {
+        console.log('hi');
+        a = 2
+    }
+    // function getNum() {
+    //     console.log('by');
+    //     a = 3
+    // }
+    console.log(a);
+    getNum()
+    console.log(a);
+
+    abs(-1);    //function
+    abs(2);     //function      
+    abs(-8);    //function
+
+    function abs(x) {
+       console.log('这是一个function');
+        return x < 0 ? -x : x;
+    }
+
+    var abs = function (x) {
+       console.log('这是一个匿名function');
+        return x < 0 ? -x : x;
+    };
+</script>
+
+<body>
+
+</body>
+
+</html>

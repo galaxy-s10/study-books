@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="edit">
+    <div id="name"></div>
+    <script>
+        var obj = {}
+        Object.defineProperty(obj, 'val', {
+            enumerable: true,       // 可枚举
+            configurable: true,     // 可配置
+            // writable: true,         // 可修改
+            // value: '100',
+            get: function () {
+                console.log('获取数据时会调用get方法');
+            },
+            set: function (e) {
+                console.log('设置数据时会调用set方法');
+                document.getElementById('edit').value = e
+                document.getElementById('name').innerHTML = e
+            }
+        })
+        delete obj.val
+        // obj.val = 200
+        console.log(obj.val);
+        // for (let key in obj) {
+        //     console.log(key);
+        // }
+        document.getElementById('edit').addEventListener('input', function (e) {
+            console.log(e.target.value);
+            obj.val = e.target.value
+
+        })
+    </script>
+</body>
+
+</html>

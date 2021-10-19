@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn1">按钮1</button>
+    <button id="btn2">按钮2</button>
+    <button id="btn3">按钮3</button>
+    <script>
+        window.onload = function () {
+            var school = "高中"
+            function test() {
+                console.log(this)
+                console.log('=========')
+            }
+            test()  //高中
+            var person = {
+                name: "小明",
+                age: "18",
+                say1: function () {
+                    console.log(person.name)
+                },
+                say2: function () {
+                    console.log(this.name)   //指向person
+                }
+            }
+            person.say1()
+            person.say2()
+
+            var buttons = document.getElementsByTagName('button')
+            console.log(buttons)
+            for (var j = 0; j < buttons.length; j++) {
+                console.log(j)
+                buttons[j].onclick = function () {
+                    console.log(buttons[j])     //undefined,因为作用域问题，后面的j改变了，前面的也变了
+                    console.log(this.id)    //this指向当前button
+                }
+            }
+        }
+
+        // var xxx = 1
+        var test1 = function() {
+            // this.xxx = "我是test1的x"
+            console.log('=====')
+            console.log(this.xxx)
+        }
+        var xxx = 1
+        test1()
+        // console.log(this.xxx)
+    </script>
+</body>
+
+</html>

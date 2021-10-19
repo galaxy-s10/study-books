@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log('变量提升')
+        function fun2(){
+            //JavaScript 只有声明的变量会提升，初始化的不会。
+            //var num1           //var num1提升了
+            console.log(num1)   //undefined
+            var num1 = 999      //var num1提升了，但初始化变量num1 = 999并不会提升
+        }
+        fun2()
+    </script>
+</body>
+
+</html>

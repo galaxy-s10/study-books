@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = 'abcdefg'
+        // 方法一：先字符串转化为数组，然后数组反转，最后转化为数组
+        var newstr = str.split("").reverse().join("")
+        console.log(newstr);    // gfedcba
+
+        // 方法二：倒序遍历字符串，将每一项插进一个新数组，最后将新数组转化为字符串
+        var newstr1 = []
+        for (var i = str.length - 1; i >= 0; i--) {
+            newstr1.push(str[i])
+        }
+        console.log(newstr1.join(""));  // gfedcba
+    </script>
+</body>
+
+</html>

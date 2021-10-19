@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<head></head>
+
+<body>
+    <div id="app">
+        <input type="text" id="aaa" v-model="text">
+        {{text}}
+        <!-- {{msg.a}} -->
+    </div>
+
+    <script>
+        var node = document.querySelector("#app")
+        var aaa = document.querySelector("#aaa")
+        let childNodes = node.childNodes;
+        // console.log(childNodes.forEach(val=>console.log(val)));
+        console.log(childNodes);
+        console.log(aaa.attributes);
+        // console.log(aaa.attributes.forEach(val=>console.log(val)));
+        for(var i=0;i<aaa.attributes.length;i++){
+            console.log(aaa.attributes[i]);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .cen1 {
+            width: 400px;
+            height: 400px;
+            background-color: red;
+            position: relative;
+        }
+
+        .cen2 {
+            background-color: yellow;
+            position: absolute;
+            /* 如果已知宽高 */
+            /* top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            margin-left: -100px;
+            margin-top: -100px; */
+            /* 如果已知宽高还可以这样 */
+            /* width: 200px;
+            height: 200px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin:auto; */
+            /* 如果宽高未知 */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        .cen3 {
+            width: 200px;
+            height: 200px;
+            background-color: green;
+            position: relative;
+        }
+
+        .cen4 {
+            background-color: hotpink;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .cen5 {
+            width: 200px;
+            height: 200px;
+            background-color: purple;
+            display: flex;
+            /* justify-content:center; */
+            align-items: Center;
+        }
+
+        .cen6 {
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+
+        }
+
+        .foot {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body style="padding: 0px;margin:0px">
+    <div class="cen1">
+        <div class="cen2">
+            水平垂直居中
+        </div>
+    </div>
+    <div class="cen3">
+        <div class="cen4">222</div>
+    </div>
+    <div class="cen5">
+        <div class="cen6">水平居中</div>
+    </div>
+    <div class="foot">foot</div>
+
+    <script>
+        function say() {
+            console.log(this)
+            console.log("我是say")
+        }
+        var that = "aaaaaaaa"
+        // var arr = [12, 13, 14, 15, 16]
+        var obj = {
+            that: "xxxxx",
+            test: this.that,
+            name: "张三", age: 18, sex: "男",
+            say: function () {
+                console.log(this.that)
+                // setTimeout(function(){
+                //     console.log(this.str)
+                // })
+                // setTimeout(()=>{
+                //     console.log(this.str)
+                // })
+            }
+
+        }
+        // console.log(obj)
+        // obj.say()
+
+        var name = 'window';
+
+        function show() {
+            console.log(this);
+            console.log(this.name);
+        }
+
+        //创建一个构造函数
+        function Fn(name) {
+            this.name = name;
+            this.show = show;
+            console.log(this)
+        }
+        var func = new Fn("fd")
+        // ggg = "aaa"
+        var ggg
+        console.log(ggg)
+        // var ggg = 100
+        // Fn("fd")
+        // say()
+        // var aaa = arr.forEach(function (value, key, arr) {
+        //     console.log(value)
+        //     console.log(this.that)
+        // })
+        // var arr = [12, 13, 14, 15, 16]
+        // for(val of arr){
+        //     console.log(that)
+        //     console.log(val)
+        // }
+        // var arr = [12, 13, 14, 15, 16]
+        // console.log(arr)
+        // var newarr = Array.isArray(arr)
+        // console.log(newarr)
+        // console.log(arr)
+        // console.log(obj.name)
+        // console.log(aaa)
+        // console.log(bbb)
+    </script>
+
+</body>
+
+</html>

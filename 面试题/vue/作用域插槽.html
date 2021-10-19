@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>作用域插槽</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>
+            定义好了一个带有slot插槽的组件com1，
+            调用该组件时，不能直接调用com1里面的数据，
+            需要使用作用域插槽
+        </h1>
+        <hr>
+        <h2>废弃的语法slot-scope</h2>
+        <com1 :todos="userinfo">
+            <!-- 直接调用com1里的数据报错,因为它会去父组件找 -->
+            <!-- {{todo.id}} -->
+            <template slot-scope="scope">
+                {{scope.todo.id}}
+            </template>
+            <!-- 解构写法 -->
+            <!-- <template slot-scope="{todo}">
+                {{todo.id}}
+            </template> -->
+        </com1>
+        <hr>
+        <h2>v-slot</h2>
+        <com2 :todos="userinfo">
+            <!-- <template v-slot="aaa"> -->
+            <template v-slot="{ todo,todo1,todo2}"> 
+                <!-- {{aaa.todo.id}}插槽里的 -->
+                <!-- {{aaa.todo.id}} -->
+                {{todo}}
+                <!-- {{aaa.todo1}}也是插槽里的 -->
+                <!-- {{aaa.todo1.name}} -->
+                {{todo1}}
+                <!-- {{aaa.todo2}}也是插槽里的 -->
+                {{todo2}}
+
+                 <!-- #########  {{todo.id}}是vue组件里的 ######### -->
+                 <!-- {{todo.id}} -->
+            </template>
+            <!-- 解构写法 -->
+            <!-- <template v-slot='{todo}'>
+                {{todo.id}}{{todo.name}}
+            </template> -->
+        </com2>
+        <hr>
+        <h2>具名插槽v-slot</h2>
+        <com3 :todos="userinfo">
+            <template v-slot:default="aaa">
+                {{aaa.todo.id}}-{{todo.id}}
+            </template>
+            <template v-slot:name1="aaa">
+                {{aaa.todo.id}}-{{todo.id}}
+            </template>
+        </com3>
+    </div>
+
+    <!-- 作用域插槽 -->
+    <template id="com1">
+        <div>
+            <li v-for="todo in todos">
+                <!-- <strong>{{todo.id}}</strong> -->
+                <slot :todo="todo">{{todo.name}}</slot>
+            </li>
+        </div>
+    </template>
+
+    <template id="com2">
+        <div>
+            <li v-for="todo in todos">
+                <!-- <strong>{{todo.id}}</strong> -->
+                <slot :todo="todo" :todo1="{'name':'张三'}" todo2="ooooo">{{todo.name}}</slot>
+            </li>
+        </div>
+    </template>
+
+    <template id="com3">
+        <div>
+            <li v-for="todo in todos">
+                <!-- <strong>{{todo.id}}</strong> -->
+                <slot :todo="todo">{{todo.name}}</slot>
+                <hr>
+                <span style="background: rebeccapurple">
+                    <slot :todo="todo" name="name1">aaaa</slot>
+                </span>
+
+            </li>
+        </div>
+    </template>
+
+    <script>
+        var com1 = {
+            template: "#com1",
+            props: ['todos']
+        }
+        var com2 = {
+            template: "#com2",
+            props: ['todos']
+        }
+        var com3 = {
+            template: "#com3",
+            props: ['todos']
+        }
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                userinfo: [
+                    { 'id': 1, 'name': '张三' },
+                    { 'id': 2, 'name': '李四' },
+                    { 'id': 3, 'name': '王五' }
+                ],
+                todo: { 'id': '父组件的todo' }
+            },
+            methods: {},
+            components: {
+                com1,
+                com2,
+                com3
+            }
+        })
+    </script>
+</body>
+
+</html>

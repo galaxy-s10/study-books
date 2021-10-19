@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // set结构
+    let arr = [1, 2, 3, 3, 5, 6, 4, 6]
+    let arr1 = new Set()
+    arr1.add(1).add(3).add(3).add(2)
+    console.log(arr1);  //Set(3) {1, 3, 2}
+    let arr2 = new Set(arr)
+    console.log(arr2);  //Set(6) {1, 2, 3, 5, 6, 4}
+    for (let val of arr2) {
+        console.log(val);
+    }
+    // 去重转数组
+    arr2 = [...arr2]
+    console.log(arr2);  // [1, 2, 3, 5, 6, 4]
+
+    // map结构
+    let arr3 = new Map()
+    arr3.set('name', '掌声').set('age', 18).set('sex', '男')
+    console.log(arr3);
+    for (let [key, value] of arr3) {
+        console.log(key, value);
+    }
+
+    // map()方法
+    let arr4 = [1, 2, 3, 4, 5]
+    arr5 = arr4.map(val => {
+        return val + 1
+    })
+    console.log(arr4);  // [1, 2, 3, 4, 5]
+    console.log(arr5);  // [2, 3, 4, 5, 6]
+
+    // find()
+    let arr6 = [1, 2, 3, 4, 5]
+    let res = arr6.find(val => {
+        return val > 3
+    })
+    console.log(res);   //4
+    let res1 = arr6.find(val => {
+        return val > 5
+    })
+    console.log(res1);   //undefined
+    let objarr = [{ id: 1, name: '张三' }, { id: 2, name: '李四' }, { id: 3, name: '王五' }]
+    let objarrres = objarr.find(val => {
+        return val.id > 1
+    })
+    console.log(objarrres);     //{id: 2, name: "李四"}
+
+    // some()
+    let arr7 = [1, 2, 3, 4, 5, 6]
+    let res2 = arr7.some(val => {
+        return val > 3
+    })
+    console.log(res2);  //true
+    let res3 = arr7.some(val => {
+        return val > 6
+    })
+    console.log(res3);  //false
+
+
+</script>
+
+<body>
+
+</body>
+
+</html>

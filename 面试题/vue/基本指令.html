@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <p>{{msg}}</p>
+        <a v-bind:href='msg'>vue</a>
+        <input type="text" v-model='msg'>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg: "hello vue"
+            },
+            methods: {},
+        })
+        // let arr = [12,69,180,992]
+        // console.log(arr)
+        // let res = arr.reduce(function(fir,ind){
+        //     console.log(fir+","+ind)
+        // })
+
+        // const { aaa } = { aaa: 'admin', password: '111111' }
+        // console.log(aaa)
+        const tokens = {
+            admin: {
+                token: 'admin-token'
+            },
+            editor: {
+                token: 'editor-token'
+            }
+        }
+        const token = tokens['admin']
+        console.log(token)
+    </script>
+
+</body>
+
+</html>

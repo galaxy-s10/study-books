@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn1">按钮1</button>
+    <button id="btn2">按钮2</button>
+    <button id="btn3">按钮3</button>
+    <script>
+        var x = "100"
+        console.log(this.x)
+        function test(){
+            this.y = 200
+            console.log(this.x)
+        }
+        console.log(this.x)
+        console.log(this.y)
+        // window.onload = function () {
+        //     function test1() {
+        //         console.log(this)
+        //         return this
+        //     }
+        // }
+        test()
+    </script>
+</body>
+
+</html>

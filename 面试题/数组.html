@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // var arr1 = [
+        //     { id: 1, name: "小明" },
+        //     { id: 2, name: "小李" },
+        //     { id: 3, name: "小张" }
+        // ]
+        var arr = []
+        arr[0] = '张三'
+        arr[1] = 18
+        arr[2] = "男"
+        console.log(arr)    //["张三", 18, "男"]
+// person = new Object();
+// person.firstname = "John";
+// person.lastname = "Doe";
+// person.age = 50;
+// person.eyecolor = "blue";
+// console.log(person) //{firstname: "John", lastname: "Doe", age: 50, eyecolor: "blue"}
+
+// person={firstname:"John",lastname:"Doe",age:50,eyecolor:"blue"}
+// console.log(person) //{firstname: "John", lastname: "Doe", age: 50, eyecolor: "blue"}
+function person(firstname,lastname,age,eyecolor){
+	this.firstname=firstname;
+	this.lastname=lastname;
+	this.age=age;
+    this.eyecolor=eyecolor;
+}
+myFather=new person("John","Doe",50,"blue");
+myMother=new person("Tim","li",48,"white");
+console.log(myFather)
+console.log(myMother)
+
+// console.log(arr)    //[name: "张三", age: 18, sex: "男"]
+// for(val in arr){    //val是属性名，而数组本身是一个对象，属性名即下标
+//     console.log("值", val) //0 1 2
+// }
+// for(val of arr){    //val是属性值
+//     console.log("值", val)
+// }
+// arr.forEach(function (val, index) {
+//     console.log("值", val)
+//     console.log("索引", index)
+// })
+// console.log(arr)
+        // var res = arr.forEach(val => {
+        //     console.log("id", val.id)
+        //     val = val.id
+        // })
+        //undefined
+        // console.log(arr)
+        // arr.forEach(val => {
+        //     console.log("值", val)
+        //     val = val.id
+        // })
+        //原数组没有改变
+        // console.log(arr)
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

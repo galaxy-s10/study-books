@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // test()
+    let str1 = 'aaaaaa'
+    let str2 = 'AAAAAA'
+    let str3 = 'aaaAAA'
+    let str4 = 'aaa111'
+    let str5 = 'AAA111'
+    let str6 = 'aaaAAA1'
+    let reg = /(?!^[a-zA-Z]{1,}$)(?!^[a-z0-9]{1,}$)(?!^[A-Z0-9]{1,}$)^[a-zA-Z0-9]{6,16}$/
+    console.log(reg.test(str1));    //false
+    console.log(reg.test(str2));    //false
+    console.log(reg.test(str3));    //false
+    console.log(reg.test(str4));    //false
+    console.log(reg.test(str5));    //false
+    console.log(reg.test(str6));    //true
+
+    // exec()
+    let str7 = 'aaaAAA1'
+    let str8 = 'aaaaaa'
+    let str9 = 'aaaAAA2'
+    let str10 = 'aaaAAA2345'
+    let reg1 = /[0-9]/
+    console.log(reg1.exec(str7));   //["1", index: 6, input: "aaaAAA1", groups: undefined]
+    console.log(reg1.exec(str8));   //null
+    console.log(reg1.exec(str9));   //["2", index: 6, input: "aaaAAA2", groups: undefined]
+    console.log(reg1.exec(str10));  //["2", index: 6, input: "aaaAAA2345", groups: undefined]
+</script>
+
+<body>
+
+</body>
+
+</html>

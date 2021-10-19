@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function Person(name) {
+        this.name = name
+    }
+    let p = new Person('Tom')
+    Person.prototype.say = function () {
+        console.log('saysay');
+    }
+    Person.prototype.age = 18
+    // 如果没在原型添加任何东西，则p.__proto__是空Object
+    console.log(p.__proto__);   //{age: 18, say: ƒ, constructor: ƒ}
+    console.log(Person.prototype);  // {age: 18, say: ƒ, constructor: ƒ}
+    console.log(Person.constructor.prototype);  //ƒ () { [native code] }
+    console.log(Person.__proto__ == Person.constructor.prototype);  //true
+    console.log(p.__proto__ == Person.prototype);  // true
+</script>
+
+<body>
+
+</body>
+
+</html>
