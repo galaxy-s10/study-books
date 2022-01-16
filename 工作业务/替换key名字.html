@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const a = [
+        {
+          checked: false,
+          children: [
+            {
+              checked: false,
+              children: [],
+              id: "b372ef2c-d676-4211-86af-de4302c0584d",
+              name: "中东",
+            },
+            {
+              checked: false,
+              children: [
+                {
+                  checked: false,
+                  children: [
+                    {
+                      checked: false,
+                      children: [],
+                      id: "1b7d3a9a-c372-471c-8275-aaf099d95706",
+                      name: "印地语(hi)",
+                    },
+                    {
+                      checked: false,
+                      children: [],
+                      id: "c70e7283-e808-4ad3-8b89-a9b69aaf8f1a",
+                      name: "马拉地语(MR)",
+                    },
+                    {
+                      checked: false,
+                      children: [],
+                      id: "80ce6cbc-e129-48a3-b12f-dee97b9c449d",
+                      name: "古及拉特语(GJ)",
+                    },
+                    {
+                      checked: false,
+                      children: [],
+                      id: "bba9b65c-78fd-4d0b-8e05-3d33446e8f0d",
+                      name: "孟加拉语(MJ)",
+                    },
+                    {
+                      checked: false,
+                      children: [],
+                      id: "7e1b6a0c-ff4b-4053-b4ba-5ac20fe52232",
+                      name: "旁遮普语(PZ)",
+                    },
+                    {
+                      checked: false,
+                      children: [],
+                      id: "12900494-873b-4050-862a-45d212e8f734",
+                      name: "泰卢固语(TG)",
+                    },
+                    {
+                      checked: false,
+                      children: [],
+                      id: "68522885-9c62-4a9c-a793-92f16c57aa44",
+                      name: "泰米尔语(TM)",
+                    },
+                    {
+                      checked: false,
+                      children: [],
+                      id: "278c4c8f-f174-4ff6-afd2-269efc645173",
+                      name: "乌尔都语(UD)",
+                    },
+                    {
+                      checked: false,
+                      children: [],
+                      id: "5301c7eb-2e12-47d7-8f4e-36884196fdcb",
+                      name: "卡纳达语(KN)",
+                    },
+                    {
+                      checked: false,
+                      children: [],
+                      id: "265a8b74-5148-48db-8d8a-08c5f88cf995",
+                      name: "马拉雅拉姆语(MY)",
+                    },
+                  ],
+                  id: "86fede3d-2037-4222-89b6-6f7b53df57a4",
+                  name: "印度",
+                },
+                {
+                  checked: false,
+                  children: [
+                    {
+                      checked: false,
+                      children: [],
+                      id: "ba2f6ffb-2817-426a-81a7-b6f88afee09a",
+                      name: "旁遮普语(PZ)",
+                    },
+                    {
+                      checked: false,
+                      children: [],
+                      id: "d8c183ed-86b2-4114-bc93-a6362d9e3070",
+                      name: "乌尔都语(UD)",
+                    },
+                  ],
+                  id: "50fe34fd-6e66-457f-99f3-0c7a8abe220d",
+                  name: "巴基斯坦",
+                },
+                {
+                  checked: false,
+                  children: [
+                    {
+                      checked: false,
+                      children: [],
+                      id: "8768e191-23c6-4cb1-b765-551fe34a3b9e",
+                      name: "孟加拉语(MJ)",
+                    },
+                  ],
+                  id: "a33d49e4-5e02-4b52-a8f1-fda91dcd483d",
+                  name: "孟加拉",
+                },
+                {
+                  checked: false,
+                  children: [],
+                  id: "e1a37a3f-88f5-4081-ae66-dfe6b4a5dfa9",
+                  name: "新加坡",
+                },
+                {
+                  checked: false,
+                  children: [],
+                  id: "1cb25257-99e9-41ea-8af2-6125437582e3",
+                  name: "马来西亚",
+                },
+              ],
+              id: "335d44b6-8e14-4e3a-bfd7-75b18edd5e2d",
+              name: "南亚",
+            },
+          ],
+          id: "1",
+          name: "全部",
+        },
+      ];
+
+      function digui(obj) {
+        let item = {};
+        item.title = obj.name;
+        item.key = obj.id;
+        return item;
+      }
+      function formatTree(a) {
+        a.forEach((item) => {
+          item.key = item.id;
+          item.title = item.name;
+          delete item.id;
+          delete item.name;
+          if (item.children) {
+            formatTree(item.children);
+          }
+        });
+        return a;
+      }
+      console.log(formatTree(a));
+    </script>
+  </body>
+</html>

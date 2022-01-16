@@ -23,8 +23,10 @@
       let objList = { a: "sgd", sdf: "terw", b: "etewet1" };
       function orderByFirstLetterObj(obj) {
         let _obj = JSON.parse(JSON.stringify(obj));
-        return _obj.sort((a, b) => {
-          return a[0].charCodeAt() - b[0].charCodeAt();
+        return Object.keys(_obj).sort(function (a, b) {
+          console.log(a[0], b[0]);
+          // console.log(a[0].charCodeAt(), b[0].charCodeAt());
+          return _obj[b][0].charCodeAt() < _obj[a][0].charCodeAt();
         });
       }
       console.log(orderByFirstLetterObj(objList));

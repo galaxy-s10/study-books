@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const treeData = [
+        {
+          title: "0-0", //name
+          key: "0-0", //id
+          checked: false,
+          children: [
+            {
+              title: "0-0-0",
+              key: "0-0-0",
+              checked: false,
+              children: [
+                { title: "0-0-0-0", key: "0-0-0-0", checked: true },
+                { title: "0-0-0-1", key: "0-0-0-1", checked: false },
+                { title: "0-0-0-2", key: "0-0-0-2", checked: false },
+              ],
+            },
+            {
+              title: "0-0-1",
+              key: "0-0-1",
+              checked: false,
+              children: [
+                { title: "0-0-1-0", key: "0-0-1-0", checked: false },
+                { title: "0-0-1-1", key: "0-0-1-1", checked: false },
+                { title: "0-0-1-2", key: "0-0-1-2", checked: false },
+              ],
+            },
+            {
+              title: "0-0-2",
+              key: "0-0-2",
+              checked: false,
+            },
+          ],
+        },
+        {
+          title: "0-1",
+          key: "0-1",
+          checked: false,
+          children: [
+            { title: "0-1-0-0", key: "0-1-0-0", checked: false },
+            { title: "0-1-0-1", key: "0-1-0-1", checked: true },
+            { title: "0-1-0-2", key: "0-1-0-2", checked: false },
+          ],
+        },
+        {
+          title: "0-2",
+          key: "0-2",
+          checked: false,
+        },
+      ];
+      console.log(treeData);
+      function findAllChecked(arr) {
+        let result = [];
+        arr.forEach((item) => {
+          if (item.checked) {
+            result.push(item.key);
+          }
+          if (item.children) {
+            result = result.concat(findAllChecked(item.children));
+          }
+        });
+        return result;
+      }
+      console.log("结果", findAllChecked(treeData));
+    </script>
+  </body>
+</html>

@@ -1,46 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        .single {
-            /* 溢出隐藏 */
-            overflow: hidden;
-            /* 文本溢出显示省略号 */
-            text-overflow: ellipsis;
-            /* 文本不换行 */
-            white-space: nowrap;
-        }
+      .single {
+        /* 溢出隐藏 */
+        overflow: hidden;
+        /* 文本溢出显示省略号 */
+        text-overflow: ellipsis;
+        /* 文本不换行 */
+        white-space: nowrap;
+      }
 
-        .many {
-            /* 溢出隐藏 */
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-        }
+      .many {
+        /* 溢出隐藏 */
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <div style="width: 200px;">
-        <p class="single">p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用</p>
-        <h4 class="single">h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用</h4>
-        <div class="single">div标签可用div标签可用div标签可用div标签可用div标签可用div标签可用</div>
-        <span class="single">span标签不可用span标签不可用span标签不可用</span>
+  <body>
+    <div style="width: 200px">
+      <p class="single">
+        p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用
+      </p>
+      <h4 class="single">
+        h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用
+      </h4>
+      <div class="single">
+        div标签可用div标签可用div标签可用div标签可用div标签可用div标签可用
+      </div>
+      <span class="single">span标签不可用span标签不可用span标签不可用</span>
     </div>
-    <hr>
-    <div style="width: 200px;">
-        <p class="many">p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用</p>
-        <h4 class="many">h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用</h4>
-        <div class="many">div标签可用div标签可用div标签可用div标签可用div标签可用div标签可用</div>
-        <span class="many">span标签不可用span标签不可用span标签不可用</span>
+    <hr />
+    <div style="width: 200px">
+      <p class="many">
+        p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用p标签可用
+      </p>
+      <h4 class="many">
+        h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用h1-6标签可用
+      </h4>
+      <div class="many">
+        div标签可用div标签可用div标签可用div标签可用div标签可用div标签可用
+      </div>
+      <span class="many">span标签不可用span标签不可用span标签不可用</span>
     </div>
-
-</body>
-
+  </body>
 </html>

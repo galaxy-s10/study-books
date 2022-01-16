@@ -1,159 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        body {
-            padding: 0;
-            margin: 0;
-            background: #F1F1F1;
-            height: 100vh;
-        }
+      body {
+        padding: 0;
+        margin: 0;
+        background: #f1f1f1;
+        height: 100vh;
+      }
 
-        .wrap {
-            width: 350px;
-            height: 600px;
-            /* margin: 1.3rem auto 0 auto; */
-            margin: 0 auto;
-            box-sizing: border-box;
-            background-color: #fff;
-            border-radius: 10px;
+      .wrap {
+        width: 350px;
+        height: 600px;
+        /* margin: 1.3rem auto 0 auto; */
+        margin: 0 auto;
+        box-sizing: border-box;
+        background-color: #fff;
+        border-radius: 10px;
+      }
 
-        }
-
-        .bindtap {
-            position: fixed;
-            bottom: 0;
-            color: #000000;
-            text-align: center;
-            display: inline-block;
-            width: 100%;
-            padding: 10px 0;
-        }
+      .bindtap {
+        position: fixed;
+        bottom: 0;
+        color: #000000;
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+        padding: 10px 0;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <div style="padding-top: 1.3rem;">
-
-    </div>
+  <body>
+    <div style="padding-top: 1.3rem"></div>
     <div class="wrap">
-        <!-- <canvas id="share" width="350" height="600"></canvas> -->
-        <img src="" alt="result" id="result">
+      <!-- <canvas id="share" width="350" height="600"></canvas> -->
+      <img src="" alt="result" id="result" />
     </div>
     <span class="bindtap">长按图片发送给好友</span>
 
     <!-- <img src="" alt="result" id="result"> -->
 
     <script>
-        let resultSrc;
-        let canvasHeight = 600 //canvas高度
-        let canvasWidth = 350 //canvas宽度
+      let resultSrc;
+      let canvasHeight = 600; //canvas高度
+      let canvasWidth = 350; //canvas宽度
 
-        let nickname = '顺其自然.' //用户名
-        let avatarSrc = 'https://img.cdn.zhengbeining.com/1594408065308Billd.jpg' //用户头像
-        let shareCodeSrc = 'https://img.cdn.zhengbeining.com/1594408065308Billd.jpg' //分享二维码
-        // let shareCodeSrc = './code.png'
+      let nickname = '顺其自然.'; //用户名
+      let avatarSrc = 'https://img.cdn.zhengbeining.com/1594408065308Billd.jpg'; //用户头像
+      let shareCodeSrc =
+        'https://img.cdn.zhengbeining.com/1594408065308Billd.jpg'; //分享二维码
+      // let shareCodeSrc = './code.png'
 
-        let shareCodeWidth = 80
-        // let canvas = document.getElementById('share')
-        var canvas = document.createElement('canvas') //创建canvas元素
-        canvas.width = 350
-        canvas.height = 600
-        console.log(canvas);
-        let ctx = canvas.getContext('2d')
+      let shareCodeWidth = 80;
+      // let canvas = document.getElementById('share')
+      var canvas = document.createElement('canvas'); //创建canvas元素
+      canvas.width = 350;
+      canvas.height = 600;
+      console.log(canvas);
+      let ctx = canvas.getContext('2d');
 
-        // 画白色背景背景
-        ctx.fillStyle = "#fff";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // 画白色背景背景
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // 画一个圆
-        var circleR = 30 //圆半径
-        // var circleX = canvasWidth; //圆心X坐标
-        var circleX = parseInt((canvasWidth / 2).toFixed()); //圆心X坐标
-        var circleY = 60; //圆心Y坐标
-        var imgX = circleX - circleR; //图片X开始坐标
-        var imgY = circleY - circleR; //图片Y开始坐标
-        var imgWidth = 2 * circleR; //图片按圆形大小
+      // 画一个圆
+      var circleR = 30; //圆半径
+      // var circleX = canvasWidth; //圆心X坐标
+      var circleX = parseInt((canvasWidth / 2).toFixed()); //圆心X坐标
+      var circleY = 60; //圆心Y坐标
+      var imgX = circleX - circleR; //图片X开始坐标
+      var imgY = circleY - circleR; //图片Y开始坐标
+      var imgWidth = 2 * circleR; //图片按圆形大小
 
-        // 新建一个图片
-        var avatar = new Image()
+      // 新建一个图片
+      var avatar = new Image();
 
-        var shareCode = new Image()
-        // avatar.crossOrigin = "Anonymous";
-        avatar.setAttribute('crossOrigin', 'Anonymous')
-        shareCode.setAttribute('crossOrigin', 'Anonymous')
-        avatar.src = avatarSrc
-        shareCode.src = shareCodeSrc
+      var shareCode = new Image();
+      // avatar.crossOrigin = "Anonymous";
+      avatar.setAttribute('crossOrigin', 'Anonymous');
+      shareCode.setAttribute('crossOrigin', 'Anonymous');
+      avatar.src = avatarSrc;
+      shareCode.src = shareCodeSrc;
 
-        avatar.onload = function () {
-            ctx.save(); // 保存当前ctx的状态
-            //  画圆
-            drawAvatar()
-            // 把头像放圆里面
-            ctx.drawImage(avatar, imgX, imgY)
-            ctx.drawImage(avatar, imgX, imgY, circleR * 2, circleR * 2)
-            ctx.restore() // 还原状态
-
-            // 画矩形
-            // 把分享二维码放矩形里
-            ctx.drawImage(shareCode, canvasWidth / 4, canvasHeight - shareCodeWidth - 10, shareCodeWidth,
-                shareCodeWidth)
-            // 绘制文字
-            ctx.fillStyle = "#1077FF";
-            ctx.font = "16px sans-serif"
-            ctx.textBaseline = "top"
-            ctx.textAlign = "right"
-            ctx.fillText(nickname, circleX, circleY + circleR + 10);
-            ctx.textAlign = "left"
-            ctx.fillStyle = "black";
-            ctx.fillText('邀请你', (circleX + 4), circleY + circleR + 10);
-            ctx.font = "2.2rem sans-serif"
-            ctx.textAlign = "center"
-            ctx.fillStyle = "black";
-            ctx.fillText('扫码免费领商品', 175, circleY + circleR + 10 + 40);
-            ctx.textAlign = "start"
-            ctx.textBaseline = "bottom"
-            ctx.font = "1rem sans-serif"
-            ctx.fillStyle = "black";
-            ctx.fillText('长按识别二维码', canvasWidth / 4 + shareCodeWidth + 10, canvasHeight - shareCodeWidth - 10 +
-                shareCodeWidth / 4 * 2);
-            ctx.fillText('关注公众号免费领', canvasWidth / 4 + shareCodeWidth + 10, canvasHeight - shareCodeWidth - 10 +
-                shareCodeWidth / 4 * 3);
-
-            let a = document.getElementById('result')
-
-            // avatar.crossOrigin = '';
-            resultSrc = canvas.toDataURL("image/jpeg"); //png有毒在安卓机下识别二维码无法跳转
-            a.src = resultSrc
-
-
-        }
-
-        // 画圆
-        function drawAvatar() {
-            ctx.beginPath(); //开始画
-            ctx.arc(circleX, circleY, circleR, 0, 2 * Math.PI) //画圆
-            ctx.closePath() //结束画
-            ctx.strokeStyle = "skyblue" //设置图形轮廓的颜色
-            // ctx.stroke() //绘制轮廓
-            ctx.clip(); //裁剪上面的圆形
-        }
+      avatar.onload = function () {
+        ctx.save(); // 保存当前ctx的状态
+        //  画圆
+        drawAvatar();
+        // 把头像放圆里面
+        ctx.drawImage(avatar, imgX, imgY);
+        ctx.drawImage(avatar, imgX, imgY, circleR * 2, circleR * 2);
+        ctx.restore(); // 还原状态
 
         // 画矩形
-        function drawShareCode() {
-            ctx.beginPath(); //开始画
-            // ctx.strokeRect(20, 20, 150, 100);
-            // console.log(canvasHeight - shareCodeWidth - 10);
-            ctx.strokeRect(canvasWidth / 4, canvasHeight - shareCodeWidth - 10, shareCodeWidth,
-                shareCodeWidth); //绘制矩形边框
-            ctx.closePath() //结束画
-            ctx.stroke() //绘制轮廓
-        }
-    </script>
-</body>
+        // 把分享二维码放矩形里
+        ctx.drawImage(
+          shareCode,
+          canvasWidth / 4,
+          canvasHeight - shareCodeWidth - 10,
+          shareCodeWidth,
+          shareCodeWidth
+        );
+        // 绘制文字
+        ctx.fillStyle = '#1077FF';
+        ctx.font = '16px sans-serif';
+        ctx.textBaseline = 'top';
+        ctx.textAlign = 'right';
+        ctx.fillText(nickname, circleX, circleY + circleR + 10);
+        ctx.textAlign = 'left';
+        ctx.fillStyle = 'black';
+        ctx.fillText('邀请你', circleX + 4, circleY + circleR + 10);
+        ctx.font = '2.2rem sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = 'black';
+        ctx.fillText('扫码免费领商品', 175, circleY + circleR + 10 + 40);
+        ctx.textAlign = 'start';
+        ctx.textBaseline = 'bottom';
+        ctx.font = '1rem sans-serif';
+        ctx.fillStyle = 'black';
+        ctx.fillText(
+          '长按识别二维码',
+          canvasWidth / 4 + shareCodeWidth + 10,
+          canvasHeight - shareCodeWidth - 10 + (shareCodeWidth / 4) * 2
+        );
+        ctx.fillText(
+          '关注公众号免费领',
+          canvasWidth / 4 + shareCodeWidth + 10,
+          canvasHeight - shareCodeWidth - 10 + (shareCodeWidth / 4) * 3
+        );
 
+        let a = document.getElementById('result');
+
+        // avatar.crossOrigin = '';
+        resultSrc = canvas.toDataURL('image/jpeg'); //png有毒在安卓机下识别二维码无法跳转
+        a.src = resultSrc;
+      };
+
+      // 画圆
+      function drawAvatar() {
+        ctx.beginPath(); //开始画
+        ctx.arc(circleX, circleY, circleR, 0, 2 * Math.PI); //画圆
+        ctx.closePath(); //结束画
+        ctx.strokeStyle = 'skyblue'; //设置图形轮廓的颜色
+        // ctx.stroke() //绘制轮廓
+        ctx.clip(); //裁剪上面的圆形
+      }
+
+      // 画矩形
+      function drawShareCode() {
+        ctx.beginPath(); //开始画
+        // ctx.strokeRect(20, 20, 150, 100);
+        // console.log(canvasHeight - shareCodeWidth - 10);
+        ctx.strokeRect(
+          canvasWidth / 4,
+          canvasHeight - shareCodeWidth - 10,
+          shareCodeWidth,
+          shareCodeWidth
+        ); //绘制矩形边框
+        ctx.closePath(); //结束画
+        ctx.stroke(); //绘制轮廓
+      }
+    </script>
+  </body>
 </html>

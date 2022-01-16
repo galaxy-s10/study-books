@@ -1,0 +1,65 @@
+2021-12-24T05:34:01.390925Z 0 [System] [MY-013169] [Server] /usr/libexec/mysqld (mysqld 8.0.26) initializing of server in progress as process 1304417
+2021-12-24T05:34:01.398295Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2021-12-24T05:34:02.373725Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2021-12-24T05:34:03.922167Z 0 [Warning] [MY-013746] [Server] A deprecated TLS version TLSv1 is enabled for channel mysql_main
+2021-12-24T05:34:03.922533Z 0 [Warning] [MY-013746] [Server] A deprecated TLS version TLSv1.1 is enabled for channel mysql_main
+2021-12-24T05:34:03.935637Z 6 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: big=%?sH#81_
+2021-12-24T05:34:21.467254Z 0 [System] [MY-010116] [Server] /usr/libexec/mysqld (mysqld 8.0.26) starting as process 1304596
+2021-12-24T05:34:21.474715Z 0 [Warning] [MY-010075] [Server] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 25831a76-647b-11ec-a0b5-5254006aa635.
+mysqld: File '/var/lib/mysql/auto.cnf' not found (OS errno 13 - Permission denied)
+2021-12-24T05:34:21.474756Z 0 [ERROR] [MY-010183] [Server] Failed to create file(file: '/var/lib/mysql/auto.cnf', errno 13)
+2021-12-24T05:34:21.474774Z 0 [ERROR] [MY-010076] [Server] Initialization of the server's UUID failed because it could not be read from the auto.cnf file. If this is a new server, the initialization failed because it was not possible to generate a new UUID.
+2021-12-24T05:34:21.474846Z 0 [ERROR] [MY-010119] [Server] Aborting
+2021-12-24T05:34:21.475052Z 0 [System] [MY-010910] [Server] /usr/libexec/mysqld: Shutdown complete (mysqld 8.0.26)  Source distribution.
+2021-12-24T05:41:01.299450Z 0 [System] [MY-013169] [Server] /usr/libexec/mysqld (mysqld 8.0.26) initializing of server in progress as process 1306221
+2021-12-24T05:41:01.307519Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2021-12-24T05:41:02.195820Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2021-12-24T05:41:03.572434Z 0 [Warning] [MY-013746] [Server] A deprecated TLS version TLSv1 is enabled for channel mysql_main
+2021-12-24T05:41:03.572819Z 0 [Warning] [MY-013746] [Server] A deprecated TLS version TLSv1.1 is enabled for channel mysql_main
+2021-12-24T05:41:03.616279Z 6 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: wgw3ifqxh5+C
+2021-12-24T05:52:10.519179Z 0 [System] [MY-010116] [Server] /usr/libexec/mysqld (mysqld 8.0.26) starting as process 1309456
+2021-12-24T05:52:10.529637Z 0 [Warning] [MY-010075] [Server] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: a2b7f01e-647d-11ec-bd20-5254006aa635.
+mysqld: File '/var/lib/mysql/auto.cnf' not found (OS errno 13 - Permission denied)
+2021-12-24T05:52:10.529682Z 0 [ERROR] [MY-010183] [Server] Failed to create file(file: '/var/lib/mysql/auto.cnf', errno 13)
+2021-12-24T05:52:10.529700Z 0 [ERROR] [MY-010076] [Server] Initialization of the server's UUID failed because it could not be read from the auto.cnf file. If this is a new server, the initialization failed because it was not possible to generate a new UUID.
+2021-12-24T05:52:10.529754Z 0 [ERROR] [MY-010119] [Server] Aborting
+2021-12-24T05:52:10.529967Z 0 [System] [MY-010910] [Server] /usr/libexec/mysqld: Shutdown complete (mysqld 8.0.26)  Source distribution.
+2021-12-24T06:10:29.198672Z 0 [System] [MY-013169] [Server] /usr/libexec/mysqld (mysqld 8.0.26) initializing of server in progress as process 1313117
+2021-12-24T06:10:29.199864Z 0 [ERROR] [MY-010457] [Server] --initialize specified but the data directory has files in it. Aborting.
+2021-12-24T06:10:29.199881Z 0 [ERROR] [MY-013236] [Server] The designated data directory /var/lib/mysql/ is unusable. You can remove all files that the server added to it.
+2021-12-24T06:10:29.199930Z 0 [ERROR] [MY-010119] [Server] Aborting
+2021-12-24T06:10:29.200014Z 0 [System] [MY-010910] [Server] /usr/libexec/mysqld: Shutdown complete (mysqld 8.0.26)  Source distribution.
+2021-12-24T06:10:33.847740Z 0 [System] [MY-010116] [Server] /usr/libexec/mysqld (mysqld 8.0.26) starting as process 1313193
+2021-12-24T06:10:33.851555Z 0 [Warning] [MY-010075] [Server] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 345980a8-6480-11ec-ac01-5254006aa635.
+mysqld: File '/var/lib/mysql/auto.cnf' not found (OS errno 13 - Permission denied)
+2021-12-24T06:10:33.851597Z 0 [ERROR] [MY-010183] [Server] Failed to create file(file: '/var/lib/mysql/auto.cnf', errno 13)
+2021-12-24T06:10:33.851615Z 0 [ERROR] [MY-010076] [Server] Initialization of the server's UUID failed because it could not be read from the auto.cnf file. If this is a new server, the initialization failed because it was not possible to generate a new UUID.
+2021-12-24T06:10:33.851672Z 0 [ERROR] [MY-010119] [Server] Aborting
+2021-12-24T06:10:33.851864Z 0 [System] [MY-010910] [Server] /usr/libexec/mysqld: Shutdown complete (mysqld 8.0.26)  Source distribution.
+2021-12-24T06:10:34.968150Z 0 [System] [MY-010116] [Server] /usr/libexec/mysqld (mysqld 8.0.26) starting as process 1313287
+2021-12-24T06:10:34.972150Z 0 [Warning] [MY-010075] [Server] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 35047e16-6480-11ec-8225-5254006aa635.
+mysqld: File '/var/lib/mysql/auto.cnf' not found (OS errno 13 - Permission denied)
+2021-12-24T06:10:34.972190Z 0 [ERROR] [MY-010183] [Server] Failed to create file(file: '/var/lib/mysql/auto.cnf', errno 13)
+2021-12-24T06:10:34.972208Z 0 [ERROR] [MY-010076] [Server] Initialization of the server's UUID failed because it could not be read from the auto.cnf file. If this is a new server, the initialization failed because it was not possible to generate a new UUID.
+2021-12-24T06:10:34.972262Z 0 [ERROR] [MY-010119] [Server] Aborting
+2021-12-24T06:10:34.972441Z 0 [System] [MY-010910] [Server] /usr/libexec/mysqld: Shutdown complete (mysqld 8.0.26)  Source distribution.
+2021-12-24T06:13:00.967255Z 0 [System] [MY-010116] [Server] /usr/libexec/mysqld (mysqld 8.0.26) starting as process 1313848
+2021-12-24T06:13:00.973411Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2021-12-24T06:13:01.154128Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2021-12-24T06:13:01.335395Z 0 [Warning] [MY-013746] [Server] A deprecated TLS version TLSv1 is enabled for channel mysql_main
+2021-12-24T06:13:01.335516Z 0 [Warning] [MY-013746] [Server] A deprecated TLS version TLSv1.1 is enabled for channel mysql_main
+2021-12-24T06:13:01.336291Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2021-12-24T06:13:01.336429Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2021-12-24T06:13:01.351899Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/lib/mysql/mysqlx.sock
+2021-12-24T06:13:01.351981Z 0 [System] [MY-010931] [Server] /usr/libexec/mysqld: ready for connections. Version: '8.0.26'  socket: '/var/lib/mysql/mysql.sock'  port: 3306  Source distribution.
+2021-12-24T06:19:48.980528Z 0 [System] [MY-013172] [Server] Received SHUTDOWN from user <via user signal>. Shutting down mysqld (Version: 8.0.26).
+2021-12-24T06:19:49.554771Z 0 [System] [MY-010910] [Server] /usr/libexec/mysqld: Shutdown complete (mysqld 8.0.26)  Source distribution.
+2021-12-24T06:19:49.856506Z 0 [System] [MY-010116] [Server] /usr/libexec/mysqld (mysqld 8.0.26) starting as process 1315351
+2021-12-24T06:19:49.862857Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2021-12-24T06:19:49.999824Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2021-12-24T06:19:50.151260Z 0 [Warning] [MY-013746] [Server] A deprecated TLS version TLSv1 is enabled for channel mysql_main
+2021-12-24T06:19:50.151377Z 0 [Warning] [MY-013746] [Server] A deprecated TLS version TLSv1.1 is enabled for channel mysql_main
+2021-12-24T06:19:50.152127Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2021-12-24T06:19:50.152263Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2021-12-24T06:19:50.167410Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/lib/mysql/mysqlx.sock
+2021-12-24T06:19:50.167455Z 0 [System] [MY-010931] [Server] /usr/libexec/mysqld: ready for connections. Version: '8.0.26'  socket: '/var/lib/mysql/mysql.sock'  port: 3306  Source distribution.
