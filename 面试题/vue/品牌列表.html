@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <div>
+            <input type="text" v-model="keywords">
+            <table border="1" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>学号</td>
+                    <td>姓名</td>
+                    <td>年龄</td>
+                    <td>性别</td>
+                </tr>
+                <tr v-for="item in search(keywords)">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.age}}</td>
+                    <td>{{item.sex}}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                keywords: "",
+                list: [
+                    { id: 1, name: "张三", age: 18, sex: "男" },
+                    { id: 2, name: "李四", age: 19, sex: "女" },
+                    { id: 3, name: "王五", age: 20, sex: "女" },
+                    { id: 4, name: "赵六", age: 22, sex: "男" },
+                    { id: 4, name: "阿三", age: 42, sex: "男" },
+                    { id: 4, name: "江三", age: 42, sex: "男" },
+                ]
+            },
+            methods: {
+                search(val) {
+                    var res = []
+                    // this.list.forEach(item => {
+                    //     if (item.name.indexOf(val) != -1) {
+                    //         console.log(item.name)
+                    //     }
+                    // })
+                    this.list.filter(item => {
+                        if(item.name.includes(val)){
+                            res.push(item)
+                        }
+                    })
+                    return res
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // 数组乱序
+    // Fisher–Yates shuffle洗牌算法
+    var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    function shuffle(arr) {
+        for (var i = arr.length - 1; i >= 0; i--) {
+            // 随机下标
+            var randomIndex = Math.floor(Math.random() * (i + 1));
+            // 随机下标的值
+            var itemAtIndex = arr[randomIndex];
+            // 随机下标的值和当前遍历到的下标的值互换位置
+            arr[randomIndex] = arr[i];
+            // 把当前遍历到的值换成随机下标的值
+            arr[i] = itemAtIndex;
+        }
+        return arr;
+    }
+    // 数组反序
+    function reve(arr) {
+        const newarr = []
+        for (let i = arr.length - 1; i >= 0; i--) {
+            newarr.push(arr[i])
+        }
+        return newarr
+    }
+    console.log(reve(arr));
+    console.log(shuffle(arr));
+
+
+</script>
+
+<body>
+
+</body>
+
+</html>

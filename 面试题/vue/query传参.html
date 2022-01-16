@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>vue-route路由query传参</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/vue.js"></script>
+	<script src="js/vue-router.js"></script>
+</head>
+<body>	
+	<div id="app">
+		<router-link to="login?id=5&name=aaa">登录</router-link>
+		<router-link to="register">注册</router-link>
+		<router-view></router-view>
+	</div>
+	
+	
+	<script type="text/javascript">
+
+		// 组件的模板对象
+		var login = {
+			template:'<h1>登录---{{$route.query.id}}---{{$route.query.name}}</h1>',
+			// created () {
+			// 	console.log(this.$route.query.id)
+			// }
+		}
+		// 组件的模板对象
+		var register = {
+			template:'<h1>注册</h1>'
+		}
+
+		var routeobj = new  VueRouter({
+			routes:[
+				{path:'/login',component:login},
+				{path:'/register',component:register},
+				
+			]
+		})
+		
+		var vm = new Vue({
+			el:"#app",
+			data:{},
+			methods:{},
+			router:routeobj
+		});
+	</script>
+</body>
+</html>

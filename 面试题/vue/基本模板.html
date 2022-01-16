@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/elindex.css">
+    <script src="js/vue.js"></script>
+    <script src="js/elindex.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        fgd
+        <el-button type="primary" @click="login">主要按钮</el-button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+                login() {
+                    console.log(this)
+                    this.$message({
+                        message: 'dfdsgg',
+                        type: 'success'
+                    })
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

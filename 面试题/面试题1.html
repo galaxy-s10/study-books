@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /* 
+            GO{
+                a:0
+                b:0
+                A:function(a){} ===>function(b){ console.log(a + b++)}
+            }
+
+            AO{
+                a:undefined ===>1   
+            }
+        */
+
+        var a = 0, b = 0;
+        function A(a) {
+            // 第二次A(2)的时候，其实A函数里面的a保存了第一次A的形参a，产生闭包，
+            // 因此第二次A()的时候，a是第一次a++后的a值，即2
+            A = function (b) {
+                console.log(a + b++);
+            }
+            console.log(a++);
+        }
+        A(1)    // 1
+        A(2)    // 4
+    </script>
+
+</body>
+
+</html>

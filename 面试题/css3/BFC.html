@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            /* 创建bfc */
+            overflow: hidden;
+            background-color: skyblue;
+        }
+
+        .box1 {
+            /* 创建bfc */
+            overflow: hidden;
+            background-color: skyblue;
+        }
+
+        .left {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+            float: left;
+        }
+
+        .right {
+            width: 110px;
+            height: 110px;
+            background-color: pink;
+            float: left;
+            /* 利用BFC元素不会和浮动元素相互重叠。 */
+            /* overflow: hidden; */
+        }
+    </style>
+</head>
+
+<body>
+    <span>高度塌陷,清除浮动</span>
+    <div class="box">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+    <br>
+    <br>
+    <div class="box1">
+        <div style="margin:10px 0">div1</div>
+        <div style="overflow: auto">
+            <div style="margin:10px 0">div2</div>
+        </div>
+        <div style="margin:10px 0">div3</div>
+    </div>
+
+    <section id="float">
+        <style media="screen">
+            #float {
+                background: red;
+                overflow: auto;
+                /* float: left; */
+            }
+
+            #float .float {
+                float: left;
+                font-size: 30px;
+            }
+        </style>
+        <div class="float">我是浮动元素</div>
+    </section>
+
+</body>
+
+</html>

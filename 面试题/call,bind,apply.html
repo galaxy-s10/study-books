@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    var name = '张三'
+    var age = 18
+    var obj = {
+        name: '李四',
+        age: this.age,
+        say: function (hobby, sport) {
+            console.log(this.name + '说：我' + this.age + '岁了,爱好是：' + hobby, '喜欢的运动是：' + sport)
+        }
+    }
+    var cat = {
+        name: '小猫',
+        age: this.age,
+        say: function (hobby, sport) {
+            console.log(this.name + '说：我' + this.age + '岁了,爱好是：' + hobby, '喜欢的运动是：' + sport)
+        }
+    }
+
+    console.log(obj.age)
+    obj.say('打王者', '跑步')
+    obj.say.call(cat, '伸懒腰', '抓鱼')
+    obj.say.apply(cat, ['伸懒腰', '抓鱼'])
+    obj.say.bind(cat, '伸懒腰', '抓鱼')()
+</script>
+
+<body>
+
+</body>
+
+</html>

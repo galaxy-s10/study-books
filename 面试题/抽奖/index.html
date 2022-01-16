@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<style>
+    .wrap {
+        position: relative;
+        /* display: flex;
+        justify-content: center;
+        align-items: center; */
+        width: 450px;
+        height: 450px;
+        background-color: pink;
+    }
+
+    #start {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -138px;
+        margin-left: -94px;
+        z-index: 100;
+    }
+
+    #start:hover {
+        cursor: pointer;
+    }
+
+    #bgc {
+        z-index: 10;
+        width: 450px;
+        height: 450px;
+        color: red
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <div id="start">
+            <img src="1.png" alt="">
+        </div>
+        <div id="bgc" style="transform: rotate(25deg);">
+            <img src="2.png" alt="">
+        </div>
+    </div>
+    <script>
+        var start = document.getElementById('start')
+        var bgc = document.getElementById('bgc')
+        // 节流函数，让规定时间内只执行一次函数
+        function throttle(fn, delay) {
+            let bool = true
+            return function () {
+                if (bool == true) {
+                    bool = false
+                    fn()
+                    setTimeout(() => {
+                        // fn()
+                        bool = true
+                    }, delay);
+                }
+            }
+        }
+        function gostart() {
+            //间隔度数
+            var deg = Math.floor(360 / 7)
+            //0-6随机数(从0开始算)
+            var ran = Math.floor(Math.random() * 7)
+            console.log(ran);
+            //转多少度数
+            var res = ran * deg
+            console.log(res);
+            //让转盘至少转10圈，加25度是为了让指针指向选中块的中间
+            var res1 = res + (360 * 10) + 25
+            console.log(res1);
+            bgc.style.transform = "rotate(" + res1 + "deg)";
+            bgc.style.transition = "ease-out 1s";
+            switch (ran) {
+                case 0:
+                    console.log('免单4999元');
+                    setTimeout(() => {
+                        alert('免单4999元')
+                        bgc.style = ""
+                        bgc.style.transform = "rotate(" + 25 + "deg)"
+                    }, 1000);
+
+                    break;
+                case 1:
+                    console.log('免单50元');
+                    setTimeout(() => {
+                        alert('免单50元')
+                        bgc.style = ""
+                        bgc.style.transform = "rotate(" + 25 + "deg)"
+                    }, 1000);
+
+                    break;
+                case 2:
+                    console.log('免单10元');
+                    setTimeout(() => {
+                        alert('免单10元')
+                        bgc.style = ""
+                        bgc.style.transform = "rotate(" + 25 + "deg)"
+                    }, 1000);
+
+                    break;
+                case 3:
+                    console.log('免单5元');
+                    setTimeout(() => {
+                        alert('免单5元')
+                        bgc.style = ""
+                        bgc.style.transform = "rotate(" + 25 + "deg)"
+                    }, 1000);
+
+                    break;
+                case 4:
+                    console.log('免分期服务费');
+                    setTimeout(() => {
+                        alert('免分期服务费')
+                        bgc.style = ""
+                        bgc.style.transform = "rotate(" + 25 + "deg)"
+                    }, 1000);
+
+                    break;
+                case 5:
+                    console.log('提高白条额度');
+                    setTimeout(() => {
+                        alert('提高白条额度')
+                        bgc.style = ""
+                        bgc.style.transform = "rotate(" + 25 + "deg)"
+                    }, 1000);
+
+                    break;
+                case 6:
+                    console.log('未中奖');
+                    setTimeout(() => {
+                        alert('未中奖')
+                        bgc.style = ""
+                        bgc.style.transform = "rotate(" + 25 + "deg)"
+                    }, 1000);
+
+                    break;
+            }
+
+        }
+        start.addEventListener('click', throttle(gostart, 1000))
+    </script>
+</body>
+
+</html>

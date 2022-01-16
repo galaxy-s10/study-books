@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var aaa;
+        function aaa() {
+            console.log(aaa)    //fn
+        }
+        aaa()
+        console.log(aaa)    //fn
+
+
+        // console.log(hidden);    //und
+        // console.log(show);      //und
+        // var hidden = 100;
+        // var show = 200;
+        // /* 自执行函数不会提升 */
+        // (function hidden() {
+        //     console.log(hidden);    //und
+        //     console.log(show);      //200
+        //     hidden = 200
+        //     show = 300
+        //     var hidden
+        //     console.log(hidden);    //200
+        //     console.log(show);    //300
+        // })()
+        // console.log(hidden);    //100
+
+        console.log(hidden);    //und
+        console.log(show);      //und
+        var hidden = 100;
+        var show = 200;
+        (function hidden() {
+            console.log(show);  //200
+            console.log(hidden);    //fn
+            hidden = 200
+            show = 300
+            display = 999
+            console.log(hidden);    //fn
+            console.log(show);      //300
+            console.log(display);   //999
+        })()
+        console.log(hidden);    //100
+        console.log(display);   //999
+
+
+        // function test(e) {
+        //     console.log(e)  // fn
+        //     e = 10
+        //     console.log(e)  // 10
+        //     function e() {
+        //         arguments[0] = 2;
+        //         console.log(e);
+        //     }
+        //     e() // Uncaught TypeError: e is not a function
+        // }
+        // test(1)
+        // console.log(e)  // Uncaught ReferenceError: e is not defined
+
+        // console.log(show);
+        // var show = 10
+        // console.log(show);
+        // function show() {
+        //     console.log(show);
+        //     console.log('show');
+        // }
+        // show()  
+    </script>
+</body>
+
+</html>

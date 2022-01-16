@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+
+    <h2>组件父传子通过v-bind和props进行传参</h2>
+    <div id="app">
+        <com1 :aaa='msg'></com1>
+        <com1 aaa='msg'></com1>
+        <com1 bbb='vuebbb'></com1>
+    </div>
+
+    <template id="com1">
+        <div>
+            我是子元素---{{aaa}}---{{bbb}}
+        </div>
+    </template>
+
+    <script>
+
+        var com1 = {
+            template: "#com1",
+            props: ['aaa', 'bbb'],
+        }
+
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg: '我是爸爸',
+                dataa: [
+                    { 'id': 1, 'name': '张三' },
+                    { 'id': 2, 'name': '李四' },
+                    { 'id': 3, 'name': '王五' }
+                ]
+            },
+            methods: {},
+            components: {
+                com1,
+            }
+        })
+    </script>
+</body>
+
+</html>

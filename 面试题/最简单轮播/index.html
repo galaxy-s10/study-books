@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .wrap {
+        width: 800px;
+        height: 400px;
+        position: relative;
+    }
+
+    .list {
+        width: 800px;
+        height: 400px;
+        list-style: none;
+        padding-left: 0;
+        position: relative;
+    }
+
+    .item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: all .5s;
+    }
+
+    .btn {
+        width: 30px;
+        height: 50px;
+        position: absolute;
+        z-index: 20;
+    }
+
+    #gopre {
+        top: 185px;
+        left: 0;
+    }
+
+    #gonext {
+        top: 185px;
+        right: 0;
+    }
+
+    .item:nth-child(1) {
+        background-color: red;
+    }
+
+    .item:nth-child(2) {
+        background-color: yellow;
+    }
+
+    .item:nth-child(3) {
+        background-color: blue;
+    }
+
+    .item:nth-child(4) {
+        background-color: green;
+    }
+
+    .item.active {
+        opacity: 1;
+        z-index: 10;
+    }
+
+    .poinList {
+        padding-left: 0;
+        list-style: none;
+        position: absolute;
+        z-index: 20;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .poin {
+        width: 10px;
+        height: 10px;
+        text-align: center;
+        background-color: black;
+        border-radius: 100%;
+        border: 1px #fff solid;
+        float: left;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .poin.active {
+        background-color: #fff;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <ul class="list">
+            <li class="item active">0</li>
+            <li class="item">1</li>
+            <li class="item">2</li>
+            <li class="item">3</li>
+        </ul>
+        <ul class="poinList">
+            <li class="poin active"></li>
+            <li class="poin"></li>
+            <li class="poin"></li>
+            <li class="poin"></li>
+        </ul>
+        <button class="btn" id="gopre">《</button>
+        <button class="btn" id="gonext">》</button>
+    </div>
+    <script>
+        var items = document.getElementsByClassName('item');
+        var poins = document.getElementsByClassName('poin');
+        var goPreBtn = document.getElementById('gopre');
+        var goNextBtn = document.getElementById('gonext');
+
+        var current = 0; // 当前轮播图编号
+        var timer = 0   //用于判断清零的定时器变量
+
+        // 点击上/下一页或指定页数时，首先清除当前活动active类
+        var clearActive = function () {
+            for (let i = 0; i < items.length; i++) {
+                items[i].className = 'item'
+            }
+            for (let i = 0; i < poins.length; i++) {
+                poins[i].className = 'poin'
+            }
+        }
+
+        var gocurrent = function () {
+            // 点击了上/下一页或指定页数，首先将跳转到下一页面的定时器变量清零
+            timer = 0
+            clearActive()
+            items[current].className = 'item active'
+            poins[current].className = 'poin active'
+        }
+
+        function goNext() {
+            // 判断，如果是最后一张则将轮播图编号修改为0，否则自增1
+            if (current < items.length - 1) {
+                current++
+            } else {
+                current = 0
+            }
+            gocurrent()
+        }
+
+        function goPre() {
+            // 判断，如果不是第一张则自减少1，否则则将轮播图编号修改为最后一张
+            if (current > 0) {
+                current--
+            } else {
+                current = items.length - 1
+            }
+            gocurrent()
+        }
+
+        goNextBtn.addEventListener('click', function () {
+            goNext()
+        })
+
+        goPreBtn.addEventListener('click', function () {
+            goPre()
+        })
+
+        // 为每个poin添加点击事件
+        for (let i = 0; i < poins.length; i++) {
+            console.log('object');
+            poins[i].addEventListener('click', function () {
+                console.log('hi');
+                current = i
+                gocurrent()
+            })
+        }
+
+        // 每100毫秒执行一次，这里的作用是当2秒的时候执行下一页操作
+        setInterval(() => {
+            timer++
+            if (timer == 20) {
+                goNext()
+                timer = 0
+            }
+        }, 100)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 使用对象构造器
+        function person(name, age) {
+            this.name = name;
+            this.age = age;
+            this.eat = function () {
+                console.log("我会吃")
+            }
+        }
+        // 创建 JavaScript 对象实例
+        var xiaoming = new person("小明", 18);
+        person.prototype.sex = "男"
+        person.prototype.say = function () {
+            console.log("我会说")
+        }
+        console.dir(xiaoming)
+        console.dir(person)
+
+        // 实例对象可以直接访问原型对象中的属性或者方法
+        // xiaoming.say()
+
+        console.log(xiaoming.__proto__ ==person.prototype)  
+        // 每个原型都有一个constructor属性，指向该关联的构造函数。
+        console.log(person.prototype.constructor == person)
+
+        console.log(xiaoming.constructor === person); // true
+        // 当获取 xiaoming.constructor 时，其实 xiaoming 中并没有 constructor 属性,
+        // 当不能读取到constructor 属性时，会从 xiaoming 的原型也就是 person.prototype 中读取
+        console.log(xiaoming.constructor === person.prototype.constructor); // true
+
+        // 实例化对象的原型__proto__和构造函数的原型prototype指向相同
+        // console.log(xiaoming.__proto__ == person.prototype)   //true
+
+        // prototype 属性使您有能力向对象添加属性和方法。
+        // console.log(person.prototype)
+        // person.prototype.age = 18
+        // console.log(person.prototype)
+        // console.log(xiaoming.__proto__)
+        // console.log(xiaoming.__proto__ == person.prototype)
+        // console.log(xiaoming.__proto__.constructor)
+        // console.log(xiaoming.__proto__ == xiaoming.__proto__.constructor)
+    </script>
+</body>
+
+</html>

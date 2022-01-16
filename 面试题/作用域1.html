@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log('案例1')
+        var num1 = 100
+        var num2 = 200
+        console.log(num1)   //100
+        console.log(num2)   //200
+        function fun1(){
+            num1 = 888
+            var num2 = 777
+            console.log('fun2修改了全局变量num1:'+num1)
+        }
+        fun1()
+        console.log(num1)       //888
+        console.log(num2)       //200
+    </script>
+</body>
+
+</html>

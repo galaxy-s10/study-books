@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>双向绑定</title>
+</head>
+
+<body>
+
+    <!-- 实现vue -->
+    <div id="app">
+        <input type="text" v-model="text">
+        <!-- <p>{{ text }}</p> -->
+    </div>
+
+    <script>
+        var str = '{{a}}{{b}}{{c}}'
+        str.replace(/\{\{(.[^\}]*)\}\}/g, (...val) => {
+            console.log(val[1]);
+        })
+    </script>
+</body>
+
+</html>

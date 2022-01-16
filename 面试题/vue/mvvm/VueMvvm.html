@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{title}}
+        <p>我叫：{{name}}，今年：<b>{{age}}</b>岁</p>
+        <p>爱好：{{hobby}}</p>
+        <p>车：{{car.benz}}、{{car.bmw}}、{{car.adui}}</p>
+        标题：<input type="text" v-model="title" value="" />
+        <br>
+        我叫：<input type="text" v-model="name" value="" />,
+        今年：<input type="text" v-model="age" value="" />岁。
+        <br>
+        想买：<input type="text" v-model="car.benz" value="" />、
+        <input type="text" v-model="car.bmw" value="" />、
+        <input type="text" v-model="car.adui" value="" />车
+    </div>
+
+    <script src="mvvm.js"></script>
+
+    <script>
+        let mvvm = new Mvvm({
+            el: "#app",
+            data: {
+                title: '个人信息',
+                name: 'cxk',
+                age: 18,
+                hobby: ['唱', '跳', 'rap'],
+                car: {
+                    benz: '奔驰s级',
+                    bmw: '宝马5系',
+                    adui: '奥迪A系'
+                }
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>

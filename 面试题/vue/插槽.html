@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+
+    <h2>插槽和具名插槽</h2>
+    <div id="app">
+        <com1></com1>
+        <com1>sss</com1>
+        <com1><button slot="left">xxx</button></com1>
+        <!-- <com1>aaa</com1> -->
+    </div>
+
+    <template id="com1">
+        <div>
+            <slot><span>默认值</span></slot>
+            <slot name="left"><span>左边</span></slot>
+            <slot name="right"><span>右边</span></slot>
+            <slot name="center"><span>中间</span></slot>
+            <hr>
+        </div>
+    </template>
+
+
+    <script>
+        var com1 = {
+            template: "#com1",
+        }
+
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+            },
+            methods: {},
+            components: {
+                com1
+            }
+        })
+    </script>
+</body>
+
+</html>

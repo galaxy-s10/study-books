@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var oldArr = [
+            { province: '广东省', city: '广州市', district: '天河区' },
+            { province: '广东省', city: '广州市', district: '白云区' },
+            { province: '广东省', city: '东莞市', district: '常平镇' },
+            { province: '广东省', city: '东莞市', district: '虎门镇' },
+            { province: '广东省', city: '东莞市', district: '长安镇' },
+            { province: '广西省', city: '南宁市', district: '兴宁区' },
+            { province: '广西省', city: '南宁市', district: '江南区' },
+            { province: '海南省', city: '海口市', district: '琼山区' },
+            { province: '海南省', city: '三亚市', district: '海棠区' },
+            { province: '海南省', city: '三沙市', district: '南沙区' },
+        ]
+        var newArr = []
+        var item = {}   // 区
+        var item1 = {}  // 市
+        for (let i = 0; i < oldArr.length; i++) {
+            // 没有这个省的
+            if (!item[oldArr[i].province]) {
+                newArr.push({
+                    name: oldArr[i].province,
+                    children: [
+                        {
+                            name: oldArr[i].city,
+                            children: [
+                                { name: oldArr[i].district }
+                            ],
+                        }
+                    ]
+                })
+                item[oldArr[i].province] = oldArr[i].province
+                item1[oldArr[i].city] = oldArr[i].city
+            } else {
+                // 遍历newArr，看看这个省的位置
+                for (let j = 0; j < newArr.length; j++) {
+                    if (newArr[j].name == item[oldArr[i].province]) {
+                        // 这个省没有这个市，就往省的children添加市
+                        if (!item1[oldArr[i].city]) {
+                            if (newArr[j].name == item[oldArr[i].province]) {
+                                newArr[j].children.push({
+                                    name: oldArr[i].city,
+                                    children: [
+                                        {
+                                            name: oldArr[i].district,
+                                        }
+                                    ],
+                                })
+                                item1[oldArr[i].city] = oldArr[i].city
+                            }
+                        } else {
+                            // 有这个省有这个市了就往市里面的children添加区
+                            for (let x = 0; x < newArr[j].children.length; x++) {
+                                if (newArr[j].children[x].name == item1[oldArr[i].city]) {
+                                    newArr[j].children[x].children.push({
+                                        name: oldArr[i].district,
+                                    })
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        console.log(newArr)
+        console.log('item', item)
+        console.log('item1', item1)
+    </script>
+</body>
+
+</html>

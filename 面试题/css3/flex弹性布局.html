@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* :first-child 选择器用于选取属于其父元素的首个子元素的指定选择器。 */
+
+        /* 所有父元素里第一个div元素 */
+        /* 第一个div元素 */
+        /* 选取属于div父元素的首个子元素的指定选择器。 */
+        /* div里的后代元素里第一个div元素 */
+
+        .main {
+            width: 500px;
+            display: flex;
+            height: 500px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap
+        }
+
+        .main div {
+            /* flex: 1; */
+            height: 200px;
+            width: 200px;
+            box-sizing: border-box;
+            text-align: center;
+            background-color: red;
+            border: 1px solid blue
+        }
+
+        /* 响应式布局 - 小于 1200px */
+        @media screen and (max-width: 1200px) {
+
+            .header,
+            .main {
+                box-sizing: border-box;
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .article {
+                width: 100%;
+            }
+
+            .navb {
+                display: none;
+            }
+        }
+
+        /* 响应式布局 - 小于 992px */
+        @media screen and (max-width: 992px) {
+
+            .header,
+            .main {
+                width: 960px;
+            }
+
+            .article {
+                /* width: 30%; */
+            }
+        }
+
+        /* 响应式布局 - 小于540px */
+        @media screen and (max-width: 540px) {
+
+            .header,
+            .main {
+                width: 1140px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div>1</div>
+        <div>2</div>
+        <div style="background-image: url(./1.jpg)">3</div>
+    </div>
+
+</body>
+
+</html>

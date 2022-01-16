@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <div>
+            <ul v-for="item in list">
+                <li>{{item.id}}</li>
+                <li>{{item.birthday | timeformat()}}</li>
+            </ul>
+            {{msg | filtera('yyy','ppp')}}
+        </div>
+    </div>
+
+    <script>
+        Vue.filter('filtera', function (xxx,yy,pp) {
+            return xxx.replace('天真',yy+pp)
+        })
+        Vue.filter('timeformat', function (ddd,token) {
+            var dt = new Date(ddd)
+            var yy = dt.getFullYear()
+            var mm = dt.getMonth()+1
+            var dd = dt.getDate()
+            var hhh = dt.getHours()
+            var mmm = dt.getMinutes()
+            var sss = dt.getSeconds()
+            if(token){
+                return `${yy}-${mm}-${dd}`
+                // return `${yy}-${mm}-${dd} ${hhh}:${mmm}:${sss}`
+
+            }else{
+                // return `${yy}-${mm}-${dd}`
+                return `${yy}-${mm}-${dd} ${hhh}:${mmm}:${sss}`
+            }
+            
+        })
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg: '我是一个天真的小孩，天真的我说，谁最天真',
+                list: [
+                    { id: 1, name: "张三", age: 18, sex: "男", birthday: new Date() },
+                    { id: 2, name: "李四", age: 19, sex: "女", birthday: new Date() },
+                    { id: 3, name: "王五", age: 20, sex: "女", birthday: new Date() },
+                    { id: 4, name: "赵六", age: 22, sex: "男", birthday: new Date() },
+                    { id: 4, name: "阿三", age: 42, sex: "男", birthday: new Date() },
+                    { id: 4, name: "江三", age: 42, sex: "男", birthday: new Date() }
+                ]
+            },
+            methods: {
+
+            }
+        })
+    </script>
+
+</body>
+
+</html>
