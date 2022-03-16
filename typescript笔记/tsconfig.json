@@ -13,7 +13,7 @@
     // "checkJs": true, //检查js，默认false，开启后，会检查js文件，比如js和ts都let a=1，且这两文件都被ts认为不是模块，就会报对应的警告
     // "moduleResolution": "node", // 如何处理模块
     // "declaration": true, // 生成相应的 .d.ts文件。
-    // "rootDir": "../",
+    "rootDir": "./",
     "outDir": "./tsbuild" //如果是"./"，就代表输出到tsconfig.json目录
     // "newLine": "lf", //当生成文件时指定行结束符： "crlf"（windows）或 "lf"（unix）。默认是platform specific
     // "noEmitOnError": true //报错时不输出文件，默认是false。

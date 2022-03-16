@@ -20,3 +20,9 @@ let data8: Person = { a: 1 }; //正确
 // 无法重新声明块范围变量“data9”。ts(2451)
 // 定义数组.ts(12, 5): 此处也声明了 "data9"。
 let data9: Person = { b: 1 }; //报错：不能将类型“{ b: number; }”分配给类型“Person”。对象文字可以只指定已知属性，并且“b”不在类型“Person”中
+
+interface type1 {
+  [index: string]: number;
+}
+
+let aa1: type1 = { a: 22 };
