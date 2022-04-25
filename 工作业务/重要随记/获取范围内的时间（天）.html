@@ -1,52 +1,60 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-05 18:09:46
- * @LastEditTime: 2021-02-05 18:29:33
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-03-21 01:23:05
+ * @LastEditors: shuisheng
  * @Description: In User Settings Edit
  * @FilePath: \hssc:\Users\Administrator\Desktop\重要随记\获取3年内的时间.html
 -->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <script>
-        function getRangeTime(begin, end) {
-            function format(val) {
-                var s = '';
-                var mouth = (val.getMonth() + 1) >= 10 ? (val.getMonth() + 1) : ('0' + (val.getMonth() + 1));
-                var day = val.getDate() >= 10 ? val.getDate() : ('0' + val.getDate());
-                s += val.getFullYear() + '-'; // 获取年份。
-                s += mouth + "-"; // 获取月份。
-                s += day; // 获取日。
-                return (s); // 返回日期。
-            };
-            var arr = [];
-            var ab = begin.split("-");
-            var ae = end.split("-");
-            var db = new Date();
-            db.setUTCFullYear(ab[0], ab[1] - 1, ab[2]);
-            var de = new Date();
-            de.setUTCFullYear(ae[0], ae[1] - 1, ae[2]);
-            var unixDb = db.getTime() - 24 * 60 * 60 * 1000;
-            var unixDe = de.getTime() - 24 * 60 * 60 * 1000;
-            for (var k = unixDb; k <= unixDe;) {
-                //console.log((new Date(parseInt(k))).format());
-                k = k + 24 * 60 * 60 * 1000;
-                arr.push(format((new Date(parseInt(k)))));
-            }
-            return arr;
+      /**
+       * ["2020-01-01","2020-05-01"]
+       */
+      function getRangeTime(begin, end) {
+        function format(val) {
+          var s = "";
+          var mouth =
+            val.getMonth() + 1 >= 10
+              ? val.getMonth() + 1
+              : "0" + (val.getMonth() + 1);
+          var day = val.getDate() >= 10 ? val.getDate() : "0" + val.getDate();
+          s += val.getFullYear() + "-"; // 获取年份。
+          s += mouth + "-"; // 获取月份。
+          s += day; // 获取日。
+          return s; // 返回日期。
         }
+        var arr = [];
 
-        console.log(getRangeTime('2021-02-01', '2022-02-01'));
-        // console.log(getAll('2020-01:01 00:00:00', '2022-01:01 00:00:00'));
+        var beginArr = begin.split("-");
+        var beginDate = new Date(
+          `${beginArr[0]}/${beginArr[1]}/${beginArr[2]} 00:00:00`
+        );
+        var beginTimestamp = beginDate.getTime() - 24 * 60 * 60 * 1000;
+
+        var endArr = end.split("-");
+        var endDate = new Date(
+          `${endArr[0]}/${endArr[1]}/${endArr[2]} 00:00:00`
+        );
+        var endTimestamp = endDate.getTime() - 24 * 60 * 60 * 1000;
+
+        for (var k = beginTimestamp; k <= endTimestamp; ) {
+          k = k + 24 * 60 * 60 * 1000;
+          arr.push(format(new Date(parseInt(k))));
+        }
+        return arr;
+      }
+
+      console.log(getRangeTime("2021-02-01", "2022-02-01"));
+      // console.log(getAll('2020-01:01 00:00:00', '2022-01:01 00:00:00'));
     </script>
-</body>
-
+  </body>
 </html>
