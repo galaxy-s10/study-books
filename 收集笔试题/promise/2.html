@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const wait = (time) => new Promise((r) => setTimeout(r, time));
+
+      let aNum = 0;
+
+      async function waitToNum(num) {
+        await wait(100);
+        return num;
+      }
+      async function asyncAdd(num) {
+        aNum += await waitToNum(num);
+      }
+
+      asyncAdd(1);
+      asyncAdd(2);
+
+      wait(50).then(() => {
+        console.log(aNum); // What is aNum?
+      });
+      /**
+       * 关键：asyncAdd(1)，asyncAdd(2)，wait(200)，都是异步的，他们之间并没有阻塞，
+       * asyncAdd(1)，asyncAdd(2)其实里面都是aNum += await waitToNum(num);
+       * 因为asyncAdd(1)和asyncAdd(2)没有阻塞，所以他们执行的时候，aNum都是0
+       * 因此aNum的结果其实是以后面的asyncAdd(2)的aNum += await waitToNum(num)为准，
+       * 因为waitToNum里面是执行wait(100)，因此肯定是先执行asyncAdd(1)和asyncAdd(2)注册的回调后，
+       * 在执行wait(200)的回调。
+       * 当执行asyncAdd(2)时，即：aNum = 0 + await waitToNum(2)，结果就是2
+       * 所以在wait(200)的回调里面大于aNum，就是2
+       */
+    </script>
+  </body>
+</html>
