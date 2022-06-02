@@ -12697,7 +12697,7 @@
 
   var mount = Vue.prototype.$mount;
   Vue.prototype.$mount = function (el, hydrating) {
-    console.log("注意：在一万多行代码的时候，又开始调用vue实例的$mount了");
+    console.log("注意：Vue.prototype.$mount");
     el = el && query(el);
 
     /* istanbul ignore if */

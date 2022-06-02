@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .upload {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+      }
+      .upload input {
+        position: absolute;
+        left: 0%;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        opacity: 0;
+        cursor: pointer;
+        /* display: none; */
+      }
+    </style>
+  </head>
+  <body>
+    <p>https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file</p>
+    <p>
+      https://developer.mozilla.org/zh-CN/docs/Web/API/File_API/Using_files_from_web_applications
+    </p>
+    <div class="upload">
+      <input
+        type="file"
+        accept=".jgp,.jpeg,.png,.gif"
+        multiple
+        onchange="handleFile(this.files)"
+      />
+    </div>
+
+    <script>
+      function handleFile(files) {
+        console.log(files);
+        var list = document.createElement("div");
+        for (let i = 0; i < files.length; i++) {
+          var img = document.createElement("img");
+          img.style.width = "100px";
+          img.style.height = "100px";
+          img.src = window.URL.createObjectURL(files[i]);
+          list.appendChild(img);
+        }
+        document.body.append(list);
+      }
+    </script>
+  </body>
+</html>

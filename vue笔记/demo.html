@@ -10,6 +10,7 @@
   <body>
     <div id="app">
       {{test}}
+      <li>111</li>
       <!-- <h1>{{obj.name}}</h1> -->
       <!-- <h1>{{obj.age}}</h1> -->
     </div>
@@ -17,6 +18,7 @@
     <!-- <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script> -->
     <script>
       debugger;
+      console.log(Vue.$mount);
       var vm = new Vue({
         el: "#app",
         data() {
