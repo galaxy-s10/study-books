@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="width: 300px; height: 200px" id="mycanvas"></div>
+
+    <script>
+      const mycanvas = document.getElementById('mycanvas');
+      const canvas = document.createElement('canvas');
+      canvas.id = 'ddd';
+      var w = mycanvas.getBoundingClientRect().width;
+      var h = mycanvas.getBoundingClientRect().height;
+
+      var mousedown = false; //鼠标是否按下
+      var offsetX = canvas.offsetLeft;
+      var offsetY = canvas.offsetTop;
+      console.log(offsetX, offsetY);
+      var ctx;
+      var img = new Image();
+      img.src = 'https://resource.hsslive.cn/1578937683585vueblog.webp';
+
+      function layer(ctx) {
+        ctx.fillStyle = 'red';
+        ctx.fillRect(0, 0, w, h);
+      }
+      canvas.width = w;
+      canvas.height = h;
+      canvas.style.backgroundImage = 'url(' + img.src + ')';
+      ctx = canvas.getContext('2d');
+      ctx.fillStyle = 'transparent';
+      ctx.fillRect(0, 0, w, h);
+      console.log(w, h);
+      layer(ctx);
+      ctx.globalCompositeOperation = 'destination-out'; //在源图像外显示目标图像。只有源图像外的目标图像部分会被显示，源图像是透明的。
+
+      console.log(offsetX, offsetY);
+      function eventDown(e) {
+        e.preventDefault();
+        mousedown = true;
+        console.log('eventDown');
+      }
+      function eventUp(e) {
+        e.preventDefault();
+        mousedown = false;
+        console.log('eventUp');
+      }
+      function eventMove(e) {
+        e.preventDefault();
+        if (mousedown) {
+          // console.log('鼠标已经按下', e.changedTouches);
+          if (e.changedTouches) {
+            e = e.changedTouches[e.changedTouches.length - 1];
+          }
+          console.log(e, e.clientX);
+          var x =
+              (e.clientX + document.body.scrollLeft || e.pageX) - offsetX || 0,
+            y = (e.clientY + document.body.scrollTop || e.pageY) - offsetY || 0;
+          console.log(ctx, 11);
+          with (ctx) {
+            beginPath();
+            arc(x, y, 10, 0, Math.PI * 2);
+            fill();
+            // console.log(getFilledPercentage());
+          }
+        } else {
+          // console.log('鼠标没有按下');
+        }
+      }
+      // canvas.addEventListener('touchstart', eventDown);
+      // canvas.addEventListener('touchend', eventUp);
+      // canvas.addEventListener('touchmove', eventMove);
+      canvas.addEventListener('mousedown', eventDown); //鼠标按下事件
+      canvas.addEventListener('mouseup', eventUp); //鼠标松开事件
+      canvas.addEventListener('mousemove', eventMove); //鼠标经过事件
+
+      mycanvas.appendChild(canvas);
+      console.log(mycanvas, canvas);
+    </script>
+  </body>
+</html>

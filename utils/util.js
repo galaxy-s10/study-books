@@ -23,7 +23,7 @@ const formatNumber = (n) => {
  * sty:'x' | 'y' | 'z'| 'rotate'
  * 返回值: 对应的transform的translateX/Y/Z或者rotate值
  */
-const aa = () => {
+const getTranslate = () => {
   function getTranslate(node, sty) {
     // 获取transform值
     var translates = document.defaultView
