@@ -12,57 +12,32 @@
     <script>
       const mycanvas = document.getElementById('mycanvas');
       const canvas = document.createElement('canvas');
+      console.log(mycanvas, canvas);
       canvas.id = 'ddd';
-      let w = mycanvas.getBoundingClientRect().width;
-      let h = mycanvas.getBoundingClientRect().height;
-      let pointSize = 30; //触笔半径
-      let mousedown = false; //鼠标是否按下
-      let offsetX = canvas.offsetLeft;
-      let offsetY = canvas.offsetTop;
-      let forwardColor = null; //遮罩层颜色
-      let forwardImgUrl =
-        'https://resource.hsslive.cn/1578937683585vueblog.webp'; //遮罩层图片
-      // let forwardImgUrl = null; //遮罩层图片
-      // let forwardColor = "red"; //遮罩层颜色
-
-      console.log(offsetX, offsetY);
-
-      let ctx;
+      var w = mycanvas.getBoundingClientRect().width;
+      var h = mycanvas.getBoundingClientRect().height;
+      var pointSize = 30; //触笔半径
+      var mousedown = false; //鼠标是否按下
+      var offsetX = canvas.offsetLeft;
+      var offsetY = canvas.offsetTop;
+      console.log(offsetX, offsetY, 2352);
+      var ctx;
+      var img = new Image();
+      img.src = 'https://resource.hsslive.cn/1578937683585vueblog.webp';
 
       function layer(ctx) {
+        ctx.fillStyle = 'red';
         ctx.fillRect(0, 0, w, h);
       }
-
       canvas.width = w;
       canvas.height = h;
+      canvas.style.backgroundImage = 'url(' + img.src + ')';
       ctx = canvas.getContext('2d');
-      if (forwardColor) {
-        ctx.fillStyle = forwardColor;
-        ctx.fillStyle = 'transparent';
-        // ctx.fillRect(0, 0, w, h);
-        layer(ctx);
-        // ctx.globalCompositeOperation = "destination-out"; //在源图像外显示目标图像。只有源图像外的目标图像部分会被显示，源图像是透明的。
-        ctx.beginPath();
-      } else {
-        let img = new Image();
-        img.src = forwardImgUrl;
-        img.crossOrigin = 'Anonymous';
-        img.onload = () => {
-          console.log(ctx, 1);
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = 'transparent';
-          // ctx.fillRect(0, 0, w, h);
-          layer(ctx);
-          // ctx.globalCompositeOperation = "destination-out"; //在源图像外显示目标图像。只有源图像外的目标图像部分会被显示，源图像是透明的。
-          ctx.beginPath();
-        };
-        // canvas.style.backgroundImage = "url(" + forwardImgUrl + ")";
-      }
-      // ctx.fillStyle = "transparent";
-      // // ctx.fillRect(0, 0, w, h);
-      // layer(ctx);
-      // // ctx.globalCompositeOperation = "destination-out"; //在源图像外显示目标图像。只有源图像外的目标图像部分会被显示，源图像是透明的。
-      // ctx.beginPath();
+      ctx.fillStyle = 'transparent';
+      ctx.fillRect(0, 0, w, h);
+      layer(ctx);
+      ctx.globalCompositeOperation = 'destination-out'; //在源图像外显示目标图像。只有源图像外的目标图像部分会被显示，源图像是透明的。
+
       function eventDown(e) {
         ctx.beginPath();
         ctx.lineWidth = 30;
@@ -70,32 +45,33 @@
 
         e.preventDefault();
         mousedown = true;
+        console.log('eventDown');
       }
       function eventUp(e) {
         e.preventDefault();
         mousedown = false;
-        console.log(getFilledPercentage());
         if (getFilledPercentage() > 10) {
+          console.log('clearCanvas');
           clearCanvas();
         }
+        console.log('eventUp');
+      }
+      function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
       const eventMove = (e) => {
         e.preventDefault();
         if (mousedown) {
-          // console.log('鼠标已经按下', e.changedTouches);
           if (e.changedTouches) {
             e = e.changedTouches[e.changedTouches.length - 1];
           }
-          let x =
+          // console.log(e, e.clientX);
+          var x =
               (e.clientX + document.body.scrollLeft || e.pageX) - offsetX || 0,
             y = (e.clientY + document.body.scrollTop || e.pageY) - offsetY || 0;
-          // ctx.arc(x, y, pointSize, 0, Math.PI * 2);
-          // ctx.fill();
-
+          console.log(x, y);
           ctx.lineTo(x, y);
           ctx.stroke();
-        } else {
-          // console.log('鼠标没有按下');
         }
       };
       // 计算已经刮过的区域占整个区域的百分比
@@ -113,9 +89,6 @@
         }
         return ((transPixels.length / (pixels.length / 4)) * 100).toFixed(2);
       }
-      function clearCanvas() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }
 
       canvas.addEventListener('touchstart', eventDown);
       canvas.addEventListener('touchend', eventUp);
@@ -125,7 +98,6 @@
       canvas.addEventListener('mousemove', eventMove); //鼠标经过事件
 
       mycanvas.appendChild(canvas);
-      console.log(mycanvas, canvas);
     </script>
   </body>
 </html>
