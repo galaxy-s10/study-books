@@ -1,81 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-    <input type="text" class="search">
+  <body>
+    防抖测试
+    <input type="text" class="search" />
     <button class="cancel">取消</button>
 
     <script>
-        function debounce(fn, delay, leading) {
-            var timer
-            var leading = leading || false
-            var debounceFn = function () {
-                if (timer) {
-                    clearTimeout(timer)
+      function debounce(fn, delay, leading) {
+        var timer;
+        var leading = leading || false;
+        var debounceFn = function () {
+          if (timer) {
+            clearTimeout(timer);
+          }
+          var _this = this;
+          var _arguments = arguments;
+          return new Promise((resolve, reject) => {
+            if (leading) {
+              var isFirst = false;
+              if (!timer) {
+                resolve(fn.apply(_this, _arguments));
+                isFirst = true;
+              }
+              timer = setTimeout(() => {
+                timer = null;
+                if (!isFirst) {
+                  resolve(fn.apply(_this, _arguments));
                 }
-                var _this = this
-                var _arguments = arguments
-                return new Promise((resolve, reject) => {
-                    if (leading) {
-                        var isFirst = false
-                        if (!timer) {
-                            resolve(fn.apply(_this, _arguments))
-                            isFirst = true
-                        }
-                        timer = setTimeout(() => {
-                            timer = null
-                            if (!isFirst) {
-                                resolve(fn.apply(_this, _arguments))
-                            }
-                        }, delay);
-                    } else {
-                        timer = setTimeout(() => {
-                            resolve(fn.apply(_this, _arguments))
-                        }, delay);
-                    }
-                })
-
+              }, delay);
+            } else {
+              timer = setTimeout(() => {
+                resolve(fn.apply(_this, _arguments));
+              }, delay);
             }
+          });
+        };
 
-            debounceFn.cancel = function () {
-                clearTimeout(timer)
-                timer = null
-            }
-            return debounceFn
-        }
+        debounceFn.cancel = function () {
+          clearTimeout(timer);
+          timer = null;
+        };
+        return debounceFn;
+      }
 
-        function ajax(e, arg1, arg2) {
-            console.log('ajaxajaxajax');
-            // Arguments(3) [InputEvent, 100, 200, callee: ƒ, Symbol(Symbol.iterator): ƒ]
-            console.log(arguments);
-            console.log(this);  //<input type="text" class="search">
-            return 100
-        }
+      function ajax(e, arg1, arg2) {
+        console.log('ajaxajaxajax');
+        // Arguments(3) [InputEvent, 100, 200, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+        console.log(arguments);
+        console.log(this); //<input type="text" class="search">
+        return 100;
+      }
 
-        var search = document.querySelector('.search')
-        var debounceWrap = debounce(ajax, 1000, true)
+      var search = document.querySelector('.search');
+      var debounceWrap = debounce(ajax, 1000, true);
 
+      search.addEventListener('input', function () {
+        debounceWrap.apply(this, [event, 100, 200]).then((res) => {
+          console.log(res); //100
+        });
+      });
 
-        search.addEventListener('input', function () {
-            debounceWrap.apply(this, [event, 100, 200]).then(res => {
-                console.log(res);   //100
-            })
-        })
+      var cancel = document.querySelector('.cancel');
 
-        var cancel = document.querySelector('.cancel')
-
-        cancel.addEventListener('click', function () {
-            debounceWrap.cancel()
-        })
-
-
+      cancel.addEventListener('click', function () {
+        debounceWrap.cancel();
+      });
     </script>
-</body>
-
+  </body>
 </html>
