@@ -1,6 +1,6 @@
 # new 构造函数里的 this 以及返回值
 
-```ts
+```js
 /**
  * new 构造函数里面的this
  * 默认函数里面的this，谁调用就指向谁，
@@ -12,7 +12,6 @@
  */
 console.log('---------new 构造函数里的this以及返回值-----------');
 function Test(name) {
-  console.log('Test构造函数的this', this);
   this.name = name;
 }
 var test = new Test('test');
@@ -37,7 +36,7 @@ console.log(test2); //{age: 18}
 
 # 没有 new 得到的是什么
 
-```ts
+```js
 /**
  * 首先我们看没有new的时候，得到的是什么
  * 根据控制台打印，可知没有new的时候，得到的dog只有自身的name属性，以及__proto__
@@ -52,7 +51,7 @@ console.log(dog);
 
 # new 做了什么
 
-```ts
+```js
 /**
  * new做了什么?
  * 首先我们要知道new之后的是什么，
@@ -90,7 +89,7 @@ console.log(cat1);
 
 # 简化版实现 new
 
-```ts
+```js
 /**
  * new做了什么?
  * 创建一个空对象，且该对象继承构造函数的原型。

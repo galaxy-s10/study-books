@@ -1,69 +1,80 @@
-# 分支操作
+# git tag
 
-- 新建分支
+## 列出标签
 
-  > git branch 新分支名
-  >
-  > 如果当前是在 master 分支，执行 git branch 新分支名，就是在 master 分支下新建分支；如果当前是在 dev 分支，执行 git branch 新分支名，就是在 dev 分支下新建分支
-
-- 切换分支
-
-  > git checkout 分支名
-
-- 重命名分支
-
-  > git branch -m 旧分支名 新分支名
-
-- 删除分支
-
-  > git branch -d 分支名，如果报错：error: The branch '分支名' is not fully merged.
-  > If you are sure you want to delete it, run 'git branch -D 分支'，则：git branch -D 分支名
-  >
-  > 删除远程分支: git push origin --delete [branchname]
-
-- 查看所有分支
-
-  > git branch -a
-
-- 查看远程分支
-
-  > git branch -r
-
-- 创建并切换分支
-
-  > git checkout -b 新分支名
-
-- 查看分支列表
-
-  > git branch -l
-
-- 创建并切换远程分支
-
-  > git checkout -b 新分支名 远程分支名
-  >
-  > 如 git checkout -b dev origin/develop
-
-- 查看每一个分支的最后一次提交
-
-  > git branch -v
-
-- 查看本地分支和远程分支的跟踪关系
-
-  > git branch -vv
-
-- 查看点线图
-
-  > git log --graph
-
-## 跟踪远程分支
-
-克隆时自动将创建好的`master`分支追踪`origin/master`分支
+在 Git 中列出已有的标签非常简单，只需要输入 `git tag` （可带上可选的 `-l` 选项 `--list`）
 
 ```bash
-git clone 服务器地址
+git tag
 ```
 
-在远程分支的基础上建立`develop`分支，并且让`develop`分支追踪`origin/develop`远程分支。
+## 提交标签
+
+提交所有 tag
+
+```bash
+git push origin --tags
+```
+
+提交某个 tag
+
+```bash
+git push origin v0.0.1
+```
+
+## 重命名标签
+
+```bash
+git tag v0.0.1 v1.0.0
+```
+
+## 删除标签
+
+要删除掉你本地仓库上的标签，可以使用命令 `git tag -d <tagname>`
+
+```bash
+git tag -d v0.0.1
+```
+
+注意上述命令并不会从任何远程仓库中移除这个标签，你必须用 `git push <remote> :refs/tags/<tagname>` 来更新你的远程仓库
+
+```
+git push origin :refs/tags/v0.0.1
+```
+
+上面这种操作的含义是，将冒号前面的空值推送到远程标签名，从而高效地删除它。
+
+第二种更直观的删除远程标签的方式是：
+
+```bash
+git push origin --delete v0.0.1
+```
+
+## 检出标签
+
+```bash
+git checkout v0.0.1
+```
+
+
+
+# git branch
+
+## 查看分支列表
+
+```bash
+git branch
+```
+
+## 新建分支
+
+```bash
+git branch hotfix-0819
+```
+
+## 在远程分支的基础上建立本地的分支
+
+在远程分支的基础上建立 `develop` 的分支，并且让 `develop` 分支追踪`origin/develop`远程分支。
 
 > 如果想新建一个本地分支不同名字，同时跟踪一个远程分支可以利用：
 > git checkout -b new_branch_name branch_name
@@ -79,55 +90,105 @@ git checkout -b develop origin/develop
 git checkout --track origin/dev-hss
 ```
 
-## fetch
-
-不管当前在哪个分支，都可以拉取远程所有分支到本地，但是注意
+## 切换分支
 
 ```bash
-git fetch
+git checkout master
+```
+
+## 重命名分支
+
+```bash
+git branch -m 旧分支名 新分支名
+```
+
+## 删除分支
+
+删除本地分支：
+
+```bash
+git branch -d 分支名
+```
+
+> 如果报错：error: The branch '分支名' is not fully merged. If you are sure you want to delete it, run 'git branch -D 分支'，则：git branch -D 分支名
+
+删除远程分支：
+
+```bash
+git push origin --delete [branchname]
+```
+
+## 查看所有分支
+
+```bash
+git branch -a
+```
+
+## 查看远程分支
+
+```bash
+git branch -r
+```
+
+## 创建并切换分支
+
+```bash
+git checkout -b 新分支名
+```
+
+## 创建并切换远程分支
+
+> git checkout -b 新分支名 远程分支名
+>
+> 如 git checkout -b dev origin/develop
+
+## 查看每一个分支的最后一次提交
+
+```bash
+git branch -v
+```
+
+## 查看本地分支和远程分支的跟踪关系
+
+```bash
+git branch -vv
+```
+
+## 查看点线图
+
+```bash
+git log --graph
 ```
 
 
 
-# 配置
-
-显示当前的 Git 配置
+# git remote
 
 ```bash
+# 删除本地远程仓库地址
+git remote rm origin
+# 新增本地远程仓库地址
+git remote add origin [url]
+# 设置本地远程仓库地址
+git remote set-url origin [url]
+```
+
+
+
+# git config
+
+```bash
+# 显示当前的Git配置
 git config --list
-```
-
-查看当前用户（global）配置
-
-```bash
+# 查看当前用户（global）配置
 git config --global --list
-```
-
-查看当前仓库配置信息
-
-```bash
+# 查看当前仓库配置信息
 git config --local --list
-```
-
-设置邮箱
-
-```bash
+# 设置邮箱
 git config --global user.email '2274751790@qq.com'
-```
-
-设置用户名
-
-```bash
+# 设置用户名
 git config --global user.name 'galaxy-s10'
 ```
-
-## 实战
-
-同一个feat1分支下，开发者a和开发者b，一开始一共两个文件，feat1.js和a.js
-
-开发者a在feat1里面，删除了a.js，然后再feat1.js里面新增了一句console.log("feat1桌面删除了a.js");，然后commit了feat1删除了a，再然后push到了远程仓库
-
-此时的开发者b不知道，自己做自己的，没有更改源文件，只是新增了一个feat11.js文件，里面写了一句console.log("feat11.js");，然后commit了add feat11，再然后push到了远程仓库，很显然，遭到了reject，然后就执行了：git pull，因为此时开发者a是先提交了，开发者b再提交的，即开发者b的add feat11前面肯定要有开发者a的feat1删除了a，此时的操作就是把开发者a的改动放到开发者b里面，因为那会a把a.js删了，因此，现在开发者b里面肯定不能有a.js了，因此就把a.js给删了，然后a还在feat1.js上面新增了一行代码，由于b没有更改过feat1.js，因此就直接把a的那一行代码也放到了feat1.js里面。最后的话就是feat11，这个文件不动，依旧在。然后此时b的add feat11后面还会多一个merge feat删除了a的commit。这种其实是属于没有冲突的。
 
 
 

@@ -1,73 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>发布订阅模式</title>
-</head>
+  </head>
 
-<body>
-    <h1>发布订阅模式</h1>
+  <body>
     <script>
-        // 中间人，不关系订阅和发布的人是谁，只关心订阅了什么东西
-        let taobao = {
-            goods: {},
-            subscribe(good, cb) {
-                if (!this.goods[good]) {
-                    this.goods[good] = []
-                }
-                console.log(`淘宝收到了有人订阅${good}的通知`);
-                this.goods[good].push(cb)
-            },
-            publish(good, cb) {
-                if (!this.goods[good]) {
-                    console.log(`这个商品不存在（没人订阅过），不发布`);
-                    return
-                }
-                console.log(`淘宝收到了有人发布${good}的通知，给所有订阅了${good}的顾客发送通知`);
-                for (let i = 0; i < this.goods[good].length; i++) {
-                    this.goods[good][i]()
-                }
-            }
+      // 中间人，不关系订阅和发布的人是谁，只关心订阅了什么东西
+      let taobao = {
+        goods: {},
+        // 订阅
+        subscribe(good, cb) {
+          if (!this.goods[good]) {
+            this.goods[good] = [];
+          }
+          console.log(`淘宝收到了有人订阅${good}的通知`);
+          this.goods[good].push(cb);
+        },
+        // 发布
+        publish(good, cb) {
+          if (!this.goods[good]) {
+            console.log(`这个商品不存在（没人订阅过），不发布`);
+            return;
+          }
+          console.log(
+            `淘宝收到了有人发布${good}的通知，给所有订阅了${good}的顾客发送通知`
+          );
+          for (let i = 0; i < this.goods[good].length; i++) {
+            this.goods[good][i]();
+          }
+        },
+      };
+      // 发布/订阅者
+      class People {
+        constructor(name) {
+          this.name = name;
         }
-        // 发布/订阅者
-        class People {
-            constructor(name) {
-                this.name = name
-            }
-            subscribe(good, cb) {
-                console.log(`${this.name}订阅了${good}`);
-                taobao.subscribe(good, cb)
-            }
-            publish(good, cb) {
-                console.log(`${this.name}发布了${good}`);
-                taobao.publish(good, cb)
-            }
+        subscribe(good, cb) {
+          console.log(`${this.name}订阅了${good}`);
+          taobao.subscribe(good, cb);
         }
-        let tom = new People('tom')
-        let lili = new People('lili')
-        let boss = new People('boss')
-        tom.subscribe('apple', function () {
-            console.log(`我是tom，我订了一台苹果12 mini,有货麻烦通知我！`);
-        })
-        tom.subscribe('xiaomi', function () {
-            console.log(`我是tom，我订了一台小米11,有货麻烦通知我！`);
-        })
+        publish(good, cb) {
+          console.log(`${this.name}发布了${good}`);
+          taobao.publish(good, cb);
+        }
+      }
+      let tom = new People('tom');
+      let lili = new People('lili');
+      let boss = new People('boss');
 
-        lili.subscribe('apple', function () {
-            console.log(`我是lili，我订了一台苹果12 pro max,有货麻烦通知我！`);
-        })
+      tom.subscribe('apple', function () {
+        console.log(`我是tom，我订了一台苹果12 mini,有货麻烦通知我！`);
+      });
+      tom.subscribe('xiaomi', function () {
+        console.log(`我是tom，我订了一台小米11,有货麻烦通知我！`);
+      });
 
-        boss.publish('apple', function () {
-            console.log(`我是boss，最新到货苹果12系列手机，欲购从速！`);
-        })
-        boss.publish('huawei', function () {
-            console.log(`我是boss，最新到货华为系列手机，欲购从速！`);
-        })
+      lili.subscribe('apple', function () {
+        console.log(`我是lili，我订了一台苹果12 pro max,有货麻烦通知我！`);
+      });
 
+      boss.publish('apple', function () {
+        console.log(`我是boss，最新到货苹果12系列手机，欲购从速！`);
+      });
+      boss.publish('huawei', function () {
+        console.log(`我是boss，最新到货华为系列手机，欲购从速！`);
+      });
     </script>
-</body>
-
+  </body>
 </html>
