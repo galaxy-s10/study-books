@@ -1,70 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <script>
-        // 基本用法
-        function say(name = 'hss', age = 18) {
-            console.log(name, age);
+      // 基本用法
+      function say(name = 'hss', age = 18) {
+        console.log(name, age);
+      }
+      say(); //hss,18
+      say('why', 21); //why,21
+      say('why'); //why,18
+      say(22); //22,18
+
+      // 与解构赋值默认值结合
+      function pet({ name = 'cat', age = 3 }) {
+        console.log(name, age);
+      }
+      pet({}); //cat,3
+      pet({ name: 'dog', age: 4 }); //dog,4
+      pet({ age: 5 }); //cat,5
+
+      // 双重默认值
+      function son({ name = 'tom', age = 10 } = {}) {
+        console.log(name, age);
+      }
+      son(); //tom,10
+      son({ name: 'lili' }); //lili,10
+      son({ age: 14 }); //tom,14
+
+      // 扩展/剩余运算符
+      var arr = [1, 2, 3];
+      console.log(arr); //[1, 2, 3]
+      console.log(...arr); //1 2 3
+      var arr1 = [2, 3, 4];
+      var arr2 = [5, 6, 7];
+      var arr3 = [...arr1, ...arr2];
+      console.log(arr3); //[2, 3, 4, 5, 6, 7]
+      var obj1 = { name: 'hss', age: 21 };
+      // console.log(...obj1);   //报错Uncaught TypeError: Found non-callable @@iterator
+      console.log({ ...obj1 }); //{name: "hss", age: 21}
+
+      // 剩余运算符
+      var obj2 = { name: 'hss', age: 21, hobby: 'code' };
+      var { age, ...obj3 } = obj2;
+      console.log(obj3); //{name: "hss", hobby: "code"}
+
+      var name = 'hss';
+      var str = `${name},喜欢code`;
+      console.log(str); //hss,喜欢code
+
+      console.log(Foo);
+
+      var Foo = class {
+        constructor() {}
+        bar() {
+          return 'Hello World!';
         }
-        say()           //hss,18
-        say('why', 21)  //why,21
-        say('why')      //why,18
-        say(22)         //22,18
-
-        // 与解构赋值默认值结合
-        function pet({ name = 'cat', age = 3 }) {
-            console.log(name, age);
-        }
-        pet({})                         //cat,3
-        pet({ name: 'dog', age: 4 })    //dog,4
-        pet({ age: 5 })                    //cat,5
-
-        // 双重默认值
-        function son({ name = 'tom', age = 10 } = {}) {
-            console.log(name, age);
-        }
-        son()               //tom,10
-        son({ name: 'lili' })  //lili,10
-        son({ age: 14 })       //tom,14
-
-        // 扩展/剩余运算符
-        var arr = [1, 2, 3]
-        console.log(arr);       //[1, 2, 3]
-        console.log(...arr);    //1 2 3
-        var arr1 = [2, 3, 4]
-        var arr2 = [5, 6, 7]
-        var arr3 = [...arr1, ...arr2]
-        console.log(arr3);  //[2, 3, 4, 5, 6, 7]
-        var obj1 = { name: 'hss', age: 21 }
-        // console.log(...obj1);   //报错Uncaught TypeError: Found non-callable @@iterator
-        console.log({ ...obj1 }); //{name: "hss", age: 21}
-
-        // 剩余运算符
-        var obj2 = { name: 'hss', age: 21, hobby: 'code' }
-        var { age, ...obj3 } = obj2
-        console.log(obj3);  //{name: "hss", hobby: "code"}
-
-        var name = 'hss'
-        var str = `${name},喜欢code`
-        console.log(str)    //hss,喜欢code
-
-        console.log(Foo);
-
-        var Foo = class {
-            constructor() { }
-            bar() {
-                return "Hello World!";
-            }
-        };
+      };
     </script>
-</body>
-
+  </body>
 </html>
