@@ -12,18 +12,20 @@ function createArrayIterator(arr) {
 }
 
 const names = ['abc', 'cba', 'nba'];
-const nums = [10, 20, 30];
 
 const namesIterator = createArrayIterator(names);
 console.log(namesIterator.next()); //{ done: false, value: 'abc' }
 console.log(namesIterator.next()); //{ done: false, value: 'cba' }
 console.log(namesIterator.next()); //{ done: false, value: 'nba' }
+console.log(namesIterator.next()); //{ done: true, value: undefined }
 console.log('-------');
 
+const nums = [10, 20, 30];
 const numsIterator = createArrayIterator(nums);
 console.log(numsIterator.next()); //{ done: false, value: 10 }
 console.log(numsIterator.next()); //{ done: false, value: 20 }
 console.log(numsIterator.next()); //{ done: false, value: 30 }
+console.log(numsIterator.next()); //{ done: true, value: undefined }
 console.log(numsIterator.next()); //{ done: true, value: undefined }
 
 console.log('-------');

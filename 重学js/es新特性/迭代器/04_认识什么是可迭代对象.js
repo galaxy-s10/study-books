@@ -24,12 +24,14 @@ console.log(iterator1.next()); //{ done: false, value: 'abc' }
 console.log(iterator1.next()); //{ done: false, value: 'cba' }
 console.log(iterator1.next()); //{ done: false, value: 'nba' }
 console.log(iterator1.next()); //{ done: true, value: undefined }
+console.log(iterator1.next()); //{ done: true, value: undefined }
 
 // 2.第二次调用iterableObj[Symbol.iterator]函数
 const iterator2 = iterableObj[Symbol.iterator]();
 console.log(iterator2.next()); //{ done: false, value: 'abc' }
 console.log(iterator2.next()); //{ done: false, value: 'cba' }
 console.log(iterator2.next()); //{ done: false, value: 'nba' }
+console.log(iterator2.next()); //{ done: true, value: undefined }
 console.log(iterator2.next()); //{ done: true, value: undefined }
 
 // 3.for...of可以遍历的东西必须是一个可迭代对象（即有[Symbol.iterator]），而对象没有[Symbol.iterator]
@@ -38,6 +40,6 @@ const obj = {
   age: 18,
 };
 
-for (const item of iterableObj) {
+for (const item of obj) {
   console.log(item);
 }

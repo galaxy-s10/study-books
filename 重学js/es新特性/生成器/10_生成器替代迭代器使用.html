@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const arr = ['abc', 'cba', 'nba'];
+      // 迭代器
+      // arr.__proto__[Symbol.iterator] = function () {
+      //   console.log('迭代器写法');
+      //   let index = 0;
+      //   return {
+      //     next() {
+      //       if (index < arr.length) {
+      //         return { done: false, value: arr[index++] };
+      //       } else {
+      //         return { done: true, value: undefined };
+      //       }
+      //     },
+      //   };
+      // };
+
+      // 生成器替换迭代器
+      // arr.__proto__[Symbol.iterator] = function* () {
+      //   console.log('生成器替换迭代器');
+      //   for (let index = 0; index < arr.length; index++) {
+      //     yield arr[index];
+      //   }
+      // };
+
+      for (let i of arr) {
+        console.log(arr, i, arr[i]);
+      }
+    </script>
+  </body>
+</html>

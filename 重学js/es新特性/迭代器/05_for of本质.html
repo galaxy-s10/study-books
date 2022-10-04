@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const arr = ['abc', 'cba', 'nba'];
+      // __proto__不是标准，只在浏览器里面有，node环境没有，因此这个案例在浏览器环境测试，在node环境测试会报错
+      // arr.__proto__[Symbol.iterator] = function () {
+      //   console.log('----');
+      //   let index = 0;
+      //   return {
+      //     next() {
+      //       if (index < arr.length) {
+      //         return { done: false, value: arr[index++] };
+      //       } else {
+      //         return { done: true, value: undefined };
+      //       }
+      //     },
+      //   };
+      // };
+
+      for (let i of arr) {
+        console.log(arr, i, arr[i]);
+      }
+      // 打印：
+      // [ 'abc', 'cba', 'nba' ] abc undefined
+      // [ 'abc', 'cba', 'nba' ] cba undefined
+      // [ 'abc', 'cba', 'nba' ] nba undefined
+    </script>
+  </body>
+</html>

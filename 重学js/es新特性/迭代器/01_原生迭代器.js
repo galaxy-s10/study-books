@@ -10,8 +10,10 @@ console.log(arrInter.next()); //{ value: 1, done: false }
 console.log(arrInter.next()); //{ value: 2, done: false }
 console.log(arrInter.next()); //{ value: 3, done: false }
 console.log(arrInter.next()); //{ value: undefined, done: true }
+console.log(arrInter.next()); //{ value: undefined, done: true }
 
 console.log(strInter.next()); //{ value: '1', done: false }
 console.log(strInter.next()); //{ value: '2', done: false }
 console.log(strInter.next()); //{ value: '3', done: false }
+console.log(strInter.next()); //{ value: undefined, done: true }
 console.log(strInter.next()); //{ value: undefined, done: true }
