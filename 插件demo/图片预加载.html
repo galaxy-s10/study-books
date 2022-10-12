@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(1);
+        }, 1000);
+      }).then(
+        (res) => {
+          console.log('res', res);
+        },
+        (rej) => {
+          console.log('rej', rej);
+        }
+      );
+
+      const preloadImg = (urls) => {
+        return urls.map((url) => {
+          return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = url;
+            img.onload = (event) => resolve({ event, url });
+            img.onerror = (event) => reject({ event, url });
+          });
+        });
+      };
+      const preloadImgRes = preloadImg([
+        'https://resource.hsslive.cn/image/1578937683585vueblog.webp',
+        'https://resource.hsslive.cn/image/1582634581438regexr.webp',
+      ]);
+      Promise.all(preloadImgRes)
+        .then((ok) => {
+          console.log('ok', ok);
+        })
+        .catch((err) => {
+          console.log('err', err);
+        });
+    </script>
+  </body>
+</html>
