@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let obj = { age: 18 };
+      let set = new Set([1, 4, 9]);
+      set.forEach((value, key) => console.log(this, key + ' : ' + value)); //这里的this是window
+      set.forEach(function (value, key) {
+        console.log(this, key + ' : ' + value); //这里的this是obj
+      }, obj);
+    </script>
+  </body>
+</html>
