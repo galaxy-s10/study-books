@@ -7,3 +7,4 @@ pets[0] = 'fish';
 const pets1 = ['cat', 'dog'] as const;
 
 pets1[0] = 'fish';
+Object.defineProperty;
