@@ -1,5 +1,18 @@
 # git config
 
+```bash
+# 显示当前的Git配置
+git config --list
+# 查看当前用户（global）配置
+git config --global --list
+# 查看当前仓库配置信息
+git config --local --list
+# 设置邮箱
+git config --global user.email '2274751790@qq.com'
+# 设置用户名
+git config --global user.name 'galaxy-s10'
+```
+
 默认的git配置文件位置：~/.gitconfig，你设置的全局配置都存在这里
 
 ```
@@ -16,9 +29,15 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 [core]
+	#whitespace，true：显示空白问题；cr-at-eol：不显示空白问题
 	whitespace = true
-	autocrlf = true
-
+	#whitespace = cr-at-eol
+	#safecrlf， true：拒绝提交包含混合换行符的文件；false：允许包含混合换行符的文件；warn：混合换行符的文件时报警告
+	safecrlf = true
+	#autocrlf，false：不自动转换换行符；input：转换为LF；true：转换为CRLF
+	#autocrlf = input
+	#autocrlf = true
+	#autocrlf = false
 ```
 
 
@@ -97,6 +116,8 @@ $ git apply --whitespace=fix <patch>
 git config --get core.autocrlf
 ```
 
+如果没有手动设置它，默认它就没有值，如果他没有值的话
+
 input，在提交的时候（即git add .）会提示`warning: xxxx 中的 CRLF 将被 LF 替换。在工作区中该文件仍保持原有的换行符`，即git status还是和以前一样的
 
 ```sh
@@ -105,8 +126,11 @@ git config --global core.autocrlf input
 
 true，会将项目的换行符换成CRLF
 
-- 如果你当前在mac环境，你的项目使用的换行符是LF，那么在提交的时候（即git add .）会提示`warning: xxxx 中的 LF 将被 CRLF 替换。在工作区中该文件仍保持原有的换行符`，因为你原本用的是LF，要换成CRLF
-- 如果你当前在window环境，你的项目使用的换行符是CRLF，那么在提交的时候（即git add .）不会提示`warning: xxxx 中的 LF 将被 CRLF 替换。在工作区中该文件仍保持原有的换行符`，因为你原本用的就是CRLF，不需要换
+如果没有手动设置core.autocrlf，默认core.autocrlf就没有值，如果他没有值的话
+
+- 如果你当前在mac环境，mac环境默认换行符是LF，那么在提交的时候（即git add .）换行符就是LF
+- 如果你当前在win环境，win环境默认换行符是CRLF，那么在提交的时候（即git add .）换行符就是CRLF
+- 如果你当前在mac环境，并且你的mac环境没有手动配置core.autocrlf，然后你拉取了一个在win环境的项目（假设该项目当时的git没有手动设置core.autocrlf，即项目里的换行符是CRLF），拉取代码下来后，随便找一个文件啥也不修改，只保存，保存后不要执行git add，直接git diff会发现该文件被修改了，修改的全是换行符（这是因为换行符不一致的问题），这时候如果我们配置`git config --global core.autocrlf input`，然后再git diff就会发现原本的修改都没了，但是显示`warning: xxx 中的 CRLF 将被 LF 替换。`，并且git status显示该文件还是被修改了，但是此时我们git add后，控制台把之前git diff的`warning: xxx 中的 CRLF 将被 LF 替换。`给打印输出了，然后git status显示没有文件被修改，貌似解决了问题，但问题是，我们遇到每个和之前文件冲突的文件，都得执行一遍git add之后，才会正常，官方的[在更改行结束符后刷新仓库](https://docs.github.com/cn/get-started/getting-started-with-git/configuring-git-to-handle-line-endings?platform=mac#refreshing-a-repository-after-changing-line-endings)，我看不懂是什么操作，但是我更改core.autocrlf为input貌似很麻烦，因为他会把原本仓库的crlf改成lf，我应该将core.autocrlf设置为true，这样才会符合原本仓库的换行符，但是如果我core.autocrlf设置为true后，那么要是我有另一个仓库，他的换行符配置是LF，那岂不是我本地的core.autocrlf有得改为input，很明显不太合理，因此这里不改全局的core.autocrlf，直接在项目根目录新建.gitattributes文件，添加：`* text eol=crlf`，这样就一点毛病都没有了，下次别的用mac同事拉这个项目代码的时候，也不需要额外配置就可以直接适配换行符了，这里再总结下最终流程：首先丢弃所有文件更改，然后新建.gitattributes文件，添加：`* text eol=crlf`，这样后面就不会有git的换行符问题了
 - 一般情况下，设置了true后，后面再操作文件，是不会有换行符的问题的（只是你git add的时候git会提示给你替换），如果有换行符的问题，那么肯定就是你原本的是LF，你保存文件后，换成了CRLF；或者你原本是CRLF，保存文件后，替换成了LF
 
 ```sh
@@ -231,67 +255,24 @@ git config --global core.safecrlf warn
 
 
 
+# 最佳实践
 
+## .gitattributes
 
-# .gitattributes
+项目根目录新建.gitattributes文件，添加：`* text eol=lf`，这样就一点毛病都没有了，下次别的用mac同事拉这个项目代码的时候，也不需要额外配置就可以直接适配换行符了，这里再总结下最终流程：首先丢弃所有文件更改，然后新建.gitattributes文件，添加：`* text eol=lf`，这样后面就不会有git的换行符问题了
 
-自定义git配置文件
+.gitattributes
 
 ```
-# https://docs.github.com/cn/get-started/getting-started-with-git/configuring-git-to-handle-line-endings?platform=mac#about-line-endings
-# 该项目一开始是在window系统创建的，.editorconfig配置的换行符是window系统的crlf
-# 设置* text eol=crlf后，会忽略git全局的core.autocrlf配置，在git add .的时候会将所有换行符替换为crlf
-# * text eol=crlf
-# 但https://adaptivepatchwork.com/2012/03/01/mind-the-end-of-your-line/文章里不推荐修改eol设置
+# 设置* text=auto的话，一般情况下没问题，但是如果git配置了safecrlf = true，就会导致问题
 # * text=auto
+# 设置* text eol=lf，即设置成和.editorconfig的end_of_line一样的值，就会不管是win还是mac，都统一
+# 使用eol设置的换行符，就不会有换行符的问题了（不会受autocrlf和safecrlf的影响）
+* text eol=lf
 
 ```
 
-
-
-# 实际案例
-
-## 空白问题
-
-在多人协作的情况下，可能每个开发者使用的操作系统不一样，在git提交时出现很多^M提示符
-
-```sh
-diff --git a/.prettierrc b/.prettierrc
-index 8134dbf..2760dcf 100644
---- a/.prettierrc
-+++ b/.prettierrc
-@@ -1,6 +1,6 @@
--{
--    "semi": false,
--    "printWidth": 200,
--    "singleQuote": true,
--    "tabWidth": 4
--}
-+{^M
-+    "semi": false,^M
-+    "printWidth": 200,^M
-+    "singleQuote": true,^M
-+    "tabWidth": 4^M
-+}^M
-```
-
-### 解决办法1
-
-```sh
-git config --global core.whitespace cr-at-eol
-```
-
-使用上面的命令后，git diff就不会显示^M差异，但仍然会显示有修改，只是不显示
-
-### 解决办法2
-
-```sh
-git config --global core.autocrlf input
-```
-
-使用该命令，git会在提交时转换为lf
-
-
+> 如果不确定当前项目的换行符是否一致，直接使用prettier格式化整个项目，prettier默认会读取.editorconfig的end_of_line配置，会使用它的换行符来进行格式化，格式化完成后，在git add和git commit提交一下即可
 
 # 参考
 

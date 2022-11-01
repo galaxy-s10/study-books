@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <style>
+      .topDiv {
+        width: 500px;
+        border: 10px solid black;
+      }
+      .floatDiv {
+        width: 100px;
+        height: 100px;
+        border: 2px dotted red;
+        color: red;
+        margin: 4px;
+        float: left;
+      }
+      .bottomDiv {
+        width: 500px;
+        height: 100px;
+        margin: 5px 0;
+        border: 2px dotted black;
+      }
+      .textDiv {
+        color: blue;
+        border: 5px solid blue;
+        /* clear: both; */
+        /* clear: left; */
+      }
+      .clearfix:after {
+        display: block;
+        clear: both;
+        content: '';
+      }
+    </style>
+  </head>
+  <body>
+    <p>https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Floats</p>
+    <p>
+      https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Floats_skills
+    </p>
+    <p>https://developer.mozilla.org/zh-CN/docs/Web/CSS/clear</p>
+
+    <div class="topDiv clearfix">
+      <div class="floatDiv">float left</div>
+      <div class="textDiv">
+        <!-- 当文字很短时，就会出现高度塌陷问题。需要清除浮动 -->
+        当文字很长时，其实没问题，不需要清除浮动，因为float原本就是希望这样的效果。当文字很长时，其实没问题，不需要清除浮动，因为float原本就是希望这样的效果。当文字很长时，其实没问题，不需要清除浮动，因为float原本就是希望这样的效果。当文字很长时，其实没问题，不需要清除浮动，因为float原本就是希望这样的效果。当文字很长时，其实没问题，不需要清除浮动，因为float原本就是希望这样的效果。当文字很长时，其实没问题，不需要清除浮动，因为float原本就是希望这样的效果。
+      </div>
+    </div>
+    <div class="bottomDiv">
+      Vue components can be authored in two different API styles: Options API
+      and Composition API.
+    </div>
+  </body>
+</html>

@@ -50,6 +50,20 @@ git push origin :refs/tags/v0.0.1
 git push origin --delete v0.0.1
 ```
 
+删除所有本地标签
+
+```sh
+git tag -d $(git tag -l) 
+```
+
+删除所有远程标签
+
+```sh
+git push origin --delete $(git tag -l)
+```
+
+> 如果本地的标签和远程的标签不一致，会导致删除失败。
+
 ## 检出标签
 
 ```bash
@@ -70,24 +84,6 @@ git branch
 
 ```bash
 git branch hotfix-0819
-```
-
-## 在远程分支的基础上建立本地的分支
-
-在远程分支的基础上建立 `develop` 的分支，并且让 `develop` 分支追踪`origin/develop`远程分支。
-
-> 如果想新建一个本地分支不同名字，同时跟踪一个远程分支可以利用：
-> git checkout -b new_branch_name branch_name
-> 这条指令本来是根据一个 branch_name 分支分出一个本地分支 new_branch_name，但是如果所根据的分支 branch_name 是一个远程分支名，那么本地的分支会自动的 track 远程分支。建议跟踪分支和被跟踪远程分支同名
-
-```bash
-git checkout -b develop origin/develop
-```
-
-在本地创建一个与 `dev-hss`同名分支跟踪远程分支。
-
-```bash
-git checkout --track origin/dev-hss
 ```
 
 ## 切换分支
@@ -138,9 +134,25 @@ git checkout -b 新分支名
 
 ## 创建并切换远程分支
 
-> git checkout -b 新分支名 远程分支名
->
+在远程分支的基础上建立 `develop` 的分支，并且让 `develop` 分支追踪`origin/develop`远程分支。
+
+```sh
+git checkout -b 新分支名 远程分支名
+```
+
 > 如 git checkout -b dev origin/develop
+
+## 在本地创建一个和远程分支同名的分支
+
+```bash
+git checkout --track origin/dev
+```
+
+> 其实git fetch后，直接git checkout dev即可在本地创建一个和远程分支同名的分支
+>
+> 如果想新建一个本地分支不同名字，同时跟踪一个远程分支可以利用：
+> git checkout -b mydev origin/dev
+> 这条指令本来是根据一个 branch_name 分支分出一个本地分支 new_branch_name，但是如果所根据的分支 branch_name 是一个远程分支名，那么本地的分支会自动的 track 远程分支。建议跟踪分支和被跟踪远程分支同名
 
 ## 查看每一个分支的最后一次提交
 
@@ -154,13 +166,13 @@ git branch -v
 git branch -vv
 ```
 
-## 查看点线图
+# git log
+
+查看点线图
 
 ```bash
 git log --graph
 ```
-
-
 
 # git remote
 
@@ -173,21 +185,45 @@ git remote add origin [url]
 git remote set-url origin [url]
 ```
 
+# git reset
 
+> 参考：https://zhuanlan.zhihu.com/p/346993796
 
-# git config
+## HEAD~和HEAD^区别
 
-```bash
-# 显示当前的Git配置
-git config --list
-# 查看当前用户（global）配置
-git config --global --list
-# 查看当前仓库配置信息
-git config --local --list
-# 设置邮箱
-git config --global user.email '2274751790@qq.com'
-# 设置用户名
-git config --global user.name 'galaxy-s10'
+- `HEAD~` 后面加数字表示后退的步数，每次后退都默认退到第一个父提交上，`HEAD~2` 表示连退两步。
+- `HEAD^` 后面加数字表示只退一步，但是这一步后退到数字表示的父提交上，`HEAD^2` 表示退一步到第二个父提交上。
+
+要想用好reset命令，必须深入理解它的三个参数：--soft，--mixed（默认），--hard
+
+## 取消上一次commit
+
+```sh
+git reset --soft HEAD~1
+```
+
+> 这个操作会把上一次提交到本地仓库的文件给移出到暂存区
+
+```sh
+git reset --hard HEAD~1
+```
+
+> 这个操作会直接重置到上个提交，并且清空掉暂存区
+
+# git commit
+
+## 重命名提交
+
+```sh
+git commit --amend -m '新的提交信息'
+```
+
+# 修改.gitignore后生效
+
+```sh
+git rm -r --cached .
+git add .
+git commit -m 'update .gitignore'
 ```
 
 
