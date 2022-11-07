@@ -1,0 +1,25 @@
+// sass-loader的additionalData会引用该global.scss文件
+@forward './constant.scss';
+@forward './mixin.scss';
+@forward './common.scss';
+@forward './utils.scss';
+
+/*
+不要将全局的@keyframes的sass文件在这里引入(在@mixin定义的@keyframes没有被@include的话,@keyframes不会被编译),
+否则所有sass文件都会带有@keyframes,会出现:
+ <style>@keyframes aaa {0% {left: 10%;}}</style>
+ <style>@keyframes aaa {0% {left: 10%;}}</style>
+ 会造成重复的@keyframes,而且如果一个sass文件里面重写了@keyframes,可能会不生效:
+ <style>@keyframes aaa {0% {left: 10%;}}@keyframes aaa {0% {left: 30%;}}</style>
+ <style>@keyframes aaa {0% {left: 10%;}}</style>
+ 最终后面的style文件里的@keyframes aaa会覆盖之前的@keyframes aaa,因此避免将@keyframes放在全局,
+ 这样可以避免重复的@keyframes和减少开发者的心智负担.
+*/
+// @forward './animate/flash-txt.scss';
+// @forward './animate/flash-img.scss';
+// @forward './animate/loading-rotate.scss';
+// @forward './animate/loading-size.scss';
+
+// 这段注释会被删除
+/* 这段注释不会被删除,但是压缩模式下还是会被删除 */
+/*! 这段注释在压缩模式下也不会被删除,常用于声明版权 */
