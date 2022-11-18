@@ -116,7 +116,7 @@ $ git apply --whitespace=fix <patch>
 git config --get core.autocrlf
 ```
 
-如果没有手动设置它，默认它就没有值，如果他没有值的话
+
 
 input，在提交的时候（即git add .）会提示`warning: xxxx 中的 CRLF 将被 LF 替换。在工作区中该文件仍保持原有的换行符`，即git status还是和以前一样的
 
@@ -257,18 +257,58 @@ git config --global core.safecrlf warn
 
 # 最佳实践
 
+> 不管你当前什么情况（不管你是刚创建项目还是拉别人的项目下来报错了），以下操作都能解决问题。但就是需要和涉及项目的人员说一下，说你添加了.gitattributes文件，让他本机的git配置的safecrlf设置为false（如果他曾经设置过true的话）
+
+本机的.gitconfig文件添加：safecrlf设置为false（一定要设置false，或者直接把safecrlf注释掉，默认就是false），然后.gitattributes文件添加`* text=auto`
+
+.gitconfig
+
+```
+[core]
+	#whitespace，true：显示空白问题；cr-at-eol：不显示空白问题
+	#whitespace = true
+	#whitespace = cr-at-eol
+
+	#safecrlf，true：拒绝提交包含混合换行符的文件；false：允许包含混合换行符的文件；warn：混合换行符的文件时报警告		#safecrlf = false
+	#safecrlf = true
+	safecrlf = false
+
+	#autocrlf，false：不自动转换换行符；input：转换为LF；true：转换为CRLF
+	#autocrlf = input
+	#autocrlf = true
+	autocrlf = false
+```
+
+> autocrlf这个配置说实际的，其实不同系统需要设置不同的值，
+>
+> 可能代码仓库使用了crlf，那么win的同学拉代码就没事，mac的同事拉代码就有事，此时mac的同学就得设置autocrlf为true
+>
+> 可能代码仓库使用了lf，那么mac的同学拉代码就没事，win的同事拉代码就有事，此时win的同学就得设置autocrlf为input
+>
+> 并且，可能mac和win的同学本地都同事有win和mac的项目，这个项目改了autocrlf，换个项目又得改回去，就很麻烦。与其本地改来改去，不如在项目添加.gitattributes文件，让.gitattributes控制。然后autocrlf我个人会设置false，即不转换，有问题我就加.gitattributes文件。
+
 ## .gitattributes
 
-项目根目录新建.gitattributes文件，添加：`* text eol=lf`，这样就一点毛病都没有了，下次别的用mac同事拉这个项目代码的时候，也不需要额外配置就可以直接适配换行符了，这里再总结下最终流程：首先丢弃所有文件更改，然后新建.gitattributes文件，添加：`* text eol=lf`，这样后面就不会有git的换行符问题了
+项目根目录新建.gitattributes文件，这样就一点毛病都没有了，下次别的用mac同事拉这个项目代码的时候，也不需要额外配置就可以直接适配换行符了，这里再总结下最终流程：首先丢弃所有文件更改，然后新建.gitattributes文件，添加你需要的配置，这样后面就不会有git的换行符问题了
 
 .gitattributes
 
 ```
-# 设置* text=auto的话，一般情况下没问题，但是如果git配置了safecrlf = true，就会导致问题
-# * text=auto
-# 设置* text eol=lf，即设置成和.editorconfig的end_of_line一样的值，就会不管是win还是mac，都统一
+# ！！！！！！这里面的配置会影响git的行为，会导致你本地的文件和提交的文件不一致！！！！！！！！
+
+# * text eol=crlf优点是会在git add .的时候，不会修改本地文件，但是会修改提交到暂存区的文件
+# 会将提交到暂存区的所有文件的结尾符换成crlf。
+# * text eol=crlf缺点是会在git add .的时候，将提交到暂存区的图片的lf也换成crlf，但是不会更改工作区的图片，
+# 这样就会有问题，因为你本地的图片没改，但是你提交的图片却改了，可能会导致这个图片不显示（可以看提交记录，
+# 图片会不显示），然后你提交到代码仓库后，代码仓库的图片也是有问题的，就会有毛病
+# * text eol=lf，即设置成和.editorconfig的end_of_line一样的值，就会不管是win还是mac，都统一
 # 使用eol设置的换行符，就不会有换行符的问题了（不会受autocrlf和safecrlf的影响）
-* text eol=lf
+# * text eol=lf
+
+# 设置* text=auto的话，能兼容win和mac，绝大部分情况下没问题，但是如果git配置了safecrlf = true，就会导致问题
+# 因为safecrlf = true不允许提交包含混合的换行符文件，建议设置safecrlf = false，然后使用* text=auto
+# PS: 很多开源项目（react、angular、webpack...）都是使用* text=auto。
+* text=auto
 
 ```
 
