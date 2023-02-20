@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.aaa {
+			font-size: 16px;
+		}
+
+		/* 由于css后面的样式会覆盖前面的样式，因此，当使用min-width时，应该从小到大的往下写，而当使用max-width时，应该从大到小的往下写 */
+
+		/* 文档宽度大于768时 */
+		@media (min-width: 768px) {
+			.aaa {
+				font-size: 26px;
+
+			}
+		}
+
+		/* 文档宽度大于992时 */
+		@media (min-width: 992px) {
+			.aaa {
+				font-size: 36px;
+			}
+		}
+
+		/* 文档宽度大于1200时 */
+		@media (min-width: 1200px) {
+			.aaa {
+				font-size: 46px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="aaa">你好</div>
+</body>
+
+</html>
