@@ -144,21 +144,97 @@ build.sh  .editorconfig     .git           .lintstagedrc.js  .prettierignore  sr
 .eslintrc.js
 ```
 
-# ps 命令
+# ps 命令（进程相关）
 
-## 获取占用内存资源最多的 10 个进程
+ps （英文全拼：process status）命令用于显示当前进程的状态，类似于 windows 的任务管理器。
+
+ps有很多选项。在支持[SUS](https://zh.wikipedia.org/wiki/单一UNIX规范)和[POSIX](https://zh.wikipedia.org/wiki/POSIX)标准的[操作系统](https://zh.wikipedia.org/wiki/操作系统)上，ps常以选项**-ef**运行，其中“-e”选择每一个（**e**very）进程，“-f”指定“完整”（**f**ull）输出格式。这些系统上的另一个常见选项是**-l**，它指定“长”（**l**ong）输出格式。
+
+## -A
+
+显示所有进程。
+
+```bash
+[root@VM-12-2-centos node]# ps -A
+    PID TTY          TIME CMD
+      1 ?        00:00:06 systemd
+      2 ?        00:00:00 kthreadd
+      3 ?        00:00:00 rcu_gp
+      4 ?        00:00:00 rcu_par_gp
+```
+
+## -e
+
+显示所有进程。约等于 `-A`
+
+```bash
+[root@VM-12-2-centos node]# ps -e
+    PID TTY          TIME CMD
+      1 ?        00:00:06 systemd
+      2 ?        00:00:00 kthreadd
+      3 ?        00:00:00 rcu_gp
+```
+
+## -f
+
+全格式。
+
+```bash
+[root@VM-12-2-centos node]# ps -f
+UID          PID    PPID  C STIME TTY          TIME CMD
+root      127494  127262  0 23:26 pts/9    00:00:00 /bin/bash --init-file /root/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/out/vs/workbench/contrib/terminal/browser/media/shellIntegration-bash.sh
+root      128996  127494  0 23:36 pts/9    00:00:00 ps -f
+[root@VM-12-2-centos node]# 
+```
+
+## -ef
+
+```bash
+[root@VM-12-2-centos node]# ps -ef
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 3月23 ?       00:00:06 /usr/lib/systemd/systemd --switched-root --system --deserialize 18
+root           2       0  0 3月23 ?       00:00:00 [kthreadd]
+root           3       2  0 3月23 ?       00:00:00 [rcu_gp]
+root           4       2  0 3月23 ?       00:00:00 [rcu_par_gp]
+root           6       2  0 3月23 ?       00:00:00 [kworker/0:0H-events_highpri]
+root           9       2  0 3月23 ?       00:00:00 [mm_percpu_wq]
+root          10       2  0 3月23 ?       00:00:01 [ksoftirqd/0]
+```
+
+## aux
+
+由于历史原因，大多数源自BSD的系统无法接受SUS和POSIX的标准选项（例如，“e”或“-e”选项将显示[环境变量](https://zh.wikipedia.org/wiki/环境变量)）。在这样的系统中，ps常使用辅助非标准选项**aux**，其中“a”列出了一个[终端](https://zh.wikipedia.org/wiki/終端)上的所有进程，包括其他用户运行的，“x”列出所有没有控制终端的进程，“u”添加了一列显示每个进程的控制用户。需要注意的是，为了最大的兼容性，使用此语法时“aux”前没有“-”。此外，在aux之后添加“ww”可以显示进程的完整信息，包括所有的参数，例如“ps auxww”。
+
+```bash
+[root@VM-12-2-centos node]# ps aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.2 250500 10764 ?        Ss   3月23   0:06 /usr/lib/systemd/systemd --switched-root --system --deserialize 18
+root           2  0.0  0.0      0     0 ?        S    3月23   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   3月23   0:00 [rcu_gp]
+root           4  0.0  0.0      0     0 ?        I<   3月23   0:00 [rcu_par_gp]
+root           6  0.0  0.0      0     0 ?        I<   3月23   0:00 [kworker/0:0H-events_highpri]
+root           9  0.0  0.0      0     0 ?        I<   3月23   0:00 [mm_percpu_wq]
+```
+
+
+
+# sort命令（排序相关）
+
+
+
+#### 获取占用内存资源最多的 10 个进程
 
 ```bash
 ps -aux | sort -k4nr | head -10
 ```
 
-## 获取占用 CPU 资源最多的 10 个进程
+#### 获取占用 CPU 资源最多的 10 个进程
 
 ```bash
 ps aux|head -1;ps aux|grep -v PID|sort -rn -k +3|head
 ```
 
-## 获取占用内存资源最多的 10 个进程
+#### 获取占用内存资源最多的 10 个进程
 
 ```bash
 ps aux|head -1;ps aux|grep -v PID|sort -rn -k +4|head
@@ -167,13 +243,13 @@ ps aux|head -1;ps aux|grep -v PID|sort -rn -k +4|head
 ## 查看所有 node 进程
 
 ```bash
-ps aux | grep node
+ps -ef | grep node
 ```
 
 ## 查看某个进程 id
 
 ```bash
-ps aux | grep 进程id
+ps -ef | grep 进程id
 ```
 
 # uname 命令（系统相关）
