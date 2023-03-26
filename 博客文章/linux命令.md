@@ -94,7 +94,7 @@ du(Disk Usage) - 报告磁盘空间使用情况
 
 --summarize， 对每个参数只显示总和。
 
-```sh
+```bash
 [root@VM-12-2-centos node]# du -s
 5919556 .
 [root@VM-12-2-centos node]# du -s -h
@@ -190,9 +190,6 @@ Swap:         4.0Gi       341Mi       3.7Gi
 Mem:          3.6Gi       2.8Gi       124Mi       1.0Mi       709Mi       545Mi
 Swap:         4.0Gi       341Mi       3.7Gi
 [root@VM-12-2-centos node]#
-```
-
-```bash
 # 普通free
 free
 # 用mb显示
@@ -604,9 +601,6 @@ find 路径 -命令参数 [输出形式]
 [root@VM-12-2-centos node]# find -maxdepth 1 -name billd-ui
 ./billd-ui
 [root@VM-12-2-centos node]#
-```
-
-```bash
 [root@VM-12-2-centos node]# find -maxdepth 1 -name billd
 [root@VM-12-2-centos node]#
 ```
@@ -758,6 +752,307 @@ SUB    = The low-level unit activation state, values depend on unit type.
 4 loaded units listed. Pass --all to see loaded but inactive units, too.
 To show all installed unit files use 'systemctl list-unit-files'.
 [root@VM-12-2-centos nginx]#
+```
+
+# rpm 命令
+
+rpm 是一个功能十分强大的软件包管理系统，它使得在 Linux 下安装、升级和删除软件包的工作变得容易，并且具有查询、验证软件包的功能。
+
+## --version 版本
+
+```bash
+[root@VM-12-2-centos node]# rpm --version
+RPM version 4.14.3
+[root@VM-12-2-centos node]#
+```
+
+## --help 帮助
+
+```bash
+rpm --help
+```
+
+## -i 安装
+
+--install
+
+```bash
+# 安装包
+rpm -i ipchains-1.3.6-1.i386.rpm
+# 或者
+rpm --install ipchains-1.3.6-1.i386.rpm
+# 在线安装
+rpm -i ftp://ftp.xxx.xxx
+# 或者
+rpm --install ftp://ftp.xxx.xxx
+```
+
+## -q 查询
+
+--query
+
+```bash
+[root@VM-12-2-centos node]# rpm -q mysql
+mysql-8.0.26-1.module_el8.4.0+915+de215114.x86_64
+[root@VM-12-2-centos node]# rpm --query mysql
+mysql-8.0.26-1.module_el8.4.0+915+de215114.x86_64
+[root@VM-12-2-centos node]#
+```
+
+### -a 所有
+
+--all
+
+```bash
+[root@VM-12-2-centos node]# rpm -q -a
+libepoxy-1.5.8-1.el8.x86_64
+pciutils-libs-3.7.0-1.el8.x86_64
+langpacks-zh_CN-1.0-12.el8.noarch
+python3-bind-9.11.26-4.el8_4.noarch
+sssd-common-pac-2.4.0-9.el8.x86_64
+ncurses-base-6.1-7.20180224.el8.noarch
+java-11-openjdk-headless-11.0.13.0.8-4.el8_5.x86_64
+libicu-60.3-2.el8_1.x86_64
+[root@VM-12-2-centos node]#
+```
+
+## -e 删除
+
+--erase
+
+```bash
+# 移除安装包
+rpm -e httpd
+```
+
+# yum 命令
+
+yum 命令：用于添加/删除/更新 RPM 包,自动解决包的依赖问题以及系统更新升级
+
+## --version 版本
+
+```bash
+[root@VM-12-2-centos node]# yum --version
+4.4.2
+  已安装： dnf-0:4.4.2-11.el8.noarch 在 2021年06月18日 星期五 03时28分18秒
+  构建    ：CentOS Buildsys <bugs@centos.org> 在 2021年03月11日 星期四 19时39分23秒
+[root@VM-12-2-centos node]#
+```
+
+## --help 帮助
+
+```bash
+yum --help
+```
+
+## install 安装
+
+```bash
+# 安装php5.3及其相关依赖包
+yum install php53
+```
+
+## info 信息
+
+可安装和可更新的 RPM 包信息
+
+```bash
+[root@VM-12-2-centos node]# yum info mysql | head -n 20
+Repository AppStream is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository PowerTools is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository base is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository PowerTools is listed more than once in the configuration
+Repository AppStream is listed more than once in the configuration
+Repository epel is listed more than once in the configuration
+上次元数据过期检查：0:14:11 前，执行于 2023年03月26日 星期日 15时39分34秒。
+已安装的软件包
+名称         : mysql
+版本         : 8.0.26
+发布         : 1.module_el8.4.0+915+de215114
+架构         : x86_64
+大小         : 63 M
+源           : mysql-8.0.26-1.module_el8.4.0+915+de215114.src.rpm
+仓库         : @System
+来自仓库     : AppStream
+概况         : MySQL client programs and shared libraries
+URL          : http://www.mysql.com
+协议         : GPLv2 with exceptions and LGPLv2 and BSD
+描述         : MySQL is a multi-user, multi-threaded SQL database server. MySQL is a
+             : client/server implementation consisting of a server daemon (mysqld)
+             : and many different client programs and libraries. The base package
+             : contains the standard MySQL client programs and generic MySQL files.
+
+[root@VM-12-2-centos node]#
+```
+
+### installed 已安装包的信息
+
+已安装包的信息(-qa 参数相似)
+
+```bash
+[root@VM-12-2-centos node]# yum info installed | head -n 40
+Repository AppStream is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository PowerTools is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository base is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository PowerTools is listed more than once in the configuration
+Repository AppStream is listed more than once in the configuration
+Repository epel is listed more than once in the configuration
+已安装的软件包
+名称         : NetworkManager
+时期         : 1
+版本         : 1.30.0
+发布         : 7.el8
+架构         : x86_64
+大小         : 6.9 M
+源           : NetworkManager-1.30.0-7.el8.src.rpm
+仓库         : @System
+来自仓库     : BaseOS
+概况         : Network connection manager and user applications
+URL          : https://networkmanager.dev/
+协议         : GPLv2+ and LGPLv2+
+描述         : NetworkManager is a system service that manages network interfaces and
+             : connections based on user or automatic configuration. It supports
+             : Ethernet, Bridge, Bond, VLAN, Team, InfiniBand, Wi-Fi, mobile broadband
+             : (WWAN), PPPoE and other devices, and supports a variety of different VPN
+             : services.
+
+名称         : NetworkManager-libnm
+时期         : 1
+版本         : 1.30.0
+发布         : 7.el8
+架构         : x86_64
+大小         : 8.8 M
+源           : NetworkManager-1.30.0-7.el8.src.rpm
+仓库         : @System
+来自仓库     : BaseOS
+概况         : Libraries for adding NetworkManager support to applications.
+URL          : https://networkmanager.dev/
+协议         : LGPLv2+
+描述         : This package contains the libraries that make it easier to use some
+             : NetworkManager functionality from applications.
+
+名称         : NetworkManager-team
+时期         : 1
+版本         : 1.30.0
+发布         : 7.el8
+架构         : x86_64
+大小         : 48 k
+[root@VM-12-2-centos node]#
+```
+
+## search 搜索包
+
+```bash
+[root@VM-12-2-centos node]# yum search jenkins
+Repository AppStream is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository PowerTools is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository base is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository PowerTools is listed more than once in the configuration
+Repository AppStream is listed more than once in the configuration
+Repository epel is listed more than once in the configuration
+上次元数据过期检查：0:00:29 前，执行于 2023年03月26日 星期日 15时39分34秒。
+============================================================================================================= 名称 和 概况 匹配：jenkins =============================================================================================================
+jenkins.noarch : Jenkins Automation Server
+python3-jenkins.noarch : Python bindings for the remote Jenkins API
+[root@VM-12-2-centos node]#
+```
+
+## list 可安装和可更新的 RPM 包
+
+```bash
+# 可安装和可更新的RPM包
+yum list
+# 已安装包
+yum list installed
+# 已安装且不在资源库的包
+yum list extras
+```
+
+## remove 卸载包
+
+```bash
+# 删除php53
+yum remove php53
+```
+
+## deplist 列出包的依赖
+
+```bash
+[root@VM-12-2-centos node]# yum deplist mysql | head -n 20
+Repository AppStream is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository PowerTools is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository base is listed more than once in the configuration
+Repository extras is listed more than once in the configuration
+Repository centosplus is listed more than once in the configuration
+Repository PowerTools is listed more than once in the configuration
+Repository AppStream is listed more than once in the configuration
+Repository epel is listed more than once in the configuration
+上次元数据过期检查：0:13:33 前，执行于 2023年03月26日 星期日 15时39分34秒。
+package: mysql-8.0.26-1.module_el8.4.0+915+de215114.x86_64
+  dependency: bash
+   provider: bash-4.4.20-2.el8.x86_64
+  dependency: coreutils
+   provider: coreutils-8.30-12.el8.x86_64
+  dependency: grep
+   provider: grep-3.1-6.el8.x86_64
+  dependency: libc.so.6(GLIBC_2.28)(64bit)
+   provider: glibc-2.28-164.el8.x86_64
+  dependency: libcrypto.so.1.1()(64bit)
+   provider: openssl-libs-1:1.1.1k-5.el8_5.x86_64
+  dependency: libcrypto.so.1.1(OPENSSL_1_1_0)(64bit)
+   provider: openssl-libs-1:1.1.1k-5.el8_5.x86_64
+  dependency: libcrypto.so.1.1(OPENSSL_1_1_1)(64bit)
+   provider: openssl-libs-1:1.1.1k-5.el8_5.x86_64
+  dependency: libdl.so.2()(64bit)
+   provider: glibc-2.28-164.el8.x86_64
+  dependency: libdl.so.2(GLIBC_2.2.5)(64bit)
+   provider: glibc-2.28-164.el8.x86_64
+  dependency: libedit.so.0()(64bit)
+[root@VM-12-2-centos node]#
+```
+
+## clean 清除
+
+```bash
+# 清除缓存目录下的软件包
+yum clean packages
+# 清除缓存目录下的 headers
+yum clean headers
+# 清除缓存目录下旧的 headers
+yum clean oldheaders
+# 清除所有
+yum clean
+# 清除所有
+yum clean all
+```
+
+```bash
+# 查看帮助
+rpm --help
+# 查看yum版本
+yum --version
+# 或者
+yum info yum
+# 查看是否安装了unzip
+yum info unzip
+# 查看是否安装了lrzsz
+yum info lrzsz
+# 列出所有已安装的软件包
+yum list installed
 ```
 
 # 文件操作
@@ -959,7 +1254,7 @@ fi
 
 日志储存位置：/var/log/
 
-```sh
+```bash
 /var/log/message ---------------------------------------系统启动后的信息和错误日志
 
 /var/log/secure ------------------------------------------与安全相关的日志信息
@@ -1080,9 +1375,6 @@ node\x20/ 11185 root   35u  IPv6 541214      0t0  TCP *:tick-port (LISTEN)
 
 ```bash
 ps aux | grep 进程id
-```
-
-```bash
 [root@VM-12-2-centos nginx]# ps aux | grep 11185
 root       11185  0.2  4.8 11562004 184556 ?     Ssl  3月23   8:47 node /node/vue3-blog-server/prod/dist/index.js
 root      149259  0.0  0.0  15456  1192 pts/28   S+   03:39   0:00 grep --color=auto 11185
@@ -1168,6 +1460,18 @@ root      138121  0.0  0.0  15456  1116 pts/11   S+   02:05   0:00 grep --color=
 [root@VM-12-2-centos nginx]#
 ```
 
+## 查找 rpm 安装的 mysql
+
+```bash
+[root@VM-12-2-centos node]# rpm -q -a | grep -i mysql
+mysql-8.0.26-1.module_el8.4.0+915+de215114.x86_64
+mysql80-community-release-el8-2.noarch
+mysql-errmsg-8.0.26-1.module_el8.4.0+915+de215114.x86_64
+mysql-common-8.0.26-1.module_el8.4.0+915+de215114.x86_64
+mysql-server-8.0.26-1.module_el8.4.0+915+de215114.x86_64
+[root@VM-12-2-centos node]#
+```
+
 ## 查找 jenkins 相关文件
 
 -maxdepth 应该设置越小，查找越快
@@ -1199,7 +1503,7 @@ sync;echo 3 > /proc/sys/vm/drop_caches
 
 ## 软连接
 
-```sh
+```bash
 # 建立软连接
 ln -s /qshell_t/qshell /usr/local/bin/qshell
 # 删除软连接
@@ -1208,7 +1512,7 @@ rm -rf /usr/local/bin/qshell
 
 ## 开启 swap
 
-```sh
+```bash
 # 新建一个专门的文件用于swap分区（4g）
 dd if=/dev/zero of=/swap bs=1024 count=4194304
 # 通过mkswap命令将上面新建出的文件做成swap分区
