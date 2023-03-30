@@ -1392,22 +1392,21 @@ kill -9 PID
 获取占用 cpu 最多的 5 个进程
 
 ```bash
-ps aux | sort -k 3 -r | head -n 6
+ps aux | sort -k 3 -n -r | head -n 5
 ```
 
 测试
 
 ```bash
-[root@VM-12-2-centos nginx]# ps aux | sort -k 3 -r | head -n 6
-USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-root      137541  0.8  2.0 908256 78820 ?        Sl   02:02   0:01 /root/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/node /root/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
-root       14130  0.6  2.5 934308 99232 ?        Ssl  3月23  21:17 node /node/billd-live-server/prod/dist/index.js
-root      134542  0.4  2.7 961044 107012 ?       Sl   01:50   0:03 /root/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/node /root/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /root/.vscode-server/.ee2b180d582a7f601fa6ecfdad8d9fd269ab1884.token
-root       11185  0.2  5.3 11563028 202776 ?     Ssl  3月23   8:33 node /node/vue3-blog-server/prod/dist/index.js
-root        7945  0.2 11.9 1333012 456820 ?      Sl   3月23   8:16 node /node/nuxt-blog-client/node_modules/nuxt/bin/nuxt.js
-sort: 冲洗流失败(fflush): 标准输出: 断开的管道
+[root@VM-12-2-centos node]# ps aux | sort -k 3 -n -r | head -n 5
+root        3751  0.7  2.5 1018112 96340 ?       Ssl  3月26  38:38 node /node/billd-live-server/prod/dist/index.js
+root      217427  0.5  1.8 950108 70880 ?        Sl   09:20   0:02 /root/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/node /root/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /root/.vscode-server/.ee2b180d582a7f601fa6ecfdad8d9fd269ab1884.token
+root      217679  0.4  2.1 907808 81820 ?        Sl   09:20   0:02 /root/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/node /root/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root        3809  0.3  0.3  45016 11636 ?        S    3月26  17:13 ffmpeg -stream_loop -1 -re -i /node/fddm_2.mp4 -c copy -f flv rtmp://localhost/live/fddm_2
+root      121053  0.3 13.1 1363228 504248 ?      Sl   3月28   8:38 node /node/nuxt-blog-client/node_modules/nuxt/bin/nuxt.js
+sort: 写入失败: 标准输出: 断开的管道
 sort: 写入错误
-[root@VM-12-2-centos nginx]#
+[root@VM-12-2-centos node]#
 ```
 
 ## 获取占用内存最多的进程
@@ -1415,22 +1414,21 @@ sort: 写入错误
 获取占用内存最多的 5 个进程
 
 ```bash
-ps aux | sort -k 4 -r | head -n 6
+ps aux | sort -k 4 -n -r | head -n 5
 ```
 
 测试
 
 ```bash
-[root@VM-12-2-centos nginx]# ps aux | sort -k 4 -r | head -n 6
-USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-root       11185  0.2  5.3 11563028 202780 ?     Ssl  3月23   8:33 node /node/vue3-blog-server/prod/dist/index.js
-root      134542  0.4  2.7 961044 107012 ?       Sl   01:50   0:03 /root/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/node /root/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /root/.vscode-server/.ee2b180d582a7f601fa6ecfdad8d9fd269ab1884.token
-root       14130  0.6  2.5 934308 98668 ?        Ssl  3月23  21:17 node /node/billd-live-server/prod/dist/index.js
-root        4273  0.0  2.5 11464256 97556 ?      Sl   3月23   0:03 node /node/next-blog-client/node_modules/.bin/../next/dist/bin/next start -p 4000
-root        4180  0.1  2.4 11673660 92428 ?      Ssl  3月23   5:14 Verdaccio
+[root@VM-12-2-centos node]# ps aux | sort -k 4 -n -r | head -n 5
+root        3055  0.1 17.1 4128540 657092 ?      Ssl  3月26   7:24 /usr/bin/java -Djava.awt.headless=true -Xms64m -Xmx256m -XX:PermSize=128M -XX:MaxNewSize=256m -XX:MaxPermSize=256m -jar /usr/share/java/jenkins.war --webroot=/var/cache/jenkins/war --httpPort=8080
+root      121046  0.3 14.7 1423408 562624 ?      Sl   3月28   8:52 node /node/nuxt-blog-client/node_modules/nuxt/bin/nuxt.js
+root      121053  0.3 13.1 1363228 504248 ?      Sl   3月28   8:38 node /node/nuxt-blog-client/node_modules/nuxt/bin/nuxt.js
+mysql       1366  0.3 11.1 2886124 426468 ?      Ssl  3月26  18:43 /usr/libexec/mysqld --basedir=/usr
+root      114587  0.3  5.8 11558600 222152 ?     Ssl  3月28   8:59 node /node/vue3-blog-server/prod/dist/index.js
 sort: 写入失败: 标准输出: 断开的管道
 sort: 写入错误
-[root@VM-12-2-centos nginx]#
+[root@VM-12-2-centos node]#
 ```
 
 ## 获取所有 node 进程
@@ -1527,6 +1525,6 @@ swapoff /swap
 
 # 参考
 
-https://linux.liuxfe.com
+[https://linux.liuxfe.com](https://linux.liuxfe.com)
 
-http://linux.51yip.com
+[http://linux.51yip.com](http://linux.51yip.com)
